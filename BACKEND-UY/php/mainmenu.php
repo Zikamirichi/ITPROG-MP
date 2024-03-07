@@ -106,9 +106,9 @@
     <main>
         <h1>Select the Dish you wish to order</h1>
         <div class="images-container">
-            <a href="mains.php"><img src="main.png" alt="Main"></a>
-            <a href="sides.php"><img src="side.png" alt="Side"></a>
-            <a href="drink.php"><img src="drinks.png" alt="Drinks"></a>
+            <a href="mains.php"><img src="../images/main.png" alt="Main"></a>
+            <a href="sides.php"><img src="../images/side.png" alt="Side"></a>
+            <a href="drink.php"><img src="../images/drinks.png" alt="Drinks"></a>
         </div>
 
         <div class="cart-container">

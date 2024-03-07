@@ -79,15 +79,15 @@ body {
         <h1>Drinks</h1>
         <ul>
             <li>
-            <img src="water.png" alt="Water">      
+            <img src="../images/water.png" alt="Water">      
             Water
             </li>
             <li>
-            <img src="coffee.png" alt="Coffee">      
+            <img src="../images/coffee.png" alt="Coffee">      
             Coffee
             </li>
             <li>
-            <img src="oj.png" alt="Orange Juice">    
+            <img src="../images/oj.png" alt="Orange Juice">    
             Orange Juice
             </li>
             <!-- Add more main dishes as needed -->
