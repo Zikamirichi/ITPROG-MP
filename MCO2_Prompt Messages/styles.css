@@ -1,0 +1,142 @@
+.confirm-order-prompt,
+.payment-prompt,
+.credit-card-prompt,
+.cash-prompt,
+.gcash-prompt,
+.payment-failed-prompt,
+.payment-successful-prompt,
+.login-prompt {
+	background-color: #f1f1f1;
+	padding: 20px;
+	border-radius: 5px;
+	text-align: center;
+	margin: 20px auto;
+	width: 50%;
+	font-family: Arial, sans-serif;
+	position: relative;
+}
+
+.confirm-order-prompt h2,
+.payment-prompt h2,
+.credit-card-prompt h2,
+.cash-prompt h2,
+.gcash-prompt h2,
+.payment-failed-prompt h2,
+.payment-successful-prompt h2,
+.login-prompt h2 {
+	margin-top: 0;
+	color: #333;
+}
+
+.confirm-order-prompt .close,
+.payment-prompt .close,
+.credit-card-prompt .close,
+.cash-prompt .close,
+.gcash-prompt .close,
+.payment-failed-prompt .close,
+.payment-successful-prompt .close,
+.login-prompt .close {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background-color: #f1f1f1;
+	color: #333;
+	border: none;
+	padding: 5px 10px;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.confirm-order-prompt .close:hover,
+.payment-prompt .close:hover,
+.credit-card-prompt .close:hover,
+.cash-prompt .close:hover,
+.gcash-prompt .close:hover,
+.payment-failed-prompt .close:hover,
+.payment-successful-prompt .close:hover,
+.login-prompt .close:hover {
+	background-color: #ddd;
+}
+
+.confirm-order-prompt .options,
+.payment-prompt .options {
+	margin-top: 20px;
+}
+
+.confirm-order-prompt button,
+.payment-prompt button,
+.credit-card-prompt button,
+.cash-prompt button,
+.gcash-prompt button,
+.payment-failed-prompt button,
+.payment-successful-prompt button,
+.login-prompt input[type="submit"] {
+	background-color: #4CAF50;
+	color: white;
+	border: none;
+	padding: 10px;
+	border-radius: 5px;
+	margin: 10px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.confirm-order-prompt button:hover,
+.payment-prompt button:hover,
+.credit-card-prompt button:hover,
+.cash-prompt button:hover,
+.gcash-prompt button:hover,
+.payment-failed-prompt button:hover,
+.payment-successful-prompt button:hover,
+.login-prompt input[type="submit"]:hover { 
+    background-color: #45a049; }
+.confirm-order-prompt button:hover,
+.payment-prompt button:hover,
+.credit-card-prompt button:hover,
+.cash-prompt button:hover,
+.gcash-prompt button:hover,
+.payment-failed-prompt button:hover,
+.payment-successful-prompt button:hover,
+.login-prompt input[type="submit"]:hover {
+	background-color: #45a049;
+}
+
+.credit-card-prompt .card-details {
+	margin-top: 20px;
+}
+
+.credit-card-prompt .card-details input {
+	margin-bottom: 20px;
+}
+
+.cash-prompt .cash-details {
+	margin-top: 20px;
+}
+
+.payment-successful-prompt .order-details {
+	margin-top: 20px;
+}
+
+.payment-successful-prompt .order-details p {
+	margin-bottom: 10px;
+}
+
+.login-prompt .input-field {
+	margin-top: 20px;
+	display: flex;
+	flex-direction: column;
+}
+
+.login-prompt .input-field label {
+	margin-bottom: 5px;
+}
+
+.login-prompt .input-field input[type="text"],
+.login-prompt .input-field input[type="password"] {
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid #ddd;
+	margin-top: 5px;
+	font-size: 18px;
+	width: 100%;
+}
