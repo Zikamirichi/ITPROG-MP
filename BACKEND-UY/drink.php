@@ -8,7 +8,7 @@
 body {
             margin: 0;
             padding: 0;
-            background-image: url('menubg.png'); 
+            background-image: url('images/menubg.png'); 
             background-size: cover;
             background-position: center;
             font-family: Arial, sans-serif;
@@ -64,6 +64,33 @@ body {
             margin-left: 50px;
             padding: 10px 0; /* Add padding for spacing */
             text-decoration: underline; /* Underline text */
+            position: relative;
+        }
+
+        .item img{ /* Class for images representing item choices */
+            width: 150px;
+            height: 150px;
+        }
+
+        .item .facts { /* Nutrition facts about specific item */
+            visibility: hidden; /* Hidden before hovering */
+            width: 200px;
+            background-color: lightgrey;
+            color: black;
+            text-align: left;
+            border-radius: 6px;
+            padding: 5px 0;
+
+            position: absolute;
+            z-index: 1; /* Display above other images */
+            top: 50%;
+            left: 110%;
+            transform: translateY(-50%);
+            box-shadow: 0 0 5px;
+        }
+
+        .item:hover .facts { /* Upon hover of item, make nutrition facts visible */
+            visibility: visible;
         }
     </style>
 </head>
@@ -78,19 +105,24 @@ body {
     <main>
         <h1>Drinks</h1>
         <ul>
-            <li>
-            <img src="water.png" alt="Water">      
-            Water
+            <li class = "item">
+                <img src="images/water.png" alt="Water"> <br>      
+                Water
+                <span class = "facts">*Insert Description of Water*</span>
             </li>
-            <li>
-            <img src="coffee.png" alt="Coffee">      
-            Coffee
+            
+            <li class = "item">
+                <img src="images/coffee.png" alt="Coffee"> <br>      
+                Coffee
+                <span class = "facts">*Insert Description of Coffee*</span>
             </li>
-            <li>
-            <img src="oj.png" alt="Orange Juice">    
-            Orange Juice
+            
+            <li class = "item">
+                <img src="images/oj.png" alt="Orange Juice"> <br>    
+                Orange Juice
+                <span class = "facts">*Insert Description of Orange Juice*</span>
             </li>
-            <!-- Add more main dishes as needed -->
+                <!-- Add more main dishes as needed -->
         </ul>
     </main>
 </body>

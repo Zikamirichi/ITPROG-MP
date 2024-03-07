@@ -8,7 +8,7 @@
         body {
             margin: 0;
             padding: 0;
-            background-image: url('ITPROG MP.png'); 
+            background-image: url('images/ITPROG MP.png'); 
             background-size: cover;
             background-position: center;
             height: 95vh;

@@ -8,7 +8,7 @@
 body {
             margin: 0;
             padding: 0;
-            background-image: url('menubg.png'); 
+            background-image: url('images/menubg.png'); 
             background-size: cover;
             background-position: center;
             font-family: Arial, sans-serif;
@@ -64,6 +64,33 @@ body {
             margin-left: 50px;
             padding: 10px 0; /* Add padding for spacing */
             text-decoration: underline; /* Underline text */
+            position: relative;
+        }
+
+        .item img{ /* Class for images representing item choices */
+            width: 150px;
+            height: 150px;
+        }
+
+        .item .facts { /* Nutrition facts about specific item */
+            visibility: hidden; /* Hidden before hovering */
+            width: 200px;
+            background-color: lightgrey;
+            color: black;
+            text-align: left;
+            border-radius: 6px;
+            padding: 5px 0;
+
+            position: absolute;
+            z-index: 1; /* Display above other images */
+            top: 50%;
+            left: 110%;
+            transform: translateY(-50%);
+            box-shadow: 0 0 5px;
+        }
+
+        .item:hover .facts { /* Upon hover of item, make nutrition facts visible */
+            visibility: visible;
         }
     </style>
 </head>
@@ -78,15 +105,23 @@ body {
     <main>
         <h1>Side Dishes</h1>
         <ul>
-            <li>
-            <img src="rice.png" alt="Rice">    
-            Rice</li>
-            <li>
-            <img src="veg.png" alt="Mixed Vegetables">    
-            Mixed Vegetables</li>
-            <li>
-            <img src="mash.png" alt="Mashed Potatoes">    
-            Mashed Potatoes</li>
+            <li class ="item">
+                <img src="images/rice.png" alt="Rice"> <br>    
+                Rice
+                <span class = "facts">*Insert Rice Description*</span>
+            </li>
+            
+            <li class ="item">
+                <img src="images/veg.png" alt="Mixed Vegetables"> <br>    
+                Mixed Vegetables
+                <span class = "facts">*Insert Mixed Vegetables Description*</span>
+            </li>
+            
+            <li class ="item">
+                <img src="images/mash.png" alt="Mashed Potatoes"> <br>   
+                Mashed Potatoes
+                <span class = "facts">*Insert Mashed Potatoes Description*</span>
+            </li>
             <!-- Add more main dishes as needed -->
         </ul>
     </main>
