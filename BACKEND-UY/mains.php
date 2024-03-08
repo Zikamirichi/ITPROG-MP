@@ -1,3 +1,5 @@
+<!-- Reference: https://codepen.io/juliankern/pen/xpWqZw -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +10,7 @@
         body {
             margin: 0;
             padding: 0;
-            background-image: url('images/menubg.png'); 
+            background-image: url('images/menubg.png');
             background-size: cover;
             background-position: center;
             font-family: Arial, sans-serif;
@@ -94,9 +96,41 @@
             visibility: visible;
         }
 
+        .content { /* Hide Content */
+            display: none;
+        }
+
+        .main { /* Represents Clickable Area */
+            width: 150px; /* Same size as images, can be changed */
+            height: 150px;
+            cursor: pointer;
+        }
+
+        #chicken:checked ~ .chicken,
+        #salad:checked ~ .salad { /* Content to be shown */
+            display: block;
+            position: fixed;
+            width: 50%;
+            height: 40%;
+            background-color: lightgrey;
+        }
+
     </style>
 </head>
 <body>
+
+    <?php
+        error_reporting(E_ERROR | E_PARSE);
+        //CHANGE $CONN VARIABLES DEPENDING ON PERSONAL DEVICE SETTINGS
+        $conn = mysqli_connect("localhost", "root", "12345", "mydb", "3360") or die ("Unable to connect!". mysqli_error($conn) );
+        mysqli_select_db($conn, "mydb");
+
+        session_start();
+        require_once("item.php"); 
+
+        
+        $saladObj = new Item(102, 1);
+    ?>
     <nav>
         <a href="mains.php" class="current-page">Main</a>
         <a href="sides.php">Sides</a>
@@ -108,25 +142,80 @@
         <h1>Main Dishes</h1>
         <ul>
             <li class="item">
-                <img src="images/chicken.png" alt="Roasted Chicken"><br>
-                Roasted Chicken (1pc)
-                <span class ="facts">Roasted Chicken Seasoned with Salt and Pepper. <br>
-                                        Nutrition Facts: <br>
-                                        Calories: 81 <br>
-                                        Fat: 53% <br>
-                                        Carbs: 0% <br>
-                                        Protein: 47% <br> <br>
-                                        Ingredients: <br>
-                                        Chicken, Pepper, Salt </span>
+                <input type="checkbox" id="chicken" hidden>
+                <label for="chicken" class="main">
+                    <img src="images/chicken.png" alt="Roasted Chicken"><br>
+                    Roasted Chicken (1pc)
+                </label>
+
+                <span class="facts">Roasted Chicken Seasoned with Salt and Pepper. <br>
+                        Nutrition Facts: <br>
+                        Calories: 81 <br>
+                        Fat: 53% <br>
+                        Carbs: 0% <br>
+                        Protein: 47% <br> <br>
+                        Ingredients: <br>
+                        Chicken, Pepper, Salt</span>
+                
+                <div class="chicken content">
+                    <h2>Roasted Chicken</h2>
+                    <img src="images/chicken.png" alt="Roasted Chicken"> <br>
+                    <div class="counter">
+                        <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                            <input type="number" id="chickenCount" name="chickenCount" value="0"> <br>
+                            <input type="submit" value ="Submit" name="submit">
+                    </form>
+                </div>
+
             </li>
             
             <li class="item">
-                <img src="images/salad.png" alt="Caesar Salad"><br>
-                Caesar Salad
+                <input type="checkbox" id="salad" hidden>
+                <label for="salad" class="main">
+                    <img src="images/salad.png" alt="Caesar Salad"><br>
+                    Caesar Salad
+                </label>
+
                 <span class="facts">*Insert Description of Caesar Salad*</span>
+
+                <div class="salad content">
+                    
+                </div>
             </li>
-            <!-- Add more main dishes as needed -->
         </ul>
     </main>
+    
+    <?php
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            
+            if(isset($_POST["chickenCount"])){ // Check if the count value is set
+                // Retrieve the count value from the POST data
+                $count = $_POST["chickenCount"];
+                $item = new Item(101, $count);
+                $_SESSION['item'] = $item; // Store in session superglobal for use in cart.php
+                
+                echo "Item ID: " . $item->getID() . "<br>"; // TESTING
+                echo "Quantity: " . $item->getQuantity() . "<br>";
+                echo "Category: " . $item->getCategory() . "<br>";
+            }
+            
+            if(isset($_POST["submit"])) {
+                $ala_id = $_POST["a04"];
+                $main_id = $_POST[$item->getID()];
+                $quantity = $_POST[$item->getQuantity()];
+            
+                error_reporting(E_ERROR | E_PARSE);
+                
+                $insert = "INSERT INTO ala_carte VALUES ('$ala_id', '$main_id', '$quantity', NULL, 0, NULL, 0)";
+                mysqli_query($conn, $insert);
+                echo "Record has been successfully inserted!";
+                
+                } else {
+                    echo "Failed to insert record!!!";
+                }
+            
+        }
+?>
+
 </body>
 </html>
