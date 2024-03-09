@@ -6,9 +6,9 @@ if (isset($_POST["loginBtn"]))
     
     $conn = mysqli_connect("localhost", "root", "12345", "mydb", "3360") or die ("Unable to connect!". mysqli_error($conn) );
 
-    $query = mysqli_query($conn, "SELECT username, password FROM sys_ad
+    $query = mysqli_query($conn, "SELECT username, `password` FROM sys_ad
 	                                   WHERE username ='$user'
-	                                   AND password ='$pass'");
+	                                   AND `password` ='$pass'");
     $fetch = mysqli_fetch_array($query);
 
     echo "HELLO";

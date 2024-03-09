@@ -42,8 +42,9 @@
     </table>
 
     <hr>
-    <a href="addnutrfacts.php">Add Nutrition Facts</a>
-    <a href="delnutrfacts.php">Delete Nutrition Facts</a>
+    <a href="addnutrfacts.php">Add Nutrition Facts</a> <br>
+    <a href="delnutrfacts.php">Delete Nutrition Facts</a> <br>
+    <a href="editnutrfacts.php">Edit Nutrition Facts</a> <br> <br>
     <a href="adminmenu.php">Back</a>
 </body>
 </html>
