@@ -87,6 +87,7 @@ body {
     <main>
         <h1>Cart</h1>
         <?php
+            /* Code for Getting item from mains.php NOT WORKING
             session_start();
             require_once("item.php");
 
@@ -104,6 +105,41 @@ body {
                 echo "Category: $category";
 
             }
+            */
+
+            // Sample cart data
+            $cart = [
+                ['item' => 'Roast Chicken (1pc)', 'quantity' => 2, 'price' => 90.00],
+                ['item' => 'Rice', 'quantity' => 1, 'price' => 20.00],
+                ['item' => 'Orange Juice', 'quantity' => 1, 'price' => 20.00]
+            ];
+            $total = 0;
+
+            // Display cart items
+            echo '<ul>';
+            foreach ($cart as $item) {
+                $subtotal = $item['quantity'] * $item['price'];
+                $total += $subtotal;
+
+                echo '<li class="cart-item">';
+                echo '<span><strong>' . $item['item'] . ' x ' . $item['quantity'] . '</strong></span>';
+                echo '<span><strong>Php ' . number_format($subtotal, 2) . '</strong></span>';
+                echo '</li>';
+            }
+            echo '</ul>';
+
+            echo '<h3 style="color: lightgrey;">Php' . number_format($total, 2) . '</h3>';
+
+            // Apply discount if there are 3 or more items
+            if (count($cart) >= 3) {
+                $discount = 0.15 * $total;
+                $total -= $discount;
+                echo '<p>Discount (15%): -$' . number_format($discount, 2) . '</p>';
+            }
+            
+            // Display total after discount
+            echo '<h3>Total: Php' . number_format($total, 2) . '</h3>';
+            
         ?>
     </main>
 </body>
