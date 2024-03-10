@@ -40,8 +40,10 @@
         font-optical-sizing: auto;
         font-weight: 800;
         font-style: normal;
-        font-size: 2vw;
-        padding: 1%;
+        font-size: 23px;
+        padding: 2%;
+        transition: all 0.5s;
+        cursor: pointer;
     }
 
     .button-container {
@@ -49,6 +51,31 @@
         left: 65%;
         bottom: 8%;
         width: 35%;
+    }
+
+    button span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
+
+    button span:after {
+        content: '\00bb';
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -20px;
+        transition: 0.5s;
+    }
+
+    button:hover span {
+        padding-right: 25px;
+    }
+
+    button:hover span:after {
+        opacity: 1;
+        right: 0;
     }
 
     body {
@@ -64,9 +91,9 @@
         <div class="name-container">
                 Healthy Food
         </div>
-        <div class="button-container">
-            <button type="button">CLICK HERE TO ORDER</button>
-        </div>
+        <a href="mainmenu.php" class="button-container">
+            <button class="button"><span>CLICK HERE TO ORDER </span></button>
+        </a>
     </div>
 </body>
 </html>
