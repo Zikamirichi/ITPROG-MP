@@ -79,13 +79,13 @@ body {
         <h1>Side Dishes</h1>
         <ul>
             <li>
-            <img src="rice.png" alt="Rice">    
+            <img src="../images/rice.png" alt="Rice">    
             Rice</li>
             <li>
-            <img src="veg.png" alt="Mixed Vegetables">    
+            <img src="../images/veg.png" alt="Mixed Vegetables">    
             Mixed Vegetables</li>
             <li>
-            <img src="mash.png" alt="Mashed Potatoes">    
+            <img src="../images/mash.png" alt="Mashed Potatoes">    
             Mashed Potatoes</li>
             <!-- Add more main dishes as needed -->
         </ul>

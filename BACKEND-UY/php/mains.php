@@ -79,11 +79,11 @@
         <h1>Main Dishes</h1>
         <ul>
         <li>
-        <img src="chicken.png" alt="Roasted Chicken">
+        <img src="../images/chicken.png" alt="Roasted Chicken">
         Roasted Chicken (1pc)
         </li>
         <li>
-        <img src="salad.png" alt="Caesar Salad">
+        <img src="../images/salad.png" alt="Caesar Salad">
         Caesar Salad
         </li>
             <!-- Add more main dishes as needed -->
