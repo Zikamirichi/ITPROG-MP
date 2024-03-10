@@ -3,95 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="navbar.css" />
+    <link rel="stylesheet" type="text/css" href="dish.css" />
     <title>Drinks</title>
     <style>
-body {
+        body {
             margin: 0;
             padding: 0;
-            background-image: url('menubg.png'); 
+            background-image: url('../images/menubg.png'); 
             background-size: cover;
             background-position: center;
-            font-family: Arial, sans-serif;
             display: flex;
-        }
-
-        nav {
-            width: 200px;
-            background-color: #D4471F;
-            height: 100vh;
-            color: white;
-            padding-top: 20px;
-        }
-
-        nav a {
-            display: block;
-            padding: 10px 20px;
-            text-decoration: none;
-            color: #555;
-            border-bottom: 1px solid #555;
-        }
-
-        nav a:hover {
-            background-color: #F0F3F4;
-        }
-
-        nav a.current-page {
-            background-color: #F0F3F4; 
-            color: #555;
-        }
-
-        main {
-            flex: 1;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-            text-align: center;
-        }
-
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-            display: flex; /* Make the list horizontal */
-            justify-content: flex-start; /* Adjust the spacing */
-
-        }
-        li {
-            margin-left: 50px;
-            padding: 10px 0; /* Add padding for spacing */
-            text-decoration: underline; /* Underline text */
         }
     </style>
 </head>
 <body>
-    <nav>
-    <a href="mains.php">Main</a>
-        <a href="sides.php" >Sides</a>
-        <a href="drink.php" class="current-page">Drinks</a>
-        <a href="cart.php">Cart</a>
-        <a href="mainmenu.php">Back to Hub</a>
-    </nav>
-    <main>
-        <h1>Drinks</h1>
+<div class="navigation-bar">
         <ul>
-            <li>
-            <img src="../images/water.png" alt="Water">      
-            Water
-            </li>
-            <li>
-            <img src="../images/coffee.png" alt="Coffee">      
-            Coffee
-            </li>
-            <li>
-            <img src="../images/oj.png" alt="Orange Juice">    
-            Orange Juice
-            </li>
-            <!-- Add more main dishes as needed -->
+            <li><a href="homepage.php">
+                    <div class="navbar-icon">
+                        <img src="../images/white-home-button.png" alt="Homepage">
+                    </div>
+                </a></li>
+            <li><a href="mains.php" class="active">
+                <div class="navbar-icon">
+                    <img src="../images/white-main-button.png" alt="Main Dishes">
+                </div>
+            </a></li>
+
+            <li><a href="sides.php">
+                <div class="navbar-icon">
+                    <img src="../images/white-side-button.png" alt="Side Dishes">
+                </div>
+            </a></li>
+            <li><a href="drinks.php">
+                <div class="navbar-icon">
+                    <img src="../images/white-drink-button.png" alt="Drinks">
+                </div>
+            </a></li>
+            <li><a href="cart.php">
+                <div class="navbar-icon">
+                    <img src="../images/white-cart-button.png" alt="Cart">
+                </div>
+            </a></li>
         </ul>
-    </main>
+    </div>
+
+    <div class="right-container">
+        <div class="select-text">DRINKS</div>
+        <div class="dish-main-box">
+            <div class="dish-item">
+                <div class="dish-img-box">
+                    <img src="../images/bottled-water.jpg" alt="Bottled Water">
+                </div>
+
+                <div class="dish-title">BOTTLED WATER</div>
+                <div class="dish-desc">1 cold purified water</div>
+                <div class="dish-price">PHP 20.00</div>
+            </div>
+            <div class="dish-item">
+                <div class="dish-img-box">
+                    <img src="../images/black-coffee.jpg" alt="Black Coffee">
+                </div>
+
+                <div class="dish-title">BLACK COFFEE</div>
+                <div class="dish-desc">1 cup of hot aromatic coffee</div>
+                <div class="dish-price">PHP 50.00</div>
+            </div>
+            <div class="dish-item">
+                <div class="dish-img-box">
+                    <img src="../images/orange-juice.jpg" alt="Orange Juice">
+                </div>
+
+                <div class="dish-title">ORANGE JUICE</div>
+                <div class="dish-desc">1 glass of refreshing orange</div>
+                <div class="dish-price">PHP 30.00</div>
+            </div>
+
+    </div>
 </body>
 </html>
