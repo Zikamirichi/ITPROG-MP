@@ -15,30 +15,6 @@
             display: flex;
         }
 
-        .navigation-bar {
-            width: 5%;
-            height: 100vh;
-            background-color: #D4471F;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-        }
-
-        .right-container{
-            flex: 1;
-            align-items: center;
-        }
-
-        .select-text{
-            color: #311712;
-            font-family: "Luckiest Guy", cursive;
-            font-weight: 400;
-            font-style: normal;
-            font-size: 50px;
-            text-align: center;
-            margin-top: 5%;
-            margin-bottom: 5%;
-            
-        }
-
         .images-container {
             display: flex;
             justify-content: space-between;
