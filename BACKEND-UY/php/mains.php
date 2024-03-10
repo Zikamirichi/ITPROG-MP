@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="navbar.css" />
+    <link rel="stylesheet" type="text/css" href="dish.css" />
     <title>Main Dishes</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            background-image: url('menubg.png'); 
+            background-image: url('../images/menubg.png'); 
             background-size: cover;
             background-position: center;
             display: flex;
@@ -50,6 +51,29 @@
 
     <div class="right-container">
         <div class="select-text">MAIN DISHES</div>
+        <div class="dish-main-box">
+            <div class="dish-item">
+                <div class="dish-img-box">
+                    <img src="../images/roasted-chicken.jpg" alt="Roasted Chicken">
+                </div>
+
+                <div class="dish-title">ROASTED CHICKEN</div>
+                <div class="dish-desc">1pc quarter leg</div>
+                <div class="dish-price">PHP 90.00</div>
+            </div>
+            <div class="dish-item">
+                <div class="dish-img-box">
+                    <img src="../images/ceasar-salad.jpg" alt="Ceasar Salad">
+                </div>
+
+                <div class="dish-title">CEASAR SALAD</div>
+                <div class="dish-desc">1 bowl with chicken cuts</div>
+                <div class="dish-price">PHP 90.00</div>
+            </div>
+            <div class="dish-item">
+                insert dish here
+            </div>
+
     </div>
 </body>
 </html>

@@ -23,7 +23,7 @@
         .button-dish {
             padding: 10px;
             background-color: #F4F4F4; 
-            border: none;
+            border: 1px solid #ddd; 
             border-radius: 15px;
             cursor: pointer;
             text-decoration: none;
