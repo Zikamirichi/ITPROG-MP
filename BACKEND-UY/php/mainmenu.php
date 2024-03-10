@@ -3,118 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="navbar.css" />
     <title>Main Menu</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            background-image: url('menubg.png'); 
+            background-image: url('../images/menubg.png'); 
             background-size: cover;
-            background-position: center;
-            font-family: Arial, sans-serif;
+            background-repeat: no-repeat;
             display: flex;
         }
 
-        nav {
-            width: 200px;
-            background-color: #D4471F;
+        .navigation-bar {
+            width: 5%;
             height: 100vh;
-            color: white;
-            padding-top: 20px;
+            background-color: #D4471F;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
         }
 
-        nav a {
-            display: block;
-            padding: 10px 20px;
-            text-decoration: none;
-            color: #555;
-            border-bottom: 1px solid #555;
-        }
-
-        nav a:hover {
-            background-color: #F0F3F4;
-        }
-
-        main {
+        .right-container{
             flex: 1;
-            padding: 20px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
             align-items: center;
-            align-content: stretch;
-            flex-wrap: wrap;
-            justify-content: space-evenly;
         }
 
-        main h1 {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #333;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-
-        main img {
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 20px;
-            cursor: pointer;
+        .select-text{
+            color: #311712;
+            font-family: "Luckiest Guy", cursive;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 50px;
+            text-align: center;
+            margin-top: 5%;
+            margin-bottom: 5%;
+            
         }
 
         .images-container {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            align-items: center;
         }
 
-        .cart-container {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 2px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .cart-button {
-            display: inline-block;
-            bottom: 100px;
-            right: 200px;
-            padding: 25px 35px;
-            background-color: black;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: auto;
+        .button-dish {
+            padding: 10px;
+            background-color: #F4F4F4; 
+            border: none;
+            border-radius: 15px;
             cursor: pointer;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 5%;
+            outline: none;
+            box-shadow: 0 20px #999;
         }
 
-        .cart-button:hover {
-            background-color: grey;
+        .button-dish img {
+            width: 80%;
         }
+
+        .button-dish:hover {
+            background-color: #CED3D7;
+        }
+
+        .button-dish:active {
+            background-color: #3e8e41;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }   
+
     </style>
 </head>
 <body>
-    <nav>
-    </nav>
-    <main>
-        <h1>Select the Dish you wish to order</h1>
+    <div class="navigation-bar">&nbsp;</div>
+    <div class="right-container">
+        <div class="select-text">Select the Dish you wish to order </div>
         <div class="images-container">
-            <a href="mains.php"><img src="main.png" alt="Main"></a>
-            <a href="sides.php"><img src="side.png" alt="Side"></a>
-            <a href="drink.php"><img src="drinks.png" alt="Drinks"></a>
+            <a href="mains.php" class="button-dish">
+                <img src="../images/main-button.png" alt="Main Dishes">
+            </a>
+            <a href="sides.php" class="button-dish">
+                <img src="../images/side-button.png" alt="Side Dishes">
+            </a>
+            <a href="drinks.php" class="button-dish">
+                <img src="../images/drink-button.png" alt="Drinks">
+            </a>
         </div>
-
-        <div class="cart-container">
-            <a href="cart.php" class="cart-button">Go to Cart</a>
-            <a href="start.php" class="cart-button">Go Back</a>
-        </div>
-    </main>
 </body>
 </html>
