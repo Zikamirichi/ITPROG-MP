@@ -40,7 +40,7 @@
 
         error_reporting(E_ERROR | E_PARSE);
         //CHANGE $CONN VARIABLES DEPENDING ON PERSONAL DEVICE SETTINGS
-        $conn = mysqli_connect("localhost", "root", "12345", "mydb", "3360") or die ("Unable to connect!". mysqli_error($conn) );
+        $conn = mysqli_connect("localhost", "root", "") or die ("Unable to connect!". mysqli_error($conn) );
         mysqli_select_db($conn, "mydb");
     
         if(isset($_POST["save"])){

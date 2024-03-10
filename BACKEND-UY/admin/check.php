@@ -4,14 +4,13 @@ if (isset($_POST["loginBtn"]))
     $user=$_POST["username"];
     $pass=$_POST["password"];
     
-    $conn = mysqli_connect("localhost", "root", "12345", "mydb", "3360") or die ("Unable to connect!". mysqli_error($conn) );
-
+    $conn = mysqli_connect("localhost", "root", "") or die ("Unable to connect!". mysqli_error($conn) );
+    mysqli_select_db($conn, "mydb");
+    
     $query = mysqli_query($conn, "SELECT username, `password` FROM sys_ad
 	                                   WHERE username ='$user'
 	                                   AND `password` ='$pass'");
     $fetch = mysqli_fetch_array($query);
-
-    echo "HELLO";
 
     if($user==$fetch["username"] && $pass==$fetch["password"]) 
     {

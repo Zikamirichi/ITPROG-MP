@@ -30,16 +30,6 @@ class Item {
         return $this-> category;
     }
 
-    public function incrementQuantity($num) { // Increments by 1, to be used in buttons
-        
-        $this-> quantity = $num + 1;
-    }
-
-    public function decrementQuantity($num) {
-        
-        $this-> quantity = $num - 1;
-    }
-
     public function setCategory($id) { // Automatically sets the category to mains
                                         // sides, drinks based on id number
         $digit = intval($id / 100); // Gets an integer single digit number

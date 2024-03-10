@@ -122,14 +122,13 @@
     <?php
         error_reporting(E_ERROR | E_PARSE);
         //CHANGE $CONN VARIABLES DEPENDING ON PERSONAL DEVICE SETTINGS
-        $conn = mysqli_connect("localhost", "root", "12345", "mydb", "3360") or die ("Unable to connect!". mysqli_error($conn) );
+        $conn = mysqli_connect("localhost", "root", "") or die ("Unable to connect!". mysqli_error($conn) );
         mysqli_select_db($conn, "mydb");
 
-        session_start();
-        require_once("item.php"); 
+        require_once("order.php"); //Adding the order class for OOP purposes
 
-        
-        $saladObj = new Item(102, 1);
+        $chickenFlag = false; //Flags to determine which submit buttons were pressed
+        $saladFlag = false;
     ?>
     <nav>
         <a href="mains.php" class="current-page">Main</a>
@@ -142,31 +141,36 @@
         <h1>Main Dishes</h1>
         <ul>
             <li class="item">
-                <input type="checkbox" id="chicken" hidden>
+                <input type="checkbox" id="chicken" hidden> <!-- Hidden checkbox is for bringing out item quantity "mini page". Refer to reference above -->
                 <label for="chicken" class="main">
                     <img src="images/chicken.png" alt="Roasted Chicken"><br>
                     Roasted Chicken (1pc)
                 </label>
 
-                <span class="facts">Roasted Chicken Seasoned with Salt and Pepper. <br>
-                        Nutrition Facts: <br>
-                        Calories: 81 <br>
-                        Fat: 53% <br>
-                        Carbs: 0% <br>
-                        Protein: 47% <br> <br>
-                        Ingredients: <br>
-                        Chicken, Pepper, Salt</span>
+                <span class="facts"> <!-- Spans with class facts are for displaying item descriptions -->
+                    <?php
+                        $factsQuery = mysqli_query($conn, "SELECT * FROM nutr_facts WHERE nutr_facts_id = 'n101'"); // Displays nutrition facts of roasted chicken with id n101
+                        while ($factsResult = mysqli_fetch_assoc($factsQuery)) {
+                            echo $factsResult ["desc"], "<br><br>";
+                            echo "Ingredients: ". $factsResult ["Ingredients"], "<br><br>";
+                            echo "Fat: ". $factsResult ["Fat"], "<br>";
+                            echo "Calories: ". $factsResult ["Calories"], "<br>";
+                            echo "Carbs: ". $factsResult ["Carbs"], "<br>";
+                            echo "Protein: ". $factsResult ["Protein"], "<br>";
+                        }
+                    ?>
+                </span>
                 
-                <div class="chicken content">
+                <div class="chicken content"> <!-- Div for "mini page" for selecting quantity of roasted chicken -->
                     <h2>Roasted Chicken</h2>
                     <img src="images/chicken.png" alt="Roasted Chicken"> <br>
-                    <div class="counter">
+                    <div class="counter"> <!-- Counter for selecting the quantity of chicken -->
                         <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                            <input type="number" id="chickenCount" name="chickenCount" value="0"> <br>
-                            <input type="submit" value ="Submit" name="submit">
-                    </form>
+                            <input type="hidden" name="item" value="chicken"> <!-- Hidden value to indicate that chicken was the selected item, for the flags later on -->
+                            <input type="number" id="count" name="count" value="1"> <br>
+                            <input type="submit" value ="Submit" name="submit"> <!-- Submit button for finalizing order -->
+                        </form>
                 </div>
-
             </li>
             
             <li class="item">
@@ -186,36 +190,53 @@
     </main>
     
     <?php
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") { // When a post is done above, execute code
             
-            if(isset($_POST["chickenCount"])){ // Check if the count value is set
-                // Retrieve the count value from the POST data
-                $count = $_POST["chickenCount"];
-                $item = new Item(101, $count);
-                $_SESSION['item'] = $item; // Store in session superglobal for use in cart.php
+            if(isset($_POST["count"])){ // Check if the count value is set
                 
-                echo "Item ID: " . $item->getID() . "<br>"; // TESTING
-                echo "Quantity: " . $item->getQuantity() . "<br>";
-                echo "Category: " . $item->getCategory() . "<br>";
+                $count = $_POST["count"]; // Retrieve the count value from the POST data
+                
+                $maxNutrQuery = mysqli_query($conn, "SELECT MAX(CAST(SUBSTRING(ordr_id, 2) AS UNSIGNED)) AS max_orderID FROM order_table");
+                $row = mysqli_fetch_assoc($maxNutrQuery); // Get Current Max order_id from table 
+                $max_orderID = $row['max_orderID'];
+                $orderNum = $max_orderID + 1;
+
+                $order = new Order("o" . $orderNum); // Create new order with new calculated order id
+
+                $item = $_POST["item"]; // Retreive the specific item selected
+
+                if ($item == "chicken") { 
+                    
+                    $order->setOrder($count, "i101"); // If submit button pressed was under Roasted Chicken, set itemID to i101
+                }
+                
+                if ($item == "salad") {
+                    
+                    $order->setOrder($count, "i102"); // Salad = i102
+                }
+                // TESTING REMOVE IN FINAL PRODUCT
+                echo "Order ID: " . $order->getorderID() . "<br>"; 
+                echo "Quantity: " . $order->getQuantity() . "<br>";
+                echo "Item ID: " . $order->getItemID() . "<br>";
             }
             
+            
             if(isset($_POST["submit"])) {
-                $ala_id = $_POST["a04"];
-                $main_id = $_POST[$item->getID()];
-                $quantity = $_POST[$item->getQuantity()];
+                $ordr_id = $order->getOrderID();
+                $quantity = $order->getQuantity();
+                $item_id = $order->getItemID();
             
                 error_reporting(E_ERROR | E_PARSE);
                 
-                $insert = "INSERT INTO ala_carte VALUES ('$ala_id', '$main_id', '$quantity', NULL, 0, NULL, 0)";
+                $insert = "INSERT INTO order_table VALUES ('$ordr_id', '$quantity', '$item_id')";
                 mysqli_query($conn, $insert);
                 echo "Record has been successfully inserted!";
                 
                 } else {
                     echo "Failed to insert record!!!";
                 }
-            
         }
-?>
+    ?>
 
 </body>
 </html>

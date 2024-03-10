@@ -30,5 +30,10 @@
 </head>
 <body>
     <a href="mainmenu.php" class="redirect-button">Go to New Page</a>
+
+    <?php
+        $conn = mysqli_connect("localhost", "root", "") or die ("Unable to connect!". mysqli_error($conn) ); // Connection to db, change data as needed
+        mysqli_select_db($conn, "mydb");
+    ?>
 </body>
 </html>
