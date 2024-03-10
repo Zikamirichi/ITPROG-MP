@@ -22,11 +22,12 @@
     color: #311712;
     width: 48vh;
     height: 48vh;
+    position: relative;
   }
 
   .dish-img-box {
     overflow: hidden;
-    
+    height: 80%;
   }
 
   .dish-img-box img {
