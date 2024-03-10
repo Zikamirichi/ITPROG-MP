@@ -87,25 +87,11 @@ body {
     <main>
         <h1>Cart</h1>
         <?php
-            /* Code for Getting item from mains.php NOT WORKING
-            session_start();
-            require_once("item.php");
+            //CHANGE $CONN VARIABLES DEPENDING ON PERSONAL DEVICE SETTINGS
+            $conn = mysqli_connect("localhost", "root", "") or die ("Unable to connect!". mysqli_error($conn) );
+            mysqli_select_db($conn, "mydb");
 
-            if(isset($_SESSION['item'])) {
-                
-                $item = $_SESSION['item'];
-                
-                $id = $item->getID();
-                $quantity = $item->getQuantity();
-                $category = $item->getCategory();
-
-                echo "HELLO WORLD";
-                echo "Item ID: $id";
-                echo "Quantity: $quantity";
-                echo "Category: $category";
-
-            }
-            */
+            
 
             // Sample cart data
             $cart = [

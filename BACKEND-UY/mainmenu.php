@@ -113,7 +113,7 @@
 
         <div class="cart-container">
             <a href="cart.php" class="cart-button">Go to Cart</a>
-            <a href="start.php" class="cart-button">Go Back</a>
+            <a href="homepage.php" class="cart-button">Go Back</a>
         </div>
     </main>
 </body>

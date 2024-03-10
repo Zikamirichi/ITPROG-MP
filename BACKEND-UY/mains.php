@@ -77,7 +77,7 @@
 
         .item .facts { /* Nutrition facts about specific item */
             visibility: hidden; /* Hidden before hovering */
-            width: 200px;
+            width: 300px;
             background-color: lightgrey;
             color: black;
             text-align: left;
@@ -126,9 +126,6 @@
         mysqli_select_db($conn, "mydb");
 
         require_once("order.php"); //Adding the order class for OOP purposes
-
-        $chickenFlag = false; //Flags to determine which submit buttons were pressed
-        $saladFlag = false;
     ?>
     <nav>
         <a href="mains.php" class="current-page">Main</a>
@@ -166,7 +163,7 @@
                     <img src="images/chicken.png" alt="Roasted Chicken"> <br>
                     <div class="counter"> <!-- Counter for selecting the quantity of chicken -->
                         <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                            <input type="hidden" name="item" value="chicken"> <!-- Hidden value to indicate that chicken was the selected item, for the flags later on -->
+                            <input type="hidden" name="item" value="chicken"> <!-- Hidden value to indicate that chicken was the selected item-->
                             <input type="number" id="count" name="count" value="1"> <br>
                             <input type="submit" value ="Submit" name="submit"> <!-- Submit button for finalizing order -->
                         </form>
@@ -180,10 +177,29 @@
                     Caesar Salad
                 </label>
 
-                <span class="facts">*Insert Description of Caesar Salad*</span>
+                <span class="facts">
+                <?php
+                        $factsQuery = mysqli_query($conn, "SELECT * FROM nutr_facts WHERE nutr_facts_id = 'n102'"); // Displays nutrition facts of caesar salad with id n102
+                        while ($factsResult = mysqli_fetch_assoc($factsQuery)) {
+                            echo $factsResult ["desc"], "<br><br>";
+                            echo "Ingredients: ". $factsResult ["Ingredients"], "<br><br>";
+                            echo "Fat: ". $factsResult ["Fat"], "<br>";
+                            echo "Calories: ". $factsResult ["Calories"], "<br>";
+                            echo "Carbs: ". $factsResult ["Carbs"], "<br>";
+                            echo "Protein: ". $factsResult ["Protein"], "<br>";
+                        }
+                    ?>
+                </span>
 
                 <div class="salad content">
-                    
+                <h2>Casear Salad</h2>
+                    <img src="images/salad.png" alt="Caesar Salad"> <br>
+                    <div class="counter"> <!-- Counter for selecting the quantity of salad -->
+                        <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                            <input type="hidden" name="item" value="salad"> <!-- Hidden value to indicate that salad was the selected item -->
+                            <input type="number" id="count" name="count" value="1"> <br>
+                            <input type="submit" value ="Submit" name="submit"> <!-- Submit button for finalizing order -->
+                        </form>
                 </div>
             </li>
         </ul>
