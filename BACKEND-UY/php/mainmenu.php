@@ -68,7 +68,7 @@
         }
 
         .button-dish:active {
-            background-color: #3e8e41;
+            background-color: #a3afb8;
             box-shadow: 0 5px #666;
             transform: translateY(4px);
         }   
