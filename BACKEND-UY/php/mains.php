@@ -71,7 +71,13 @@
                 <div class="dish-price">PHP 90.00</div>
             </div>
             <div class="dish-item">
-                insert dish here
+                <div class="dish-img-box">
+                    <img src="../images/burger.jpg" alt="Burger">
+                </div>
+
+                <div class="dish-title">BURGER</div>
+                <div class="dish-desc">1 juicy beef burger</div>
+                <div class="dish-price">PHP 70.00</div>
             </div>
 
     </div>

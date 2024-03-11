@@ -25,7 +25,7 @@
                         <img src="../images/white-home-button.png" alt="Homepage">
                     </div>
                 </a></li>
-            <li><a href="mains.php" class="active">
+            <li><a href="mains.php">
                 <div class="navbar-icon">
                     <img src="../images/white-main-button.png" alt="Main Dishes">
                 </div>
@@ -36,7 +36,7 @@
                     <img src="../images/white-side-button.png" alt="Side Dishes">
                 </div>
             </a></li>
-            <li><a href="drinks.php">
+            <li><a href="drinks.php" class="active">
                 <div class="navbar-icon">
                     <img src="../images/white-drink-button.png" alt="Drinks">
                 </div>

@@ -74,6 +74,7 @@ li:nth-child(1) {
 .right-container{
   flex: 1;
   align-items: center;
+  padding-bottom: 50%;
 }
 
 .select-text{
