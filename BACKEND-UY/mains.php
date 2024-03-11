@@ -125,6 +125,7 @@
         $conn = mysqli_connect("localhost", "root", "") or die ("Unable to connect!". mysqli_error($conn) );
         mysqli_select_db($conn, "mydb");
 
+        session_start(); // Start session to store mains objects
         require_once("order.php"); //Adding the order class for OOP purposes
     ?>
     <nav>
@@ -206,14 +207,19 @@
     </main>
     
     <?php
+        if(!isset($_SESSION['mains'])) { // Checks if a mains array has already been set (to avoid reset everytime mains.php is visited in current session)
+            
+            $_SESSION['mains'] = []; // Set an array to store all mains orders in SESSION
+        }
+
         if ($_SERVER["REQUEST_METHOD"] == "POST") { // When a post is done above, execute code
             
             if(isset($_POST["count"])){ // Check if the count value is set
                 
                 $count = $_POST["count"]; // Retrieve the count value from the POST data
                 
-                $maxNutrQuery = mysqli_query($conn, "SELECT MAX(CAST(SUBSTRING(ordr_id, 2) AS UNSIGNED)) AS max_orderID FROM order_table");
-                $row = mysqli_fetch_assoc($maxNutrQuery); // Get Current Max order_id from table 
+                $maxOrderQuery = mysqli_query($conn, "SELECT MAX(CAST(SUBSTRING(ordr_id, 2) AS UNSIGNED)) AS max_orderID FROM order_table");
+                $row = mysqli_fetch_assoc($maxOrderQuery); // Get Current Max order_id from table 
                 $max_orderID = $row['max_orderID'];
                 $orderNum = $max_orderID + 1;
 
@@ -230,8 +236,9 @@
                     
                     $order->setOrder($count, "i102"); // Salad = i102
                 }
-                // TESTING REMOVE IN FINAL PRODUCT
-                echo "Order ID: " . $order->getorderID() . "<br>"; 
+
+                // TESTING; REMOVE ECHOES IN FINAL PROJECT
+                echo "Order ID: " . $order->getOrderID() . "<br>"; 
                 echo "Quantity: " . $order->getQuantity() . "<br>";
                 echo "Item ID: " . $order->getItemID() . "<br>";
             }
@@ -246,7 +253,10 @@
                 
                 $insert = "INSERT INTO order_table VALUES ('$ordr_id', '$quantity', '$item_id')";
                 mysqli_query($conn, $insert);
-                echo "Record has been successfully inserted!";
+
+                array_push($_SESSION['mains'],$ordr_id); // Add order IDs to mains array in session
+
+                echo "Record has been successfully inserted!"; // TESTING ALSO, CAN REMOVE along with else statement
                 
                 } else {
                     echo "Failed to insert record!!!";

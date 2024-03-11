@@ -123,6 +123,7 @@ body {
         $conn = mysqli_connect("localhost", "root", "") or die ("Unable to connect!". mysqli_error($conn) );
         mysqli_select_db($conn, "mydb");
 
+        session_start();
         require_once("order.php"); //Adding the order class for OOP purposes
     ?>
 
@@ -236,14 +237,19 @@ body {
     </main>
 
     <?php
+        if(!isset($_SESSION['sides'])) { // Checks if a sides array has already been set (to avoid reset everytime sides.php is visited in current session)
+            
+            $_SESSION['sides'] = []; // Set an array to store all sides order IDs in SESSION
+        }
+
         if ($_SERVER["REQUEST_METHOD"] == "POST") { // When a post is done above, execute code
             
             if(isset($_POST["count"])){ // Check if the count value is set
                 
                 $count = $_POST["count"]; // Retrieve the count value from the POST data
                 
-                $maxNutrQuery = mysqli_query($conn, "SELECT MAX(CAST(SUBSTRING(ordr_id, 2) AS UNSIGNED)) AS max_orderID FROM order_table");
-                $row = mysqli_fetch_assoc($maxNutrQuery); // Get Current Max order_id from table 
+                $maxOrderQuery = mysqli_query($conn, "SELECT MAX(CAST(SUBSTRING(ordr_id, 2) AS UNSIGNED)) AS max_orderID FROM order_table");
+                $row = mysqli_fetch_assoc($maxOrderQuery); // Get Current Max order_id from table 
                 $max_orderID = $row['max_orderID'];
                 $orderNum = $max_orderID + 1;
 
@@ -282,6 +288,9 @@ body {
                 
                 $insert = "INSERT INTO order_table VALUES ('$ordr_id', '$quantity', '$item_id')";
                 mysqli_query($conn, $insert);
+
+                array_push($_SESSION['sides'],$ordr_id); // Add order IDs to sides array in session
+
                 echo "Record has been successfully inserted!";
                 
                 } else {

@@ -97,6 +97,8 @@
     </div>
 
     <?php
+        session_start(); // Start a session at the homepage for new users
+
         $conn = mysqli_connect("localhost", "root", "") or die ("Unable to connect!". mysqli_error($conn) ); // Connection to db, change data as needed
         mysqli_select_db($conn, "mydb");
 
@@ -108,6 +110,12 @@
                                                          // add c at the start for the cart_id format; add a 0 in the middle; add the value extracted + 1 = c04, c05...
         $insertQuery = "INSERT INTO cart (cart_id) VALUES ('$cartID')";
         mysqli_query($conn, $insertQuery);
+
+        $_SESSION['cartID'] = "$cartID"; // Stores current cartID throughout the user's session
+
+        $_SESSION['mains'] = []; // Initialize mains, sides, drinks arrays
+        $_SESSION['sides'] = [];
+        $_SESSION['drinks'] = [];
 
     ?>
 </body>
