@@ -5,6 +5,7 @@
     gap: 5%; 
     margin-left: 5%;
     margin-right: 5%;
+    padding-bottom: 5%;
   }
   
 .dish-item {
@@ -24,6 +25,16 @@
     height: 48vh;
     position: relative;
   }
+
+  .dish-item:hover {
+    background-color: #CED3D7;; 
+  }
+
+  .dish-item:active {
+    background-color: #2b7e27;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+  }   
 
   .dish-img-box {
     overflow: hidden;
