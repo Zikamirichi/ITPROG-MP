@@ -31,7 +31,7 @@
   }
 
   .dish-item:active {
-    background-color: #2b7e27;
+    background-color: #006634;
     box-shadow: 0 5px #666;
     transform: translateY(4px);
   }   
