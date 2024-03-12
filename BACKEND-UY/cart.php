@@ -238,10 +238,12 @@ body {
 
             $totalBill += $totalForAlacarte;
             echo "Total for Whole Transaction: Php $totalBill"; // Total bill from combos + ala_carte saved in session
+
+            $_SESSION['totalBill'] = $totalBill;
         ?>
 
-    <br><a href="editOrder.php">Edit Order</a>
-        <br><a href="paid.php">Done</a>
+        <br><a href="editOrder.php">Edit Order</a>
+        <br><a href="payOptions.php">Proceed to Payment</a>
     </main>
 </body>
 </html>
