@@ -96,10 +96,6 @@ body {
             session_start();
             require_once("order.php"); //Adding the order class for OOP purposes
 
-            if (!isset($_SESSION['totalBill'])) { // For use in displaying payment later on
-                $_SESSION['totalBill'] = 0;
-            }
-
             //CHANGE $CONN VARIABLES DEPENDING ON PERSONAL DEVICE SETTINGS
             $conn = mysqli_connect("localhost", "root", "") or die ("Unable to connect!". mysqli_error($conn) );
             mysqli_select_db($conn, "mydb");
@@ -141,6 +137,7 @@ body {
             $displayComboResult = mysqli_query($conn, $displayComboQuery);
 
             echo "<h2>Combo Items</h2>";
+            $totalBill = 0;
             $comboNum = 1; // Initialize combo number as 1
 
             while ($comboRow = mysqli_fetch_assoc($displayComboResult)) { // Loop through each row in combo table created
@@ -165,7 +162,7 @@ body {
                 echo "Discount: Php $discountForCombo <br>";
                 echo "Subtotal After Discount: Php $totalAfterDiscount <br>";
                 
-                $_SESSION['totalBill'] += $totalAfterDiscount; // Store subtotal in session variable. Gets added to after each loop iteration if more than 1 combo exists.
+                $totalBill += $totalAfterDiscount; // Store subtotal in session variable. Gets added to after each loop iteration if more than 1 combo exists.
                 $comboNum++; // Increment the shown comboNum
             }
 
@@ -186,7 +183,6 @@ body {
             $displayAlacarteResult = mysqli_query($conn, $alaCarteQuery);
 
             echo "<h2>Ala Carte Items</h2>";
-            $totalForAlacarte = 0; // Initialize total for ala carte items
 
             while ($alaCarteRow = mysqli_fetch_assoc($displayAlacarteResult)) { // Loop through all resulting rows in ala_carte query
 
@@ -198,37 +194,49 @@ body {
                 $drinkPrice = $alaCarteRow['drinkPrice'];
                 $quantity = $alaCarteRow['quantity'];
 
-                $totalForAlacarte = 0; // Initialize total as 0
                 if ($mainName != NULL) { // If the order is a main
 
                     $totalMainPrice = $mainPrice * $quantity; // Calculate total price for main
                     echo "Main: $mainName - Php $mainPrice * $quantity = Php $totalMainPrice<br>";
-
-                    $totalForAlacarte += $totalMainPrice; // Get the price of the ala carte item * quantity
                 }
 
                 if ($sideName != NULL) { // If the order is a side   
 
                     $totalSidePrice = $sidePrice * $quantity; // Calculate total price for side
                     echo "Sides: $sideName - Php $sidePrice * $quantity = Php $totalSidePrice<br>";
-
-                    $totalForAlacarte += $totalSidePrice;
                 }
 
                 if ($drinkName != NULL) { // If the order is a drink
                 
                     $totalDrinkPrice = $drinkPrice * $quantity; // Calculate total price for drink
                     echo "Drinks: $drinkName - Php $drinkPrice * $quantity = Php $totalDrinkPrice<br>";
-
-                    $totalForAlacarte += $totalDrinkPrice;
                 }
             }
-        
+
+            // Query to get total for ala carte items relative to cart ID
+            $alaCarteTotalQuery = "SELECT 
+            SUM(COALESCE(mains.price*ot.ordr_quan, 0) + COALESCE(side.price*ot.ordr_quan, 0) + COALESCE(drink.price*ot.ordr_quan, 0)) AS total_earned_from_alacarte
+            FROM 
+                ala_carte ac
+                JOIN order_table AS ot 
+                    ON ac.ordr_id = ot.ordr_id
+                JOIN item i 
+                    ON i.item_id = ot.item_id
+                LEFT JOIN sides AS side 
+                    ON i.item_id = side.sides_id
+                LEFT JOIN mains AS mains 
+                    ON i.item_id = mains.mains_id
+                LEFT JOIN drinks AS drink 
+                    ON i.item_id = drink.drinks_id
+                WHERE cart_id = '$cartID';";
+            
+            $alaCarteTotalResult = mysqli_query($conn, $alaCarteTotalQuery); 
+            $alaCarteTotalRow = mysqli_fetch_assoc($alaCarteTotalResult); // Fetch the total calculated
+            
+            $totalForAlacarte = $alaCarteTotalRow['total_earned_from_alacarte'];
             echo "Subtotal for Ala Carte: Php $totalForAlacarte <br><br>"; // Subtotal after all ala carte entries
 
-            $_SESSION['totalBill'] += $totalForAlacarte; // Add Ala carte total to whole bill
-            $totalBill = $_SESSION['totalBill'];
-
+            $totalBill += $totalForAlacarte;
             echo "Total for Whole Transaction: Php $totalBill"; // Total bill from combos + ala_carte saved in session
         ?>
 
