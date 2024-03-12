@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		.confirm-order-prompt {
+		  background-color: #f1f1f1;
+		  padding: 20px;
+		  border-radius: 5px;
+		  text-align: center;
+		  margin: 20px auto;
+		  width: 400px;
+		  height: 400px;
+		  font-family: 'Luckiest Guy', cursive;
+		  position: relative;
+		  aspect-ratio: 1/1;
+		}
+
+		.confirm-order-prompt h2 {
+		  margin-top: 0;
+		  color: #ffffff;
+		  background-color: #D4471F;
+		  padding: 10px;
+		  border-radius: 5px;
+		}
+
+		.confirm-order-prompt .close {
+		  position: absolute;
+	top: 10px;
+		  right: 10px;
+		  background-color: #f1f1f1;
+		  color: #333;
+		  border: none;
+		  padding: 5px 10px;
+		  font-family: 'Luckiest Guy', cursive;
+		  border-radius: 50%;
+		  cursor: pointer;
+		}
+
+		.confirm-order-prompt .close:hover {
+		  background-color: #ddd;
+		}
+
+		.confirm-order-prompt button {
+		  margin-bottom: 10px;
+		  background-color: #CED3D7;
+		  color: rgb(0, 0, 0);
+		  border: none;
+		  padding: 10px;
+          font-family: 'Luckiest Guy', cursive;
+          font-size: 15px;
+		  border-radius: 5px;
+		  cursor: pointer;
+		  transition: background-color 0.3s ease;
+		}
+
+		.confirm-order-prompt button:hover {
+		  background-color: #45a049;
+		}
+	</style>
+</head>
+<body>
+    <div id="confirm-order-prompt" class="confirm-order-prompt">
+        <span class="close">&times;</span>
+        <h2>CONFIRM ORDER</h2>
+        <p>Please select 'YES' to confirm your order and proceed to payment:</p>
+        <button id="confirm-order">NO</button>
+        <button id="cancel-order">YES</button>
+      </div>
+
+    <script>
+        const confirmOrderButton = document.getElementById('confirm-order');
+        confirmOrderButton.addEventListener('click', () => {
+            alert('Please select "YES" to confirm your order.');
+            confirmOrderButton.preventDefault();
+        });
+
+        
+        const cancelOrderButton = document.getElementById('cancel-order');
+        cancelOrderButton.addEventListener('click', () => {
+            
+            window.location.href = 'choose_payment.html';
+        });
+
+     
+        const closeButton = document.querySelector('.confirm-order-prompt .close');
+        closeButton.addEventListener('click', () => {
+            document.getElementById('confirm-order-prompt').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
