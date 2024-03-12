@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
     <title>Cart</title>
     <style>
-body {
+        body {
             margin: 0;
             padding: 0;
             background-image: url('menubg.png'); 
@@ -69,10 +70,26 @@ body {
             display: flex;
             justify-content: space-between;
             text-decoration: underline; /* Underline text */
+            background-color: white;
+            padding: 30px;
+            border-radius: 20px; /* Top left, top right, bottom right, bottom left */
+        }
+
+        .cart-total {
+            background-color: white;
+            padding: 30px;
+            border-radius: 20px; /* Top left, top right, bottom right, bottom left */
         }
 
         .cart-item span {
             margin-right: 10px;
+        }
+
+        .cart-bg {
+            background-color: lightgrey;
+            margin: 30px;
+            padding: 30px;
+            border-radius: 20px; /* Top left, top right, bottom right, bottom left */
         }
     </style>
 </head>
@@ -86,6 +103,7 @@ body {
     </nav>
     <main>
         <h1>Cart</h1>
+        <div class="cart-bg">
         <?php
         // Sample cart data
         $cart = [
@@ -108,6 +126,7 @@ body {
         }
         echo '</ul>';
 
+        echo '<div class="cart-total">';
         echo '<h3 style="color: lightgrey;">Php' . number_format($total, 2) . '</h3>';
 
         // Apply discount if there are 3 or more items
@@ -119,7 +138,11 @@ body {
         
         // Display total after discount
         echo '<h3>Total: Php' . number_format($total, 2) . '</h3>';
+        echo '</div>';
         ?>
+        <button>Done</button>
+        </div>
+        
     </main>
 </body>
 </html>
