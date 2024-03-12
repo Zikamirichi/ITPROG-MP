@@ -127,6 +127,17 @@
 
         session_start(); // Start session to store mains objects
         require_once("order.php"); //Adding the order class for OOP purposes
+
+        // Get stocks from database for input to be limited to the available stocks
+        $maxm01StockQuery = "SELECT quantity FROM stocks WHERE stocks_id = 'm01';";
+        $maxm01StockResult = mysqli_query($conn, $maxm01StockQuery);
+        $maxm01StockRow = mysqli_fetch_assoc($maxm01StockResult);
+        $maxm01Stock = $maxm01StockRow['quantity'];
+
+        $maxm02Stock = "SELECT quantity FROM stocks WHERE stocks_id ='m02';";
+        $maxm02StockResult = mysqli_query($conn, $maxm02Stock);
+        $maxm02StockRow = mysqli_fetch_assoc($maxm02StockResult);
+        $maxm02Stock = $maxm02StockRow['quantity'];
     ?>
     <nav>
         <a href="mains.php" class="current-page">Main</a>
@@ -165,7 +176,7 @@
                     <div class="counter"> <!-- Counter for selecting the quantity of chicken -->
                         <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                             <input type="hidden" name="item" value="chicken"> <!-- Hidden value to indicate that chicken was the selected item-->
-                            <input type="number" id="count" name="count" value="1" min="1"> <br>
+                            <input type="number" id="count" name="count" value="1" min="1" max="<?php echo $maxm01Stock; ?>"> <br>
                             <input type="submit" value ="Submit" name="submit"> <!-- Submit button for finalizing order -->
                         </form>
                 </div>
@@ -198,7 +209,7 @@
                     <div class="counter"> <!-- Counter for selecting the quantity of salad -->
                         <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                             <input type="hidden" name="item" value="salad"> <!-- Hidden value to indicate that salad was the selected item -->
-                            <input type="number" id="count" name="count" value="1" min="1"> <br>
+                            <input type="number" id="count" name="count" value="1" min="1" max="<?php echo $maxm02Stock; ?>"> <br>
                             <input type="submit" value ="Submit" name="submit"> <!-- Submit button for finalizing order -->
                         </form>
                 </div>

@@ -125,6 +125,29 @@ body {
 
         session_start();
         require_once("order.php"); //Adding the order class for OOP purposes
+        
+        // Get stocks from database for input to be limited to the available stocks
+        $maxs01StockQuery = "SELECT quantity FROM stocks WHERE stocks_id ='s01';";
+        $maxs01StockResult = mysqli_query($conn, $maxs01StockQuery);
+        $maxs01StockRow = mysqli_fetch_assoc($maxs01StockResult);
+        $maxs01Stock = $maxs01StockRow['quantity'];
+
+        $maxs02StockQuery = "SELECT quantity FROM stocks WHERE stocks_id ='s02';";
+        $maxs02StockResult = mysqli_query($conn, $maxs02StockQuery);
+        $maxs02StockRow = mysqli_fetch_assoc($maxs02StockResult);
+        $maxs02Stock = $maxs02StockRow['quantity'];
+
+        $maxs03StockQuery = "SELECT quantity FROM stocks WHERE stocks_id ='s03';";
+        $maxs03StockResult = mysqli_query($conn, $maxs03StockQuery);
+        $maxs03StockRow = mysqli_fetch_assoc($maxs03StockResult);
+        $maxs03Stock = $maxs03StockRow['quantity'];
+
+        /* Comment out since s04 is not used.
+        $maxs04StockQuery = "SELECT quantity FROM stocks WHERE stocks_id = 's04':";
+        $maxs04StockResult = mysqli_query($conn, $maxs04StockQuery);
+        $maxs04StockRow = mysqli_fetch_assoc($maxs04StockResult);
+        $maxs04Stock = $maxs04StockRow['quantity'];
+        */
     ?>
 
     <nav>
@@ -163,7 +186,7 @@ body {
                         <div class="counter"> <!-- Counter for selecting the quantity of rice -->
                             <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                                 <input type="hidden" name="item" value="rice"> <!-- Hidden value to indicate that rice was the selected item-->
-                                <input type="number" id="count" name="count" value="1" min="1"> <br>
+                                <input type="number" id="count" name="count" value="1" min="1" max="<?php echo $maxs01Stock; ?>"> <br>
                                 <input type="submit" value ="Submit" name="submit"> <!-- Submit button for finalizing order -->
                             </form>
                     </div>
@@ -195,7 +218,7 @@ body {
                         <div class="counter"> <!-- Counter for selecting the quantity of veg -->
                             <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                                 <input type="hidden" name="item" value="veg"> <!-- Hidden value to indicate that veg was the selected item-->
-                                <input type="number" id="count" name="count" value="1" min="1"> <br>
+                                <input type="number" id="count" name="count" value="1" min="1" max="<?php echo $maxs02Stock; ?>"> <br>
                                 <input type="submit" value ="Submit" name="submit"> <!-- Submit button for finalizing order -->
                             </form>
                     </div>
@@ -227,7 +250,7 @@ body {
                         <div class="counter"> <!-- Counter for selecting the quantity of mash -->
                             <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                                 <input type="hidden" name="item" value="mash"> <!-- Hidden value to indicate that mash was the selected item-->
-                                <input type="number" id="count" name="count" value="1" min="1"> <br>
+                                <input type="number" id="count" name="count" value="1" min="1" max="<?php echo $maxs03Stock; ?>"> <br>
                                 <input type="submit" value ="Submit" name="submit"> <!-- Submit button for finalizing order -->
                             </form>
                     </div>
