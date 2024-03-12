@@ -244,15 +244,23 @@
             }
             
             
-            if(isset($_POST["submit"])) {
-                $ordr_id = $order->getOrderID();
+            if(isset($_POST["submit"])) { // Check if the submit button was pressed
+                $ordr_id = $order->getOrderID(); // Getters for data to be inserted in database
                 $quantity = $order->getQuantity();
                 $item_id = $order->getItemID();
             
                 error_reporting(E_ERROR | E_PARSE);
                 
+                // Insert values into orders table
                 $insert = "INSERT INTO order_table VALUES ('$ordr_id', '$quantity', '$item_id')";
                 mysqli_query($conn, $insert);
+
+                // Update stocks table based on item ID with order quantity
+                $updateMainsStock = "UPDATE stocks s
+                                        JOIN mains m ON s.stocks_id = m.stocks_id
+                                        SET s.quantity = s.quantity - $quantity
+                                        WHERE m.mains_id = '$item_id'";
+                mysqli_query($conn, $updateMainsStock); 
 
                 array_push($_SESSION['mains'],$ordr_id); // Add order IDs to mains array in session
 

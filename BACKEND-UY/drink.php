@@ -291,6 +291,13 @@ body {
                 $insert = "INSERT INTO order_table VALUES ('$ordr_id', '$quantity', '$item_id')";
                 mysqli_query($conn, $insert);
 
+                // Update stocks table based on item ID with order quantity
+                $updateDrinkStock = "UPDATE stocks s
+                                        JOIN drinks d ON s.stocks_id = d.stocks_id
+                                        SET s.quantity = s.quantity - $quantity
+                                        WHERE d.drinks_id = '$item_id'";
+                mysqli_query($conn, $updateDrinkStock); 
+
                 array_push($_SESSION['drinks'],$ordr_id); // Add order IDs to drinks array in session
 
                 echo "Record has been successfully inserted!";
