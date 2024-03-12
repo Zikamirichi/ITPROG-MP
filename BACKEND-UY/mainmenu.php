@@ -105,6 +105,7 @@
     </nav>
     <main>
         <h1>Select the Dish you wish to order</h1>
+        <p>PRACTICE ITO<p>
         <div class="images-container">
             <a href="mains.php"><img src="images/main.png" alt="Main"></a>
             <a href="sides.php"><img src="images/side.png" alt="Side"></a>
