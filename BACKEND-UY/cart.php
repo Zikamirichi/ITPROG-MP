@@ -171,19 +171,16 @@ body {
 
             // FOR ALA CARTE ITEMS
             // Query to get all ala_carte items across the different cmb tables; where the cartID matches
-            $alaCarteQuery = "SELECT ac.*, mains.`name` AS mainName, mains.price AS mainPrice, side.`name` AS sideName, side.price AS sidePrice, 
-                                    drink.names AS drinkName, drink.price AS drinkPrice
+            $alaCarteQuery = "SELECT ac.*, ot.ordr_quan AS quantity,  
+                                mains.`name` AS mainName, mains.price AS mainPrice,
+                                side.`name` AS sideName, side.price AS sidePrice,
+                                drink.names AS drinkName, drink.price AS drinkPrice
                                 FROM ala_carte ac
-                                JOIN order_table AS ot 
-                                    ON ac.ordr_id = ot.ordr_id
-                                JOIN item i 
-                                    ON i.item_id = ot.item_id
-                                LEFT JOIN sides AS side 
-                                    ON i.item_id = side.sides_id
-                                LEFT JOIN mains AS mains 
-                                    ON i.item_id = mains.mains_id
-                                LEFT JOIN drinks AS drink 
-                                    ON i.item_id = drink.drinks_id
+                                JOIN order_table ot ON ac.ordr_id = ot.ordr_id 
+                                JOIN item i ON ot.item_id = i.item_id
+                                LEFT JOIN sides side ON i.item_id = side.sides_id  
+                                LEFT JOIN mains mains ON i.item_id = mains.mains_id
+                                LEFT JOIN drinks drink ON i.item_id = drink.drinks_id
                                 WHERE ac.cart_id = '$cartID'";
             
             $displayAlacarteResult = mysqli_query($conn, $alaCarteQuery);
@@ -199,21 +196,31 @@ body {
                 $sidePrice = $alaCarteRow['sidePrice'];
                 $drinkName = $alaCarteRow['drinkName'];
                 $drinkPrice = $alaCarteRow['drinkPrice'];
+                $quantity = $alaCarteRow['quantity'];
 
                 $totalForAlacarte = 0; // Initialize total as 0
                 if ($mainName != NULL) { // If the order is a main
-                    $totalForAlacarte += $mainPrice;
-                    echo "Main: $mainName - Php $mainPrice <br><br>";
+
+                    $totalMainPrice = $mainPrice * $quantity; // Calculate total price for main
+                    echo "Main: $mainName - Php $mainPrice * $quantity = Php $totalMainPrice<br>";
+
+                    $totalForAlacarte += $totalMainPrice; // Get the price of the ala carte item * quantity
                 }
 
-                if ($sideName != NULL) { // If the order is a side
-                    $totalForAlacarte += $sidePrice;
-                    echo "Sides: $sideName - Php $sidePrice <br>";
+                if ($sideName != NULL) { // If the order is a side   
+
+                    $totalSidePrice = $sidePrice * $quantity; // Calculate total price for side
+                    echo "Sides: $sideName - Php $sidePrice * $quantity = Php $totalSidePrice<br>";
+
+                    $totalForAlacarte += $totalSidePrice;
                 }
 
                 if ($drinkName != NULL) { // If the order is a drink
-                    $totalForAlacarte += $drinkPrice;
-                    echo "Drinks: $drinkName - Php $drinkPrice <br>";
+                
+                    $totalDrinkPrice = $drinkPrice * $quantity; // Calculate total price for drink
+                    echo "Drinks: $drinkName - Php $drinkPrice * $quantity = Php $totalDrinkPrice<br>";
+
+                    $totalForAlacarte += $totalDrinkPrice;
                 }
             }
         
@@ -225,7 +232,8 @@ body {
             echo "Total for Whole Transaction: Php $totalBill"; // Total bill from combos + ala_carte saved in session
         ?>
 
-        <a href="paid.php">Done</a>
+    <br><a href="editOrder.php">Edit Order</a>
+        <br><a href="paid.php">Done</a>
     </main>
 </body>
 </html>

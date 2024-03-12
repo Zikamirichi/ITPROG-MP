@@ -163,7 +163,7 @@ body {
                     <div class="counter"> <!-- Counter for selecting the quantity of water -->
                         <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                             <input type="hidden" name="item" value="water"> <!-- Hidden value to indicate that water was the selected item-->
-                            <input type="number" id="count" name="count" value="1"> <br>
+                            <input type="number" id="count" name="count" value="1" min="1"> <br>
                             <input type="submit" value ="Submit" name="submit"> <!-- Submit button for finalizing order -->
                         </form>
                 </div>
@@ -196,7 +196,7 @@ body {
                     <div class="counter"> <!-- Counter for selecting the quantity of coffee -->
                         <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                             <input type="hidden" name="item" value="coffee"> <!-- Hidden value to indicate that coffee was the selected item-->
-                            <input type="number" id="count" name="count" value="1"> <br>
+                            <input type="number" id="count" name="count" value="1" min="1"> <br>
                             <input type="submit" value ="Submit" name="submit"> <!-- Submit button for finalizing order -->
                         </form>
                 </div>
@@ -229,7 +229,7 @@ body {
                     <div class="counter"> <!-- Counter for selecting the quantity of oj -->
                         <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                             <input type="hidden" name="item" value="oj"> <!-- Hidden value to indicate that oj was the selected item-->
-                            <input type="number" id="count" name="count" value="1"> <br>
+                            <input type="number" id="count" name="count" value="1" min="1"> <br>
                             <input type="submit" value ="Submit" name="submit"> <!-- Submit button for finalizing order -->
                         </form>
                 </div>

@@ -163,7 +163,7 @@ body {
                         <div class="counter"> <!-- Counter for selecting the quantity of rice -->
                             <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                                 <input type="hidden" name="item" value="rice"> <!-- Hidden value to indicate that rice was the selected item-->
-                                <input type="number" id="count" name="count" value="1"> <br>
+                                <input type="number" id="count" name="count" value="1" min="1"> <br>
                                 <input type="submit" value ="Submit" name="submit"> <!-- Submit button for finalizing order -->
                             </form>
                     </div>
@@ -195,7 +195,7 @@ body {
                         <div class="counter"> <!-- Counter for selecting the quantity of veg -->
                             <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                                 <input type="hidden" name="item" value="veg"> <!-- Hidden value to indicate that veg was the selected item-->
-                                <input type="number" id="count" name="count" value="1"> <br>
+                                <input type="number" id="count" name="count" value="1" min="1"> <br>
                                 <input type="submit" value ="Submit" name="submit"> <!-- Submit button for finalizing order -->
                             </form>
                     </div>
@@ -227,7 +227,7 @@ body {
                         <div class="counter"> <!-- Counter for selecting the quantity of mash -->
                             <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                                 <input type="hidden" name="item" value="mash"> <!-- Hidden value to indicate that mash was the selected item-->
-                                <input type="number" id="count" name="count" value="1"> <br>
+                                <input type="number" id="count" name="count" value="1" min="1"> <br>
                                 <input type="submit" value ="Submit" name="submit"> <!-- Submit button for finalizing order -->
                             </form>
                     </div>
