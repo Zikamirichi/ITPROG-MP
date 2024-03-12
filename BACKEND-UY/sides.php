@@ -131,7 +131,7 @@ body {
         <a href="mains.php">Main</a>
         <a href="sides.php" class="current-page">Sides</a>
         <a href="drink.php">Drinks</a>
-        <a href="cart.php">Cart</a>
+        <a href="processOrders.php">Cart</a>
         <a href="mainmenu.php">Back to Hub</a>
     </nav>
     <main>

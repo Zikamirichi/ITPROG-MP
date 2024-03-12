@@ -132,7 +132,7 @@
         <a href="mains.php" class="current-page">Main</a>
         <a href="sides.php">Sides</a>
         <a href="drink.php">Drinks</a>
-        <a href="cart.php">Cart</a>
+        <a href="processOrders.php">Cart</a>
         <a href="mainmenu.php">Back to Hub</a>
     </nav>
     <main>
