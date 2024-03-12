@@ -101,6 +101,7 @@
             $comboQuery = "INSERT INTO combo (cmb_id, cart_id, c_main_id, c_side_id, c_drink_id)
                             VALUES ('$nextComboID','$cartID', '$nextMainID', '$nextSideID', '$nextDrinkID')"; // Query the DB to insert the combo items to combo table
             mysqli_query($conn, $comboQuery);
+            
 
             // For Mains
             if ($mainQuantity > 1) { // If an order is part of the combo meal but is selected to be more than 1 quantity
@@ -128,6 +129,18 @@
                 $insertNewMainQuery = "INSERT INTO order_table (ordr_id, ordr_quan, item_id)
                                         VALUES ('$newMainOrderID', '$newMainQuantity', '$newMainItemID')"; // Insert the new order to order table
                 mysqli_query($conn, $insertNewMainQuery);
+
+                $maxAlaCarteQuery = mysqli_query($conn, "SELECT MAX(CAST(SUBSTRING(ala_id, 2) AS UNSIGNED)) AS maxAlaID FROM ala_carte");
+                $maxAlaCarteFetch = mysqli_fetch_array($maxAlaCarteQuery);
+                $maxAlaCarteID = $maxAlaCarteFetch['maxAlaID'];
+                $newAlaCarteID = 'a' . sprintf("%02d", $maxAlaCarteID + 1); // The order ID to be used for the new order made
+
+                $insertAlacarteQuery = "INSERT INTO ala_carte (ala_id, cart_id, ordr_id) 
+                                        VALUES ('$newAlaCarteID','$cartID','$newMainOrderID')"; // Insert the new order to ala carte table
+                mysqli_query($conn, $insertAlacarteQuery);
+
+                //array_push($mains, $newMainOrderID);
+                //$_SESSION['mains'] = $mains;
             }
 
             // For Sides
@@ -154,6 +167,18 @@
                 $insertNewSideQuery = "INSERT INTO order_table (ordr_id, ordr_quan, item_id)
                                         VALUES ('$newSideOrderID', '$newSideQuantity', '$newSideItemID')";
                 mysqli_query($conn, $insertNewSideQuery);
+
+                $maxAlaCarteQuery = mysqli_query($conn, "SELECT MAX(CAST(SUBSTRING(ala_id, 2) AS UNSIGNED)) AS maxAlaID FROM ala_carte");
+                $maxAlaCarteFetch = mysqli_fetch_array($maxAlaCarteQuery);
+                $maxAlaCarteID = $maxAlaCarteFetch['maxAlaID'];
+                $newAlaCarteID = 'a' . sprintf("%02d", $maxAlaCarteID + 1); // The order ID to be used for the new order made
+
+                $insertAlacarteQuery = "INSERT INTO ala_carte (ala_id, cart_id, ordr_id) 
+                                        VALUES ('$newAlaCarteID','$cartID','$newSideOrderID')"; // Insert the new order to ala carte table
+                mysqli_query($conn, $insertAlacarteQuery);
+
+                //array_push($sides, $newMainOrderID);
+                //$_SESSION['sides'] = $sides;
             }
             
             if ($drinkQuantity > 1) {
@@ -179,12 +204,24 @@
                 $insertNewDrinkQuery = "INSERT INTO order_table (ordr_id, ordr_quan, item_id)
                                         VALUES ('$newDrinkOrderID', '$newDrinkQuantity', '$newDrinkItemID')";
                 mysqli_query($conn, $insertNewDrinkQuery);
-            }
 
-            unset($_SESSION['mains'][array_search($mainOrder, $_SESSION['mains'])]);
-            unset($_SESSION['sides'][array_search($sideOrder, $_SESSION['sides'])]);
-            unset($_SESSION['drinks'][array_search($drinkOrder, $_SESSION['drinks'])]);
+                $maxAlaCarteQuery = mysqli_query($conn, "SELECT MAX(CAST(SUBSTRING(ala_id, 2) AS UNSIGNED)) AS maxAlaID FROM ala_carte");
+                $maxAlaCarteFetch = mysqli_fetch_array($maxAlaCarteQuery);
+                $maxAlaCarteID = $maxAlaCarteFetch['maxAlaID'];
+                $newAlaCarteID = 'a' . sprintf("%02d", $maxAlaCarteID + 1); // The order ID to be used for the new order made
+
+                $insertAlacarteQuery = "INSERT INTO ala_carte (ala_id, cart_id, ordr_id) 
+                                        VALUES ('$newAlaCarteID','$cartID','$newDrinkOrderID')"; // Insert the new order to ala carte table
+                mysqli_query($conn, $insertAlacarteQuery);
+
+                //array_push($drinks, $newMainOrderID);
+                //$_SESSION['drinks'] = $drinks;
+            }
         }
+
+        unset($_SESSION['mains']);
+        unset($_SESSION['sides']); 
+        unset($_SESSION['drinks']);
     }
 
     // Ala Carte Processing
