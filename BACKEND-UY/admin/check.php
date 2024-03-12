@@ -16,7 +16,7 @@ if (isset($_POST["loginBtn"]))
     {
       session_start();  //to start the session
       $_SESSION['getLogin'] = $user;  //this will hold the session variable to identify the user of the system
-      header("location: http://localhost/IT-PROG/ITPROG-MP/BACKEND-UY/admin/adminmenu.php");  //this sets the headers for the HTTP response given by the server 
+      header("location: adminmenu.php");  //this sets the headers for the HTTP response given by the server 
     }
    else
     {

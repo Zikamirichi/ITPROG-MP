@@ -219,7 +219,7 @@
             }
         }
 
-        unset($_SESSION['mains']);
+        unset($_SESSION['mains']); // Unset Session arrays to avoid duplicate entries
         unset($_SESSION['sides']); 
         unset($_SESSION['drinks']);
     }
