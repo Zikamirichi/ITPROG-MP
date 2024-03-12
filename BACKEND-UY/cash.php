@@ -8,10 +8,11 @@
 <body>
     <?php
         session_start();
-        $totalBill = (double) $_SESSION['totalBill'];
-
-        echo "<h2>Total Bill: $totalBill</h2><br><br>";
+        $totalBill = $_SESSION['totalBill'];
+        
+        echo "<h2>Total Bill: Php $totalBill</h2>";
     ?>
+    
     <br><br><a href="paid.php">Done</a>
 </body>
 </html>

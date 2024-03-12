@@ -32,6 +32,46 @@
         $drinks = [];
     }
 
+    // Join with order_table to get item ids
+    $alacarteOrdersQuery = "SELECT a.ordr_id, o.item_id  
+              FROM ala_carte AS a
+              JOIN order_table AS o ON a.ordr_id = o.ordr_id
+              WHERE a.cart_id = '$cartID'";
+
+    $result = mysqli_query($conn, $alacarteOrdersQuery);
+
+    // Check if we have 1 main, side, and drink
+    $mainId = null; 
+    $sideId = null;
+    $drinkId = null;
+
+    while($row = mysqli_fetch_assoc($result)) { // Test each row
+      $itemId = $row['item_id'];
+      
+      if(substr($itemId, 0, 2) == 'i1') { // If id matches that of mains, assign the order id associated with it to $mainID
+        
+        $mainId = $row['ordr_id']; 
+      } 
+      
+      else if(substr($itemId, 0, 2) == 'i2') {
+
+        $sideId = $row['ordr_id'];
+      } 
+      
+      else if(substr($itemId, 0, 2) == 'i3') { 
+        
+        $drinkId = $row['ordr_id'];
+      }
+    }
+
+    if($mainId && $sideId && $drinkId) {
+      // Can make combo
+      array_push($mains, $mainId);
+      array_push($sides, $sideId);
+      array_push($drinks, $drinkId);
+    }
+
+
     // COMBO PROCESSING
     if (isset($mains, $sides, $drinks)) { // Check if there are at least 1 of each mains, sides, drinks in the order
 
@@ -289,6 +329,7 @@
           }
         }
       }
+
 
     // Query to Delete Comboed Items fro the ala carte table. With respect to the cart id of the ala carte table
     $deleteAlacarteQuery = "DELETE FROM ala_carte
