@@ -8,5 +8,7 @@
 <body>
     <h2>Select The Table You Would Like to Modify:</h2>
     <a href="modnutrfacts.php">Nutrition Facts Table</a>
+    <br> 
+    <a href="sides-table/sides-table.php">Sides Table</a>
 </body>
 </html>
