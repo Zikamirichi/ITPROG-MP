@@ -1,10 +1,29 @@
 <html>
 <head>
-   <title>Login Page</title>
+   <title>Login</title>
+   <style>
+      body {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         height: 100vh; 
+         margin: 0;
+      }
 
+      .header {
+         background-color: #D4471F;
+         font-family: "Luckiest Guy", cursive;
+         font-weight: 400;
+         font-style: normal;
+         display: inline;
+      }
+   </style>
 </head>
 <body>
-   <h2> User Login Page</h2>
+   <div class="header">
+      <img src="../images/logo-only.png" alt="Logo">
+      HEALTHY FOOD
+   </div>
    <table>
    <tr>
       <form method="post" action="check.php">
