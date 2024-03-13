@@ -7,9 +7,70 @@
     session_start();
     $cartID = $_SESSION['cartID']; // Get the cart ID of the current user
 
-    $mains = $_SESSION['mains']; // Get the Mains currently ordered in the session
-    $sides = $_SESSION['sides']; // Get the Sides 
-    $drinks = $_SESSION['drinks']; // Get the Drinks 
+
+    if (isset($_SESSION['mains'])) { // Check if mains were ordered by the customer
+        $mains = $_SESSION['mains']; // Get the Mains currently ordered in the session
+    }
+    else {
+
+        $mains = [];
+    }
+
+    if (isset($_SESSION['sides'])) { // Check if sides were ordered by the customer
+        $sides = $_SESSION['sides']; // Get the Sides currently ordered in the session
+    }
+    else {
+
+        $sides = [];
+    }
+
+    if (isset($_SESSION['drinks'])) { // Check if drinks were ordered by the customer
+        $drinks = $_SESSION['drinks']; // Get the Drinks currently ordered in the session
+    }
+    else {
+
+        $drinks = [];
+    }
+
+    // Join with order_table to get item ids
+    $alacarteOrdersQuery = "SELECT a.ordr_id, o.item_id  
+              FROM ala_carte AS a
+              JOIN order_table AS o ON a.ordr_id = o.ordr_id
+              WHERE a.cart_id = '$cartID'";
+
+    $result = mysqli_query($conn, $alacarteOrdersQuery);
+
+    // Check if we have 1 main, side, and drink
+    $mainId = null; 
+    $sideId = null;
+    $drinkId = null;
+
+    while($row = mysqli_fetch_assoc($result)) { // Test each row
+      $itemId = $row['item_id'];
+      
+      if(substr($itemId, 0, 2) == 'i1') { // If id matches that of mains, assign the order id associated with it to $mainID
+        
+        $mainId = $row['ordr_id']; 
+      } 
+      
+      else if(substr($itemId, 0, 2) == 'i2') {
+
+        $sideId = $row['ordr_id'];
+      } 
+      
+      else if(substr($itemId, 0, 2) == 'i3') { 
+        
+        $drinkId = $row['ordr_id'];
+      }
+    }
+
+    if($mainId && $sideId && $drinkId) {
+      // Can make combo
+      array_push($mains, $mainId);
+      array_push($sides, $sideId);
+      array_push($drinks, $drinkId);
+    }
+
 
     // COMBO PROCESSING
     if (isset($mains, $sides, $drinks)) { // Check if there are at least 1 of each mains, sides, drinks in the order
@@ -269,22 +330,23 @@
         }
       }
 
-      // Query to Delete Comboed Items fro the ala carte table. With respect to the cart id of the ala carte table
-     $deleteAlacarteQuery = "DELETE FROM ala_carte
-     WHERE ordr_id IN (
-         SELECT ala_carte.ordr_id FROM ala_carte
-         JOIN order_table ON ala_carte.ordr_id = order_table.ordr_id
-         JOIN cmb_main ON order_table.ordr_id = cmb_main.ordr_id
-         UNION
-         SELECT ala_carte.ordr_id FROM ala_carte
-         JOIN order_table ON ala_carte.ordr_id = order_table.ordr_id
-         JOIN cmb_side ON order_table.ordr_id = cmb_side.ordr_id
-         UNION
-         SELECT ala_carte.ordr_id FROM ala_carte
-         JOIN order_table ON ala_carte.ordr_id = order_table.ordr_id
-         JOIN cmb_drink ON order_table.ordr_id = cmb_drink.ordr_id)
-     AND ala_carte.cart_id = '$cartID'";
- 
-     mysqli_query($conn, $deleteAlacarteQuery);
+
+    // Query to Delete Comboed Items fro the ala carte table. With respect to the cart id of the ala carte table
+    $deleteAlacarteQuery = "DELETE FROM ala_carte
+    WHERE ordr_id IN (
+        SELECT ala_carte.ordr_id FROM ala_carte
+        JOIN order_table ON ala_carte.ordr_id = order_table.ordr_id
+        JOIN cmb_main ON order_table.ordr_id = cmb_main.ordr_id
+        UNION
+        SELECT ala_carte.ordr_id FROM ala_carte
+        JOIN order_table ON ala_carte.ordr_id = order_table.ordr_id
+        JOIN cmb_side ON order_table.ordr_id = cmb_side.ordr_id
+        UNION
+        SELECT ala_carte.ordr_id FROM ala_carte
+        JOIN order_table ON ala_carte.ordr_id = order_table.ordr_id
+        JOIN cmb_drink ON order_table.ordr_id = cmb_drink.ordr_id)
+    AND ala_carte.cart_id = '$cartID'";
+
+    mysqli_query($conn, $deleteAlacarteQuery);
 
     header("Location: cart.php");

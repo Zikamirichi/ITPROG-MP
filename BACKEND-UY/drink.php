@@ -153,7 +153,7 @@ body {
     <a href="mains.php">Main</a>
         <a href="sides.php" >Sides</a>
         <a href="drink.php" class="current-page">Drinks</a>
-        <a href="preProcessOrders.php">Cart</a>
+        <a href="processOrders.php">Cart</a>
         <a href="mainmenu.php">Back to Hub</a>
     </nav>
     <main>
