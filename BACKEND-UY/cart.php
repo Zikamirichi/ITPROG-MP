@@ -6,6 +6,9 @@
                     https://www.plus2net.com/php_tutorial/array-session.php 
                     https://www.w3schools.com/php/func_math_min.asp 
                     https://stackoverflow.com/questions/35618366/continuously-updating-php-page -->
+    <?php
+        header("refresh: 5; URL=processOrders.php"); //Refresh page every 5 seconds to reflect combo changes
+    ?>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -241,10 +244,6 @@ body {
 
             $_SESSION['totalBill'] = $totalBill;
         ?>
-
-        <form action="processOrders.php" method="post"> <!-- Button for creating combos from ala carte entries -->
-            <input type="submit" name="refresh" value="Create Combo">
-        </form>
 
         <br><a href="editOrder.php">Edit Order</a>
         <br><a href="payOptions.php">Proceed to Payment</a>
