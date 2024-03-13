@@ -15,7 +15,7 @@
             <td>Name : </td><td> <input type='text' name='name' size='10'></td>
         </tr>
         <tr>
-            <td>Price : </td><td> <input type='number' name='price' size='10'></td>
+            <td>Price : </td><td> <input type='number' name='price' size='10' step=0.01></td>
         </tr>
         <tr>
             <td><strong>Nutrition facts</strong></td><td>
