@@ -350,3 +350,9 @@
     mysqli_query($conn, $deleteAlacarteQuery);
 
     header("Location: cart.php");
+
+    if(isset($_POST['refresh'])) {
+      
+      // Redirect back to cart.php
+      header('Location: cart.php'); 
+    }

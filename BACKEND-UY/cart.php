@@ -242,6 +242,10 @@ body {
             $_SESSION['totalBill'] = $totalBill;
         ?>
 
+        <form action="processOrders.php" method="post"> <!-- Button for creating combos from ala carte entries -->
+            <input type="submit" name="refresh" value="Create Combo">
+        </form>
+
         <br><a href="editOrder.php">Edit Order</a>
         <br><a href="payOptions.php">Proceed to Payment</a>
     </main>
