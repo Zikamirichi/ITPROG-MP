@@ -17,7 +17,6 @@
          width: 100%;
          min-height: 100vh;
          background-image: url('../images/menubg.png');
-         /* background: linear-gradient(to bottom right, #D4471F, #CED3D7, #D4471F); */
       }
 
       .main-container {
@@ -56,7 +55,13 @@
          justify-content: center;
          padding-top: 5%;
          padding-bottom: 5%;
+         padding-left: 10%;
+         padding-right: 5%;
          background-color: #F0F3F4;
+      }
+
+      table {
+         width: 100%;
       }
 
       td {
@@ -120,7 +125,7 @@
       <tr>
          <form method="post" action="check.php">
             <td>Username:</td><td><input type="text" name="username" required/></td>
-            <tr><td>Password: </td><td><input type="password" name="password" required/></td></tr>
+            <tr><td>Password:</td><td><input type="password" name="password" required/></td></tr>
             <tr><td colspan="2" class="submit-button"><input type="submit" value="Login" name="loginBtn"/></td>
          </form>
       </tr>
