@@ -14,5 +14,7 @@
     <a href="sides-table/sides-table.php">Sides Table</a>
     <br> 
     <a href="Results/results.php">Results Table</a>
+    <br>
+    <a href="modstocks.php">Stocks Table</a>
 </body>
 </html>
