@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../css/navbar.css" />
-    <link rel="stylesheet" type="text/css" href="../css/dish.css" />
+    <link rel="stylesheet" type="text/css" href="/ITPROG-MP/BACKEND-UY/css/navbar.css" />
+    <link rel="stylesheet" type="text/css" href="/ITPROG-MP/BACKEND-UY/css/dish.css" />
     <title>Main Dishes</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            background-image: url('../images/menubg.png'); 
+            background-image: url('/ITPROG-MP/BACKEND-UY/images/menubg.png'); 
             background-size: cover;
             background-position: center;
             display: flex;
@@ -22,28 +22,28 @@
         <ul>
             <li><a href="homepage.php">
                     <div class="navbar-icon">
-                        <img src="../images/white-home-button.png" alt="Homepage">
+                        <img src="/ITPROG-MP/BACKEND-UY/images/white-home-button.png" alt="Homepage">
                     </div>
                 </a></li>
             <li><a href="mains.php" class="active">
                 <div class="navbar-icon">
-                    <img src="../images/white-main-button.png" alt="Main Dishes">
+                    <img src="/ITPROG-MP/BACKEND-UY/images/white-main-button.png" alt="Main Dishes">
                 </div>
             </a></li>
 
             <li><a href="sides.php">
                 <div class="navbar-icon">
-                    <img src="../images/white-side-button.png" alt="Side Dishes">
+                    <img src="/ITPROG-MP/BACKEND-UY/images/white-side-button.png" alt="Side Dishes">
                 </div>
             </a></li>
             <li><a href="drinks.php">
                 <div class="navbar-icon">
-                    <img src="../images/white-drink-button.png" alt="Drinks">
+                    <img src="/ITPROG-MP/BACKEND-UY/images/white-drink-button.png" alt="Drinks">
                 </div>
             </a></li>
             <li><a href="cart.php">
                 <div class="navbar-icon">
-                    <img src="../images/white-cart-button.png" alt="Cart">
+                    <img src="/ITPROG-MP/BACKEND-UY/images/white-cart-button.png" alt="Cart">
                 </div>
             </a></li>
         </ul>
@@ -54,7 +54,7 @@
         <div class="dish-main-box">
             <div class="dish-item">
                 <div class="dish-img-box">
-                    <img src="../images/roasted-chicken.jpg" alt="Roasted Chicken">
+                    <img src="/ITPROG-MP/BACKEND-UY/images/roasted-chicken.jpg" alt="Roasted Chicken">
                 </div>
 
                 <div class="dish-title">ROASTED CHICKEN</div>
@@ -63,7 +63,7 @@
             </div>
             <div class="dish-item">
                 <div class="dish-img-box">
-                    <img src="../images/ceasar-salad.jpg" alt="Ceasar Salad">
+                    <img src="/ITPROG-MP/BACKEND-UY/images/ceasar-salad.jpg" alt="Ceasar Salad">
                 </div>
 
                 <div class="dish-title">CEASAR SALAD</div>
@@ -72,7 +72,7 @@
             </div>
             <div class="dish-item">
                 <div class="dish-img-box">
-                    <img src="../images/burger.jpg" alt="Burger">
+                    <img src="/ITPROG-MP/BACKEND-UY/images/burger.jpg" alt="Burger">
                 </div>
 
                 <div class="dish-title">BURGER</div>

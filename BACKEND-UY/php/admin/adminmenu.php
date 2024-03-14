@@ -25,13 +25,13 @@
     <div class="content-box">
         <div class="instructions"> Please select a table:</div>
         <div class="buttons-box">
-            <a href="modnutrfacts.php" class="button-table">Nutrition Facts Table</a>
+            <a href="../admin/modnutrfacts.php" class="button-table">Nutrition Facts Table</a>
             <br> 
-            <a href="Main/mains-table.php" class="button-table">Mains Table</a>
+            <a href="../Main/mains-table.php" class="button-table">Mains Table</a>
             <br> 
-            <a href="sides-table/sides-table.php" class="button-table">Sides Table</a>
+            <a href="../sides-table/sides-table.php" class="button-table">Sides Table</a>
             <br> 
-            <a href="Results/results.php" class="button-table">Results Table</a>
+            <a href="../Results/results.php" class="button-table">Results Table</a>
         </div>
     </div>
 </body>

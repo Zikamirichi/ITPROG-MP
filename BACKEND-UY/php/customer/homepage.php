@@ -3,15 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/ITPROG-MP/BACKEND-UY/css/navbar.css" />
     <title>Healthy Foods</title>
 </head>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Satisfy&display=swap');
-  
-    @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
-
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-
     .welcome-container {
         width: max-content;
         font-family: "Satisfy", cursive;
@@ -79,7 +74,7 @@
     }
 
     body {
-        background-image: url("../images/homepage_background.png");
+        background-image: url("/ITPROG-MP/BACKEND-UY/images/homepage_background.png");
         background-size: cover;
         background-repeat: no-repeat;
     }
