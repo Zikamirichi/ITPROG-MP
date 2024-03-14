@@ -18,7 +18,7 @@
             ADD NEW NUTRITION FACTS
         </div>
         <div class="content-box">
-        <div class="instructions"> Please fill up the table:</div>
+        <div class="instructions"> Please fill up the form:</div>
             <form action='<?php echo $_SERVER["PHP_SELF"];?>' method='post'>
                 <table>
                     <tr>
