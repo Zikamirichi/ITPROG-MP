@@ -27,6 +27,8 @@
         <div class="buttons-box">
             <a href="modnutrfacts.php" class="button-table">Nutrition Facts Table</a>
             <br> 
+            <a href="Main/mains-table.php" class="button-table">Mains Table</a>
+            <br> 
             <a href="sides-table/sides-table.php" class="button-table">Sides Table</a>
             <br> 
             <a href="Results/results.php" class="button-table">Results Table</a>
