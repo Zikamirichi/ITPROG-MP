@@ -9,6 +9,21 @@
         input[type="submit"] {
             margin-top: 5%;
         }
+
+        .back-button {
+            background-color: white;
+            color: #311712;
+            border: 1px solid #CED3D7;
+        }
+
+        .back-button:hover {
+            background-color: #D4471F;
+            color: white;
+        }
+
+        .button-table:active {
+            background-color: #D4471F;
+        }
     </style>
 </head>
 <body>
@@ -23,6 +38,8 @@
                 <table>
                     <tr><td>Name : </td><td> <input type='text' name='name' size='10'></td></tr>
                     <tr><td>Price : </td><td> <input type='number' name='price' size='10' step=0.01></td></tr>
+                    
+                    <tr><td colspan="2">&nbsp;</td></tr>
                     <tr><td><strong>Nutrition facts</strong></td></tr>
                     <tr><td>Description : </td><td> <input type='text' name='desc' size='10'></td></tr>
                     <tr><td>Ingredients :</td> <td> <input type='text' name='Ingredients' size='10'></td></tr>
@@ -30,9 +47,16 @@
                     <tr><td>Calories :</td> <td> <input type='text' name='Calories' size='10'></td></tr>
                     <tr><td>Carbs :</td> <td> <input type='text' name='Carbs' size='10'></td></tr>
                     <tr><td>Protein :</td> <td> <input type='text' name='Protein' size='10'></td></tr>
+                    
+                    <tr><td colspan="2">&nbsp;</td></tr>
                     <br><tr><td><strong>Stocks</strong></td><td></tr>
                     <tr><td>Quantity :</td> <td> <input type='number' name='quantity' size='10'></td></tr>
-                    <tr><td colspan="2" class="submit-button"><input type='submit' value='Save' name='save' /></td></tr>
+                    <tr>
+                    <td colspan="2" class="submit-button">
+                        <a href="drinks-table.php" class="back-button">Back</a>
+                        <input type="submit" value="Save" name='save' />
+                    </td>
+                </tr>
             </form>
         </table>
         </div>
@@ -110,6 +134,6 @@
                 
         } 
     ?>
-      <a href="drinks-table.php">Back</a>
+
 </body>
 </html>

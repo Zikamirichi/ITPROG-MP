@@ -54,7 +54,7 @@
                 <!-- <tr><td colspan="2" class="submit-button"><input type='submit' value='Save' name='save' /></td></tr> -->
                 <tr>
                     <td colspan="2" class="submit-button">
-                        <a href="../adminmenu.php" class="back-button">Back</a>
+                        <a href="mains-table.php" class="back-button">Back</a>
                         <input type="submit" value="Save" name='save' />
                     </td>
                 </tr>
