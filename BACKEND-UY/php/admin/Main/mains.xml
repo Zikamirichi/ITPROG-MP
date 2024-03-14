@@ -1,0 +1,16 @@
+<mains>
+  <main>
+    <mains_id>i101</mains_id>
+    <name>Roasted Chicken</name>
+    <price>90</price>
+    <nutrifacts_id>n101</nutrifacts_id>
+    <stocks_id>m01</stocks_id>
+  </main>
+  <main>
+    <mains_id>i102</mains_id>
+    <name>Caesar Salad</name>
+    <price>100</price>
+    <nutrifacts_id>n102</nutrifacts_id>
+    <stocks_id>m02</stocks_id>
+  </main>
+</mains>

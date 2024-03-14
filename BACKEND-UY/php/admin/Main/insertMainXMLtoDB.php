@@ -1,17 +1,18 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "dbemployees");
+$conn = mysqli_connect("localhost", "root", "", "mydb");
 
 $affectedRow = 0;
 
-$xml = simplexml_load_file("xmldata1.xml") or die("Error: Cannot create object");
+$xml = simplexml_load_file("mains.xml") or die("Error: Cannot create object");
 
 foreach ($xml->children() as $row) {
-  echo $id = $row->id;
-  echo $fname = $row->fname;
-  echo $lname = $row->lname;
-  echo $photo = $row->photo;
+  echo $mains_id = $row->mains_id;
+  echo $name = $row->name;
+  echo $price = $row->price;
+  echo $nutr_facts_id = $row->nutr_facts_id;
+  echo $stocks_id = $row->stocks_id;
   echo "<br />";  
-    $sql = "INSERT INTO tblemp(id, fname, lname, photo) VALUES ('" . $id . "','" . $fname . "','" . $lname . "','" . $photo . "')";
+    $sql = "INSERT INTO mains(mains_id, name, price, nutr_facts_id, stocks_id) VALUES ('$mains_id', '$name', '$price', '$nutr_facts_id', '$stocks_id')";
     
     $result = mysqli_query($conn, $sql);
     
