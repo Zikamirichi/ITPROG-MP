@@ -1,64 +1,11 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" type="text/css" href="admin.css" />
    <title>Login</title>
    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-
-      body {
-         display: flex;
-         flex-direction: column;
-         justify-content: center;
-         align-items: center; 
-         margin: 0;
-         font-family: "Luckiest Guy", cursive;
-         font-weight: 400;
-         font-style: normal;
-         width: 100%;
-         min-height: 100vh;
-         background-image: url('../images/menubg.png');
-      }
-
-      .main-container {
-         display: flex;
-         flex-direction: column;
-         width: 100%;
-         border: 2px solid black;
-         width: 40%;
-      }
-
-      .header {
-         display: flex;
-         background-color: #D4471F;
-         color: #311712;
-         font-size: 20px;
-         height: 60px;
-         width: auto;
-         align-items: center;
-         border-bottom: 1px solid black;
-         padding: 0 10px;
-      }
-
-      .header img {
-         max-width: auto; 
-         height: 100%;
-         padding-right: 10px;
-      }
-
-      .credentials-box {
-         display: flex;
-         align-items: center;
-         font-family: "Montserrat", sans-serif;
-         font-optical-sizing: auto;
-         font-weight: 800;
-         font-style: normal;
-         justify-content: center;
-         padding-top: 5%;
-         padding-bottom: 5%;
-         padding-left: 10%;
-         padding-right: 5%;
-         background-color: #F0F3F4;
-      }
 
       table {
          width: 100%;
@@ -120,7 +67,7 @@
       <img src="../images/logo-only.png" alt="Logo">
       ADMIN LOGIN
    </div>
-   <div class="credentials-box">
+   <div class="content-box">
       <table>
       <tr>
          <form method="post" action="check.php">

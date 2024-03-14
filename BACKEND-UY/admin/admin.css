@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    margin: 0;
+    font-family: "Luckiest Guy", cursive;
+    font-weight: 400;
+    font-style: normal;
+    width: 100%;
+    min-height: 100vh;
+    background-image: url('../images/menubg.png');
+ }
+
+ .main-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: 2px solid black;
+    width: 40%;
+ }
+
+ .header {
+    display: flex;
+    background-color: #D4471F;
+    color: #311712;
+    font-size: 20px;
+    height: 60px;
+    width: auto;
+    align-items: center;
+    border-bottom: 1px solid black;
+    padding: 0 10px;
+ }
+
+ .header img {
+    max-width: auto; 
+    height: 100%;
+    padding-right: 10px;
+ }
+
+ .content-box {
+    align-items: center;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    justify-content: center;
+    padding: 5%;
+    background-color: #F0F3F4;
+ }
+
+ .buttons-box {
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button-table {
+    padding: 10px;
+    background-color: white; 
+    border: 1px solid #ddd; 
+    border-radius: 15px;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    outline: none;
+    box-shadow: 0 7px #999;
+    padding: 3%;
+    width: 40%;
+    color: #311712;
+}
+
+.button-table:hover {
+    background-color: #311712;;
+    color: white;
+}
+
+.button-table:active {
+    background-color: #45a049;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+} 
