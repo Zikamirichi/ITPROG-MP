@@ -3,123 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="navbar.css" />
+    <link rel="stylesheet" type="text/css" href="dish.css" />
+  </head>
     <title>Cart</title>
     <style>
-body {
+        body {
             margin: 0;
             padding: 0;
-            background-image: url('menubg.png'); 
+            background-image: url('../images/menubg.png'); 
             background-size: cover;
             background-position: center;
-            font-family: Arial, sans-serif;
             display: flex;
-            justify-content: center; /* Center the content horizontally */
-            align-items: center; /* Center the content vertically */
         }
 
-        nav {
-            width: 200px;
-            background-color: #D4471F;
-            height: 100vh;
-            color: white;
-            padding-top: 20px;
+        .cart-main-box {
+            background-color: #CED3D7;
+            margin-left: 5%;
+            margin-right: 5%;
+            border-radius: 15px;
+            padding-top: 10px;
+            padding-bottom: 10px;
         }
 
-        nav a {
-            display: block;
-            padding: 10px 20px;
-            text-decoration: none;
-            color: #555;
-            border-bottom: 1px solid #555;
-        }
-
-        nav a:hover {
-            background-color: #F0F3F4;
-        }
-
-        nav a.current-page {
-            background-color: #F0F3F4; 
-            color: #555;
-        }
-
-        main {
-            flex: 1;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-            text-align: right
-        }
-
-        h1 {
-            color: #333;
-            text-align: center
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        li {
+        .cart-item-box {
+            margin: 2%;
+            border-radius: 15px;
+            background-color: white;
+            font-family: "Luckiest Guy", cursive;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 23px;
+            padding: 10px;
+            margin-top: 10px;
             margin-bottom: 10px;
+            position: relative;
         }
 
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            text-decoration: underline; /* Underline text */
-        }
-
-        .cart-item span {
-            margin-right: 10px;
-        }
+        /* TO DO:
+        - Divide cart-item-box into 3 parts (dish title, quantity, price)
+        - design for combo meal title
+        - create for total
+        - create - and + for quantity
+        - create confirm and cancel buttons
+        - integrate with prompt messages */
     </style>
 </head>
 <body>
-    <nav>
-        <a href="mains.php">Main</a>
-        <a href="sides.php" >Sides</a>
-        <a href="drink.php">Drinks</a>
-        <a href="cart.php" class="current-page">Cart</a>
-        <a href="mainmenu.php">Back to Hub</a>
-    </nav>
-    <main>
-        <h1>Cart</h1>
-        <?php
-        // Sample cart data
-        $cart = [
-            ['item' => 'Roast Chicken (1pc)', 'quantity' => 2, 'price' => 90.00],
-            ['item' => 'Rice', 'quantity' => 1, 'price' => 20.00],
-            ['item' => 'Orange Juice', 'quantity' => 1, 'price' => 20.00]
-        ];
-        $total = 0;
+<div class="navigation-bar">
+        <ul>
+            <li><a href="homepage.php">
+                    <div class="navbar-icon">
+                        <img src="../images/white-home-button.png" alt="Homepage">
+                    </div>
+                </a></li>
+            <li><a href="mains.php">
+                <div class="navbar-icon">
+                    <img src="../images/white-main-button.png" alt="Main Dishes">
+                </div>
+            </a></li>
 
-        // Display cart items
-        echo '<ul>';
-        foreach ($cart as $item) {
-            $subtotal = $item['quantity'] * $item['price'];
-            $total += $subtotal;
+            <li><a href="sides.php">
+                <div class="navbar-icon">
+                    <img src="../images/white-side-button.png" alt="Side Dishes">
+                </div>
+            </a></li>
+            <li><a href="drinks.php">
+                <div class="navbar-icon">
+                    <img src="../images/white-drink-button.png" alt="Drinks">
+                </div>
+            </a></li>
+            <li><a href="cart.php" class="active">
+                <div class="navbar-icon">
+                    <img src="../images/white-cart-button.png" alt="Cart">
+                </div>
+            </a></li>
+        </ul>
+    </div>
 
-            echo '<li class="cart-item">';
-            echo '<span><strong>' . $item['item'] . ' x ' . $item['quantity'] . '</strong></span>';
-            echo '<span><strong>Php ' . number_format($subtotal, 2) . '</strong></span>';
-            echo '</li>';
-        }
-        echo '</ul>';
-
-        echo '<h3 style="color: lightgrey;">Php' . number_format($total, 2) . '</h3>';
-
-        // Apply discount if there are 3 or more items
-        if (count($cart) >= 3) {
-            $discount = 0.15 * $total;
-            $total -= $discount;
-            echo '<p>Discount (15%): -$' . number_format($discount, 2) . '</p>';
-        }
-        
-        // Display total after discount
-        echo '<h3>Total: Php' . number_format($total, 2) . '</h3>';
-        ?>
-    </main>
+    <div class="right-container">
+        <div class="select-text">CART</div>
+        <div class="cart-main-box">
+            <div class="cart-item-box">
+                ROASTED CHICKEN
+            </div>
+            <div class="cart-item-box">
+                RICE
+            </div>
+            <div class="cart-item-box">
+                ORANGE JUICE
+            </div>
+        </div>
+    </div>
 </body>
 </html>
