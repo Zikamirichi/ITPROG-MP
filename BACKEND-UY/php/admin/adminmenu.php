@@ -5,16 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/ITPROG-MP/BACKEND-UY/css/admin.css" />
     <title>Main Menu</title>
-    <style>
-        .instructions {
-            font-family: "Montserrat", sans-serif;
-            font-optical-sizing: auto;
-            font-weight: 800;
-            font-style: normal;
-            text-align: center;
-            color: #311712;
-        }
-    </style>
 </head>
 <body>
     <div class="main-container">

@@ -6,6 +6,9 @@
     <link rel="stylesheet" type="text/css" href="/ITPROG-MP/BACKEND-UY/css/admin.css" />
     <title>Nutrition Facts</title>
     <style>
+        input[type="submit"] {
+            margin-top: 5%;
+        }
     </style>
 </head>
 <body>
@@ -15,28 +18,29 @@
             ADD NEW NUTRITION FACTS
         </div>
         <div class="content-box">
+        <div class="instructions"> Please fill up the table:</div>
             <form action='<?php echo $_SERVER["PHP_SELF"];?>' method='post'>
-            <table border='1' width='40%'>
-                <tr>
-                    <td>Description : </td><td> <input type='text' name='desc' size='10'></td>
-                </tr>
-                <tr>
-                    <td>Ingredients :</td> <td> <input type='text' name='Ingredients' size='10'></td>
-                </tr>
-                <tr>
-                    <td>Fat :</td> <td> <input type='text' name='Fat' size='10'></td>
-                </tr>
-                <tr>
-                    <td>Calories :</td> <td> <input type='text' name='Calories' size='10'></td>
-                </tr>
-                <tr>
-                    <td>Carbs :</td> <td> <input type='text' name='Carbs' size='10'></td>
-                </tr>
-                <tr>
-                    <td>Protein :</td> <td> <input type='text' name='Protein' size='10'></td>
-                </tr>
-                <tr>
-                <tr><td colspan='2'><input type='submit' value='Save' name='save' /></td></tr>
+                <table>
+                    <tr>
+                        <td>Description : </td><td> <input type='text' name='desc' size='10'></td>
+                    </tr>
+                    <tr>
+                        <td>Ingredients :</td> <td> <input type='text' name='Ingredients' size='10'></td>
+                    </tr>
+                    <tr>
+                        <td>Fat :</td> <td> <input type='text' name='Fat' size='10'></td>
+                    </tr>
+                    <tr>
+                        <td>Calories :</td> <td> <input type='text' name='Calories' size='10'></td>
+                    </tr>
+                    <tr>
+                        <td>Carbs :</td> <td> <input type='text' name='Carbs' size='10'></td>
+                    </tr>
+                    <tr>
+                        <td>Protein :</td> <td> <input type='text' name='Protein' size='10'></td>
+                    </tr>
+                    <tr><td colspan="2" class="submit-button"><input type='submit' value='Save' name='save' /></td></tr>
+            </form>
             </table>
         </div>
     </div>
