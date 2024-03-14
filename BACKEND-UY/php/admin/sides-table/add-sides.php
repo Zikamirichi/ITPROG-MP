@@ -3,49 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/ITPROG-MP/BACKEND-UY/css/admin.css" />
+    <title>Sides</title>
+    <style>
+        input[type="submit"] {
+            margin-top: 5%;
+        }
+
+        .back-button {
+            background-color: white;
+            color: #311712;
+            border: 1px solid #CED3D7;
+        }
+
+        .back-button:hover {
+            background-color: #D4471F;
+            color: white;
+        }
+
+        .button-table:active {
+            background-color: #D4471F;
+        }
+    </style>
 </head>
 <body>
-    <hr>
-    <h2> Add Sides </h2>
-        
-    <form action='<?php echo $_SERVER["PHP_SELF"];?>' method='post'>
-    <table border='1' width='40%'>
-        <tr>
-            <td>Name : </td><td> <input type='text' name='name' size='10'></td>
-        </tr>
-        <tr>
-            <td>Price : </td><td> <input type='number' name='price' size='10' step=0.01></td>
-        </tr>
-        <tr>
-            <td><strong>Nutrition facts</strong></td><td>
-        </tr>
-        <tr>
-            <td>Description : </td><td> <input type='text' name='desc' size='10'></td>
-        </tr>
-        <tr>
-            <td>Ingredients :</td> <td> <input type='text' name='Ingredients' size='10'></td>
-        </tr>
-        <tr>
-            <td>Fat :</td> <td> <input type='text' name='Fat' size='10'></td>
-        </tr>
-        <tr>
-            <td>Calories :</td> <td> <input type='text' name='Calories' size='10'></td>
-        </tr>
-        <tr>
-            <td>Carbs :</td> <td> <input type='text' name='Carbs' size='10'></td>
-        </tr>
-        <tr>
-            <td>Protein :</td> <td> <input type='text' name='Protein' size='10'></td>
-        </tr>
-        <tr>
-            <td><strong>Stocks</strong></td><td>
-        </tr>
-        <tr>
-            <td>Quantity :</td> <td> <input type='number' name='quantity' size='10'></td>
-        </tr>
-        <tr><td colspan='2'><input type='submit' value='Save' name='save' /></td></tr>
-    </table>
+    <div class="main-container">
+        <div class="header">
+            <img src="/ITPROG-MP/BACKEND-UY/images/logo-only.png" alt="Logo">
+            ADD NEW SIDE DISHES
+        </div>
+        <div class="content-box">
+            <div class="instructions"> Please fill up the form:</div>   
+            <form action='<?php echo $_SERVER["PHP_SELF"];?>' method='post'>
+            <table>
+                <tr><td>Name : </td><td> <input type='text' name='name' size='10'></td></tr>
+                <tr><td>Price : </td><td> <input type='number' name='price' size='10' step=0.01></td></tr>
+                
+                <tr><td colspan="2">&nbsp;</td></tr>
+                <tr><td><strong>Nutrition facts</strong></td><td></tr>
+                <tr><td>Description : </td><td> <input type='text' name='desc' size='10'></td></tr>
+                <tr><td>Ingredients :</td> <td> <input type='text' name='Ingredients' size='10'></td></tr>
+                <tr><td>Fat :</td> <td> <input type='text' name='Fat' size='10'></td></tr>
+                <tr><td>Calories :</td> <td> <input type='text' name='Calories' size='10'></td></tr>
+                <tr><td>Carbs :</td> <td> <input type='text' name='Carbs' size='10'></td></tr>
+                <tr><td>Protein :</td> <td> <input type='text' name='Protein' size='10'></td></tr>
+                
+                <tr><td colspan="2">&nbsp;</td></tr>
+                <tr><td><strong>Stocks</strong></td><td></tr>
+                <tr><td>Quantity :</td> <td> <input type='number' name='quantity' size='10'></td></tr>
+                <tr>
+                    <td colspan="2" class="submit-button">
+                        <a href="sides-table.php" class="back-button">Back</a>
+                        <input type="submit" value="Save" name='save' />
+                    </td>
+                </tr>
+            </form>
+        </table>
+        </div>
+    </div>
 
     <?php
 
@@ -116,12 +131,9 @@
             mysqli_query($conn, $insert);
 
             echo "Record has been successfully inserted!";
-                
-        } else {
-            echo "Failed to insert record!!!";
+        
         }
     ?>
 
-    <a href="sides-table.php">Back</a>
 </body>
 </html>
