@@ -12,5 +12,8 @@
     <a href="sides-table/sides-table.php">Sides Table</a>
     <br> 
     <a href="Results/results.php">Results Table</a>
+    <br>
+    <br>
+    <a href="logout.php">Logout</a>
 </body>
 </html>
