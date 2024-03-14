@@ -67,9 +67,9 @@
 
             <hr>
             <div class="buttons-box">
-                <a href="add-sides.php">Add Sides</a> <br>
-                <a href="delnutrfacts.php">Delete Sides</a> <br>
-                <a href="editnutrfacts.php">Edit Sides</a> <br> <br>
+                <a href="add-sides.php" class="button-table">Add Sides</a> <br>
+                <a href="delnutrfacts.php" class="button-table">Delete Sides</a> <br>
+                <a href="editnutrfacts.php" class="button-table">Edit Sides</a> <br> <br>
                 <div class="back-submit-container">
                     <a href="../adminmenu.php" class="back-button">Back</a>
                 </div>
