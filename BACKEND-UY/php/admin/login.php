@@ -63,21 +63,21 @@
 </head>
 <body>
    <div class="main-container">
-   <div class="header">
-      <img src="/ITPROG-MP/BACKEND-UY/images/logo-only.png" alt="Logo">
-      ADMIN LOGIN
-   </div>
-   <div class="content-box">
-      <table>
-      <tr>
-         <form method="post" action="check.php">
-            <td>Username:</td><td><input type="text" name="username" required/></td>
-            <tr><td>Password:</td><td><input type="password" name="password" required/></td></tr>
-            <tr><td colspan="2" class="submit-button"><input type="submit" value="Login" name="loginBtn"/></td>
-         </form>
-      </tr>
-      </table>
-   </div>
+      <div class="header">
+         <img src="/ITPROG-MP/BACKEND-UY/images/logo-only.png" alt="Logo">
+         ADMIN LOGIN
+      </div>
+      <div class="content-box">
+         <table>
+         <tr>
+            <form method="post" action="check.php">
+               <td>Username:</td><td><input type="text" name="username" required/></td>
+               <tr><td>Password:</td><td><input type="password" name="password" required/></td></tr>
+               <tr><td colspan="2" class="submit-button"><input type="submit" value="Login" name="loginBtn"/></td>
+            </form>
+         </tr>
+         </table>
+      </div>
    </div>
    
    <?php
