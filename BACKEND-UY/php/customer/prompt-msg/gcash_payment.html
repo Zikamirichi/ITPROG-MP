@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		.gcash-prompt {
+		  background-color: #f1f1f1;
+		  padding: 20px;
+		  border-radius: 5px;
+		  text-align: center;
+		  margin: 20px auto;
+		  width: 400px;
+		  height: 400px;
+		  font-family: 'Luckiest Guy', cursive;
+		  position: relative;
+		  aspect-ratio: 1/1;
+		}
+
+		.gcash-prompt h2 {
+		  margin-top: 0;
+		  color: #ffffff;
+		  background-color: #D4471F;
+		  padding: 10px;
+		  border-radius: 5px;
+		}
+
+		.gcash-prompt .close {
+		  position: absolute;
+		  top: 10px;
+		  right: 10px;
+		  background-color: #f1f1f1;
+		  color: #333;
+		  border: none;
+		  padding: 5px 10px;
+		  font-family: 'Luckiest Guy', cursive;
+		  border-radius: 50%;
+		  cursor: pointer;
+		}
+
+		.gcash-prompt .close:hover {
+		  background-color: #ddd;
+		}
+
+		.qr-code {
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+		  height: 80%;
+		}
+
+		.qr-code img {
+		  max-width: 100%;
+		  max-height: 100%;
+		}
+	</style>
+</head>
+<body>
+    <div id="gcash-prompt" class="gcash-prompt">
+        <link rel="stylesheet" href="Healthy_Food_QR.jpg">
+        <span class="close">&times;</span>
+        <h2>GCASH</h2>
+        <div class="qr-code">
+            <img src="Healthy_Food_QR.jpg" alt="QR Code">
+        </div>
+    <button id="submit-gcash">SUBMIT</button>
+    </div>
+</body>
+</html>
+
+<script>
+    const submitButton = document.querySelector('#submit-gcash');
+submitButton.addEventListener('click', () => {
+  window.location.href = 'payment_successful.html';
+});
+</script>

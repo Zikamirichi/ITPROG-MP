@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .payment-failed-prompt {
+          background-color: #f1f1f1;
+          padding: 20px;
+          border-radius: 5px;
+          text-align: center;
+          margin: 20px auto;
+          width: 400px;
+          height: 200px;
+          font-family: 'Luckiest Guy', cursive;
+          position: relative;
+        }
+    
+        .payment-failed-prompt h2 {
+          margin-top: 0;
+          color: #ffffff;
+          background-color: #D4471F;
+          padding: 10px;
+          border-radius: 5px;
+          font-size: 24px;
+        }
+    
+        .payment-failed-prompt .close {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          background-color: #f1f1f1;
+          color: #333;
+          border: none;
+          padding: 5px 10px;
+          font-family: 'Luckiest Guy', cursive;
+          border-radius: 50%;
+          cursor: pointer;
+          font-size: 24px;
+        }
+    
+        .payment-failed-prompt .close:hover {
+          background-color: #ddd;
+        }
+    
+        .payment-failed-prompt .options {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         margin-top: 30px;
+         gap: 30px; 
+        }       
+    
+        .payment-failed-prompt .try-again {
+          background-color: #D4471F;
+          color: rgb(255, 255, 255);
+          border: none;
+          padding: 10px;
+          font-family: 'Luckiest Guy', cursive;
+          border-radius: 5px;cursor: pointer;
+          transition: background-color 0.3s ease;
+          font-size: 16px;
+          margin-right: 30px;
+        }
+    
+        .payment-failed-prompt .try-again:hover {
+          background-color: #45a049;
+        }
+    
+        .payment-failed-prompt .choose-another {
+          background-color: #000000;
+          color: rgb(255, 255, 255);
+          border: none;
+          padding: 10px;
+          font-family: 'Luckiest Guy', cursive;
+          border-radius: 5px;cursor: pointer;
+          transition: background-color 0.3s ease;
+          font-size: 16px;
+          margin-left: 30px;
+        }
+    
+        .payment-failed-prompt .choose-another:hover {
+          background-color: #45a049;
+        }
+      </style>
+</head>
+<body>
+    <div id="payment-failed-prompt" class="payment-failed-prompt">
+        <span class="close">&times;</span>
+        <h2>Payment Failed</h2>
+        <div class="options">
+            <button id="choose-another" class="choose-another">Choose Another</button>
+            <button id="try-again" class="try-again">Try Again</button>
+        </div>
+    </div>
+    <script>
+        const closeButton = document.querySelector('.payment-failed-prompt .close');
+
+        closeButton.addEventListener('click', () => {
+          document.getElementById('payment-failed-prompt').style.display = 'none';
+        });
+
+        const tryAgainButton = document.getElementById('try-again');
+
+        tryAgainButton.addEventListener('click', () => {
+          location.href ='payment_successful.html';
+        });
+
+        const chooseAnotherButton = document.getElementById('choose-another');
+
+        chooseAnotherButton.addEventListener('click', () => {
+          location.href = 'choose_payment.html';
+        });
+    </script>
+</body>
+</html>

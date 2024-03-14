@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		.login-prompt {
+		  background-color: #f1f1f1;
+		  padding: 20px;
+		  border-radius: 5px;
+		  text-align: center;
+		  margin: 20px auto;
+		  width: 400px;
+		  height: 400px;
+		  font-family: 'Luckiest Guy', cursive;
+		  position: relative;
+		  aspect-ratio: 1/1;
+		}
+
+		.login-prompt h2 {
+		  margin-top: 0;
+		  color: #ffffff;
+		  background-color: #D4471F;
+		  padding: 10px;
+		  border-radius: 5px;
+		}
+
+		.login-prompt .close {
+		  position: absolute;
+		  top: 10px;
+		  right: 10px;
+		  background-color: #f1f1f1;
+		  color: #333;
+		  border: none;
+		  padding: 5px 10px;
+		  font-family: 'Luckiest Guy', cursive;
+		  border-radius: 50%;
+		  cursor: pointer;
+		}
+
+		.login-prompt .close:hover {
+		  background-color: #ddd;
+		}
+
+		.input-field {
+		  display: flex;
+		  flex-direction: column;
+		  align-items: center;
+		  margin-top: 50px;
+		}
+
+		.input-field label {
+		  font-size: 18px;
+		  margin-bottom: 10px;
+		}
+
+		.input-field input[type="text"],
+		.input-field input[type="password"] {
+		  border: 1px solid #ccc;
+		  border-radius: 5px;
+		  padding: 10px;
+		  font-size: 16px;
+		  width: 80%;
+		  box-sizing: border-box;
+		  margin-bottom: 20px;
+		}
+
+		.input-field input[type="submit"] {
+          color: #ffffff;
+		  background-color: #D4471F;
+		  border: none;
+		  padding: 10px;
+		  border-radius: 5px;
+          font-family: 'Luckiest Guy', cursive;
+		  cursor: pointer;
+		  transition: background-color 0.3s ease;
+		}
+
+		.input-field input[type="submit"]:hover {
+		  background-color: #000000;
+		}
+	</style>
+</head>
+<body>
+    <div id="login-prompt" class="login-prompt">
+        <span class="close">&times;</span>
+        <h2>Login</h2>
+        <form class="input-field">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+            <input type="submit" value="ENTER">
+        </form>
+    </div>
+</body>
+</html>
