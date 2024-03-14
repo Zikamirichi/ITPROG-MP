@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Choose Payment</title>
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+  <style>
+   .choose-payment-prompt {
+  background-color: #f1f1f1;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  margin: 20px auto;
+  width: 400px;
+  height: 400px;
+  font-family: 'Luckiest Guy', cursive;
+  position: relative;
+  aspect-ratio: 1/1;
+}
+
+    .choose-payment-prompt h2 {
+      margin-top: 0;
+      color: #ffffff;
+      font-family: 'Luckiest Guy', cursive;
+      background-color: #D4471F;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .choose-payment-prompt .close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #f1f1f1;
+      color: #333;
+      border: none;
+      padding: 5px 10px;
+      font-family: 'Luckiest Guy', cursive;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .choose-payment-prompt .close:hover {
+      background-color: #ddd;
+    }
+
+    .choose-payment-prompt .options {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .choose-payment-prompt button {
+      margin-bottom: 10px;
+      background-color: #CED3D7;
+      color: rgb(0, 0, 0);
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      font-family: 'Luckiest Guy', cursive;
+      font-size: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .choose-payment-prompt button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="choose-payment-prompt">
+    <span class="close">&times;</span>
+    <h2>PAYMENT OPTIONS</h2>
+    <div class="options">
+      <button id="credit-card-button">CREDIT CARD</button>
+      <button id="gcash-button">GCASH</button>
+      <button id="cash-button">CASH MONEY</button>
+    </div>
+  </div>
+
+  <script>
+    // Get the choose payment prompt element
+    const choosePaymentPrompt = document.querySelector('.choose-payment-prompt');
+
+    // Get the credit card button
+    const creditCardButton = document.getElementById('credit-card-button');
+
+    // Add an event listener to the credit card button
+    creditCardButton.addEventListener('click', () => {
+      // Redirect to the credit card payment prompt
+      location.href = 'credit_card.html';
+    });
+
+    // Get the GCASH button
+    const gcashButton = document.getElementById('gcash-button');
+
+    // Add an event listener to the GCASH button
+    gcashButton.addEventListener('click', () => {
+      // Redirect to the GCASH payment prompt
+      location.href = 'gcash_payment.html';
+    });
+
+    // Get the cash button
+    const cashButton = document.getElementById('cash-button');
+
+    // Add an event listener to the cash button
+    cashButton.addEventListener('click', () => {
+      // Redirect to the cash payment prompt
+      location.href = 'cash_payment.html';
+    });
+
+    // Add an event listener to the close button
+    choosePaymentPrompt.querySelector('.close').addEventListener('click', () => {
+      choosePaymentPrompt.style.display= 'none';
+    });
+  </script>
+</body>
+</html>
