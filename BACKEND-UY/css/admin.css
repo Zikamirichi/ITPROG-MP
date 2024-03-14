@@ -111,6 +111,24 @@ input[type="number"] {
    font-style: normal;
 }
 
+input[type="submit"],
+.back-button
+ {
+   text-decoration: none;
+   text-align: right;
+   background-color: #311712; 
+   color: white;
+   padding: 10px 15px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   font-size: 16px;
+   font-family: "Luckiest Guy", cursive;
+   font-weight: 400;
+   font-style: normal;
+   box-shadow: 0 7px #999;
+}
+
 input[type="submit"]:hover,
 .back-button:hover {
    background-color: #45a049;
@@ -133,20 +151,3 @@ input[type="submit"]:active,
    margin-bottom: 5%;
 }
 
-input[type="submit"],
-.back-button
- {
-   text-decoration: none;
-   text-align: right;
-   background-color: #311712; 
-   color: white;
-   padding: 10px 15px;
-   border: none;
-   border-radius: 5px;
-   cursor: pointer;
-   font-size: 16px;
-   font-family: "Luckiest Guy", cursive;
-   font-weight: 400;
-   font-style: normal;
-   box-shadow: 0 7px #999;
-}
