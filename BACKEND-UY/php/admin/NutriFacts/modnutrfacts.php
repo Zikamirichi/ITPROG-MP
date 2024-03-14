@@ -11,6 +11,8 @@
         //CHANGE $CONN VARIABLES DEPENDING ON PERSONAL DEVICE SETTINGS
         $conn = mysqli_connect("localhost", "root", "") or die ("Unable to connect!". mysqli_error($conn) );
         mysqli_select_db($conn, "mydb");
+
+        session_start();
 ?>
 
     <h2>Show Nutrition Facts Table</h2>
@@ -43,7 +45,14 @@
 
     <hr>
     <a href="addnutrfacts.php">Add Nutrition Facts</a> <br>
-    <a href="delnutrfacts.php">Delete Nutrition Facts</a> <br>
+    <?php
+        if (isset($_SESSION['getLogin']) && $_SESSION['getLogin'] == "IT_A_Fredrick") {
+            
+            echo "<a href='delnutrfacts.php'>Delete Nutrition Facts</a> <br>";
+        }
+        
+    ?>
+    
     <a href="editnutrfacts.php">Edit Nutrition Facts</a> <br> <br>
     <a href="adminmenu.php">Back</a>
 </body>

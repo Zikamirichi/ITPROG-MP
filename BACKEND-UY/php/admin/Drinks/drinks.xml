@@ -1,0 +1,30 @@
+<drinks>
+  <drink>
+    <drinks_id>i310</drinks_id>
+    <names>Matcha Latte</names>
+    <price>100</price>
+    <nutrifacts_id>n310</nutrifacts_id>
+    <stocks_id>d10</stocks_id>
+  </drink>
+  <drink>
+    <drinks_id>i311</drinks_id>
+    <names>Caramel Macchiato</names>
+    <price>100</price>
+    <nutrifacts_id>n311</nutrifacts_id>
+    <stocks_id>d11</stocks_id>
+  </drink>
+  <drink>
+    <drinks_id>i312</drinks_id>
+    <names>Jamba Juice</names>
+    <price>50</price>
+    <nutrifacts_id>n312</nutrifacts_id>
+    <stocks_id>d12</stocks_id>
+  </drink>
+  <drink>
+    <drinks_id>i313</drinks_id>
+    <names>Iced Tea</names>
+    <price>30</price>
+    <nutrifacts_id>n313</nutrifacts_id>
+    <stocks_id>d13</stocks_id>
+  </drink>
+</drinks>
