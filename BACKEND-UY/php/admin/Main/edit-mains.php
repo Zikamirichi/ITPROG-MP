@@ -1,9 +1,38 @@
 <html>
 <head><title>Using the Edit Statement</title></head>
 <body>
+
+<div class="content-box">
+            <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Nutrition Facts ID</th>
+                <th>Stock ID</th>
+            </tr>
+
+            <?php
+            $conn = mysqli_connect("localhost", "root", "") or die ("Unable to connect!". mysqli_error($conn) );
+            mysqli_select_db($conn, "mydb");
+                $factsQuery = mysqli_query($conn, "SELECT * FROM mains ORDER BY mains_id");
+                while ($factsResult = mysqli_fetch_assoc($factsQuery)) {
+                    echo "<tr>";
+                    echo "<td>", $factsResult ["mains_id"], "</td>";
+                    echo "<td>", $factsResult ["name"], "</td>";
+                    echo "<td>", $factsResult ["price"], "</td>";
+                    echo "<td>", $factsResult ["nutr_facts_id"], "</td>";
+                    echo "<td>", $factsResult ["stocks_id"], "</td>";
+                    echo "</tr>";
+                }
+            ?>
+            </table>
+    </div>
     <?php
         $conn = mysqli_connect("localhost", "root", "") or die ("Unable to connect!". mysqli_error($conn) );
         mysqli_select_db($conn, "mydb");
+
+        
 
         if(isset($_POST["enter"])){
             // nutr enter
@@ -21,13 +50,13 @@
             echo "<form method='post' action='".$_SERVER['PHP_SELF']."'>";
             // mains info
             echo "<h3>Mains info</h3>";
-            echo "<input type='hidden' name='newMainID' value='".$getMainsInfo["mains_id"]."'>".$getMainsInfo["mains_id"]."<br />";
+          //  echo "<input type='hidden' name='newMainID' value='".$getMainsInfo["mains_id"]."'>".$getMainsInfo["mains_id"]."<br />";
             echo "Name: <input type='text' name='newName' value='".$getMainsInfo["name"]."' size='150'> <br />";
             echo "Price: <input type='number' name='newPrice' value='".$getMainsInfo["price"]."' size='150' step=0.01> <br />";
 
             // Nutrition facts
             echo "<h3>Nutrition facts</h3>";
-            echo "<input type='hidden' name='newID' value='".$getFacts["nutr_facts_id"]."'>".$getFacts["nutr_facts_id"]."<br />";
+          //  echo "<input type='hidden' name='newID' value='".$getFacts["nutr_facts_id"]."'>".$getFacts["nutr_facts_id"]."<br />";
             echo "Description: <input type='text' name='newDesc' value='".$getFacts["desc"]."' size='150'> <br />";
             echo "Ingredients: <input type='text' name='newIngredients' value='".$getFacts["Ingredients"]."' size='100'> <br />";
             echo "Fat: <input type='text' name='newFat' value='".$getFacts["Fat"]."'><br />";
@@ -37,7 +66,7 @@
 
             // quantity info
             echo "<h3>Stocks info</h3>";
-            echo "<input type='hidden' name='stocksID' value='".$getStocks["stocks_id"]."'>".$getStocks["stocks_id"]."<br />";
+          //  echo "<input type='hidden' name='stocksID' value='".$getStocks["stocks_id"]."'>".$getStocks["stocks_id"]."<br />";
             echo "Price: <input type='number' name='newQuantity' value='".$getStocks["quantity"]."' size='150'> <br />";
 
             echo "<input type='submit' name='save' value='Save'><br />";
@@ -75,22 +104,7 @@
 
     <hr>
 
-    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
     
-    Select Main ID: 
-    <select name="mains_id">
-        <?php
-        $idQuery = mysqli_query($conn, "SELECT mains_id FROM mains");
-
-        // Loop through the results and populate dropdown options
-        while ($row = mysqli_fetch_assoc($idQuery)) {
-            echo "<option value='" . $row['mains_id'] . "'>" . $row['mains_id'] . "</option>";
-        }
-        ?>
-    </select>
-
-    <input type="submit" name="enter" value="Enter" /><br /><br />
-    </form>
 
     <a href="mains-table.php">Back</a>
 
