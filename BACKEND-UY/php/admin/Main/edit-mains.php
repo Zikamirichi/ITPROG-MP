@@ -77,7 +77,7 @@
 
     <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
     
-    Select Nutrition Facts ID: 
+    Select Main ID: 
     <select name="mains_id">
         <?php
         $idQuery = mysqli_query($conn, "SELECT mains_id FROM mains");

@@ -95,7 +95,7 @@
             mysqli_query($conn, $insert);
 
             // create stocks
-            $idQuery = mysqli_query($conn, "SELECT MAX(stocks_id) FROM sides");
+            $idQuery = mysqli_query($conn, "SELECT MAX(stocks_id) FROM mains");
             $idResult = mysqli_fetch_assoc($idQuery);
             $stocks_id = $idResult["MAX(stocks_id)"];
             $stocks_id++;
@@ -114,8 +114,8 @@
             // Create add feature in mains
             $idQuery = mysqli_query($conn, "SELECT MAX(mains_id) FROM mains");
             $idResult = mysqli_fetch_assoc($idQuery);
-            $sides_id = $idResult["MAX(mains_id)"];
-            $sides_id++;
+            $mains_id = $idResult["MAX(mains_id)"];
+            $mains_id++;
 
             echo `Added mains`;
             var_dump($mains_id);

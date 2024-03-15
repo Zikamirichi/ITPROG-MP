@@ -61,7 +61,7 @@
       </table>
     <hr>
 
-  <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+  <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" onsubmit="return confirm('Are you sure?');">
     Enter Mains ID: 
     <select name="id">
             <?php
@@ -72,7 +72,7 @@
               }
             ?>
         </select> <br /><br />
-    <input type="submit" name="enter" value="Enter" /><br /><br />
+    <input type="submit" name="enter" value="Enter" title="Are you sure?"/><br /><br />
   </form>
 
   <?php
@@ -89,7 +89,7 @@
       $stocks_id = $getFacts['stocks_id'];
       $nutr_facts_id = $getFacts['nutr_facts_id'];
 
-      mysqli_query($conn, "DELETE FROM mains WHERE sides_id='".$getFacts['mains_id']."'");
+      mysqli_query($conn, "DELETE FROM mains WHERE mains_id='".$getFacts['mains_id']."'");
       mysqli_query($conn, "DELETE FROM item WHERE item_id='".$getFacts['mains_id']."'");
       mysqli_query($conn, "DELETE FROM stocks WHERE stocks_id='".$getFacts['stocks_id']."'");
       mysqli_query($conn, "DELETE FROM nutr_facts WHERE nutr_facts_id='".$getFacts['nutr_facts_id']."'");
