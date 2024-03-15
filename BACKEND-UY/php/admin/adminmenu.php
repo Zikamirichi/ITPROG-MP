@@ -20,6 +20,8 @@
                 <a href="/ITPROG-MP/BACKEND-UY/php/admin/sides-table/sides-table.php" class="button-table">Sides Table</a>
                 <br>
                 <a href="/ITPROG-MP/BACKEND-UY/php/admin/Drinks/drinks-table.php" class="button-table">Drinks Table</a>
+                <br>
+                <a href="/ITPROG-MP/BACKEND-UY/php/admin/Results/results.php" class="button-table">Results</a>
                 <br> 
             </div>
         </div>
