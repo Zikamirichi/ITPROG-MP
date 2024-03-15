@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nutrfacts [
+    <!ELEMENT nutrfacts (information*)>
+    <!ELEMENT information (nutrfacts_id, description, ingredients, fats, calories, protein, carbs)>
+    
+    <!ELEMENT nutrfacts_id (#PCDATA)>
+    <!ELEMENT description (#PCDATA)>
+    <!ELEMENT ingredients (#PCDATA)>
+    <!ELEMENT fats (#PCDATA)>
+    <!ELEMENT calories (#PCDATA)>
+    <!ELEMENT protein (#PCDATA)>
+    <!ELEMENT carbs (#PCDATA)>
+]>
+
+<nutrfacts>
+    <information>
+        <nutrfacts_id>n101</nutrfacts_id>
+        <description>It's typically juicy, flavorful, and often seasoned with herbs and spices. The exterior is usually golden brown and slightly crispy, while the interior remains moist and tender.</description>
+        <ingredients>Chicken, Olive oil or butter, Salt, Black pepper, Garlic powder, Paprika, Thyme, Lemon, Onion powder</ingredients>
+        <fats>23</fats>
+        <calories>231</calories>
+        <protein>0</protein>
+        <carbs>43.3</carbs>
+    </information>
+    <information>
+        <nutrfacts_id>n102</nutrfacts_id>
+        <description>Classic dish that originated in Tijuana, Mexico, and is now popular worldwide. It's known for its crisp romaine lettuce, savory dressing, crunchy croutons, and grated Parmesan cheese. The salad has a rich and tangy flavor profile, making it a favorite among many.</description>
+        <ingredients>Romaine lettuce, Caesar dressing, Croutons, Grated Parmesan cheese, Lemon juice, Olive oil, Anchovies, Worcestershire sauce, Garlic, Black pepper</ingredients>
+        <fats>40</fats>
+        <calories>41</calories>
+        <protein>2</protein>
+        <carbs>2</carbs>
+    </information>
+    <information>
+        <nutrfacts_id>n201</nutrfacts_id>
+        <description>A staple food for billions of people worldwide. It's cultivated in various climates and regions, with different varieties offering diverse flavors, textures, and culinary uses.</description>
+        <ingredients>Water, Rice</ingredients>
+        <fats>0.4</fats>
+        <calories>205</calories>
+        <protein>45</protein>
+        <carbs>4.3</carbs>
+    </information>
+    <information>
+        <nutrfacts_id>n202</nutrfacts_id>
+        <description>Combination of various vegetables that are commonly cooked or served together in a dish.</description>
+        <ingredients>Carrots, Broccoli, Bell Peppers, Green Beans, Peas, Corn, Onions, Mushrooms, Tomatoes</ingredients>
+        <fats>0.53</fats>
+        <calories>118</calories>
+        <protein>11.91</protein>
+        <carbs>2.6</carbs>
+    </information>
+    <information>
+        <nutrfacts_id>n203</nutrfacts_id>
+        <description>Mashed potatoes are a creamy and fluffy side dish made from boiled potatoes that have been mashed and mixed with various ingredients.</description>
+        <ingredients>Potatoes, Butter, Milk or cream, Salt, Black pepper</ingredients>
+        <fats>8.8</fats>
+        <calories>237</calories>
+        <protein>36</protein>
+        <carbs>4.1</carbs>
+    </information>
+    <information>
+        <nutrfacts_id>n204</nutrfacts_id>
+        <description>Pieces of apple fruit that have been cut into thin or thick slices, usually with the skin left intact.</description>
+        <ingredients>Apple</ingredients>
+        <fats>0/3</fats>
+        <calories>57</calories>
+        <protein>15</protein>
+        <carbs>0.3</carbs>
+    </information>
+    <information>
+        <nutrfacts_id>n301</nutrfacts_id>
+        <description>Essential for all forms of life and plays a crucial role in various biological processes.</description>
+        <ingredients>Water</ingredients>
+        <fats></fats>
+        <calories>0</calories>
+        <protein>0</protein>
+        <carbs>0</carbs>
+    </information>
+    <information>
+        <nutrfacts_id>n302</nutrfacts_id>
+        <description>Coffee is a brewed beverage made from roasted coffee beans, which are the seeds of berries from the Coffea plant.</description>
+        <ingredients>Coffee Beans, Water</ingredients>
+        <fats>0.1</fats>
+        <calories>2.4</calories>
+        <protein>0</protein>
+        <carbs>0.3</carbs>
+    </information>
+    <information>
+        <nutrfacts_id>n303</nutrfacts_id>
+        <description>Orange juice is a liquid extracted from ripe oranges, typically by squeezing or pressing the fruit to release its juice.</description>
+        <ingredients>Oranges, Water</ingredients>
+        <fats>0.5</fats>
+        <calories>112</calories>
+        <protein>26</protein>
+        <carbs>1.7</carbs>
+    </information>
+    <information>
+        <nutrfacts_id>n304</nutrfacts_id>
+        <description>Type of herbal tea that is naturally caffeine-free and often has a rich, reddish-brown color.</description>
+        <ingredients>Water, Sweetener, Red tea</ingredients>
+        <fats>0</fats>
+        <calories>118</calories>
+        <protein>28.5</protein>
+        <carbs>0</carbs>
+    </information>
+</nutrfacts>
