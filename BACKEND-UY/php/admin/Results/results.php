@@ -27,11 +27,11 @@
 <body>
     <h1>Results Table</h1>
     <?php
-     $date = $_GET['date'];
-     echo "<h3>Date: '$date' </h3>";
     error_reporting(E_ERROR | E_PARSE);
     $conn = mysqli_connect("localhost", "root", "") or die ("Unable to connect!". mysqli_error($conn) );
         mysqli_select_db($conn, "mydb");
+        $date = $_GET['date'];
+     echo "<h3>Date: '$date' </h3>";
     ?>
     <table>
         <!-- Dishes Sold -->
