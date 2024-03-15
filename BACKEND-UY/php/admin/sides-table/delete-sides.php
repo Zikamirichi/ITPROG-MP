@@ -30,7 +30,7 @@
       </table>
     <hr>
 
-  <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+  <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" onsubmit="return confirm('Are you sure?');">
     Enter Sides ID: 
     <select name="id">
             <?php
@@ -41,7 +41,7 @@
               }
             ?>
         </select> <br /><br />
-    <input type="submit" name="enter" value="Enter" /><br /><br />
+    <input type="submit" name="enter" value="Enter" title="Are you sure?"/><br /><br />
   </form>
 
   <?php
