@@ -39,18 +39,4 @@
         <nutr_facts_id>n204</nutr_facts_id>
         <stocks_id>s04</stocks_id>
     </side>
-    <side>
-        <sides_id>i205</sides_id>
-        <name>test</name>
-        <price>11</price>
-        <nutr_facts_id>n205</nutr_facts_id>
-        <stocks_id>s05</stocks_id>
-    </side>
-    <side>
-        <sides_id>i206</sides_id>
-        <name>test</name>
-        <price>11</price>
-        <nutr_facts_id>n206</nutr_facts_id>
-        <stocks_id>s06</stocks_id>
-    </side>
 </sides>
