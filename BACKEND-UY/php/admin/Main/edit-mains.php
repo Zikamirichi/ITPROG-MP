@@ -21,8 +21,8 @@
             echo "<form method='post' action='".$_SERVER['PHP_SELF']."'>";
             // mains info
             echo "<h3>Mains info</h3>";
-            echo "<input type='hidden' name='newMainID' value='".$getMainsInfo["drinks_id"]."'>".$getMainsInfo["drinks_id"]."<br />";
-            echo "Name: <input type='text' name='newName' value='".$getMainsInfo["names"]."' size='150'> <br />";
+            echo "<input type='hidden' name='newMainID' value='".$getMainsInfo["mains_id"]."'>".$getMainsInfo["mains_id"]."<br />";
+            echo "Name: <input type='text' name='newName' value='".$getMainsInfo["name"]."' size='150'> <br />";
             echo "Price: <input type='number' name='newPrice' value='".$getMainsInfo["price"]."' size='150' step=0.01> <br />";
 
             // Nutrition facts
