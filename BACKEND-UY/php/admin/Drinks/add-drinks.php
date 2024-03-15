@@ -36,21 +36,21 @@
             <div class="instructions"> Please fill up the form:</div>
             <form action='<?php echo $_SERVER["PHP_SELF"];?>' method='post'>
                 <table>
-                    <tr><td>Name : </td><td> <input type='text' name='name' size='10'></td></tr>
-                    <tr><td>Price : </td><td> <input type='number' name='price' size='10' step=0.01></td></tr>
+                    <tr><td>Name : </td><td> <input type='text' name='name' size='10' required></td></tr>
+                    <tr><td>Price : </td><td> <input type='number' name='price' size='10' step=0.01 required></td></tr>
                     
                     <tr><td colspan="2">&nbsp;</td></tr>
                     <tr><td><strong>Nutrition facts</strong></td></tr>
-                    <tr><td>Description : </td><td> <input type='text' name='desc' size='10'></td></tr>
-                    <tr><td>Ingredients :</td> <td> <input type='text' name='Ingredients' size='10'></td></tr>
-                    <tr><td>Fat :</td> <td> <input type='text' name='Fat' size='10'></td></tr>
-                    <tr><td>Calories :</td> <td> <input type='text' name='Calories' size='10'></td></tr>
-                    <tr><td>Carbs :</td> <td> <input type='text' name='Carbs' size='10'></td></tr>
-                    <tr><td>Protein :</td> <td> <input type='text' name='Protein' size='10'></td></tr>
+                    <tr><td>Description : </td><td> <input type='text' name='desc' size='10' required></td></tr>
+                    <tr><td>Ingredients :</td> <td> <input type='text' name='Ingredients' size='10' required></td></tr>
+                    <tr><td>Fat :</td> <td> <input type='number' name='Fat' size='10' required></td></tr>
+                    <tr><td>Calories :</td> <td> <input type='number' name='Calories' size='10' required></td></tr>
+                    <tr><td>Carbs :</td> <td> <input type='number' name='Carbs' size='10' required></td></tr>
+                    <tr><td>Protein :</td> <td> <input type='number' name='Protein' size='10' required></td></tr>
                     
                     <tr><td colspan="2">&nbsp;</td></tr>
                     <br><tr><td><strong>Stocks</strong></td><td></tr>
-                    <tr><td>Quantity :</td> <td> <input type='number' name='quantity' size='10'></td></tr>
+                    <tr><td>Quantity :</td> <td> <input type='number' name='quantity' size='10' required></td></tr>
                     <tr>
                     <td colspan="2" class="submit-button">
                         <a href="drinks-table.php" class="back-button">Back</a>
