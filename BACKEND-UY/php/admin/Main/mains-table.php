@@ -67,8 +67,8 @@
             <hr>
             <div class="buttons-box">
                 <a href="add-mains.php" class="button-table">Add Mains</a> <br>
-                <a href="delMainnutrifacts.php" class="button-table">Delete Mains</a> <br>
-                <a href="editMainnutrifacts.php" class="button-table">Edit Mains</a> <br>
+                <a href="delete-mains.php" class="button-table">Delete Mains</a> <br>
+                <a href="edit-mains.php" class="button-table">Edit Mains</a> <br>
                 <div class="back-submit-container">
                     <a href="../adminmenu.php" class="back-button">Back</a>
                 </div>
