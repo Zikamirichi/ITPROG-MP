@@ -20,7 +20,7 @@ if (isset($_POST["loginBtn"]))
     }
    else
     {
-      header("location:login.php?error=1");
+      header("location:index.php?error=1");
     }
 }
 ?>

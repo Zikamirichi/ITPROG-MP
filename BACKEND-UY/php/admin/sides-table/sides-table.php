@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/ITPROG-MP/BACKEND-UY/css/admin.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/admin.css" />
     <title>Side Dish</title>
     <style>
         table {
@@ -30,7 +30,7 @@
 <body>
     <div class="main-container">
         <div class="header">
-            <img src="/ITPROG-MP/BACKEND-UY/images/logo-only.png" alt="Logo">
+            <img src="../../../images/logo-only.png" alt="Logo">
             SIDE DISH TABLE
         </div>
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/ITPROG-MP/BACKEND-UY/css/admin.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/admin.css" />
     <title>Drinks</title>
     <style>
         table {
@@ -30,7 +30,7 @@
 <body>
     <div class="main-container">
         <div class="header">
-            <img src="/ITPROG-MP/BACKEND-UY/images/logo-only.png" alt="Logo">
+            <img src="../../../images/logo-only.png" alt="Logo">
             MAIN DISH TABLE
         </div>
 
@@ -68,8 +68,8 @@
             <hr>
             <div class="buttons-box">
                 <a href="add-drinks.php" class="button-table">Add Drinks</a> <br>
-                <a href="delnutrifacts.php" class="button-table">Delete Drinks</a> <br>
-                <a href="editnutrifacts.php" class="button-table">Edit Drinks</a> <br>
+                <a href="delete-drinks.php" class="button-table">Delete Drinks</a> <br>
+                <a href="edit-drinks.php" class="button-table">Edit Drinks</a> <br>
                 <div class="back-submit-container">
                     <a href="../adminmenu.php" class="back-button">Back</a>
                 </div>
