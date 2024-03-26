@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/ITPROG-MP/BACKEND-UY/css/admin.css" />
     <title>Results</title>
+    
     <style>
         table {
             width: 80%;
@@ -218,7 +219,7 @@
 
     <br>
     <div class="back-submit-container">
-                    <a href="../adminmenu.php" class="back-button">Back</a>
+        <a href="../adminmenu.php" class="back-button" style="margin-right: 250px;">Back</a>
     </div>
 </body>
 </html>
