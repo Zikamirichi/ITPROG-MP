@@ -74,7 +74,7 @@
     }
 
     body {
-        background-image: url("/ITPROG-MP/BACKEND-UY/images/homepage_background.png");
+        background-image: url("../../images/homepage_background.png");
         background-size: cover;
         background-repeat: no-repeat;
     }
@@ -90,5 +90,28 @@
             <button class="button"><span>CLICK HERE TO ORDER </span></button>
         </a>
     </div>
+
+    <?php
+        session_start(); // Start a session at the homepage for new users
+
+        $conn = mysqli_connect("localhost", "root", "") or die ("Unable to connect!". mysqli_error($conn) ); // Connection to db, change data as needed
+        mysqli_select_db($conn, "mydb");
+
+        $maxCartQuery = mysqli_query($conn, "SELECT MAX(CAST(SUBSTRING(cart_id, 2) AS UNSIGNED)) AS maxCartID FROM cart"); // Get Current Maximum cart ID
+        $row = mysqli_fetch_array($maxCartQuery);                                                                          // Only get the numbers after the 'c' character
+        $maxCartID = $row['maxCartID'];
+
+        $cartID = 'c' . sprintf("%02d", $maxCartID + 1); // Get the new cart ID for the next customer
+                                                         // add c at the start for the cart_id format; add a 0 in the middle; add the value extracted + 1 = c04, c05...
+        $insertQuery = "INSERT INTO cart (cart_id) VALUES ('$cartID')";
+        mysqli_query($conn, $insertQuery);
+
+        $_SESSION['cartID'] = "$cartID"; // Stores current cartID throughout the user's session
+
+        $_SESSION['mains'] = []; // Initialize mains, sides, drinks arrays in session
+        $_SESSION['sides'] = [];
+        $_SESSION['drinks'] = [];
+
+    ?>
 </body>
 </html>

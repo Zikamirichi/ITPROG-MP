@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/ITPROG-MP/BACKEND-UY/css/navbar.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/navbar.css" />
     <title>Main Menu</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            background-image: url('/ITPROG-MP/BACKEND-UY/images/menubg.png'); 
+            background-image: url('../../images/menubg.png'); 
             background-size: cover;
             background-repeat: no-repeat;
             display: flex;
@@ -58,13 +58,13 @@
         <div class="select-text">Select the Dish you wish to order </div>
         <div class="images-container">
             <a href="mains.php" class="button-dish">
-                <img src="/ITPROG-MP/BACKEND-UY/images/main-button.png" alt="Main Dishes">
+                <img src="../../images/main-button.png" alt="Main Dishes">
             </a>
             <a href="sides.php" class="button-dish">
-                <img src="/ITPROG-MP/BACKEND-UY/images/side-button.png" alt="Side Dishes">
+                <img src="../../images/side-button.png" alt="Side Dishes">
             </a>
             <a href="drinks.php" class="button-dish">
-                <img src="/ITPROG-MP/BACKEND-UY/images/drink-button.png" alt="Drinks">
+                <img src="../../images/drink-button.png" alt="Drinks">
             </a>
         </div>
 </body>
