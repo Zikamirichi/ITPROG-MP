@@ -24,6 +24,17 @@
             margin: 5%;
         }
 
+        .back-button {
+            background-color: white;
+            color: #311712;
+            border: 1px solid #CED3D7;
+        }
+
+        .back-button:hover {
+            background-color: #D4471F;
+            color: white;
+        }
+
     </style>
 </head>
 <body>
@@ -99,7 +110,7 @@
   ?>
   
   <hr>
-  <a href="mains-table.php">Back</a>
+  <a class="back-button" href="mains-table.php">Back</a>
 
 </body>
 </html>
