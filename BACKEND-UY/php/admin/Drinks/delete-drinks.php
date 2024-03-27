@@ -3,7 +3,7 @@
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/ITPROG-MP/BACKEND-UY/css/admin.css" />
-    <<!-- Bootstrap CSS -->
+    <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- jQuery and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js">
@@ -81,7 +81,7 @@
       </table>
     <hr>
 
-    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" onsubmit="return confirm('Are you sure?');">
+    <form id="deleteForm" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
         Enter Drinks ID: 
         <select name="id">
                 <?php
@@ -92,13 +92,13 @@
                 }
                 ?>
             </select> <br /><br />
-            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteConfirmationModal">
-                Delete
-            </button><br /><br />
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteConfirmationModal">
+                    Delete
+                </button><br /><br />
     </form>
 
     <?php
-    ob_start(); // Start buffering output
+        ob_start(); // Start buffering output
     ?>
 
       <!-- Deletion Prompt -->
@@ -123,10 +123,10 @@
     </div>
 
     <script>
-      $(document).ready(function() {
-      $('#deleteButton').click(function(){
-        $('form').submit();
-      });
+        $(document).ready(function() {
+        $('#deleteButton').click(function(){
+        $('#deleteForm').submit();
+    });
 
         if (window.location.search.indexOf('deleted=true') > -1) {
           $('#successMessageModal').modal('show');
