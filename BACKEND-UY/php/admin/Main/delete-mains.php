@@ -34,7 +34,7 @@
             background-color: #D4471F;
             color: white;
         }
-
+        
     </style>
 </head>
 <body>
@@ -72,19 +72,25 @@
       </table>
     <hr>
 
-  <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" onsubmit="return confirm('Are you sure?');">
-    Enter Mains ID: 
-    <select name="id">
-            <?php
-              $idQuery = mysqli_query($conn, "SELECT * FROM mains");
-              
-              while ($row = mysqli_fetch_assoc($idQuery)) {
-                  echo "<option value='" . $row['mains_id'] . "'>" . $row['name'] . " (" . $row['mains_id'] . ")</option>";
-              }
-            ?>
-        </select> <br /><br />
-    <input type="submit" name="enter" value="Enter" title="Are you sure?"/><br /><br />
-  </form>
+  <div class="select-box">
+    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" onsubmit="return confirm('Are you sure?');">
+      Enter Mains ID: 
+      <select name="id">
+              <?php
+                $idQuery = mysqli_query($conn, "SELECT * FROM mains");
+                
+                while ($row = mysqli_fetch_assoc($idQuery)) {
+                    echo "<option value='" . $row['mains_id'] . "'>" . $row['name'] . " (" . $row['mains_id'] . ")</option>";
+                }
+              ?>
+          </select> <br /><br />
+  </div>
+      <div class="submit-button">
+          <a href="mains-table.php" class="back-button">Back</a>
+          <input type="submit" name="enter" value="Enter" title="Are you sure?"/><br /><br />
+      </div>
+    </form>
+ 
 
   <?php
     $conn = mysqli_connect("localhost", "root", "") or die ("Unable to connect!". mysqli_error($conn) );
@@ -108,9 +114,6 @@
         
     }	 
   ?>
-  
-  <hr>
-  <a class="back-button" href="mains-table.php">Back</a>
 
 </body>
 </html>
