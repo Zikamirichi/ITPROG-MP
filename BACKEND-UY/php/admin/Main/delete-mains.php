@@ -80,7 +80,7 @@
       </table>
     <hr>
 
-  <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" onsubmit="return confirm('Are you sure?');">
+    <form id="deleteForm" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
     Enter Mains ID: 
     <select name="id">
             <?php
@@ -122,10 +122,10 @@
     </div>
 
     <script>
-      $(document).ready(function() {
-      $('#deleteButton').click(function(){
-        $('form').submit();
-      });
+        $(document).ready(function() {
+        $('#deleteButton').click(function(){
+        $('#deleteForm').submit();
+    });
 
         if (window.location.search.indexOf('deleted=true') > -1) {
           $('#successMessageModal').modal('show');

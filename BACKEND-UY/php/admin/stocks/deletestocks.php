@@ -32,7 +32,7 @@
       </table>
     <hr>
 
-  <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+    <form id="deleteForm" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
     Enter Stocks ID: 
     <select name="id">
             <?php
@@ -75,17 +75,17 @@
         
         <script>
             $(document).ready(function() {
-                $('#deleteButton').click(function(){
-                    $('form').submit();
-                });
+            $('#deleteButton').click(function(){
+            $('#deleteForm').submit();
+        });
 
-                if (window.location.search.indexOf('deleted=true') > -1) {
-                    $('#successMessageModal').modal('show');
-                    
-                    // Use the History API to remove the 'deleted=true' query parameter
-                    if (window.history.replaceState) {
-                        var newUrl = window.location.pathname;
-                        window.history.replaceState({path:newUrl}, '', newUrl);
+            if (window.location.search.indexOf('deleted=true') > -1) {
+            $('#successMessageModal').modal('show');
+                        
+                // Use the History API to remove the 'deleted=true' query parameter
+                if (window.history.replaceState) {
+                    var newUrl = window.location.pathname;
+                    window.history.replaceState({path:newUrl}, '', newUrl);
                     }
                 }
             });

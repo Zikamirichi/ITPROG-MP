@@ -79,7 +79,7 @@
       </table>
     <hr>
 
-  <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" onsubmit="return confirm('Are you sure?');">
+    <form id="deleteForm" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
     Enter Sides ID: 
     <select name="id">
             <?php
@@ -124,7 +124,7 @@
         <script>
         $(document).ready(function() {
         $('#deleteButton').click(function(){
-            $('form').submit();
+        $('#deleteForm').submit();
         });
 
             if (window.location.search.indexOf('deleted=true') > -1) {
