@@ -38,6 +38,37 @@
     </style>
 </head>
 <body>
+        <div class="main-container">
+        <div class="header">
+            <img src="/ITPROG-MP/BACKEND-UY/images/logo-only.png" alt="Logo">
+            Drinks TABLE
+        </div>
+        <div class="content-box">
+            <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Nutrition Facts ID</th>
+                <th>Stock ID</th>
+            </tr>
+
+            <?php
+            $conn = mysqli_connect("localhost", "root", "") or die ("Unable to connect!". mysqli_error($conn) );
+            mysqli_select_db($conn, "mydb");
+                $factsQuery = mysqli_query($conn, "SELECT * FROM drinks ORDER BY drinks_id");
+                while ($factsResult = mysqli_fetch_assoc($factsQuery)) {
+                    echo "<tr>";
+                    echo "<td>", $factsResult ["drinks_id"], "</td>";
+                    echo "<td>", $factsResult ["names"], "</td>";
+                    echo "<td>", $factsResult ["price"], "</td>";
+                    echo "<td>", $factsResult ["nutr_facts_id"], "</td>";
+                    echo "<td>", $factsResult ["stocks_id"], "</td>";
+                    echo "</tr>";
+                }
+            ?>
+            </table>
+
     <?php
         $conn = mysqli_connect("localhost", "root", "") or die ("Unable to connect!". mysqli_error($conn) );
         mysqli_select_db($conn, "mydb");
