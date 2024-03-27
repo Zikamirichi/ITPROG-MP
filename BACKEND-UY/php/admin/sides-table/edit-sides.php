@@ -43,7 +43,7 @@
     <div class="main-container">
         <div class="header">
             <img src="../../../images/logo-only.png" alt="Logo">
-            SIDE DISH TABLE
+            EDIT SIDE DISH
         </div>
 
         <?php
