@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../../../css/admin.css" />
-    <title>Using Edit</title>
+    <title>Side Dish</title>
     <style>
         table {
             border: 1px solid black;
@@ -43,7 +43,7 @@
     <div class="main-container">
         <div class="header">
             <img src="../../../images/logo-only.png" alt="Logo">
-            SIDE DISH TABLE
+            EDIT SIDE DISH
         </div>
 
         <?php

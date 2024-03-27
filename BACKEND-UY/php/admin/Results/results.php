@@ -32,7 +32,7 @@
     $verification_xml = simplexml_load_file('verification.xml');
 
     error_reporting(E_ERROR | E_PARSE);
-    $conn = mysqli_connect("localhost", "root", "", "mydb", 3360) or die ("Unable to connect!". mysqli_error($conn) );
+    $conn = mysqli_connect("localhost", "root", "", "mydb") or die ("Unable to connect!". mysqli_error($conn) );
         mysqli_select_db($conn, "mydb");
         $date = $_GET['date'];
      echo "<h3>Date: '$date' </h3>";

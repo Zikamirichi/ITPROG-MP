@@ -42,14 +42,14 @@
             background-color: #D4471F;
             color: white;
         }
-
+        
     </style>
 </head>
 <body>
     <div class="main-container">
         <div class="header">
             <img src="../../../images/logo-only.png" alt="Logo">
-            MAIN DISH TABLE            
+            DELETE MAIN DISH            
         </div>
 
         <div class="content-box">
@@ -80,6 +80,7 @@
       </table>
     <hr>
 
+    <div class="select-box">    
     <form id="deleteForm" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
     Enter Mains ID: 
     <select name="id">

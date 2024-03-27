@@ -48,8 +48,8 @@
 <body>
 <div class="main-container">
         <div class="header">
-            <img src="/ITPROG-MP/BACKEND-UY/images/logo-only.png" alt="Logo">
-            DRINK TABLE            
+            <img src="../../../images/logo-only.png" alt="Logo">
+            DELETE A DRINK         
         </div>
 
         <div class="content-box">
@@ -81,20 +81,23 @@
       </table>
     <hr>
 
-    <form id="deleteForm" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-        Enter Drinks ID: 
-        <select name="id">
-                <?php
-                $idQuery = mysqli_query($conn, "SELECT * FROM drinks");
-                
-                while ($row = mysqli_fetch_assoc($idQuery)) {
-                    echo "<option value='" . $row['drinks_id'] . "'>" . $row['name'] . " (" . $row['drinks_id'] . ")</option>";
-                }
-                ?>
+    <div class="select-box">    
+        <form id="deleteForm" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+            Enter Drinks ID: 
+            <select name="id">
+                    <?php
+                    $idQuery = mysqli_query($conn, "SELECT * FROM drinks");
+                    
+                    while ($row = mysqli_fetch_assoc($idQuery)) {
+                        echo "<option value='" . $row['drinks_id'] . "'>" . $row['name'] . " (" . $row['drinks_id'] . ")</option>";
+                    }
+                    ?>
             </select> <br /><br />
-                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteConfirmationModal">
-                    Delete
-                </button><br /><br />
+    </div>
+        <div class="submit-button">
+            <a href="drinks-table.php" class="back-button">Back</a>
+            <input type="submit" name="enter" value="Enter" title="Are you sure?"/><br /><br />
+        </div>
     </form>
 
     <?php
@@ -182,9 +185,6 @@
   <?php
     ob_end_flush(); // Send output and turn off buffering
   ?>
-
-  <hr>
-  <a class="back-button" href="drinks-table.php">Back</a>
 
 </body>
 </html>

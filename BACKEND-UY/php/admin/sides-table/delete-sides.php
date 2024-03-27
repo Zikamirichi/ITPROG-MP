@@ -11,7 +11,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"> 
     </script>
 
-    <title>Main Dish</title>
+    <title>Side Dish</title>
     <style>
         table {
             border: 1px solid black;
@@ -49,7 +49,7 @@
   <div class="main-container">
     <div class="header">
         <img src="/ITPROG-MP/BACKEND-UY/images/logo-only.png" alt="Logo">
-        SIDE DISH TABLE            
+        DELETE SIDE DISH            
     </div>
     <div class="content-box">
       <table>
@@ -79,21 +79,24 @@
       </table>
     <hr>
 
-    <form id="deleteForm" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-    Enter Sides ID: 
-    <select name="id">
-            <?php
-              $idQuery = mysqli_query($conn, "SELECT * FROM sides");
-              
-              while ($row = mysqli_fetch_assoc($idQuery)) {
-                  echo "<option value='" . $row['sides_id'] . "'>" . $row['name'] . " (" . $row['sides_id'] . ")</option>";
-              }
-            ?>
-        </select> <br /><br />
-        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteConfirmationModal">
-          Delete
-        </button><br /><br />
-  </form>
+    <div class="select-box">    
+        <form id="deleteForm" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+            Enter Sides ID: 
+            <select name="id">
+                    <?php
+                    $idQuery = mysqli_query($conn, "SELECT * FROM sides");
+                    
+                    while ($row = mysqli_fetch_assoc($idQuery)) {
+                        echo "<option value='" . $row['sides_id'] . "'>" . $row['name'] . " (" . $row['sides_id'] . ")</option>";
+                    }
+                    ?>
+                </select> <br /><br />
+    </div>
+      <div class="submit-button">
+          <a href="sides-table.php" class="back-button">Back</a>
+          <input type="submit" name="enter" value="Enter" title="Are you sure?"/><br /><br />
+      </div>
+    </form>
 
   <?php
         ob_start(); // Start buffering output
