@@ -182,7 +182,6 @@
         ?>
     
         <hr>
-        <a href="sides-table.php">Back</a>
 
         <?php
             ob_end_flush(); // Send output and turn off buffering
