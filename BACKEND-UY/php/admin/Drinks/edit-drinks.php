@@ -50,7 +50,7 @@
                 <th>Name</th>
                 <th>Price</th>
                 <th>Nutrition Facts ID</th>
-                <th>Stock ID</th>
+                <th>Stocks</th>
             </tr>
 
             <?php
@@ -89,13 +89,13 @@
             echo "<form method='post' action='".$_SERVER['PHP_SELF']."'>";
             // drinks info
             echo "<h3>Drinks info</h3>";
-            echo "<input type='hidden' name='newMainID' value='".$getDrinksInfo["drinks_id"]."'>".$getDrinksInfo["drinks_id"]."<br />";
+            //echo "<input type='hidden' name='newMainID' value='".$getDrinksInfo["drinks_id"]."'>".$getDrinksInfo["drinks_id"]."<br />";
             echo "Name: <input type='text' name='newName' value='".$getDrinksInfo["names"]."' size='150'> <br />";
             echo "Price: <input type='number' name='newPrice' value='".$getDrinksInfo["price"]."' size='150' step=0.01> <br />";
 
             // Nutrition facts
             echo "<h3>Nutrition facts</h3>";
-            echo "<input type='hidden' name='newID' value='".$getFacts["nutr_facts_id"]."'>".$getFacts["nutr_facts_id"]."<br />";
+            //echo "<input type='hidden' name='newID' value='".$getFacts["nutr_facts_id"]."'>".$getFacts["nutr_facts_id"]."<br />";
             echo "Description: <input type='text' name='newDesc' value='".$getFacts["desc"]."' size='150'> <br />";
             echo "Ingredients: <input type='text' name='newIngredients' value='".$getFacts["Ingredients"]."' size='100'> <br />";
             echo "Fat: <input type='text' name='newFat' value='".$getFacts["Fat"]."'><br />";
@@ -105,10 +105,11 @@
 
             // quantity info
             echo "<h3>Stocks info</h3>";
-            echo "<input type='hidden' name='stocksID' value='".$getStocks["stocks_id"]."'>".$getStocks["stocks_id"]."<br />";
-            echo "Price: <input type='number' name='newQuantity' value='".$getStocks["quantity"]."' size='150'> <br />";
-
-            echo "<input type='submit' name='save' value='Save'><br />";
+            //echo "<input type='hidden' name='stocksID' value='".$getStocks["stocks_id"]."'>".$getStocks["stocks_id"]."<br />";
+            echo "Quantity: <input type='number' name='newQuantity' value='".$getStocks["quantity"]."' size='150'> <br />";
+            echo "<div class=save-box>";
+            echo "<input type='submit' name='save' value='Save'<br />";
+            echo "</div>";
             echo "</form>";
         }
 
@@ -148,11 +149,11 @@
     Select ID: 
     <select name="drinks_id">
         <?php
-        $idQuery = mysqli_query($conn, "SELECT drinks_id FROM drinks");
+        $idQuery = mysqli_query($conn, "SELECT * FROM drinks");
 
         // Loop through the results and populate dropdown options
         while ($row = mysqli_fetch_assoc($idQuery)) {
-            echo "<option value='" . $row['drinks_id'] . "'>" . $row['drinks_id'] . "</option>";
+            echo "<option value='" . $row['drinks_id'] . "'>" . $row['names'] . " (" . $row['drinks_id'] . ")</option>";
         }
         ?>
     </select>
