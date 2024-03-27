@@ -156,11 +156,10 @@
         }
         ?>
     </select>
-
+    <br /><br />
+    <a class="back-button" href="drinks-table.php">Back</a>
     <input type="submit" name="enter" value="Enter" /><br /><br />
     </form>
-
-    <a class="back-button" href="drinks-table.php">Back</a>
 
 </body>
 </html>

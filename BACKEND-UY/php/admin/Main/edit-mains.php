@@ -143,10 +143,26 @@
     ?>
 
     <hr>
-
     
+    
+    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+    
+    Select Nutrition Facts ID: 
+    <select name="mains_id">
+        <?php
+        $idQuery = mysqli_query($conn, "SELECT mains_id FROM mains");
 
+        // Loop through the results and populate dropdown options
+        while ($row = mysqli_fetch_assoc($idQuery)) {
+            echo "<option value='" . $row['mains_id'] . "'>" . $row['mains_id'] . "</option>";
+        }
+        ?>
+    </select>
+    <br /><br />
     <a class="back-button" href="mains-table.php">Back</a>
+    <input type="submit" name="enter" value="Enter" /><br /><br />
+    </form>
+    
 
 </body>
 </html>

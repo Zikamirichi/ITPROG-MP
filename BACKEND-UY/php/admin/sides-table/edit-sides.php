@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../../../css/admin.css" />
+    <link rel="stylesheet" type="text/css" href="/ITPROG-MP/BACKEND-UY/css/admin.css" />
     <title>Side Dish</title>
     <style>
         table {
@@ -168,11 +168,10 @@
         }
         ?>
     </select>
-
+    <br /><br />
+    <a class="back-button" href="sides-table.php">Back</a>
     <input type="submit" name="enter" value="Enter" /><br /><br />
     </form>
-
-    <a class="back-button" href="sides-table.php">Back</a>
 
 </body>
 </html>
