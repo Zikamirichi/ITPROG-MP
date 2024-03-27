@@ -24,6 +24,17 @@
             margin: 5%;
         }
 
+        .back-button {
+            background-color: white;
+            color: #311712;
+            border: 1px solid #CED3D7;
+        }
+
+        .back-button:hover {
+            background-color: #D4471F;
+            color: white;
+        }
+
     </style>
 </head>
 
@@ -161,7 +172,7 @@
     <input type="submit" name="enter" value="Enter" /><br /><br />
     </form>
 
-    <a href="sides-table.php">Back</a>
+    <a class="back-button" href="sides-table.php">Back</a>
 
 </body>
 </html>

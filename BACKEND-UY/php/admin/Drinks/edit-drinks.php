@@ -1,5 +1,42 @@
 <html>
-<head><title>Using the Edit Statement</title></head>
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/ITPROG-MP/BACKEND-UY/css/admin.css" />
+    <title>Edit Drinks</title>
+    <style>
+        table {
+            border: 1px solid black;
+        }
+
+        td, th {
+            border: 1px solid black;
+            text-align: center;
+            background-color: white;
+        }
+
+        tr th {
+            background-color: #311712; 
+            color: white;
+        }
+
+        hr {
+            margin: 5%;
+        }
+
+        .back-button {
+            background-color: white;
+            color: #311712;
+            border: 1px solid #CED3D7;
+        }
+
+        .back-button:hover {
+            background-color: #D4471F;
+            color: white;
+        }
+
+    </style>
+</head>
 <body>
     <?php
         $conn = mysqli_connect("localhost", "root", "") or die ("Unable to connect!". mysqli_error($conn) );
@@ -92,7 +129,7 @@
     <input type="submit" name="enter" value="Enter" /><br /><br />
     </form>
 
-    <a href="drinks-table.php">Back</a>
+    <a class="back-button" href="drinks-table.php">Back</a>
 
 </body>
 </html>

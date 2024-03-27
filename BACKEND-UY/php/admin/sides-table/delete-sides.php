@@ -1,10 +1,51 @@
 <html>
-<head><title>Delete Nutrition Facts</title></head>
-<body>
+<head><title>Delete Nutrition Facts</title>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/ITPROG-MP/BACKEND-UY/css/admin.css" />
+    <title>Main Dish</title>
+    <style>
+        table {
+            border: 1px solid black;
+        }
 
-  <h2>Delete Sides</h2>
-      <table border="1" width="90%">
-      <tr bgcolor="#FLE5EB">
+        td, th {
+            border: 1px solid black;
+            text-align: center;
+            background-color: white;
+        }
+
+        tr th {
+            background-color: #311712; 
+            color: white;
+        }
+
+        hr {
+            margin: 5%;
+        }
+
+        .back-button {
+            background-color: white;
+            color: #311712;
+            border: 1px solid #CED3D7;
+        }
+
+        .back-button:hover {
+            background-color: #D4471F;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+  <div class="main-container">
+    <div class="header">
+        <img src="/ITPROG-MP/BACKEND-UY/images/logo-only.png" alt="Logo">
+        SIDE DISH TABLE            
+    </div>
+    <div class="content-box">
+      <table>
+      <tr>
         <th>ID</th>
         <th>Name</th>
         <th>Price</th>
@@ -68,7 +109,7 @@
   ?>
   
   <hr>
-  <a href="sides-table.php">Back</a>
+  <a class="back-button" href="sides-table.php">Back</a>
 
 </body>
 </html>
