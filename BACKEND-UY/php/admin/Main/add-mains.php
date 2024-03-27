@@ -181,6 +181,5 @@
         ob_end_flush(); // Send output and turn off buffering
     ?>
 
-    <!-- <a href="mains-table.php">Back</a> -->
 </body>
 </html>

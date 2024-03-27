@@ -8,7 +8,7 @@ body {
     justify-content: center;
     align-items: center; 
     margin: 0;
-    font-family: "Luckiest Guy", cursive;
+    font-family: "Luckiest Guy", cursive !important; 
     font-weight: 400;
     font-style: normal;
     width: 100%;
@@ -112,8 +112,7 @@ input[type="number"] {
 }
 
 input[type="submit"],
-.back-button
- {
+.back-button {
    text-decoration: none;
    text-align: right;
    background-color: #311712; 
@@ -132,12 +131,42 @@ input[type="submit"],
 input[type="submit"]:hover,
 .back-button:hover {
    background-color: #45a049;
+   text-decoration: none;
 }
 
 input[type="submit"]:active,
 .back-button:active,
 .button-table:active {
    background-color: #45a049;
+   box-shadow: 0 5px #666;
+   transform: translateY(4px);
+}
+
+.btn.btn-danger, .btn.btn-secondary {
+   text-decoration: none;
+   text-align: right;
+   background-color: #311712; 
+   color: white;
+   padding: 10px 15px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   font-size: 16px;
+   font-family: "Luckiest Guy", cursive;
+   font-weight: 400;
+   font-style: normal;
+   box-shadow: 0 7px #999;
+}
+
+.btn.btn-danger:hover,
+.btn.btn-secondary:hover {
+   background-color: #D4471F;
+   text-decoration: none;
+}
+
+.btn.btn-danger:active,
+.btn.btn-secondary:active {
+   background-color: #D4471F;
    box-shadow: 0 5px #666;
    transform: translateY(4px);
 }
@@ -164,3 +193,25 @@ select {
    font-weight: 800;
  }
 
+ .modal-header {
+   background-color: #D4471F;
+   font-family: "Luckiest Guy", cursive !important; 
+   font-weight: 400;
+   font-style: normal;
+ }
+
+ .modal-body {
+   font-size: 16px;
+   font-family: "Montserrat", sans-serif;
+   font-optical-sizing: auto;
+   font-weight: normal;
+   font-style: normal;
+   text-align: center;
+   padding: 10% !important; 
+ }
+
+ .save-box {
+   text-align: center;
+   margin-top: 5%;
+   margin-bottom: 8%;
+ }

@@ -59,7 +59,7 @@
                 <th>Name</th>
                 <th>Price</th>
                 <th>Nutrition Facts ID</th>
-                <th>Stock ID</th>
+                <th>Stocks</th>
             </tr>
 
       <?php
@@ -82,7 +82,7 @@
 
     <div class="select-box">    
     <form id="deleteForm" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-    Enter Mains ID: 
+    Select ID: 
     <select name="id">
             <?php
               $idQuery = mysqli_query($conn, "SELECT * FROM mains");
@@ -94,10 +94,11 @@
         </select> <br /><br /> 
         <td colspan="2" class="submit-button">
                         <a href="mains-table.php" class="back-button">Back</a>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteConfirmationModal">
+                        Delete
+                        </button>
         </td>
-        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteConfirmationModal">
-            Delete
-        </button>   
+           
   </form>
 
   <?php
@@ -118,7 +119,7 @@
                     Are you sure you want to delete this main dish and its related records?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="back-button" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-danger" id="deleteButton">Delete</button>
                 </div>
             </div>
@@ -148,7 +149,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="successMessageModalTitle">Success</h5>
+                        <h5 class="modal-title" id="successMessageModalTitle">Success!</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -157,7 +158,7 @@
                         The record has been successfully deleted from the database.
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="back-button" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -181,8 +182,6 @@
       }
       ?>
 
-    <hr>
-  
     <?php
       ob_end_flush(); // Send output and turn off buffering
     ?>

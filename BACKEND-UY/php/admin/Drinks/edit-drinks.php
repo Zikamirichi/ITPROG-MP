@@ -41,7 +41,7 @@
         <div class="main-container">
         <div class="header">
             <img src="/ITPROG-MP/BACKEND-UY/images/logo-only.png" alt="Logo">
-            Drinks TABLE
+            EDIT DRINKS
         </div>
         <div class="content-box">
             <table>
@@ -143,9 +143,9 @@
 
     <hr>
 
+    <div class="select-box">
     <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-    
-    Select Nutrition Facts ID: 
+    Select ID: 
     <select name="drinks_id">
         <?php
         $idQuery = mysqli_query($conn, "SELECT drinks_id FROM drinks");

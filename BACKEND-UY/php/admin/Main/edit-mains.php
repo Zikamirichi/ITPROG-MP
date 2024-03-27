@@ -43,14 +43,15 @@
             <img src="/ITPROG-MP/BACKEND-UY/images/logo-only.png" alt="Logo">
             EDIT MAIN DISH
         </div>
-<div class="content-box">
+        
+        <div class="content-box">
             <table>
             <tr>
                 <th>ID</th>
                 <th>Name</th>
                 <th>Price</th>
                 <th>Nutrition Facts ID</th>
-                <th>Stock ID</th>
+                <th>Stocks</th>
             </tr>
 
             <?php
@@ -68,7 +69,8 @@
                 }
             ?>
             </table>
-    <?php
+        
+        <?php
         $conn = mysqli_connect("localhost", "root", "") or die ("Unable to connect!". mysqli_error($conn) );
         mysqli_select_db($conn, "mydb");
 
@@ -107,9 +109,10 @@
             // quantity info
             echo "<h3>Stocks info</h3>";
           //  echo "<input type='hidden' name='stocksID' value='".$getStocks["stocks_id"]."'>".$getStocks["stocks_id"]."<br />";
-            echo "Price: <input type='number' name='newQuantity' value='".$getStocks["quantity"]."' size='150'> <br />";
-
-            echo "<input type='submit' name='save' value='Save'><br />";
+            echo "Quantity: <input type='number' name='newQuantity' value='".$getStocks["quantity"]."' size='150'> <br />";
+            echo "<div class=save-box>";
+            echo "<input type='submit' name='save' value='Save'<br />";
+            echo "</div>";
             echo "</form>";
         }
 
@@ -144,17 +147,16 @@
 
     <hr>
     
-    
+    <div class="select-box">
     <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-    
-    Select Nutrition Facts ID: 
+    Select ID: 
     <select name="mains_id">
         <?php
-        $idQuery = mysqli_query($conn, "SELECT mains_id FROM mains");
+        $idQuery = mysqli_query($conn, "SELECT * FROM mains");
 
         // Loop through the results and populate dropdown options
         while ($row = mysqli_fetch_assoc($idQuery)) {
-            echo "<option value='" . $row['mains_id'] . "'>" . $row['mains_id'] . "</option>";
+            echo "<option value='" . $row['mains_id'] . "'>" . $row['name'] . " (" . $row['mains_id'] . ")</option>";
         }
         ?>
     </select>
@@ -163,6 +165,5 @@
     <input type="submit" name="enter" value="Enter" /><br /><br />
     </form>
     
-
 </body>
 </html>

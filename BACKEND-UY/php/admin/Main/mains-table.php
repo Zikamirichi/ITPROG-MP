@@ -47,7 +47,7 @@
                 <th>Name</th>
                 <th>Price</th>
                 <th>Nutrition Facts ID</th>
-                <th>Stock ID</th>
+                <th>Stocks</th>
             </tr>
 
             <?php
