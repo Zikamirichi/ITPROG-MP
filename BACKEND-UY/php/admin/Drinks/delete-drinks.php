@@ -40,7 +40,7 @@
 <body>
 <div class="main-container">
         <div class="header">
-            <img src="/ITPROG-MP/BACKEND-UY/images/logo-only.png" alt="Logo">
+            <img src="../../../images/logo-only.png" alt="Logo">
             DRINK TABLE            
         </div>
 
@@ -73,19 +73,24 @@
       </table>
     <hr>
 
-  <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" onsubmit="return confirm('Are you sure?');">
-    Enter Drinks ID: 
-    <select name="id">
-            <?php
-              $idQuery = mysqli_query($conn, "SELECT * FROM drinks");
-              
-              while ($row = mysqli_fetch_assoc($idQuery)) {
-                  echo "<option value='" . $row['drinks_id'] . "'>" . $row['name'] . " (" . $row['drinks_id'] . ")</option>";
-              }
-            ?>
-        </select> <br /><br />
-    <input type="submit" name="enter" value="Enter" title="Are you sure?"/><br /><br />
-  </form>
+    <div class="select-box">
+      <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" onsubmit="return confirm('Are you sure?');">
+        Enter Drinks ID: 
+        <select name="id">
+                <?php
+                  $idQuery = mysqli_query($conn, "SELECT * FROM drinks");
+                  
+                  while ($row = mysqli_fetch_assoc($idQuery)) {
+                      echo "<option value='" . $row['drinks_id'] . "'>" . $row['name'] . " (" . $row['drinks_id'] . ")</option>";
+                  }
+                ?>
+            </select> <br /><br />
+    </div>
+        <div class="submit-button">
+            <a href="drinks-table.php" class="back-button">Back</a>
+            <input type="submit" name="enter" value="Enter" title="Are you sure?"/><br /><br />
+        </div>
+      </form>
 
   <?php
     $conn = mysqli_connect("localhost", "root", "") or die ("Unable to connect!". mysqli_error($conn) );
@@ -110,8 +115,5 @@
     }	 
   ?>
   
-  <hr>
-  <a class="back-button" href="drinks-table.php">Back</a>
-
 </body>
 </html>
