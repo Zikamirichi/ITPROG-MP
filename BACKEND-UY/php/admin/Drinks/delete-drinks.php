@@ -41,7 +41,7 @@
 <div class="main-container">
         <div class="header">
             <img src="../../../images/logo-only.png" alt="Logo">
-            DRINK TABLE            
+            DELETE A DRINK         
         </div>
 
         <div class="content-box">

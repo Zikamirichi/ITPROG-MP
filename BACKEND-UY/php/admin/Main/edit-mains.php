@@ -41,7 +41,7 @@
 <div class="main-container">
         <div class="header">
             <img src="/ITPROG-MP/BACKEND-UY/images/logo-only.png" alt="Logo">
-            MAIN DISH TABLE
+            EDIT MAIN DISH
         </div>
 <div class="content-box">
             <table>

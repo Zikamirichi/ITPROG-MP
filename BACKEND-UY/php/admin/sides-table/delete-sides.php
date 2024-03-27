@@ -41,7 +41,7 @@
   <div class="main-container">
     <div class="header">
         <img src="/ITPROG-MP/BACKEND-UY/images/logo-only.png" alt="Logo">
-        SIDE DISH TABLE            
+        DELETE SIDE DISH            
     </div>
     <div class="content-box">
       <table>
