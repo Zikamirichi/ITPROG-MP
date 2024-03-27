@@ -90,10 +90,13 @@
                   echo "<option value='" . $row['mains_id'] . "'>" . $row['name'] . " (" . $row['mains_id'] . ")</option>";
               }
             ?>
-        </select> <br /><br />
+        </select> <br /><br /> 
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="mains-table.php">
+            Back
+        </button> 
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteConfirmationModal">
             Delete
-        </button><br /><br/>
+        </button>   
   </form>
 
   <?php
@@ -178,7 +181,6 @@
       ?>
 
     <hr>
-    <a href="mains-table.php">Back</a>
   
     <?php
       ob_end_flush(); // Send output and turn off buffering
