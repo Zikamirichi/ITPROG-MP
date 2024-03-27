@@ -8,25 +8,34 @@
     
     <style>
         table {
-            width: 80%;
-            border-collapse: collapse;
-            border: 2px solid black;
-            margin: auto;
-        }
-
-        th, td {
-            padding: 10px;
             border: 1px solid black;
-            text-align: left;
         }
 
-        th {
-            background-color: #f2f2f2;
+        td, th {
+            border: 1px solid black;
+            text-align: center;
+            background-color: white;
         }
+
+        tr th {
+            background-color: #311712; 
+            color: white;
+        }
+
+        hr {
+            margin: 5%;
+        }
+        
+
     </style>
 </head>
 <body>
-    <h1>Results Table</h1>
+    <div class="main-container">
+        <div class="header">
+            <img src="../../../images/logo-only.png" alt="Logo">
+            RESULTS TABLE
+        </div>
+
     <?php
     // Load verification XML file
     $verification_xml = simplexml_load_file('verification.xml');
@@ -274,10 +283,11 @@
     
     <!-- Dropdown with a Submit Button to Select Distinct Dates -->
     <form action="results.php" method="GET">
+        Select Date:
     <select name="date">
         <?php
         error_reporting(E_ERROR | E_PARSE);
-        $conn = mysqli_connect("localhost", "root", "", "mydb", 3360) or die ("Unable to connect!". mysqli_error($conn) );
+        $conn = mysqli_connect("localhost", "root", "", "mydb") or die ("Unable to connect!". mysqli_error($conn) );
         mysqli_select_db($conn, "mydb");
         
         $sql = "SELECT DISTINCT date FROM or_;";
