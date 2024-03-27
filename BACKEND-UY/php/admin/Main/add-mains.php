@@ -119,10 +119,6 @@
             $nutr_facts_id = $idResult["MAX(nutr_facts_id)"];
             $nutr_facts_id++;
 
-            echo `Added nutrition facts`;
-            var_dump($nutr_facts_id);
-            echo `<br>`;
-
             $desc = $_POST["desc"];
             $ingredients = $_POST["Ingredients"];
             $fat = $_POST["Fat"];
@@ -141,9 +137,9 @@
             $stocks_id = $idResult["MAX(stocks_id)"];
             $stocks_id++;
 
-            echo `Added stocks`;
+            /*echo `Added stocks`;
             var_dump($stocks_id);
-            echo `<br>`;
+            echo `<br>`;*/
 
             $quantity = (int) $_POST["quantity"];
 
@@ -158,9 +154,9 @@
             $mains_id = $idResult["MAX(mains_id)"];
             $mains_id++;
 
-            echo `Added mains`;
+            /*echo `Added mains`;
             var_dump($mains_id);
-            echo `<br>`;
+            echo `<br>`;*/
 
             $insert = "INSERT INTO item VALUES ('$mains_id')";
             mysqli_query($conn, $insert);
@@ -173,7 +169,7 @@
             $insert = "INSERT INTO mains VALUES ('$mains_id', '$name', '$price', '$nutr_facts_id', '$stocks_id')";
             mysqli_query($conn, $insert);
 
-            echo "Record has been successfully inserted!";
+            //echo "Record has been successfully inserted!";
         }
     ?>
 
