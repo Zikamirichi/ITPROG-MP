@@ -58,7 +58,7 @@
         <th>Name</th>
         <th>Price</th>
         <th>Nutrition Facts ID</th>
-        <th>Stock ID</th>
+        <th>Stocks</th>
       </tr>
 
       <?php
@@ -81,7 +81,7 @@
 
     <div class="select-box">    
         <form id="deleteForm" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-            Enter Sides ID: 
+            Select ID: 
             <select name="id">
                     <?php
                     $idQuery = mysqli_query($conn, "SELECT * FROM sides");
@@ -90,12 +90,13 @@
                         echo "<option value='" . $row['sides_id'] . "'>" . $row['name'] . " (" . $row['sides_id'] . ")</option>";
                     }
                     ?>
-                </select> <br /><br />
-    </div>
-      <div class="submit-button">
-          <a href="sides-table.php" class="back-button">Back</a>
-          <input type="submit" name="enter" value="Enter" title="Are you sure?"/><br /><br />
-      </div>
+            </select> <br /><br /> 
+        <td colspan="2" class="submit-button">
+                        <a href="sides-table.php" class="back-button">Back</a>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteConfirmationModal">
+                        Delete
+                        </button>
+        </td>
     </form>
 
   <?php
@@ -116,7 +117,7 @@
                         Are you sure you want to delete this side?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="back-button" data-dismiss="modal">Close</button>
                         <!-- This button triggers the deletion -->
                         <button type="button" class="btn btn-danger" id="deleteButton">Delete</button>
                     </div>
@@ -156,7 +157,7 @@
                         The record has been successfully deleted from the database.
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="back-button" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -181,8 +182,6 @@
         }
         ?>
     
-        <hr>
-
         <?php
             ob_end_flush(); // Send output and turn off buffering
         ?>
