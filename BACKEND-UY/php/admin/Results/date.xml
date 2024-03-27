@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE date[
+<!ELEMENT data (date+)>
+<!ELEMENT date (#PCDATA)>
+]>
+
+<data>
+    <date>2024-03-12</date>
+    <date>2024-03-14</date>
+</data>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE Verification [
+<!ELEMENT verification (dishes_sold+, earnings+, discounts_given+)>
+<!ELEMENT dishes_sold (date, total)>
+<!ELEMENT earnings (date, total)>
+<!ELEMENT discounts_given (date, total)>
+
+<!ELEMENT date (#PCDATA)>
+<!ELEMENT total (#PCDATA)>
+]>
+
+<verification>
+    <!-- Dishes Sold -->
+    <dishes_sold>
+        <date>2024-03-12</date>
+        <total>5</total> <!-- Expected total dishes sold -->
+    </dishes_sold>
+    <dishes_sold>
+        <date>2024-03-14</date>
+        <total>10</total> <!-- Expected total dishes sold -->
+    </dishes_sold>
+
+    <!-- Earnings -->
+    <earnings>
+        <date>2024-03-12</date>
+        <total>330</total> <!-- Expected total earnings -->
+    </earnings>
+    <earnings>
+        <date>2024-03-14</date>
+        <total>440</total> <!-- Expected total earnings -->
+    </earnings>
+
+    <!-- Discounts Given -->
+    <discounts_given>
+        <date>2024-03-12</date>
+        <total>1</total> <!-- Expected total discounts given -->
+    </discounts_given>
+    <discounts_given>
+        <date>2024-03-14</date>
+        <total>2</total> <!-- Expected total discounts given -->
+    </discounts_given>
+</verification>
