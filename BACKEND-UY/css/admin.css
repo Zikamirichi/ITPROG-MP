@@ -112,7 +112,8 @@ input[type="number"] {
 }
 
 input[type="submit"],
-.back-button {
+.back-button,
+.submit-bttn {
    text-decoration: none;
    text-align: right;
    background-color: #311712; 
@@ -129,14 +130,16 @@ input[type="submit"],
 }
 
 input[type="submit"]:hover,
-.back-button:hover {
+.back-button:hover,
+.submit-bttn:hover  {
    background-color: #45a049;
    text-decoration: none;
 }
 
 input[type="submit"]:active,
 .back-button:active,
-.button-table:active {
+.button-table:active,
+.submit-bttn:active {
    background-color: #45a049;
    box-shadow: 0 5px #666;
    transform: translateY(4px);

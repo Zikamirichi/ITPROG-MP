@@ -54,10 +54,40 @@
 
         .back-result {
             display: flex;
-    justify-content: center; /* Horizontally center */
-    align-items: center;
+            justify-content: center; /* Horizontally center */
+            align-items: center;
             background-color: white;
             padding: 5%;
+        }
+
+        .table-box {
+            display: flex;
+            flex-direction: row;
+            padding-left: 3%;
+            padding-right: 3%;
+            background-color: white;
+        }
+
+       .right-box {
+            display: flex;
+            flex-direction: column;
+            padding-left: 3%;
+        }
+
+        .left-box {
+            display: flex;
+            flex-direction: column;
+            padding-right: 3%;
+            border-right: 1px solid black;
+        }
+
+        .date-column {
+            white-space: nowrap;
+            min-width: 105px;
+        }
+
+        .main-container {
+            min-width: 800px;
         }
 
     </style>
@@ -69,6 +99,8 @@
             RESULTS TABLE
         </div>
 
+        <div class="table-box">
+            <div class="left-box">
     <?php
     // Load verification XML file
     $verification_xml = simplexml_load_file('verification.xml');
@@ -366,9 +398,11 @@
         mysqli_close($conn);
         ?>
     </select>
-        <button type="submit">Submit</button>
+        <button type="submit" class="submit-bttn">Submit</button>
     </form>
+    </div>
 
+    <div class="right-box">
     <?php
 // Load and parse the XML file
 $xml = simplexml_load_file('verification.xml');
@@ -405,8 +439,9 @@ foreach ($xml->discounts_given as $item) {
 ksort($dates);
 
 // Display data in a tabular format
-echo "<div class=verification-table> VERIFICATION RESULTS";
-echo "<table>
+echo "<div class='date-submit'>";
+echo "VERIFICATION RESULTS (ALL)</div>";
+echo "<div class=verification-table><table>
         <tr>
             <th>Date</th>
             <th>Total Dishes Sold</th>
@@ -420,7 +455,7 @@ foreach ($dates as $date => $value) {
     $total_discounts_given = isset($discounts_given[$date]) ? $discounts_given[$date] : 0;
 
     echo "<tr>
-            <td>$date</td>
+            <td class='date-column'>$date</td>
             <td>$total_dishes_sold</td>
             <td>$total_earnings</td>
             <td>$total_discounts_given</td>
@@ -431,9 +466,9 @@ echo "</table> </div>";
 ?>
 
     <div class="back-result"><a href="../adminmenu.php" class="back-button">Back</a></div>
-
 </div>
-
+</div>
+</div>
 
 </body>
 </html>
