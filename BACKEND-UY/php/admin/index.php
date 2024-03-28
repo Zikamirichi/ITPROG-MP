@@ -12,6 +12,25 @@
          padding: 10px;
          text-align: left;
       }
+
+      .password-container {
+         position: relative;
+      }
+
+      .password-toggle {
+         position: absolute;
+         right: 5px;
+         top: 50%;
+         transform: translateY(-50%);
+         cursor: pointer;
+         padding: 5%;
+         max-width: 100%;
+         max-height: 60px;
+      }
+
+      .password-toggle.clicked {
+         filter: invert(100%) sepia(0%) saturate(10000%) hue-rotate(180deg);
+      }
    </style>
 </head>
 <body>
@@ -25,7 +44,10 @@
          <tr>
             <form id="loginForm" method="post" action="check.php">
                <td>Username:</td><td><input type="text" name="username" required/></td>
-               <tr><td>Password:</td><td><input type="password" name="password" id="password" required/><input type="image" src="eye.png" alt="Eye" onclick="togglePasswordVisibility(event)" style="width: 20px; height: 20px;"></td></tr>
+               <tr><td>Password:</td><td class="password-container">
+                  <input type="password" name="password" id="password" required/>
+                  <img src="../../images/eye.png" alt="Eye" class="password-toggle" onclick="togglePasswordVisibility(event)">
+               </td></tr>
                <tr><td colspan="2" class="submit-button"><input type="submit" value="Login" name="loginBtn" class="btn btn-primary"/></td>
             </form>
          </tr>
@@ -53,6 +75,7 @@
             passwordField.type = "text";
          } else {
             passwordField.type = "password";
+
          }
       }
    </script>
