@@ -3,6 +3,8 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
    <link rel="stylesheet" type="text/css" href="../../css/admin.css" />
    <title>Login</title>
    <style>
@@ -24,7 +26,7 @@
             <form id="loginForm" method="post" action="check.php">
                <td>Username:</td><td><input type="text" name="username" required/></td>
                <tr><td>Password:</td><td><input type="password" name="password" id="password" required/><input type="image" src="eye.png" alt="Eye" onclick="togglePasswordVisibility(event)" style="width: 20px; height: 20px;"></td></tr>
-               <tr><td colspan="2" class="submit-button"><input type="submit" value="Login" name="loginBtn"/></td>
+               <tr><td colspan="2" class="submit-button"><input type="submit" value="Login" name="loginBtn" class="btn btn-primary"/></td>
             </form>
          </tr>
          </table>
