@@ -7,6 +7,11 @@
     <title>Results</title>
     
     <style>
+        .table-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
         table {
             border: 1px solid black;
         }
@@ -15,6 +20,16 @@
             border: 1px solid black;
             text-align: center;
             background-color: white;
+            font-weight: normal;
+        }
+
+        td {
+            font-family: "Montserrat", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: normal;;
+            font-style: normal;
+            padding: 3%;
+
         }
 
         tr th {
@@ -25,7 +40,25 @@
         hr {
             margin: 5%;
         }
+
+        .date-submit {
+            text-align: center;
+            padding: 5%;
+            background-color: white;
+        }
         
+        .verification-table {
+            text-align: center;
+            background-color: white;
+        }
+
+        .back-result {
+            display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center;
+            background-color: white;
+            padding: 5%;
+        }
 
     </style>
 </head>
@@ -44,11 +77,14 @@
     $conn = mysqli_connect("localhost", "root", "", "mydb") or die ("Unable to connect!". mysqli_error($conn) );
         mysqli_select_db($conn, "mydb");
         $date = $_GET['date'];
-     echo "<h3>Date: '$date' </h3>";
+     echo "<div class='date-submit'>";
+     echo "Date: '$date' </div>";
 
      // Array to store verification results
     $verification_results = [];
     ?>
+
+    <div class="table-container">
     <table>
         <!-- Dishes Sold -->
         <tr>
@@ -56,233 +92,232 @@
         </tr>
         <tr>
         <?php
-        $query_dishes_sold = "SELECT 
-        (total_dish_alacarte.total_dishes_sold + total_dish_combo.total_dishes_sold) AS total_dishes_sold
-        FROM
-        (
-            SELECT 
-                SUM(ot.ordr_quan) AS total_dishes_sold
-            FROM 
-                or_ 
-                JOIN cart c ON c.cart_id = or_.cart_id
-                JOIN ala_carte ac ON ac.cart_id = c.cart_id
-                JOIN order_table ot ON ac.ordr_id = ot.ordr_id
-            WHERE 
-                or_.date = '$date'
-        ) AS total_dish_alacarte,
-        (
-            SELECT 
-                SUM(ot_m.ordr_quan + ot_s.ordr_quan + ot_d.ordr_quan) AS total_dishes_sold
-            FROM 
-                or_ 
-                JOIN cart ca ON ca.cart_id = or_.cart_id
-                JOIN combo co ON co.cart_id = ca.cart_id
-                JOIN cmb_main AS cmb_m ON cmb_m.c_main_id = co.c_main_id
-                JOIN cmb_side AS cmb_s ON cmb_s.c_side_id = co.c_side_id
-                JOIN cmb_drink AS cmb_d ON cmb_d.c_drink_id = co.c_drink_id
-                JOIN order_table AS ot_m ON cmb_m.ordr_id = ot_m.ordr_id
-                JOIN order_table AS ot_s ON cmb_s.ordr_id = ot_s.ordr_id
-                JOIN order_table AS ot_d ON cmb_d.ordr_id = ot_d.ordr_id
-            WHERE 
-                or_.date = '$date'
-        ) AS total_dish_combo;";
-        $result_dishes_sold = mysqli_query($conn, $query_dishes_sold);
-
-        if ($result_dishes_sold) {
-        // Fetch the actual total dishes sold for the selected date
-        $row = mysqli_fetch_assoc($result_dishes_sold);
-        $actual_total_dishes_sold = (int) $row['total_dishes_sold'];
-
-        // Load verification XML file
-        $verification_xml = simplexml_load_file('verification.xml');
-
-        // Find the expected total dishes sold for the selected date from the XML
-        $expected_total_dishes_sold = null;
-        foreach ($verification_xml->dishes_sold as $verification) {
-        if ((string) $verification->date === $date) {
-        $expected_total_dishes_sold = (int) $verification->total;
-        break;
-        }
-        }
-
-        // Compare actual and expected total dishes sold
-        if ($actual_total_dishes_sold == $expected_total_dishes_sold) {
-        echo "<tr><td>Verified: Total dishes sold is <b>$expected_total_dishes_sold </b></td></tr>";
-        } else {
-        echo "<tr><td>Mismatch: Total dishes sold Expected: <b>$expected_total_dishes_sold</b>, Actual: <b> $actual_total_dishes_sold </b></td></tr>";
-        }
-        } else {
-        echo "<tr><td>Error: " . mysqli_error($conn) . "</td></tr>";
-        }
-        ?>
-
-        </tr>
-
-        <!-- Earnings -->
-        <tr>
-            <th>Earnings</th>
-        </tr>
-        <tr>
-            <?php 
-           // Fetch the selected date from the form
-    $date = $_GET['date'];
-
-    // Fetch total earnings for the selected date
-    $sql = "
-            SELECT (total_earned_from_combo + total_earned_from_alacarte) AS total_earnings
-            FROM (
-                SELECT 
-                    SUM(mains.price + side.price + drink.price) AS total_earned_from_combo
-                FROM 
-                    or_ 
-                    JOIN cart ca ON ca.cart_id = or_.cart_id
-                    JOIN combo c ON ca.cart_id = c.cart_id
-                    JOIN cmb_main AS cmb_m 
-                        ON cmb_m.c_main_id = c.c_main_id
-                    JOIN cmb_side AS cmb_s 
-                        ON cmb_s.c_side_id = c.c_side_id
-                    JOIN cmb_drink AS cmb_d 
-                        ON cmb_d.c_drink_id = c.c_drink_id
-                    JOIN order_table AS ot_m 
-                        ON cmb_m.ordr_id = ot_m.ordr_id
-                    JOIN order_table AS ot_s 
-                        ON cmb_s.ordr_id = ot_s.ordr_id
-                    JOIN order_table AS ot_d 
-                        ON cmb_d.ordr_id = ot_d.ordr_id
-                    JOIN item i_m 
-                        ON i_m.item_id = ot_m.item_id
-                    JOIN item i_s 
-                        ON i_s.item_id = ot_s.item_id
-                    JOIN item i_d 
-                        ON i_d.item_id = ot_d.item_id
-                    JOIN sides AS side
-                        ON i_s.item_id = side.sides_id
-                    JOIN mains AS mains 
-                        ON i_m.item_id = mains.mains_id
-                    JOIN drinks AS drink 
-                        ON i_d.item_id = drink.drinks_id
-                    WHERE 
-                    or_.date = '$date'
-            ) AS ComboTotal,
-            
-            -- Query for Ala_carteTotal
+            $query_dishes_sold = "SELECT 
+            (total_dish_alacarte.total_dishes_sold + total_dish_combo.total_dishes_sold) AS total_dishes_sold
+            FROM
             (
                 SELECT 
-                    SUM(COALESCE(mains.price*ot.ordr_quan, 0) + COALESCE(side.price*ot.ordr_quan, 0) + COALESCE(drink.price*ot.ordr_quan, 0)) AS total_earned_from_alacarte
-            FROM 
+                    SUM(ot.ordr_quan) AS total_dishes_sold
+                FROM 
                     or_ 
                     JOIN cart c ON c.cart_id = or_.cart_id
                     JOIN ala_carte ac ON ac.cart_id = c.cart_id
-                    JOIN order_table AS ot 
-                        ON ac.ordr_id = ot.ordr_id
-                    JOIN item i 
-                        ON i.item_id = ot.item_id
-                    LEFT JOIN sides AS side 
-                        ON i.item_id = side.sides_id
-                    LEFT JOIN mains AS mains 
-                        ON i.item_id = mains.mains_id
-                    LEFT JOIN drinks AS drink 
-                        ON i.item_id = drink.drinks_id
-                        WHERE 
-                    or_.date = '$date'
-            ) AS Ala_carteTotal;";
-        
-        $result = mysqli_query($conn, $sql);
-        
-        if ($result) {
-            // Load verification XML file
-            $verification_xml = simplexml_load_file('verification.xml');
-
-            // Find the corresponding expected total earnings from the XML for the selected date
-            $expected_total_earnings = null;
-            foreach ($verification_xml->earnings as $verification) {
-                if ((string) $verification->date === $date) {
-                    $expected_total_earnings = (float) $verification->total;
-                    break;
-                }
-            }
-
-            // Check if expected total earnings for the selected date exist in the XML
-            if ($expected_total_earnings !== null) {
-                // Fetch actual total earnings for the selected date
-                $row = mysqli_fetch_assoc($result);
-                $actual_total_earnings = $row['total_earnings'];
-
-                // Compare actual and expected total earnings for the selected date
-                if ($actual_total_earnings == $expected_total_earnings) {
-                    echo "<td>Verified: Total earnings is <b>₱$expected_total_earnings</b></td>";
-                } else {
-                    echo "<td>Mismatch: Total earnings Expected: <b>₱$expected_total_earnings</b>, Actual: <b>₱$actual_total_earnings</b></td>";
-                }
-            } else {
-                echo "<td>No expected value found for $date in XML</td>";
-            }
-        } else {
-            echo "<td>Error: " . mysqli_error($conn) . "</td>";
-        }
-        ?>
-    </tr>
-
-
-        <!-- Discounts Given -->
-        <tr>
-            <th>Discounts Given</th>
-        </tr>
-        <tr>
-        <?php
-        // Fetch the selected date from the form
-        $date = $_GET['date'];
-
-        // Fetch total discounts given for the selected date
-        $sql = "SELECT COUNT(c.cmb_id) AS `total_discounts`
-                FROM 
-                    or_ or_ JOIN cart ca
-                            ON ca.cart_id = or_.cart_id
-                            JOIN combo c
-                            ON  c.cart_id = ca.cart_id
+                    JOIN order_table ot ON ac.ordr_id = ot.ordr_id
                 WHERE 
-                    or_.date = '$date';";
-        $result = mysqli_query($conn, $sql);
+                    or_.date = '$date'
+            ) AS total_dish_alacarte,
+            (
+                SELECT 
+                    SUM(ot_m.ordr_quan + ot_s.ordr_quan + ot_d.ordr_quan) AS total_dishes_sold
+                FROM 
+                    or_ 
+                    JOIN cart ca ON ca.cart_id = or_.cart_id
+                    JOIN combo co ON co.cart_id = ca.cart_id
+                    JOIN cmb_main AS cmb_m ON cmb_m.c_main_id = co.c_main_id
+                    JOIN cmb_side AS cmb_s ON cmb_s.c_side_id = co.c_side_id
+                    JOIN cmb_drink AS cmb_d ON cmb_d.c_drink_id = co.c_drink_id
+                    JOIN order_table AS ot_m ON cmb_m.ordr_id = ot_m.ordr_id
+                    JOIN order_table AS ot_s ON cmb_s.ordr_id = ot_s.ordr_id
+                    JOIN order_table AS ot_d ON cmb_d.ordr_id = ot_d.ordr_id
+                WHERE 
+                    or_.date = '$date'
+            ) AS total_dish_combo;";
+            $result_dishes_sold = mysqli_query($conn, $query_dishes_sold);
 
-        if ($result) {
+            if ($result_dishes_sold) {
+            // Fetch the actual total dishes sold for the selected date
+            $row = mysqli_fetch_assoc($result_dishes_sold);
+            $actual_total_dishes_sold = (int) $row['total_dishes_sold'];
+
             // Load verification XML file
             $verification_xml = simplexml_load_file('verification.xml');
 
-            // Find the corresponding expected total discounts from the XML for the selected date
-            $expected_total_discounts = null;
-            foreach ($verification_xml->discounts_given as $verification) {
-                if ((string) $verification->date === $date) {
-                    $expected_total_discounts = (int) $verification->total;
-                    break;
-                }
+            // Find the expected total dishes sold for the selected date from the XML
+            $expected_total_dishes_sold = null;
+            foreach ($verification_xml->dishes_sold as $verification) {
+            if ((string) $verification->date === $date) {
+            $expected_total_dishes_sold = (int) $verification->total;
+            break;
+            }
             }
 
-            // Check if expected total discounts for the selected date exist in the XML
-            if ($expected_total_discounts !== null) {
-                // Fetch actual total discounts given for the selected date
-                $row = mysqli_fetch_assoc($result);
-                $actual_total_discounts = $row['total_discounts'];
-
-                // Compare actual and expected total discounts for the selected date
-                if ($actual_total_discounts == $expected_total_discounts) {
-                    echo "<td>Verified: Total discounts given is <b>$expected_total_discounts</b></td>";
-                } else {
-                    echo "<td>Mismatch: Total discounts given Expected: <b>$expected_total_discounts</b>, Actual: <b>$actual_total_discounts</b></td>";
-                }
+            // Compare actual and expected total dishes sold
+            if ($actual_total_dishes_sold == $expected_total_dishes_sold) {
+            echo "<tr><td>Verified: Total dishes sold is <b>$expected_total_dishes_sold </b></td></tr>";
             } else {
-                echo "<td>No expected value found for $date in XML</td>";
+            echo "<tr><td>Mismatch: Total dishes sold Expected: <b>$expected_total_dishes_sold</b>, Actual: <b> $actual_total_dishes_sold </b></td></tr>";
             }
-        } else {
-            echo "<td>Error: " . mysqli_error($conn) . "</td>";
-        }
+            } else {
+            echo "<tr><td>Error: " . mysqli_error($conn) . "</td></tr>";
+            }
         ?>
+
+        </tr>
+
+        <table>
+            <!-- Earnings -->
+            <tr><th>Earnings</th></tr>
+        <tr>
+            <?php 
+                    // Fetch the selected date from the form
+                $date = $_GET['date'];
+
+                // Fetch total earnings for the selected date
+                $sql = "
+                        SELECT (total_earned_from_combo + total_earned_from_alacarte) AS total_earnings
+                        FROM (
+                            SELECT 
+                                SUM(mains.price + side.price + drink.price) AS total_earned_from_combo
+                            FROM 
+                                or_ 
+                                JOIN cart ca ON ca.cart_id = or_.cart_id
+                                JOIN combo c ON ca.cart_id = c.cart_id
+                                JOIN cmb_main AS cmb_m 
+                                    ON cmb_m.c_main_id = c.c_main_id
+                                JOIN cmb_side AS cmb_s 
+                                    ON cmb_s.c_side_id = c.c_side_id
+                                JOIN cmb_drink AS cmb_d 
+                                    ON cmb_d.c_drink_id = c.c_drink_id
+                                JOIN order_table AS ot_m 
+                                    ON cmb_m.ordr_id = ot_m.ordr_id
+                                JOIN order_table AS ot_s 
+                                    ON cmb_s.ordr_id = ot_s.ordr_id
+                                JOIN order_table AS ot_d 
+                                    ON cmb_d.ordr_id = ot_d.ordr_id
+                                JOIN item i_m 
+                                    ON i_m.item_id = ot_m.item_id
+                                JOIN item i_s 
+                                    ON i_s.item_id = ot_s.item_id
+                                JOIN item i_d 
+                                    ON i_d.item_id = ot_d.item_id
+                                JOIN sides AS side
+                                    ON i_s.item_id = side.sides_id
+                                JOIN mains AS mains 
+                                    ON i_m.item_id = mains.mains_id
+                                JOIN drinks AS drink 
+                                    ON i_d.item_id = drink.drinks_id
+                                WHERE 
+                                or_.date = '$date'
+                        ) AS ComboTotal,
+                        
+                        -- Query for Ala_carteTotal
+                        (
+                            SELECT 
+                                SUM(COALESCE(mains.price*ot.ordr_quan, 0) + COALESCE(side.price*ot.ordr_quan, 0) + COALESCE(drink.price*ot.ordr_quan, 0)) AS total_earned_from_alacarte
+                        FROM 
+                                or_ 
+                                JOIN cart c ON c.cart_id = or_.cart_id
+                                JOIN ala_carte ac ON ac.cart_id = c.cart_id
+                                JOIN order_table AS ot 
+                                    ON ac.ordr_id = ot.ordr_id
+                                JOIN item i 
+                                    ON i.item_id = ot.item_id
+                                LEFT JOIN sides AS side 
+                                    ON i.item_id = side.sides_id
+                                LEFT JOIN mains AS mains 
+                                    ON i.item_id = mains.mains_id
+                                LEFT JOIN drinks AS drink 
+                                    ON i.item_id = drink.drinks_id
+                                    WHERE 
+                                or_.date = '$date'
+                        ) AS Ala_carteTotal;";
+                    
+                $result = mysqli_query($conn, $sql);
+                
+                if ($result) {
+                    // Load verification XML file
+                    $verification_xml = simplexml_load_file('verification.xml');
+
+                    // Find the corresponding expected total earnings from the XML for the selected date
+                    $expected_total_earnings = null;
+                    foreach ($verification_xml->earnings as $verification) {
+                        if ((string) $verification->date === $date) {
+                            $expected_total_earnings = (float) $verification->total;
+                            break;
+                        }
+                    }
+
+                    // Check if expected total earnings for the selected date exist in the XML
+                    if ($expected_total_earnings !== null) {
+                        // Fetch actual total earnings for the selected date
+                        $row = mysqli_fetch_assoc($result);
+                        $actual_total_earnings = $row['total_earnings'];
+
+                        // Compare actual and expected total earnings for the selected date
+                        if ($actual_total_earnings == $expected_total_earnings) {
+                            echo "<td>Verified: Total earnings is <b>₱$expected_total_earnings</b></td>";
+                        } else {
+                            echo "<td>Mismatch: Total earnings Expected: <b>₱$expected_total_earnings</b>, Actual: <b>₱$actual_total_earnings</b></td>";
+                        }
+                    } else {
+                        echo "<td>No expected value found for $date in XML</td>";
+                    }
+                } else {
+                    echo "<td>Error: " . mysqli_error($conn) . "</td>";
+                }
+                    ?>
+                </tr>
+
+                <!-- Discounts Given -->
+                <tr>
+                    <th>Discounts Given</th>
+                </tr>
+                <tr>
+                    <?php
+                        // Fetch the selected date from the form
+                        $date = $_GET['date'];
+
+                        // Fetch total discounts given for the selected date
+                        $sql = "SELECT COUNT(c.cmb_id) AS `total_discounts`
+                                FROM 
+                                    or_ or_ JOIN cart ca
+                                            ON ca.cart_id = or_.cart_id
+                                            JOIN combo c
+                                            ON  c.cart_id = ca.cart_id
+                                WHERE 
+                                    or_.date = '$date';";
+                        $result = mysqli_query($conn, $sql);
+
+                        if ($result) {
+                            // Load verification XML file
+                            $verification_xml = simplexml_load_file('verification.xml');
+
+                            // Find the corresponding expected total discounts from the XML for the selected date
+                            $expected_total_discounts = null;
+                            foreach ($verification_xml->discounts_given as $verification) {
+                                if ((string) $verification->date === $date) {
+                                    $expected_total_discounts = (int) $verification->total;
+                                    break;
+                                }
+                            }
+
+                            // Check if expected total discounts for the selected date exist in the XML
+                            if ($expected_total_discounts !== null) {
+                                // Fetch actual total discounts given for the selected date
+                                $row = mysqli_fetch_assoc($result);
+                                $actual_total_discounts = $row['total_discounts'];
+
+                                // Compare actual and expected total discounts for the selected date
+                                if ($actual_total_discounts == $expected_total_discounts) {
+                                    echo "<td>Verified: Total discounts given is <b>$expected_total_discounts</b></td>";
+                                } else {
+                                    echo "<td>Mismatch: Total discounts given Expected: <b>$expected_total_discounts</b>, Actual: <b>$actual_total_discounts</b></td>";
+                                }
+                            } else {
+                                echo "<td>No expected value found for $date in XML</td>";
+                            }
+                        } else {
+                            echo "<td>Error: " . mysqli_error($conn) . "</td>";
+                        }
+                    
+                    ?>
         </tr>
     </table>
-    <br>
+    </div>
 
     
     <!-- Dropdown with a Submit Button to Select Distinct Dates -->
-    <form action="results.php" method="GET">
+    <form action="results.php" method="GET" class="date-submit">
         Select Date:
     <select name="date">
         <?php
@@ -331,9 +366,8 @@
         mysqli_close($conn);
         ?>
     </select>
-    <button type="submit">Submit</button>
-</form>
-    <br>
+        <button type="submit">Submit</button>
+    </form>
 
     <?php
 // Load and parse the XML file
@@ -371,8 +405,8 @@ foreach ($xml->discounts_given as $item) {
 ksort($dates);
 
 // Display data in a tabular format
-echo "<h1>Verification Results</h1>";
-echo "<table border='1'>
+echo "<div class=verification-table> VERIFICATION RESULTS";
+echo "<table>
         <tr>
             <th>Date</th>
             <th>Total Dishes Sold</th>
@@ -393,12 +427,13 @@ foreach ($dates as $date => $value) {
           </tr>";
 }
 
-echo "</table>";
+echo "</table> </div>";
 ?>
 
-<div class="back-submit-container">
-    <a href="../adminmenu.php" class="back-button" style="margin-right: 250px;">Back</a>
+    <div class="back-result"><a href="../adminmenu.php" class="back-button">Back</a></div>
+
 </div>
+
 
 </body>
 </html>
