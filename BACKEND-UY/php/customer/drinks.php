@@ -112,6 +112,10 @@
                 <div class="dish-title"><?php echo getDrinkName($conn, 'i301') ?></div>
                 <div class="dish-desc"><?php echo getDrinkDesc($conn,'n301') ?></div>
                 <div class="dish-price"><?php echo getDrinkPrice($conn, 'i301') ?></div>
+            
+                <span class="facts"> <!-- Spans with class facts are for displaying item descriptions -->
+                    <?php echo getDrinkFacts($conn, 'n301') ?>
+                </span>
             </div>
 
             <div class="dish-item item" onclick="showHiddenDiv('coffeeDiv')">
@@ -122,6 +126,10 @@
                 <div class="dish-title"><?php echo getDrinkName($conn, 'i302') ?></div>
                 <div class="dish-desc"><?php echo getDrinkDesc($conn,'n302') ?></div>
                 <div class="dish-price"><?php echo getDrinkPrice($conn, 'i302') ?></div>
+            
+                <span class="facts"> <!-- Spans with class facts are for displaying item descriptions -->
+                    <?php echo getDrinkFacts($conn, 'n302') ?>
+                </span>
             </div>
 
             <div class="dish-item item" onclick="showHiddenDiv('ojDiv')">
@@ -132,6 +140,10 @@
                 <div class="dish-title"><?php echo getDrinkName($conn, 'i303') ?></div>
                 <div class="dish-desc"><?php echo getDrinkDesc($conn,'n303') ?></div>
                 <div class="dish-price"><?php echo getDrinkPrice($conn, 'i303') ?></div>
+            
+                <span class="facts"> <!-- Spans with class facts are for displaying item descriptions -->
+                    <?php echo getDrinkFacts($conn, 'n303') ?>
+                </span>
             </div>
     </div>
 
@@ -320,7 +332,7 @@
             
             while ($factsResult = mysqli_fetch_assoc($factsQuery)) {
                 
-                echo "Ingredients: ". $factsResult ["Ingredients"], "g<br><br>";
+                echo "Ingredients: ". $factsResult ["Ingredients"], "<br><br>";
                 echo "Fat: ". $factsResult ["Fat"], "g<br>";
                 echo "Calories: ". $factsResult ["Calories"], "g<br>";
                 echo "Carbs: ". $factsResult ["Carbs"], "g<br>";

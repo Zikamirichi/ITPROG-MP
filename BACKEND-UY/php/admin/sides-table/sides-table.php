@@ -39,6 +39,8 @@
                 //CHANGE $CONN VARIABLES DEPENDING ON PERSONAL DEVICE SETTINGS
                 $conn = mysqli_connect("localhost", "root", "", "mydb") or die ("Unable to connect!". mysqli_error($conn) );
                 mysqli_select_db($conn, "mydb");
+
+                session_start();
         ?>
 
         <div class="content-box">
@@ -71,7 +73,14 @@
             <hr>
             <div class="buttons-box">
                 <a href="add-sides.php" class="button-table">Add Sides</a> <br>
-                <a href="delete-sides.php" class="button-table">Delete Sides</a> <br>
+
+                <?php
+                    if (isset($_SESSION['getLogin']) && $_SESSION['isAdmin'] == TRUE) {
+                        
+                        echo "<a href='delete-sides.php' class='button-table'>Delete Sides</a> <br>";
+                    }
+                ?>
+
                 <a href="edit-sides.php" class="button-table">Edit Sides</a> <br> <br>
                 <div class="back-submit-container">
                     <a href="../adminmenu.php" class="back-button">Back</a>
