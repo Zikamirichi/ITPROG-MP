@@ -51,10 +51,10 @@
                 <tr><td><strong>Nutrition facts</strong></td><td></tr>
                 <tr><td>Description : </td><td> <input type='text' name='desc' size='10'required placeholder="Maximum of 44 characters" maxlength="44"></td></tr>
                 <tr><td>Ingredients :</td> <td> <input type='text' name='Ingredients' size='10' required placeholder="Maximum of 500 characters" maxlength="500"></td></tr>
-                <tr><td>Fat (g) :</td> <td> <input type='number' name='Fat' size='10' required></td></tr>
-                <tr><td>Calories (g) :</td> <td> <input type='number' name='Calories' size='10' required></td></tr>
-                <tr><td>Carbs (g) :</td> <td> <input type='number' name='Carbs' size='10' required></td></tr>
-                <tr><td>Protein (g) :</td> <td> <input type='number' name='Protein' size='10' required></td></tr>
+                <tr><td>Fat (g) :</td> <td> <input type='number' name='Fat' size='10' required min="0" step="0.1"></td></tr>
+                <tr><td>Calories (g) :</td> <td> <input type='number' name='Calories' size='10' required min="0" step="0.1"></td></tr>
+                <tr><td>Carbs (g) :</td> <td> <input type='number' name='Carbs' size='10' required min="0" step="0.1"></td></tr>
+                <tr><td>Protein (g) :</td> <td> <input type='number' name='Protein' size='10' required min="0" step="0.1"></td></tr>
 
                 <tr><td colspan="2">&nbsp;</td></tr>
                 <tr><td><strong>Stocks</strong></td><td></tr>
