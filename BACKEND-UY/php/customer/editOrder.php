@@ -405,7 +405,7 @@
                         echo "Quantity Successfully Updated!";
                     }
                 }
-                echo "<a href='processOrders.php' class='btn btn-orange'>Back to Cart</a>";
+                echo "<div><a href='processOrders.php' class='btn btn-orange'>Back to Cart</a></div>";
                 echo '</div>';
         
     ?>
