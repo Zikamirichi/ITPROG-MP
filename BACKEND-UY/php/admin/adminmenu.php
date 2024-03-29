@@ -23,6 +23,7 @@
                 <br>
                 <a href="Results/results.php" class="button-table">Results</a>
                 <br> 
+                <a href="logout.php" class="back-button">Logout</a>
             </div>
         </div>
     </div>
