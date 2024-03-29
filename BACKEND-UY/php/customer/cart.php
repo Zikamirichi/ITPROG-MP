@@ -164,15 +164,19 @@
             <br><a href="payOptions.php">Proceed to Payment</a>
         </div>
     </div>
+        <script> // Reference: https://stackoverflow.com/questions/17642872/refresh-page-and-keep-scroll-position
+        window.onload = function() {
+            // Save scroll position
+            var scrollPos = sessionStorage.getItem('scrollPos');
+            if (scrollPos) {
+                window.scrollTo(0, scrollPos);
+                sessionStorage.removeItem('scrollPos');
+            }
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function(event) { // Reference: https://stackoverflow.com/questions/17642872/refresh-page-and-keep-scroll-position
-            var scrollpos = localStorage.getItem('scrollpos');
-            if (scrollpos) window.scrollTo(0, scrollpos);
-        });
-
-        window.onbeforeunload = function(e) {
-            localStorage.setItem('scrollpos', window.scrollY);
+            // Save scroll position before refresh
+            window.onbeforeunload = function() {
+                sessionStorage.setItem('scrollPos', window.scrollY);
+            };
         };
     </script>
 

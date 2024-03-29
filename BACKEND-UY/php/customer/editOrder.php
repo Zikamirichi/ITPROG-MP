@@ -111,6 +111,59 @@
                 $drinkOrderIDRow = mysqli_fetch_assoc($drinkOrderIDResult);
                 $drinkOrderID = $drinkOrderIDRow['ordr_id'];
 
+                // INCREMENT STOCKS FOR TO BE DELETED ORDERS
+                // Get stocks_id for main 
+                $getMainStocksID = "SELECT i.item_id, s.stocks_id  
+                FROM order_table ot
+                JOIN item i ON ot.item_id = i.item_id 
+                JOIN mains m ON i.item_id = m.mains_id
+                JOIN stocks s ON m.stocks_id = s.stocks_id
+                WHERE ot.ordr_id = '$mainOrderID'";
+
+                $mainResult = mysqli_query($conn, $getMainStocksID);
+                $mainRow = mysqli_fetch_assoc($mainResult);
+                $mainStocksID = $mainRow['stocks_id'];
+
+                // Increment quantity in stocks table for main
+                $incrementMainStock = "UPDATE stocks SET quantity = quantity + 1 WHERE stocks_id = '$mainStocksID'";
+                mysqli_query($conn, $incrementMainStock);
+
+
+                // Get stocks_id for side
+                $getSideStocksID = "SELECT i.item_id, s.stocks_id  
+                FROM order_table ot
+                JOIN item i ON ot.item_id = i.item_id 
+                JOIN sides sd ON i.item_id = sd.sides_id
+                JOIN stocks s ON sd.stocks_id = s.stocks_id
+                WHERE ot.ordr_id = '$sideOrderID'";
+
+                $sideResult = mysqli_query($conn, $getSideStocksID);
+                $sideRow = mysqli_fetch_assoc($sideResult);
+                $sideStocksID = $sideRow['stocks_id'];
+
+                // Increment quantity in stocks table for side  
+                $incrementSideStock = "UPDATE stocks SET quantity = quantity + 1 WHERE stocks_id = '$sideStocksID'";
+                mysqli_query($conn, $incrementSideStock);
+
+
+                // Get stocks_id for drink
+                $getDrinkStocksID = "SELECT i.item_id, s.stocks_id  
+                FROM order_table ot
+                JOIN item i ON ot.item_id = i.item_id 
+                JOIN drinks d ON i.item_id = d.drinks_id
+                JOIN stocks s ON d.stocks_id = s.stocks_id
+                WHERE ot.ordr_id = '$drinkOrderID'";
+
+                $drinkResult = mysqli_query($conn, $getDrinkStocksID);
+                $drinkRow = mysqli_fetch_assoc($drinkResult);
+                $drinkStocksID = $drinkRow['stocks_id'];
+
+                // Increment quantity in stocks table for drink
+                $incrementDrinkStock = "UPDATE stocks SET quantity = quantity + 1 WHERE stocks_id = '$drinkStocksID'"; 
+                mysqli_query($conn, $incrementDrinkStock);
+
+
+                // DELETE ORDERS
                 // Delete the combo from the combo table
                 $delCmbQuery = "DELETE FROM combo WHERE cmb_id = '$comboID';";
                 mysqli_query($conn, $delCmbQuery); // Delete the combo from the combo table
@@ -124,6 +177,7 @@
 
                 $delCmbDrinkQuery = "DELETE FROM cmb_drink WHERE c_drink_id = '$drinkID';";
                 mysqli_query($conn, $delCmbDrinkQuery); // Delete the drinks from the combo table
+
 
                 // Delete main order from order table
                 $deleteMainQuery = "DELETE FROM order_table WHERE ordr_id = '$mainOrderID';";
