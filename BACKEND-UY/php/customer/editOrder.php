@@ -223,17 +223,18 @@
                 $sidePrice = $alaCarteRow['sidePrice'];
                 $drinkName = $alaCarteRow['drinkName'];
                 $drinkPrice = $alaCarteRow['drinkPrice'];
-                $quantity = $alaCarteRow['quantity'];
 
                 $totalForAlacarte = 0; // Initialize total as 0
                 if ($mainName != NULL) { // If the order is a main
+
+                    $mainQuantity = $alaCarteRow['quantity'];
                     $totalForAlacarte += $mainPrice;
 
                     echo "Main: $mainName - ";
                     
                     echo '<form method="post">'; // Form to change quantity of main
 
-                    echo "<input type='number' name='mainQuan' value='$quantity' min='0'>"; 
+                    echo "<input type='number' name='mainQuan' value='$mainQuantity' min='0'>"; 
                     echo '<input type="hidden" name="order_id" value="'.$orderID.'">';
 
                     echo '<button type="submit" name="confirmMain">Confirm Change</button>';
@@ -242,13 +243,15 @@
                 }
 
                 if ($sideName != NULL) { // If the order is a side
+
+                    $sideQuantity = $alaCarteRow['quantity'];
                     $totalForAlacarte += $sidePrice;
 
                     echo "Sides: $sideName - ";
                     
                     echo '<form method="post">'; // Form to change quantity of side
 
-                    echo "<input type='number' name='sideQuan' value='$quantity' min='0'>"; 
+                    echo "<input type='number' name='sideQuan' value='$sideQuantity' min='0'>"; 
                     echo '<input type="hidden" name="order_id" value="'.$orderID.'">';
 
                     echo '<button type="submit" name="confirmSide">Confirm Change</button>';
@@ -257,13 +260,15 @@
                 }
 
                 if ($drinkName != NULL) { // If the order is a drink
+
+                    $drinkQuantity = $alaCarteRow['quantity'];
                     $totalForAlacarte += $drinkPrice;
 
                     echo "Drink: $drinkName - ";
                     
                     echo '<form method="post">'; // Form to change quantity of drink
 
-                    echo "<input type='number' name='drinkQuan' value='$quantity' min='0'>"; 
+                    echo "<input type='number' name='drinkQuan' value='$drinkQuantity' min='0'>"; 
                     echo '<input type="hidden" name="order_id" value="'.$orderID.'">';
 
                     echo '<button type="submit" name="confirmDrink">Confirm Change</button>';
@@ -274,9 +279,16 @@
 
             if (isset($_POST['confirmMain'])) { // If the user wants to change the quantity of a main item
 
-
                 $orderID = $_POST['order_id'];
                 $newQuantity = $_POST['mainQuan'];
+
+                // Retrieve Stocks ID
+                $stocksIDQuery = "SELECT stocks_id FROM mains 
+                JOIN item ON mains.mains_id = item.item_id
+                JOIN order_table ON item.item_id = order_table.item_id WHERE ordr_id = '$orderID'";
+                $stocksIDResult = mysqli_query($conn, $stocksIDQuery);
+                $stocksIDRow = mysqli_fetch_assoc($stocksIDResult);
+                $stocksID = $stocksIDRow['stocks_id'];
 
                 if ($newQuantity == 0) { // If the user wants to delete the item
 
@@ -286,6 +298,10 @@
                     $deleteOrderQuery = "DELETE FROM order_table WHERE ordr_id = '$orderID'";
                     mysqli_query($conn, $deleteOrderQuery);
 
+                    // INCREMENT STOCKS AFTER DELETE
+                    $updateStocksQuery = "UPDATE stocks SET quantity = quantity + $mainQuantity WHERE stocks_id = '$stocksID'";
+                    mysqli_query($conn, $updateStocksQuery);
+
                     echo "Item Successfully Deleted!";
                 }
 
@@ -294,15 +310,38 @@
                     $updateAlaCarteQuery = "UPDATE order_table SET ordr_quan = '$newQuantity' WHERE ordr_id = '$orderID'";
                     mysqli_query($conn, $updateAlaCarteQuery);
 
+                    if ($newQuantity < $mainQuantity) { // Increment / Decrement Stocks Based on User Action
+                        
+                        $incrementQuantity = $mainQuantity - $newQuantity;
+                        $updateStocksQuery = "UPDATE stocks SET quantity = quantity + $incrementQuantity WHERE stocks_id = '$stocksID'";
+                        mysqli_query($conn, $updateStocksQuery);
+                      } 
+                      
+                      else if ($newQuantity > $mainQuantity) {
+                        
+                        $decrementQuantity = $newQuantity - $mainQuantity;
+                        $updateStocksQuery = "UPDATE stocks SET quantity = quantity - $decrementQuantity WHERE stocks_id = '$stocksID'";
+                        mysqli_query($conn, $updateStocksQuery);
+                      }
+
                     echo "Quantity Successfully Updated!";
                 }
+
+                header("Location: {$_SERVER['PHP_SELF']}");
             }
 
             if (isset($_POST['confirmSide'])) { 
 
-
                 $orderID = $_POST['order_id'];
                 $newQuantity = $_POST['sideQuan'];
+
+                // Retrieve Stocks ID
+                $stocksIDQuery = "SELECT stocks_id FROM sides
+                JOIN item ON sides.sides_id = item.item_id
+                JOIN order_table ON item.item_id = order_table.item_id WHERE ordr_id = '$orderID'";
+                $stocksIDResult = mysqli_query($conn, $stocksIDQuery);
+                $stocksIDRow = mysqli_fetch_assoc($stocksIDResult);
+                $stocksID = $stocksIDRow['stocks_id'];
 
                 if ($newQuantity == 0) { // If the user wants to delete the item
 
@@ -312,15 +351,36 @@
                     $deleteOrderQuery = "DELETE FROM order_table WHERE ordr_id = '$orderID'";
                     mysqli_query($conn, $deleteOrderQuery);
 
+                    // INCREMENT STOCKS AFTER DELETE
+                    $updateStocksQuery = "UPDATE stocks SET quantity = quantity + $sideQuantity WHERE stocks_id = '$stocksID'";
+                    mysqli_query($conn, $updateStocksQuery);
+
                     echo "Item Successfully Deleted!";
                 }
+
                 else { // If the user wants to change the quantity of the item
 
                     $updateAlaCarteQuery = "UPDATE order_table SET ordr_quan = '$newQuantity' WHERE ordr_id = '$orderID'";
                     mysqli_query($conn, $updateAlaCarteQuery);
 
+                    if ($newQuantity < $sideQuantity) { // Increment / Decrement Stocks Based on User Action
+                        
+                        $incrementQuantity = $sideQuantity - $newQuantity;
+                        $updateStocksQuery = "UPDATE stocks SET quantity = quantity + $incrementQuantity WHERE stocks_id = '$stocksID'";
+                        mysqli_query($conn, $updateStocksQuery);
+                      } 
+                      
+                      else if ($newQuantity > $sideQuantity) {
+                        
+                        $decrementQuantity = $newQuantity - $sideQuantity;
+                        $updateStocksQuery = "UPDATE stocks SET quantity = quantity - $decrementQuantity WHERE stocks_id = '$stocksID'";
+                        mysqli_query($conn, $updateStocksQuery);
+                      }
+
                     echo "Quantity Successfully Updated!";
                 }
+
+                header("Location: {$_SERVER['PHP_SELF']}");
             }
 
             if (isset($_POST['confirmDrink'])) { 
@@ -328,6 +388,14 @@
                 $orderID = $_POST['order_id'];
                 $newQuantity = $_POST['drinkQuan'];
 
+                // Retrieve Stocks ID
+                $stocksIDQuery = "SELECT stocks_id FROM drinks
+                JOIN item ON drinks.drinks_id = item.item_id
+                JOIN order_table ON item.item_id = order_table.item_id WHERE ordr_id = '$orderID'";
+                $stocksIDResult = mysqli_query($conn, $stocksIDQuery);
+                $stocksIDRow = mysqli_fetch_assoc($stocksIDResult);
+                $stocksID = $stocksIDRow['stocks_id'];
+
                 if ($newQuantity == 0) { // If the user wants to delete the item
 
                     $deleteAlaCarteQuery = "DELETE FROM ala_carte WHERE ordr_id = '$orderID'";
@@ -336,15 +404,36 @@
                     $deleteOrderQuery = "DELETE FROM order_table WHERE ordr_id = '$orderID'";
                     mysqli_query($conn, $deleteOrderQuery);
 
+                    // INCREMENT STOCKS AFTER DELETE
+                    $updateStocksQuery = "UPDATE stocks SET quantity = quantity + $drinkQuantity WHERE stocks_id = '$stocksID'";
+                    mysqli_query($conn, $updateStocksQuery);
+
                     echo "Item Successfully Deleted!";
                 }
+
                 else { 
 
                     $updateAlaCarteQuery = "UPDATE order_table SET ordr_quan = '$newQuantity' WHERE ordr_id = '$orderID'";
                     mysqli_query($conn, $updateAlaCarteQuery);
 
+                    if ($newQuantity < $drinkQuantity) { // Increment / Decrement Stocks Based on User Action
+                        
+                        $incrementQuantity = $drinkQuantity - $newQuantity;
+                        $updateStocksQuery = "UPDATE stocks SET quantity = quantity + $incrementQuantity WHERE stocks_id = '$stocksID'";
+                        mysqli_query($conn, $updateStocksQuery);
+                      } 
+                      
+                      else if ($newQuantity > $drinkQuantity) {
+                        
+                        $decrementQuantity = $newQuantity - $drinkQuantity;
+                        $updateStocksQuery = "UPDATE stocks SET quantity = quantity - $decrementQuantity WHERE stocks_id = '$stocksID'";
+                        mysqli_query($conn, $updateStocksQuery);
+                      }
+
                     echo "Quantity Successfully Updated!";
                 }
+
+                header("Location: {$_SERVER['PHP_SELF']}");
             }
     
 echo "<br><br> <a href='processOrders.php'>Back to Cart</a>";
