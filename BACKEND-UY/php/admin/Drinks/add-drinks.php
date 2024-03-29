@@ -60,7 +60,7 @@
                     <tr>
                     <td colspan="2" class="submit-button">
                         <a href="drinks-table.php" class="back-button">Back</a>
-                        <td colspan="2" class="submit-button"><input type='submit' value='Save' name='save' /></td>
+                        <input type='submit' value='Save' name='save'>
                     </td>
                 </tr>
             </form>

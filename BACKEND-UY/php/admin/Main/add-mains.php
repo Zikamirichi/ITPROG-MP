@@ -13,6 +13,7 @@
 
     <title>Main Dish</title>
     <style>
+
         input[type="submit"] {
             margin-top: 5%;
         }
@@ -48,12 +49,12 @@
 
                 <tr><td colspan="2">&nbsp;</td></tr>
                 <tr><td><strong>Nutrition facts</strong></td><td></tr>
-                <tr><td>Description : </td><td> <input type='text' name='desc' size='10'required></td></tr>
-                <tr><td>Ingredients :</td> <td> <input type='text' name='Ingredients' size='10' required></td></tr>
-                <tr><td>Fat :</td> <td> <input type='number' name='Fat' size='10' required></td></tr>
-                <tr><td>Calories :</td> <td> <input type='number' name='Calories' size='10' required></td></tr>
-                <tr><td>Carbs :</td> <td> <input type='number' name='Carbs' size='10' required></td></tr>
-                <tr><td>Protein :</td> <td> <input type='number' name='Protein' size='10' required></td></tr>
+                <tr><td>Description : </td><td> <input type='text' name='desc' size='10'required placeholder="Maximum of 44 characters" maxlength="44"></td></tr>
+                <tr><td>Ingredients :</td> <td> <input type='text' name='Ingredients' size='10' required placeholder="Maximum of 500 characters" maxlength="500"></td></tr>
+                <tr><td>Fat (g) :</td> <td> <input type='number' name='Fat' size='10' required></td></tr>
+                <tr><td>Calories (g) :</td> <td> <input type='number' name='Calories' size='10' required></td></tr>
+                <tr><td>Carbs (g) :</td> <td> <input type='number' name='Carbs' size='10' required></td></tr>
+                <tr><td>Protein (g) :</td> <td> <input type='number' name='Protein' size='10' required></td></tr>
 
                 <tr><td colspan="2">&nbsp;</td></tr>
                 <tr><td><strong>Stocks</strong></td><td></tr>
@@ -62,7 +63,7 @@
                 <tr>
                     <td colspan="2" class="submit-button">
                         <a href="mains-table.php" class="back-button">Back</a>
-                        <td colspan="2" class="submit-button"><input type='submit' value='Save' name='save' /></td>
+                        <input type='submit' value='Save' name='save'>
                     </td>
                 </tr>
 
