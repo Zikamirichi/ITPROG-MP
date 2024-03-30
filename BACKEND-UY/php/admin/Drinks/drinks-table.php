@@ -31,13 +31,13 @@
     <div class="main-container">
         <div class="header">
             <img src="../../../images/logo-only.png" alt="Logo">
-            MAIN DISH TABLE
+            DRINKS TABLE
         </div>
 
         <?php
                 error_reporting(E_ERROR | E_PARSE);
                 //CHANGE $CONN VARIABLES DEPENDING ON PERSONAL DEVICE SETTINGS
-                $conn = mysqli_connect("localhost", "root", "") or die ("Unable to connect!". mysqli_error($conn) );
+                $conn = mysqli_connect("localhost", "root", "", "mydb") or die ("Unable to connect!". mysqli_error($conn) );
                 mysqli_select_db($conn, "mydb");
 
                 session_start();
@@ -50,18 +50,21 @@
                 <th>Name</th>
                 <th>Price</th>
                 <th>Nutrition Facts ID</th>
-                <th>Stock ID</th>
+                <th>Stocks</th>
             </tr>
 
             <?php
-                $factsQuery = mysqli_query($conn, "SELECT * FROM drinks ORDER BY drinks_id");
+                $factsQuery = mysqli_query($conn, "SELECT d.*, s.quantity 
+                FROM drinks d JOIN stocks s
+                             ON   d.stocks_id = s.stocks_id
+                 ORDER BY drinks_id;");
                 while ($factsResult = mysqli_fetch_assoc($factsQuery)) {
                     echo "<tr>";
                     echo "<td>", $factsResult ["drinks_id"], "</td>";
                     echo "<td>", $factsResult ["names"], "</td>";
                     echo "<td>", $factsResult ["price"], "</td>";
                     echo "<td>", $factsResult ["nutr_facts_id"], "</td>";
-                    echo "<td>", $factsResult ["stocks_id"], "</td>";
+                    echo "<td>", $factsResult ["quantity"], "</td>";
                     echo "</tr>";
                 }
             ?>

@@ -4,7 +4,7 @@ if (isset($_POST["loginBtn"]))
     $user=$_POST["username"];
     $pass=$_POST["password"];
     
-    $conn = mysqli_connect("localhost", "root", "") or die ("Unable to connect!". mysqli_error($conn) );
+    $conn = mysqli_connect("localhost", "root", "", "mydb") or die ("Unable to connect!". mysqli_error($conn) );
     mysqli_select_db($conn, "mydb");
     
     $query = mysqli_query($conn, "SELECT username, `password`, `admin` FROM sys_ad
