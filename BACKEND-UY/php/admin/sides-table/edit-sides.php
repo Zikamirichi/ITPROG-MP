@@ -94,7 +94,8 @@
             $id = $getSidesInfo['nutr_facts_id'];
             $factsQuery = mysqli_query($conn, "SELECT * FROM nutr_facts WHERE nutr_facts_id='$id'");
             $getFacts = mysqli_fetch_array($factsQuery);
-            echo "<form method='post' action='".$_SERVER['PHP_SELF']."'>";
+            
+            echo "<form method='post' action='".$_SERVER['PHP_SELF']."' enctype='multipart/form-data'>";
             // sides info
             echo "<h3>Sides info</h3>";
             echo "<input type='hidden' name='newMainID' value='".$getSidesInfo["sides_id"]."'>".$getSidesInfo["sides_id"]."<br />";
@@ -115,6 +116,13 @@
             echo "<h3>Stocks info</h3>";
             echo "<input type='hidden' name='stocksID' value='".$getStocks["stocks_id"]."'>".$getStocks["stocks_id"]."<br />";
             echo "Quantity: <input type='number' name='newQuantity' value='".$getStocks["quantity"]."' size='150'> <br />";
+
+            // Image
+            echo "<h3>Image</h3>";
+            echo '<img src="' . '../../../images/' . $getSidesInfo['image_name'] . '" width="50">';
+            echo "<br><br>";
+            echo '<input type="file" name="newImage">';
+
             echo "<div class=save-box>";
             echo "<input type='submit' name='save' value='Save'<br />";
             echo "</div>";
@@ -134,19 +142,48 @@
             $newCalories = $_POST["newCalories"];
             $newCarbs = $_POST["newCarbs"];
             $newProtein = $_POST["newProtein"];
-            mysqli_query($conn, "UPDATE nutr_facts set `desc`='$newDesc', Ingredients='$newIngredients', Fat='$newFat', Calories='$newCalories', Carbs='$newCarbs', Protein='$newProtein'
-                                WHERE nutr_facts_id='$id'");
 
             // stocks update
             $newQuantity = $_POST["newQuantity"];
-            mysqli_query($conn, "UPDATE stocks set `quantity`='$newQuantity'
-                                WHERE stocks_id='$stocksID'");
 
             // sides update
             $newName = $_POST["newName"];
             $newPrice = $_POST["newPrice"];
-            mysqli_query($conn, "UPDATE sides set `name`='$newName', `price`='$newPrice'
-                                WHERE sides_id='$mainID'");
+            
+            // Handle image upload
+            if ($_FILES['newImage']['name']) {
+                $target_dir = __DIR__ . "/../../../images/";
+                $image = $_FILES['newImage']['name'];
+                $imageExt = pathinfo($image, PATHINFO_EXTENSION);
+
+                // Allow only .jpg files
+                if ($imageExt == "jpg") {
+                    
+                    $target_file = $target_dir . basename($image);
+                    move_uploaded_file($_FILES["newImage"]["tmp_name"], $target_file);
+
+                    // UPDATE STATEMENTS AFTER SUCCESSFUL IMAGE UPLOAD
+                    mysqli_query($conn, "UPDATE nutr_facts set `desc`='$newDesc', Ingredients='$newIngredients', Fat='$newFat', Calories='$newCalories', Carbs='$newCarbs', Protein='$newProtein'
+                    WHERE nutr_facts_id='$id'");
+                                
+                    mysqli_query($conn, "UPDATE stocks set `quantity`='$newQuantity'
+                    WHERE stocks_id='$stocksID'");
+                    
+                    // Update database with new image name
+                    mysqli_query($conn, "UPDATE sides set `name`='$newName', `price`='$newPrice', `image_name`='$image'
+                                        WHERE sides_id='$mainID'");
+                } 
+                
+                else {
+                    
+                    echo "Only .jpg files allowed, please try again.";
+                }
+            } 
+            
+            else {
+                
+                echo "Error uploading image";
+            }
 
             echo "Record has been updated!";
         }
