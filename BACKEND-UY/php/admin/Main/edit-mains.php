@@ -92,7 +92,7 @@ if(isset($_POST["enter"])){
     $factsQuery = mysqli_query($conn, "SELECT * FROM nutr_facts WHERE nutr_facts_id='$id'");
     $getFacts = mysqli_fetch_array($factsQuery);
     
-    echo "<form method='post' action='".$_SERVER['PHP_SELF']."'>";
+    echo "<form method='post' action='".$_SERVER['PHP_SELF']."' enctype='multipart/form-data'>";;
     // mains info
     echo "<h3>Mains info</h3>";
     echo "<input type='hidden' name='newMainID' value=$mainID>";
