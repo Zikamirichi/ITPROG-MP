@@ -34,7 +34,7 @@
         </div>
         <div class="content-box">
             <div class="instructions"> Please fill up the form:</div>   
-            <form action='<?php echo $_SERVER["PHP_SELF"];?>' method='post'>
+            <form action='<?php echo $_SERVER["PHP_SELF"];?>' method='post' enctype='multipart/form-data'>
             <table>
                 <tr><td>Name : </td><td> <input type='text' name='name' size='10' required></td></tr>
                 <tr><td>Price : </td><td> <input type='number' name='price' size='10' step=0.01 required></td></tr>
@@ -51,6 +51,7 @@
                 <tr><td colspan="2">&nbsp;</td></tr>
                 <tr><td><strong>Stocks</strong></td><td></tr>
                 <tr><td>Quantity :</td> <td> <input type='number' name='quantity' size='10' required></td></tr>
+                <tr><td>Upload Image :</td> <td> <input type='file' name='image' size='10' required></td></tr>
                 <tr>
                     <td colspan="2" class="submit-button">
                         <a href="sides-table.php" class="back-button">Back</a>
@@ -77,7 +78,6 @@
             $nutr_facts_id++;
 
             echo `Added nutrition facts`;
-            var_dump($nutr_facts_id);
             echo `<br>`;
 
             $desc = $_POST["desc"];
@@ -87,11 +87,6 @@
             $protein = $_POST["Carbs"];
             $carbs = $_POST["Protein"];
 
-            error_reporting(E_ERROR | E_PARSE);
-            
-            $insert = "INSERT INTO nutr_facts VALUES ('$nutr_facts_id', '$desc', '$ingredients', '$fat', '$calories', '$protein', '$carbs')";
-            mysqli_query($conn, $insert);
-
             // create stocks
             $idQuery = mysqli_query($conn, "SELECT MAX(stocks_id) FROM sides");
             $idResult = mysqli_fetch_assoc($idQuery);
@@ -99,15 +94,9 @@
             $stocks_id++;
 
             echo `Added stocks`;
-            var_dump($stocks_id);
             echo `<br>`;
 
             $quantity = (int) $_POST["quantity"];
-
-            error_reporting(E_ERROR | E_PARSE);
-            
-            $insert = "INSERT INTO stocks VALUES ('$stocks_id', '$quantity')";
-            mysqli_query($conn, $insert);
 
             // Create add feature in sides
             $idQuery = mysqli_query($conn, "SELECT MAX(sides_id) FROM sides");
@@ -116,21 +105,58 @@
             $sides_id++;
 
             echo `Added sides`;
-            var_dump($sides_id);
             echo `<br>`;
-
-            $insert = "INSERT INTO item VALUES ('$sides_id')";
-            mysqli_query($conn, $insert);
 
             $name = $_POST["name"];
             $price = (double) $_POST["price"];
 
-            error_reporting(E_ERROR | E_PARSE);
+            // Check for image upload 
+            // Reference: https://www.w3schools.com/php/php_file_upload.asp
+            if($_FILES['image']['name']) {
 
-            $insert = "INSERT INTO sides VALUES ('$sides_id', '$name', '$price', '$nutr_facts_id', '$stocks_id')";
-            mysqli_query($conn, $insert);
+                $target_dir = __DIR__ . "/../../../images/";
+                
+                $image = $_FILES['image']['name'];
+                
+                // Get image extension
+                $imageExt = pathinfo($image, PATHINFO_EXTENSION);
+                
+                // Allow only .jpg files
+                if($imageExt == "jpg") {
+                
+                    $target_file = $target_dir . basename($image);
+                    
+                    // Move uploaded file
+                    move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
 
-            echo "Record has been successfully inserted!";
+                    error_reporting(E_ERROR | E_PARSE);
+                    $insert = "INSERT INTO nutr_facts VALUES ('$nutr_facts_id', '$desc', '$ingredients', '$fat', '$calories', '$protein', '$carbs')";
+                    mysqli_query($conn, $insert);
+
+                    error_reporting(E_ERROR | E_PARSE);
+                    $insert = "INSERT INTO stocks VALUES ('$stocks_id', '$quantity')";
+                    mysqli_query($conn, $insert);
+
+                    $insert = "INSERT INTO item VALUES ('$sides_id')";
+                    mysqli_query($conn, $insert);
+                
+                    error_reporting(E_ERROR | E_PARSE);
+                    $insert = "INSERT INTO sides VALUES ('$sides_id', '$name', '$price', '$nutr_facts_id', '$stocks_id', '$image')";
+                    mysqli_query($conn, $insert);
+
+                    echo "Record has been successfully inserted!";
+                } 
+                
+                else {
+                    
+                    echo "Only .jpg files allowed, please try again.";
+                }
+            } 
+            
+            else {
+            
+            echo "Error uploading image";
+            }
         
         }
     ?>
