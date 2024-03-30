@@ -299,11 +299,16 @@
             
             while ($factsResult = mysqli_fetch_assoc($factsQuery)) {
                 
-                echo "Ingredients: ". $factsResult ["Ingredients"], "g<br><br>";
-                echo "Fat: ". $factsResult ["Fat"], "g<br>";
+                echo '<div class="dish-desc">';
+                echo "<strong>Nutrition Facts:</strong> <br>";
                 echo "Calories: ". $factsResult ["Calories"], "g<br>";
+                echo "Fat: ". $factsResult ["Fat"], "g<br>";
                 echo "Carbs: ". $factsResult ["Carbs"], "g<br>";
                 echo "Protein: ". $factsResult ["Protein"], "g<br>";
+
+                echo '<br>';
+                echo "Ingredients: <br>". $factsResult ["Ingredients"], "<br><br>";
+                echo '</div>';
             }
         }
     ?>
