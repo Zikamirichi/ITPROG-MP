@@ -57,8 +57,7 @@
             <?php
             $conn = mysqli_connect("localhost", "root", "", "mydb") or die ("Unable to connect!". mysqli_error($conn) );
             mysqli_select_db($conn, "mydb");
-            $factsQuery = mysqli_query($conn, "
-            SELECT m.*, s.quantity 
+            $factsQuery = mysqli_query($conn, "SELECT m.*, s.quantity 
             FROM mains m JOIN stocks s
                          ON   m.stocks_id = s.stocks_id
              ORDER BY mains_id;");
@@ -92,7 +91,7 @@ if(isset($_POST["enter"])){
     $factsQuery = mysqli_query($conn, "SELECT * FROM nutr_facts WHERE nutr_facts_id='$id'");
     $getFacts = mysqli_fetch_array($factsQuery);
     
-    echo "<form method='post' action='".$_SERVER['PHP_SELF']."' enctype='multipart/form-data'>";;
+    echo "<form method='post' action='".$_SERVER['PHP_SELF']."' enctype='multipart/form-data'>";
     // mains info
     echo "<h3>Mains info</h3>";
     echo "<input type='hidden' name='newMainID' value=$mainID>";

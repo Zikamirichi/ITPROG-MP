@@ -56,16 +56,39 @@
    </div>
    
    <?php
-      if(isset($_GET["error"])) {
-          $error=$_GET["error"];
-  
-        //this line will be called by the check.php if the login credentials are incorrect 
-         if ($error==1) {
-            echo "<p align='center'>Username and/or password invalid<br/></p>"; 
-		   }
-      }
- 
-   ?>
+    if(isset($_GET["error"])) {
+        $error = $_GET["error"];
+        
+        // Check if error is due to invalid credentials
+        if ($error == 1) {
+            echo "<script>
+                    $(document).ready(function(){
+                        $('#errorModal').modal('show');
+                    });
+                  </script>"; 
+        }
+    }
+?>
+<!-- Bootstrap Modal for Error -->
+<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="errorModalLabel">Error</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <p align='center'>Username and/or password invalid</p>
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+         </div>
+      </div>
+   </div>
+</div>
+
    <script>
       function togglePasswordVisibility(event) {
          event.preventDefault();
