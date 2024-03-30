@@ -145,16 +145,6 @@
                     <?php echo getSideFacts($conn, 'n203') ?>
                 </span>
             </div>
-            
-            <div class="dish-item">
-                <div class="dish-img-box">
-                    <img src="../../images/fries.jpg" alt="Fries">
-                </div>
-
-                <div class="dish-title">FRIES</div>
-                <div class="dish-desc">1 small bucket of tasty fries</div>
-                <div class="dish-price">PHP 45.00</div>
-            </div>
     </div>
 
     <!-- Contents of the hidden div for Rice -->

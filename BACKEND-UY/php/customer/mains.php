@@ -68,7 +68,6 @@
         session_start(); // Start session to store mains objects
         require_once("order.php"); //Adding the order class for OOP purposes
 
-        mainStocks($conn);
     ?>
     <div class="navigation-bar">
         <ul>
@@ -103,79 +102,94 @@
 
     <div class="right-container">
         <div class="select-text">MAIN DISHES</div>
-        <div class="dish-main-box">
             
-            <div class="dish-item item" onclick="showHiddenDiv('chickenDiv')">
+            <div class="dish-main-box">
+                <?php
+                    $mainDishesQuery = mysqli_query($conn, "SELECT * FROM mains"); // Fetch all main dishes
+                    while ($mainDish = mysqli_fetch_assoc($mainDishesQuery)) { // Iterate over each main dish
+                ?>
+                <div class="dish-item item" onclick="showHiddenDiv('<?php echo $mainDish['mains_id']; ?>')"> <!-- Onclick for hidden div -->
+                    <div class="dish-img-box">
+                        <?php
+                            if ($mainDish['name'] == "Roasted Chicken") { // If the mains are either chicken or salad, use those images
+
+                                echo "<img src='../../images/roasted-chicken.jpg' alt='" . $mainDish['name'] . "'>";
+                            }
+
+                            else if ($mainDish['name'] == "Caesar Salad") {
+
+                                echo "<img src='../../images/ceasar-salad.jpg' alt='" . $mainDish['name'] . "'>";
+                            }
+
+                            else {
+                                echo "<img src='../../images/generic-mains.jpg' alt='" . $mainDish['name'] . "'>";
+                            }
+                        ?>
+                    </div>
+
+                    <div class="dish-title"><?php echo $mainDish['name']; ?></div>
+                    <div class="dish-desc"><?php echo getMainDesc($conn, $mainDish['nutr_facts_id']); ?></div>
+                    <div class="dish-price"><?php echo "PHP " . $mainDish['price'] . ".00"; ?></div>
+
+                    <span class="facts">
+                        <?php echo getMainFacts($conn, $mainDish['nutr_facts_id']); ?>
+                    </span>
+                </div>
+                <?php
+                    }?>
+            </div>
+        </div>
+    </div>
+
+    <?php
+        // Loop through all mains in the table
+        $mainsResult = mysqli_query($conn, "SELECT * FROM mains"); // Fetch all main dishes
+        while ($row = mysqli_fetch_assoc($mainsResult)) {
+
+            $mainID = $row['mains_id'];
+            $name = $row['name'];
+            $stockID = $row['stocks_id'];
+        
+            // Get max stock
+            $stockQuery = "SELECT quantity FROM stocks WHERE stocks_id='$stockID'";
+            $stockResult = mysqli_query($conn, $stockQuery);
+            $stockRow = mysqli_fetch_assoc($stockResult);
+            $maxStock = $stockRow['quantity'];
+        
+            // Hidden div
+            echo "<div id='$mainID' class='hidden-div'>";
+                echo "<h2>$name</h2>";
                 
-                <div class="dish-img-box">
-                    <img src="../../images/roasted-chicken.jpg" alt="Roasted Chicken">
-                </div>
+                if ($name == "Roasted Chicken") { // If the mains are either chicken or salad, use those images
 
-                <div class="dish-title"><?php echo getMainName($conn, 'i101') ?></div>
-                <div class="dish-desc"><?php echo getMainDesc($conn,'n101') ?></div>
-                <div class="dish-price"><?php echo getMainPrice($conn, 'i101') ?></div>
+                    // Limit style to 10%, may edit later
+                    echo "<img src='../../images/roasted-chicken.jpg' alt='" . $name . "' style='width: 10%; height: 10%;'>";
+                }
 
-                <span class="facts"> <!-- Spans with class facts are for displaying item descriptions -->
-                    <?php echo getMainFacts($conn, 'n101') ?>
-                </span>
-            </div>
+                else if ($name == "Caesar Salad") {
+
+                    echo "<img src='../../images/ceasar-salad.jpg' alt='" . $name . "' style='width: 10%; height: 10%;'>";
+                }
+
+                else {
+                    echo "<img src='../../images/generic-mains.jpg' alt='" . $name . "' style='width: 10%; height: 10%;'>";
+                }
             
-            <div class="dish-item item" onclick="showHiddenDiv('saladDiv')">
-                <div class="dish-img-box">
-                    <img src="../../images/ceasar-salad.jpg" alt="Ceasar Salad">
-                </div>
-
-                <div class="dish-title"><?php echo getMainName($conn, 'i102') ?></div>
-                <div class="dish-desc"><?php echo getMainDesc($conn,'n102') ?></div>
-                <div class="dish-price"><?php echo getMainPrice($conn, 'i102') ?></div>
-
-                <span class="facts"> <!-- Spans with class facts are for displaying item descriptions -->
-                    <?php echo getMainFacts($conn, 'n102') ?>
-                </span>
-            </div>
-            <div class="dish-item">
-                <div class="dish-img-box">
-                    <img src="../../images/burger.jpg" alt="Burger">
-                </div>
-
-                <div class="dish-title">BURGER</div>
-                <div class="dish-desc">1 juicy beef burger</div>
-                <div class="dish-price">PHP 70.00</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Contents of the hidden div for chicken -->
-    <div id="chickenDiv" class="hidden-div">
+                echo "<div class='counter'>";
+                    echo "<form method='post'>";
+                        echo "<input type='hidden' name='item' value='$mainID'>";
+                        echo "<input type='number' name='count' value='1' min='1' max='$maxStock'>";
+                        echo "<input type='submit' name='submit'>";
+                    echo "</form>";
+                echo "</div>";
+            echo "</div>";
         
-        <h2><?php echo getMainName($conn, 'i101') ?></h2>
-        <img src="../../images/roasted-chicken.jpg" alt="Roasted Chicken" style="width: 10%; height: 10%;"> <br>
-        <div class="counter"> <!-- Counter for selecting the quantity of chicken -->
-            <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                <input type="hidden" name="item" value="chicken"> <!-- Hidden value to indicate that chicken was the selected item-->
-                <input type="number" id="count" name="count" value="1" min="1" max="<?php echo $maxm01Stock; ?>"> <br>
-                <input type="submit" value ="Submit" name="submit"> <!-- Submit button for finalizing order -->
-            </form>
-        </div>
-    </div>
-
-    <!-- Contents of the hidden div for Salad -->
-    <div id="saladDiv" class="hidden-div">
-        
-        <h2><?php echo getMainName($conn, 'i102') ?></h2>
-        <img src="../../images/ceasar-salad.jpg" alt="Caesar Salad" style="width: 10%; height: 10%;"> <br>
-        <div class="counter"> <!-- Counter for selecting the quantity of salad -->
-            <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                <input type="hidden" name="item" value="salad"> <!-- Hidden value to indicate that salad was the selected item -->
-                <input type="number" id="count" name="count" value="1" min="1" max="<?php echo $maxm02Stock; ?>"> <br>
-                <input type="submit" value ="Submit" name="submit"> <!-- Submit button for finalizing order -->
-            </form>
-        </div>
-    </div>
-
+        }
+  ?>
     <script>
         // Function to show the hidden div based on the provided div ID
         function showHiddenDiv(divId) {
+            
             var divToShow = document.getElementById(divId);
             if (divToShow.style.display === "none") {
                
@@ -196,34 +210,28 @@
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") { // When a post is done above, execute code
             
-            if(isset($_POST["count"])){ // Check if the count value is set
-                
-                $count = $_POST["count"]; // Retrieve the count value from the POST data
-                
-                $maxOrderQuery = mysqli_query($conn, "SELECT MAX(CAST(SUBSTRING(ordr_id, 2) AS UNSIGNED)) AS max_orderID FROM order_table");
-                $row = mysqli_fetch_assoc($maxOrderQuery); // Get Current Max order_id from table 
-                $max_orderID = $row['max_orderID'];
-                $orderNum = $max_orderID + 1;
+            if(isset($_POST["count"])) {
 
-                $order = new Order("o" . $orderNum); // Create new order with new calculated order id
-
-                $item = $_POST["item"]; // Retreive the specific item selected
-
-                if ($item == "chicken") { 
-                    
-                    $order->setOrder($count, "i101"); // If submit button pressed was under Roasted Chicken, set itemID to i101
-                }
-                
-                if ($item == "salad") {
-                    
-                    $order->setOrder($count, "i102"); // Salad = i102
-                }
-
-                // TESTING; REMOVE ECHOES IN FINAL PROJECT
-                echo "Order ID: " . $order->getOrderID() . "<br>"; 
+                $count = $_POST["count"];
+            
+                // Get max order ID
+                $maxOrderQuery = "SELECT MAX(CAST(SUBSTRING(ordr_id, 2) AS UNSIGNED)) AS max_orderID FROM order_table";
+                $maxResult = mysqli_query($conn, $maxOrderQuery);
+                $maxRow = mysqli_fetch_assoc($maxResult);
+                $maxOrderID = $maxRow['max_orderID'];
+            
+                $orderID = "o" . ($maxOrderID + 1);
+            
+                $mainID = $_POST["item"]; // Get $mainID
+            
+                $order = new Order($orderID); 
+                $order->setOrder($count, $mainID); // Set new order
+            
+                // Output for testing REMOVE LATER
+                echo "Order ID: " . $order->getOrderID() . "<br>";
                 echo "Quantity: " . $order->getQuantity() . "<br>";
-                echo "Item ID: " . $order->getItemID() . "<br>";
-            }
+                echo "Item ID: " . $mainID . "<br>";
+              }
             
             
             if(isset($_POST["submit"])) { // Check if the submit button was pressed
@@ -251,19 +259,6 @@
                 } else {
                     echo "Failed to insert record!!!";
                 }
-        }
-        function mainStocks($conn) {
-
-            // Get stocks from database for input to be limited to the available stocks
-            $maxm01StockQuery = "SELECT quantity FROM stocks WHERE stocks_id = 'm01';";
-            $maxm01StockResult = mysqli_query($conn, $maxm01StockQuery);
-            $maxm01StockRow = mysqli_fetch_assoc($maxm01StockResult);
-            $maxm01Stock = $maxm01StockRow['quantity'];
-
-            $maxm02StockQuery = "SELECT quantity FROM stocks WHERE stocks_id ='m02';";
-            $maxm02StockResult = mysqli_query($conn, $maxm02StockQuery);
-            $maxm02StockRow = mysqli_fetch_assoc($maxm02StockResult);
-            $maxm02Stock = $maxm02StockRow['quantity'];
         }
 
         function getMainDesc($conn, $ntrID) {
