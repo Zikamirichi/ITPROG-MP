@@ -97,13 +97,13 @@
             echo "<form method='post' action='".$_SERVER['PHP_SELF']."'>";
             // sides info
             echo "<h3>Sides info</h3>";
-            //echo "<input type='hidden' name='newMainID' value='".$getSidesInfo["sides_id"]."'>".$getSidesInfo["sides_id"]."<br />";
+            echo "<input type='hidden' name='newMainID' value='".$getSidesInfo["sides_id"]."'>".$getSidesInfo["sides_id"]."<br />";
             echo "Name: <input type='text' name='newName' value='".$getSidesInfo["name"]."' size='150'> <br />";
             echo "Price: <input type='number' name='newPrice' value='".$getSidesInfo["price"]."' size='150' step=0.01> <br />";
 
             // Nutrition facts
             echo "<h3>Nutrition facts</h3>";
-            //echo "<input type='hidden' name='newID' value='".$getFacts["nutr_facts_id"]."'>".$getFacts["nutr_facts_id"]."<br />";
+            echo "<input type='hidden' name='newID' value='".$getFacts["nutr_facts_id"]."'>".$getFacts["nutr_facts_id"]."<br />";
             echo "Description: <input type='text' name='newDesc' value='".$getFacts["desc"]."' size='10' placeholder='Maximum of 44 characters' maxlength='44'> <br />";
             echo "Ingredients: <input type='text' name='newIngredients' value='".$getFacts["Ingredients"]."' size='10' placeholder='Maximum of 500 characters' maxlength='500'> <br />";
             echo "Fat (g) : <input type='number' name='newFat' value='".$getFacts["Fat"]."' min='0' step='0.1'><br />";
@@ -113,7 +113,7 @@
 
             // quantity info
             echo "<h3>Stocks info</h3>";
-            //echo "<input type='hidden' name='stocksID' value='".$getStocks["stocks_id"]."'>".$getStocks["stocks_id"]."<br />";
+            echo "<input type='hidden' name='stocksID' value='".$getStocks["stocks_id"]."'>".$getStocks["stocks_id"]."<br />";
             echo "Quantity: <input type='number' name='newQuantity' value='".$getStocks["quantity"]."' size='150'> <br />";
             echo "<div class=save-box>";
             echo "<input type='submit' name='save' value='Save'<br />";
@@ -122,8 +122,12 @@
         }
 
         if(isset($_POST["save"])){
+
+            $mainID = $_POST['newMainID']; 
+            $stocksID = $_POST['stocksID'];
+            $id = $_POST['newID'];
+
             // nutr update
-            $newID = $_POST["newID"];
             $newDesc = $_POST["newDesc"];
             $newIngredients = $_POST["newIngredients"];
             $newFat = $_POST["newFat"];
@@ -131,20 +135,18 @@
             $newCarbs = $_POST["newCarbs"];
             $newProtein = $_POST["newProtein"];
             mysqli_query($conn, "UPDATE nutr_facts set `desc`='$newDesc', Ingredients='$newIngredients', Fat='$newFat', Calories='$newCalories', Carbs='$newCarbs', Protein='$newProtein'
-                                WHERE nutr_facts_id='$newID'");
+                                WHERE nutr_facts_id='$id'");
 
             // stocks update
-            $stocksID = $_POST["stocksID"];
             $newQuantity = $_POST["newQuantity"];
             mysqli_query($conn, "UPDATE stocks set `quantity`='$newQuantity'
                                 WHERE stocks_id='$stocksID'");
 
             // sides update
-            $newMainID = $_POST["newMainID"];
             $newName = $_POST["newName"];
             $newPrice = $_POST["newPrice"];
             mysqli_query($conn, "UPDATE sides set `name`='$newName', `price`='$newPrice'
-                                WHERE sides_id='$newMainID'");
+                                WHERE sides_id='$mainID'");
 
             echo "Record has been updated!";
         }
@@ -161,7 +163,7 @@
 
         // Loop through the results and populate dropdown options
         while ($row = mysqli_fetch_assoc($idQuery)) {
-            echo "<option value='" . $row['mains_id'] . "'>" . $row['name'] . " (" . $row['sides_id'] . ")</option>";
+            echo "<option value='" . $row['sides_id'] . "'>" . $row['name'] . " (" . $row['sides_id'] . ")</option>";
         }
         ?>
     </select>
