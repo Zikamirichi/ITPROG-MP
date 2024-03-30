@@ -109,24 +109,7 @@
             <div class="dish-item item" onclick="showHiddenDiv('<?php echo $sideDish['sides_id']; ?>')"> <!-- Onclick for hidden div -->
                 <div class="dish-img-box">
                     <?php
-                        if ($sideDish['name'] == "Rice") { // If the sides are either chicken or salad, use those images
-
-                            echo "<img src='../../images/rice.jpg' alt='" . $sideDish['name'] . "'>";
-                        }
-
-                        else if ($sideDish['name'] == "Mixed Vegetables") {
-
-                            echo "<img src='../../images/mixed-vegetables.jpg' alt='" . $sideDish['name'] . "'>";
-                        }
-
-                        else if ($sideDish['name'] == "Mashed Potatoes") {
-
-                            echo "<img src='../../images/mashed-potatoes.jpg' alt='" . $sideDish['name'] . "'>";
-                        }
-
-                        else {
-                            echo "<img src='../../images/generic-sides.jpg' alt='" . $sideDish['name'] . "'>";
-                        }
+                        echo "<img src='../../images/" . $sideDish['image_name'] . "' alt='" . $sideDish['name'] . "'>";
                     ?>
                 </div>
 
@@ -151,6 +134,7 @@
             $sideID = $row['sides_id'];
             $name = $row['name'];
             $stockID = $row['stocks_id'];
+            $imageName = $row['image_name'];
         
             // Get max stock
             $stockQuery = "SELECT quantity FROM stocks WHERE stocks_id='$stockID'";
@@ -162,25 +146,8 @@
             echo "<div id='$sideID' class='hidden-div'>";
                 echo "<h2>$name</h2>";
                 
-                if ($name == "Rice") { // If the sides are either chicken or salad, use those images
-
-                    // Limit style to 10%, may edit later
-                    echo "<img src='../../images/rice.jpg' alt='" . $name . "' style='width: 10%; height: 10%;'>";
-                }
-
-                else if ($name == "Mixed Vegetables") {
-
-                    echo "<img src='../../images/mixed-vegetables.jpg' alt='" . $name . "' style='width: 10%; height: 10%;'>";
-                }
-
-                else if ($name == "Mashed Potatoes") {
-
-                    echo "<img src='../../images/mashed-potatoes.jpg' alt='" . $name . "' style='width: 10%; height: 10%;'>";
-                }
-
-                else {
-                    echo "<img src='../../images/generic-sides.jpg' alt='" . $name . "' style='width: 10%; height: 10%;'>";
-                }
+                // Limit style to 10%, may edit later
+                echo "<img src='../../images/$imageName' alt='" . $name . "' style='width: 10%; height: 10%;'>";
             
                 echo "<div class='counter'>";
                     echo "<form method='post'>";

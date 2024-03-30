@@ -109,24 +109,7 @@
                 <div class="dish-item item" onclick="showHiddenDiv('<?php echo $drinkItem['drinks_id']; ?>')"> <!-- Onclick for hidden div -->
                     <div class="dish-img-box">
                         <?php
-                            if ($drinkItem['names'] == "Water") { // If the drinks are either water, coffee, oj, use those images
-
-                                echo "<img src='../../images/bottled-water.jpg' alt='" . $drinkItem['names'] . "'>";
-                            }
-
-                            else if ($drinkItem['names'] == "Coffee") {
-
-                                echo "<img src='../../images/black-coffee.jpg' alt='" . $drinkItem['names'] . "'>";
-                            }
-
-                            else if ($drinkItem['names'] == "Orange Juice") {
-
-                                echo "<img src='../../images/orange-juice.jpg' alt='" . $drinkItem['names'] . "'>";
-                            }
-
-                            else {
-                                echo "<img src='../../images/generic-drinks.jpg' alt='" . $drinkItem['names'] . "'>";
-                            }
+                            echo "<img src='../../images/" . $drinkItem['image_name'] . "' alt='" . $drinkItem['names'] . "'>";
                         ?>
                     </div>
 
@@ -135,7 +118,7 @@
                     <div class="dish-price"><?php echo "PHP " . $drinkItem['price'] . ".00"; ?></div>
 
                     <span class="facts">
-                        <?php echo getDrinkFacts($conn, $drinkDish['nutr_facts_id']); ?>
+                        <?php echo getDrinkFacts($conn, $drinkItem['nutr_facts_id']); ?>
                     </span>
                 </div>
                 <?php
@@ -152,6 +135,7 @@
             $drinkID = $row['drinks_id'];
             $name = $row['names'];
             $stockID = $row['stocks_id'];
+            $imageName = $row['image_name'];
         
             // Get max stock
             $stockQuery = "SELECT quantity FROM stocks WHERE stocks_id='$stockID'";
@@ -162,26 +146,9 @@
             // Hidden div
             echo "<div id='$drinkID' class='hidden-div'>";
                 echo "<h2>$name</h2>";
-                
-                if ($name == "Water") { // If the drinkss are either water, coffee, orange juice, use those images
 
-                    // Limit style to 10%, may edit later
-                    echo "<img src='../../images/bottled-water.jpg' alt='" . $name . "' style='width: 10%; height: 10%;'>";
-                }
-
-                else if ($name == "Coffee") {
-
-                    echo "<img src='../../images/black-coffee.jpg' alt='" . $name . "' style='width: 10%; height: 10%;'>";
-                }
-
-                else if ($name == "Orange Juice") {
-
-                    echo "<img src='../../images/orange-juice.jpg' alt='" . $name . "' style='width: 10%; height: 10%;'>";
-                }
-
-                else {
-                    echo "<img src='../../images/generic-drinks.jpg' alt='" . $name . "' style='width: 10%; height: 10%;'>";
-                }
+                // Limit style to 10%, may edit later
+                echo "<img src='../../images/$imageName' alt='" . $name . "' style='width: 10%; height: 10%;'>";
             
                 echo "<div class='counter'>";
                     echo "<form method='post'>";

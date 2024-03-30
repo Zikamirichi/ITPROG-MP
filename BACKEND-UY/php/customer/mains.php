@@ -111,19 +111,7 @@
                 <div class="dish-item item" onclick="showHiddenDiv('<?php echo $mainDish['mains_id']; ?>')"> <!-- Onclick for hidden div -->
                     <div class="dish-img-box">
                         <?php
-                            if ($mainDish['name'] == "Roasted Chicken") { // If the mains are either chicken or salad, use those images
-
-                                echo "<img src='../../images/roasted-chicken.jpg' alt='" . $mainDish['name'] . "'>";
-                            }
-
-                            else if ($mainDish['name'] == "Caesar Salad") {
-
-                                echo "<img src='../../images/ceasar-salad.jpg' alt='" . $mainDish['name'] . "'>";
-                            }
-
-                            else {
-                                echo "<img src='../../images/generic-mains.jpg' alt='" . $mainDish['name'] . "'>";
-                            }
+                             echo "<img src='../../images/" . $mainDish['image_name'] . "' alt='" . $mainDish['name'] . "'>";
                         ?>
                     </div>
 
@@ -149,6 +137,7 @@
             $mainID = $row['mains_id'];
             $name = $row['name'];
             $stockID = $row['stocks_id'];
+            $imageName = $row['image_name'];
         
             // Get max stock
             $stockQuery = "SELECT quantity FROM stocks WHERE stocks_id='$stockID'";
@@ -160,20 +149,8 @@
             echo "<div id='$mainID' class='hidden-div'>";
                 echo "<h2>$name</h2>";
                 
-                if ($name == "Roasted Chicken") { // If the mains are either chicken or salad, use those images
-
-                    // Limit style to 10%, may edit later
-                    echo "<img src='../../images/roasted-chicken.jpg' alt='" . $name . "' style='width: 10%; height: 10%;'>";
-                }
-
-                else if ($name == "Caesar Salad") {
-
-                    echo "<img src='../../images/ceasar-salad.jpg' alt='" . $name . "' style='width: 10%; height: 10%;'>";
-                }
-
-                else {
-                    echo "<img src='../../images/generic-mains.jpg' alt='" . $name . "' style='width: 10%; height: 10%;'>";
-                }
+                // Limit style to 10%, may edit later
+                echo "<img src='../../images/$imageName' alt='" . $name . "' style='width: 10%; height: 10%;'>";
             
                 echo "<div class='counter'>";
                     echo "<form method='post'>";
