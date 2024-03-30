@@ -90,23 +90,23 @@ if(isset($_POST["enter"])){
     echo "<form method='post' action='".$_SERVER['PHP_SELF']."'>";
     // mains info
     echo "<h3>Mains info</h3>";
-    echo "<input type='hidden' name='newMainID' value='".$getMainsInfo["mains_id"]."'>";
+    //echo "<input type='hidden' name='newMainID' value='".$getMainsInfo["mains_id"]."'>";
     echo "Name: <input type='text' name='newName' value='".$getMainsInfo["name"]."' size='150'> <br />";
     echo "Price: <input type='number' name='newPrice' value='".$getMainsInfo["price"]."' size='150' step=0.01> <br />";
 
     // Nutrition facts
     echo "<h3>Nutrition facts</h3>";
-    echo "<input type='hidden' name='newID' value='".$getFacts["nutr_facts_id"]."'>";
-    echo "Description: <input type='text' name='newDesc' value='".$getFacts["desc"]."' size='150'> <br />";
-    echo "Ingredients: <input type='text' name='newIngredients' value='".$getFacts["Ingredients"]."' size='100'> <br />";
-    echo "Fat: <input type='text' name='newFat' value='".$getFacts["Fat"]."'><br />";
-    echo "Calories: <input type='text' name='newCalories' value='".$getFacts["Calories"]."'><br />";
-    echo "Carbs: <input type='text' name='newCarbs' value='".$getFacts["Carbs"]."'><br />";
-    echo "Protein: <input type='text' name='newProtein' value='".$getFacts["Protein"]."'><br />";
+    //echo "<input type='hidden' name='newID' value='".$getFacts["nutr_facts_id"]."'>";
+    echo "Description: <input type='text' name='newDesc' value='".$getFacts["desc"]."' size='150' placeholder='Maximum of 44 characters' maxlength='44'> <br />";
+    echo "Ingredients: <input type='text' name='newIngredients' value='".$getFacts["Ingredients"]."' size='10' placeholder='Maximum of 500 characters' maxlength='500'> <br />";
+    echo "Fat (g) : <input type='number' name='newFat' value='".$getFacts["Fat"]."' min='0' step='0.1'><br />";
+    echo "Calories (g) : <input type='number' name='newCalories' value='".$getFacts["Calories"]."' min='0' step='0.1'><br />";
+    echo "Carbs (g) : <input type='number' name='newCarbs' value='".$getFacts["Carbs"]."' min='0' step='0.1'><br />";
+    echo "Protein (g) : <input type='number' name='newProtein' value='".$getFacts["Protein"]."' min='0' step='0.1'><br />";
 
     // quantity info
     echo "<h3>Stocks info</h3>";
-    echo "<input type='hidden' name='stocksID' value='".$getStocks["stocks_id"]."'>";
+    //echo "<input type='hidden' name='stocksID' value='".$getStocks["stocks_id"]."'>";
     echo "Quantity: <input type='number' name='newQuantity' value='".$getStocks["quantity"]."' size='150'> <br />";
     echo "<div class=save-box>";
     echo "<input type='submit' name='save' value='Save'<br />";

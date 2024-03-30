@@ -98,10 +98,10 @@
             //echo "<input type='hidden' name='newID' value='".$getFacts["nutr_facts_id"]."'>".$getFacts["nutr_facts_id"]."<br />";
             echo "Description: <input type='text' name='newDesc' value='".$getFacts["desc"]."' size='10' placeholder='Maximum of 44 characters' maxlength='44'> <br />";
             echo "Ingredients: <input type='text' name='newIngredients' value='".$getFacts["Ingredients"]."' size='10' placeholder='Maximum of 500 characters' maxlength='500'> <br />";
-            echo "Fat (g) : <input type='text' name='newFat' value='".$getFacts["Fat"]."' min='0' step='0.1'><br />";
-            echo "Calories (g) : <input type='text' name='newCalories' value='".$getFacts["Calories"]."' min='0' step='0.1'><br />";
-            echo "Carbs (g) : <input type='text' name='newCarbs' value='".$getFacts["Carbs"]."' min='0' step='0.1'><br />";
-            echo "Protein (g) : <input type='text' name='newProtein' value='".$getFacts["Protein"]."' min='0' step='0.1'><br />";
+            echo "Fat (g) : <input type='number' name='newFat' value='".$getFacts["Fat"]."' min='0' step='0.1'><br />";
+            echo "Calories (g) : <input type='number' name='newCalories' value='".$getFacts["Calories"]."' min='0' step='0.1'><br />";
+            echo "Carbs (g) : <input type='number' name='newCarbs' value='".$getFacts["Carbs"]."' min='0' step='0.1'><br />";
+            echo "Protein (g) : <input type='number' name='newProtein' value='".$getFacts["Protein"]."' min='0' step='0.1'><br />";
 
             // quantity info
             echo "<h3>Stocks info</h3>";
