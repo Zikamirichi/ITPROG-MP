@@ -48,7 +48,7 @@
                   <input type="password" name="password" id="password" required/>
                   <img src="../../images/eye.png" alt="Eye" class="password-toggle" onclick="togglePasswordVisibility(event)">
                </td></tr>
-               <tr><td colspan="2" class="submit-button"><input type="submit" value="Login" name="loginBtn" class="btn btn-primary"/></td>
+               <tr><td colspan="2" class="submit-button"><input type="submit" value="Login" name="loginBtn"/></td>
             </form>
          </tr>
          </table>
