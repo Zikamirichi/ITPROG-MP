@@ -186,8 +186,6 @@
                     error_reporting(E_ERROR | E_PARSE);
                     $insert = "INSERT INTO drinks VALUES ('$drinks_id', '$name', '$price', '$nutr_facts_id', '$stocks_id', '$image')";
                     mysqli_query($conn, $insert);
-
-                    echo "Record has been successfully inserted!";
                 } 
                 
                 else {

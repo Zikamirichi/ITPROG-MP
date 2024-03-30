@@ -87,16 +87,17 @@ if(isset($_POST["enter"])){
     $id = $getMainsInfo['nutr_facts_id'];
     $factsQuery = mysqli_query($conn, "SELECT * FROM nutr_facts WHERE nutr_facts_id='$id'");
     $getFacts = mysqli_fetch_array($factsQuery);
+    
     echo "<form method='post' action='".$_SERVER['PHP_SELF']."'>";
     // mains info
     echo "<h3>Mains info</h3>";
-    //echo "<input type='hidden' name='newMainID' value='".$getMainsInfo["mains_id"]."'>";
+    echo "<input type='hidden' name='newMainID' value='".$getMainsInfo["mains_id"]."'>";
     echo "Name: <input type='text' name='newName' value='".$getMainsInfo["name"]."' size='150'> <br />";
     echo "Price: <input type='number' name='newPrice' value='".$getMainsInfo["price"]."' size='150' step=0.01> <br />";
 
     // Nutrition facts
     echo "<h3>Nutrition facts</h3>";
-    //echo "<input type='hidden' name='newID' value='".$getFacts["nutr_facts_id"]."'>";
+    echo "<input type='hidden' name='newID' value='".$getFacts["nutr_facts_id"]."'>";
     echo "Description: <input type='text' name='newDesc' value='".$getFacts["desc"]."' size='150' placeholder='Maximum of 44 characters' maxlength='44'> <br />";
     echo "Ingredients: <input type='text' name='newIngredients' value='".$getFacts["Ingredients"]."' size='10' placeholder='Maximum of 500 characters' maxlength='500'> <br />";
     echo "Fat (g) : <input type='number' name='newFat' value='".$getFacts["Fat"]."' min='0' step='0.1'><br />";
@@ -106,7 +107,7 @@ if(isset($_POST["enter"])){
 
     // quantity info
     echo "<h3>Stocks info</h3>";
-    //echo "<input type='hidden' name='stocksID' value='".$getStocks["stocks_id"]."'>";
+    echo "<input type='hidden' name='stocksID' value='".$getStocks["stocks_id"]."'>";
     echo "Quantity: <input type='number' name='newQuantity' value='".$getStocks["quantity"]."' size='150'> <br />";
     echo "<div class=save-box>";
     echo "<input type='submit' name='save' value='Save'<br />";
@@ -115,8 +116,12 @@ if(isset($_POST["enter"])){
 }
 
 if(isset($_POST["save"])){
+
+    $mainID = $_POST['newMainID']; 
+    $stocksID = $_POST['stocksID'];
+    $id = $_POST['newID'];
+
     // nutr update
-    $newID = $_POST["newID"];
     $newDesc = $_POST["newDesc"];
     $newIngredients = $_POST["newIngredients"];
     $newFat = $_POST["newFat"];
@@ -124,21 +129,20 @@ if(isset($_POST["save"])){
     $newCarbs = $_POST["newCarbs"];
     $newProtein = $_POST["newProtein"];
     mysqli_query($conn, "UPDATE nutr_facts set `desc`='$newDesc', Ingredients='$newIngredients', Fat='$newFat', Calories='$newCalories', Carbs='$newCarbs', Protein='$newProtein'
-                        WHERE nutr_facts_id='$newID'");
+                        WHERE nutr_facts_id='$id'");
 
     // stocks update
-    $stocksID = $_POST["stocksID"];
     $newQuantity = $_POST["newQuantity"];
     mysqli_query($conn, "UPDATE stocks set `quantity`='$newQuantity'
                         WHERE stocks_id='$stocksID'");
 
     // mains update
-    $newMainID = $_POST["newMainID"];
     $newName = $_POST["newName"];
     $newPrice = $_POST["newPrice"];
     mysqli_query($conn, "UPDATE mains set `name`='$newName', `price`='$newPrice'
-                        WHERE mains_id='$newMainID'");
+                        WHERE mains_id='$mainID'");
 
+    var_dump($mainID, $stocksID, $id);
     echo "Record has been updated!";
 }
 ?>

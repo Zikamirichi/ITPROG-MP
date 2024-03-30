@@ -187,8 +187,6 @@
               
                   $insert = "INSERT INTO mains VALUES ('$mains_id', '$name', '$price', '$nutr_facts_id', '$stocks_id', '$image')"; 
                   mysqli_query($conn, $insert);
-
-                  echo "Record has been successfully inserted!";
                 } 
                 
                 else {
