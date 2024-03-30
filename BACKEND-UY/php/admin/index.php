@@ -56,20 +56,16 @@
    </div>
    
    <?php
-    if(isset($_GET["error"])) {
-        $error = $_GET["error"];
-        
-        // Check if error is due to invalid credentials
-        if ($error == 1) {
-            echo "<script>
-                    $(document).ready(function(){
-                        $('#errorModal').modal('show');
-                    });
-                  </script>"; 
-        }
-    }
-?>
-
+      if(isset($_GET["error"])) {
+          $error=$_GET["error"];
+  
+        //this line will be called by the check.php if the login credentials are incorrect 
+         if ($error==1) {
+            echo "<p align='center'>Username and/or password invalid<br/></p>"; 
+		   }
+      }
+ 
+   ?>
    <script>
       function togglePasswordVisibility(event) {
          event.preventDefault();
