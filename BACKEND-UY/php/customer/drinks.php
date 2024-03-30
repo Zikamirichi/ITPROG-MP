@@ -65,8 +65,6 @@
 
         session_start(); // Start session to store mains objects
         require_once("order.php"); //Adding the order class for OOP purposes
-
-        drinkStocks($conn);
     ?>
 
     <div class="navigation-bar">
@@ -92,7 +90,7 @@
                     <img src="../../images/white-drink-button.png" alt="Drinks">
                 </div>
             </a></li>
-            <li><a href="cart.php">
+            <li><a href="processOrders.php">
                 <div class="navbar-icon">
                     <img src="../../images/white-cart-button.png" alt="Cart">
                 </div>
@@ -102,92 +100,100 @@
 
     <div class="right-container">
         <div class="select-text">DRINKS</div>
-        <div class="dish-main-box">
             
-            <div class="dish-item item" onclick="showHiddenDiv('waterDiv')">
-                <div class="dish-img-box">
-                    <img src="../../images/bottled-water.jpg" alt="Bottled Water">
+            <div class="dish-main-box">
+                <?php
+                    $drinksQuery = mysqli_query($conn, "SELECT * FROM drinks"); // Fetch all drinks dishes
+                    while ($drinkItem = mysqli_fetch_assoc($drinksQuery)) { // Iterate over each drinks
+                ?>
+                <div class="dish-item item" onclick="showHiddenDiv('<?php echo $drinkItem['drinks_id']; ?>')"> <!-- Onclick for hidden div -->
+                    <div class="dish-img-box">
+                        <?php
+                            if ($drinkItem['names'] == "Water") { // If the drinks are either water, coffee, oj, use those images
+
+                                echo "<img src='../../images/bottled-water.jpg' alt='" . $drinkItem['names'] . "'>";
+                            }
+
+                            else if ($drinkItem['names'] == "Coffee") {
+
+                                echo "<img src='../../images/black-coffee.jpg' alt='" . $drinkItem['names'] . "'>";
+                            }
+
+                            else if ($drinkItem['names'] == "Orange Juice") {
+
+                                echo "<img src='../../images/orange-juice.jpg' alt='" . $drinkItem['names'] . "'>";
+                            }
+
+                            else {
+                                echo "<img src='../../images/generic-drinks.jpg' alt='" . $drinkItem['names'] . "'>";
+                            }
+                        ?>
+                    </div>
+
+                    <div class="dish-title"><?php echo $drinkItem['names']; ?></div>
+                    <div class="dish-desc"><?php echo getDrinkDesc($conn, $drinkItem['nutr_facts_id']); ?></div>
+                    <div class="dish-price"><?php echo "PHP " . $drinkItem['price'] . ".00"; ?></div>
+
+                    <span class="facts">
+                        <?php echo getDrinkFacts($conn, $drinkDish['nutr_facts_id']); ?>
+                    </span>
                 </div>
-
-                <div class="dish-title"><?php echo getDrinkName($conn, 'i301') ?></div>
-                <div class="dish-desc"><?php echo getDrinkDesc($conn,'n301') ?></div>
-                <div class="dish-price"><?php echo getDrinkPrice($conn, 'i301') ?></div>
-            
-                <span class="facts"> <!-- Spans with class facts are for displaying item descriptions -->
-                    <?php echo getDrinkFacts($conn, 'n301') ?>
-                </span>
+                <?php
+                    }?>
             </div>
-
-            <div class="dish-item item" onclick="showHiddenDiv('coffeeDiv')">
-                <div class="dish-img-box">
-                    <img src="../../images/black-coffee.jpg" alt="Black Coffee">
-                </div>
-
-                <div class="dish-title"><?php echo getDrinkName($conn, 'i302') ?></div>
-                <div class="dish-desc"><?php echo getDrinkDesc($conn,'n302') ?></div>
-                <div class="dish-price"><?php echo getDrinkPrice($conn, 'i302') ?></div>
-            
-                <span class="facts"> <!-- Spans with class facts are for displaying item descriptions -->
-                    <?php echo getDrinkFacts($conn, 'n302') ?>
-                </span>
-            </div>
-
-            <div class="dish-item item" onclick="showHiddenDiv('ojDiv')">
-                <div class="dish-img-box">
-                    <img src="../../images/orange-juice.jpg" alt="Orange Juice">
-                </div>
-
-                <div class="dish-title"><?php echo getDrinkName($conn, 'i303') ?></div>
-                <div class="dish-desc"><?php echo getDrinkDesc($conn,'n303') ?></div>
-                <div class="dish-price"><?php echo getDrinkPrice($conn, 'i303') ?></div>
-            
-                <span class="facts"> <!-- Spans with class facts are for displaying item descriptions -->
-                    <?php echo getDrinkFacts($conn, 'n303') ?>
-                </span>
-            </div>
-    </div>
-
-    <!-- Contents of the hidden div for Water -->
-    <div id="waterDiv" class="hidden-div">
-        
-        <h2><?php echo getDrinkName($conn, 'i301') ?></h2>
-        <img src="../../images/bottled-water.jpg" alt="Bottled Water" style="width: 10%; height: 10%;"> <br>
-        <div class="counter"> <!-- Counter for selecting the quantity of water -->
-            <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                <input type="hidden" name="item" value="water"> <!-- Hidden value to indicate that water was the selected item-->
-                <input type="number" id="count" name="count" value="1" min="1" max="<?php echo $maxd01Stock; ?>"> <br>
-                <input type="submit" value ="Submit" name="submit"> <!-- Submit button for finalizing order -->
-            </form>
         </div>
     </div>
 
-    <!-- Contents of the hidden div for Water -->
-    <div id="coffeeDiv" class="hidden-div">
-        
-        <h2><?php echo getDrinkName($conn, 'i302') ?></h2>
-        <img src="../../images/black-coffee.jpg" alt="Black Coffee" style="width: 10%; height: 10%;"> <br>
-        <div class="counter"> <!-- Counter for selecting the quantity of coffee -->
-            <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                <input type="hidden" name="item" value="coffee"> <!-- Hidden value to indicate that water was the selected item-->
-                <input type="number" id="count" name="count" value="1" min="1" max="<?php echo $maxd02Stock; ?>"> <br>
-                <input type="submit" value ="Submit" name="submit"> <!-- Submit button for finalizing order -->
-            </form>
-        </div>
-    </div>
+    <?php
+        // Loop through all drinks in the table
+        $drinksResult = mysqli_query($conn, "SELECT * FROM drinks"); // Fetch all drinks
+        while ($row = mysqli_fetch_assoc($drinksResult)) {
 
-    <!-- Contents of the hidden div for Orange Juice -->
-    <div id="ojDiv" class="hidden-div">
+            $drinkID = $row['drinks_id'];
+            $name = $row['names'];
+            $stockID = $row['stocks_id'];
         
-        <h2><?php echo getDrinkName($conn, 'i303') ?></h2>
-        <img src="../../images/orange-juice.jpg" alt="Orange Juice" style="width: 10%; height: 10%;"> <br>
-        <div class="counter"> <!-- Counter for selecting the quantity of orange juice -->
-            <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                <input type="hidden" name="item" value="oj"> <!-- Hidden value to indicate that orange juice was the selected item-->
-                <input type="number" id="count" name="count" value="1" min="1" max="<?php echo $maxd03Stock; ?>"> <br>
-                <input type="submit" value ="Submit" name="submit"> <!-- Submit button for finalizing order -->
-            </form>
-        </div>
-    </div>
+            // Get max stock
+            $stockQuery = "SELECT quantity FROM stocks WHERE stocks_id='$stockID'";
+            $stockResult = mysqli_query($conn, $stockQuery);
+            $stockRow = mysqli_fetch_assoc($stockResult);
+            $maxStock = $stockRow['quantity'];
+        
+            // Hidden div
+            echo "<div id='$drinkID' class='hidden-div'>";
+                echo "<h2>$name</h2>";
+                
+                if ($name == "Water") { // If the drinkss are either water, coffee, orange juice, use those images
+
+                    // Limit style to 10%, may edit later
+                    echo "<img src='../../images/bottled-water.jpg' alt='" . $name . "' style='width: 10%; height: 10%;'>";
+                }
+
+                else if ($name == "Coffee") {
+
+                    echo "<img src='../../images/black-coffee.jpg' alt='" . $name . "' style='width: 10%; height: 10%;'>";
+                }
+
+                else if ($name == "Orange Juice") {
+
+                    echo "<img src='../../images/orange-juice.jpg' alt='" . $name . "' style='width: 10%; height: 10%;'>";
+                }
+
+                else {
+                    echo "<img src='../../images/generic-drinks.jpg' alt='" . $name . "' style='width: 10%; height: 10%;'>";
+                }
+            
+                echo "<div class='counter'>";
+                    echo "<form method='post'>";
+                        echo "<input type='hidden' name='item' value='$drinkID'>";
+                        echo "<input type='number' name='count' value='1' min='1' max='$maxStock'>";
+                        echo "<input type='submit' name='submit'>";
+                    echo "</form>";
+                echo "</div>";
+            echo "</div>";
+        
+        }
+  ?>
 
     <script>
         // Function to show the hidden div based on the provided div ID
@@ -212,39 +218,28 @@
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") { // When a post is done above, execute code
             
-            if(isset($_POST["count"])){ // Check if the count value is set
-                
-                $count = $_POST["count"]; // Retrieve the count value from the POST data
-                
-                $maxOrderQuery = mysqli_query($conn, "SELECT MAX(CAST(SUBSTRING(ordr_id, 2) AS UNSIGNED)) AS max_orderID FROM order_table");
-                $row = mysqli_fetch_assoc($maxOrderQuery); // Get Current Max order_id from table 
-                $max_orderID = $row['max_orderID'];
-                $orderNum = $max_orderID + 1;
+            if(isset($_POST["count"])) {
 
-                $order = new Order("o" . $orderNum); // Create new order with new calculated order id
-
-                $item = $_POST["item"]; // Retreive the specific item selected
-
-                if ($item == "water") { 
-                    
-                    $order->setOrder($count, "i301"); // If submit button pressed was under water, set itemID to i301
-                }
-                
-                if ($item == "coffee") {
-                    
-                    $order->setOrder($count, "i302"); // Coffee = i302
-                }
-
-                if ($item == "oj") {
-                    
-                    $order->setOrder($count, "i303"); // Orange Juice = i303
-                }
-
-                // TESTING REMOVE IN FINAL PRODUCT
-                echo "Order ID: " . $order->getorderID() . "<br>"; 
+                $count = $_POST["count"];
+            
+                // Get max order ID
+                $maxOrderQuery = "SELECT MAX(CAST(SUBSTRING(ordr_id, 2) AS UNSIGNED)) AS max_orderID FROM order_table";
+                $maxResult = mysqli_query($conn, $maxOrderQuery);
+                $maxRow = mysqli_fetch_assoc($maxResult);
+                $maxOrderID = $maxRow['max_orderID'];
+            
+                $orderID = "o" . ($maxOrderID + 1);
+            
+                $drinkID = $_POST["item"]; // Get $drinkID
+            
+                $order = new Order($orderID); 
+                $order->setOrder($count, $drinkID); // Set new order
+            
+                // Output for testing REMOVE LATER
+                echo "Order ID: " . $order->getOrderID() . "<br>";
                 echo "Quantity: " . $order->getQuantity() . "<br>";
-                echo "Item ID: " . $order->getItemID() . "<br>";
-            }
+                echo "Item ID: " . $drinkID . "<br>";
+              }
             
             
             if(isset($_POST["submit"])) {
@@ -271,32 +266,6 @@
                 } else {
                     echo "Failed to insert record!!!";
                 }
-        }
-
-        function drinkStocks($conn) {
-
-            // Get stocks from database for input to be limited to the available stocks
-            $maxd01StockQuery = "SELECT quantity FROM stocks WHERE stocks_id = 'd01';";
-            $maxd01StockResult = mysqli_query($conn, $maxd01StockQuery);
-            $maxd01StockRow = mysqli_fetch_assoc($maxd01StockResult);
-            $maxd01Stock = $maxd01StockRow['quantity'];
-
-            $maxd02StockQuery = "SELECT quantity FROM stocks WHERE stocks_id = 'd02';";
-            $maxd02StockResult = mysqli_query($conn, $maxd02StockQuery);
-            $maxd02StockRow = mysqli_fetch_assoc($maxd02StockResult);
-            $maxd02Stock = $maxd02StockRow['quantity'];
-
-            $maxd03StockQuery = "SELECT quantity FROM stocks WHERE stocks_id = 'd03';";
-            $maxd03StockResult = mysqli_query($conn, $maxd03StockQuery);
-            $maxd03StockRow = mysqli_fetch_assoc($maxd03StockResult);
-            $maxd03Stock = $maxd03StockRow['quantity'];
-
-            /* Comment out since d04 is not used.
-            $maxd04StockQuery = "SELECT quantity FROM stocks WHERE stocks_id = 'd04';";
-            $maxd04StockResult = mysqli_query($conn, $maxd04StockQuery);
-            $maxd04StockRow = mysqli_fetch_assoc($maxd04StockResult);
-            $maxd04Stock = $maxd04StockRow['quantity'];
-            */
         }
 
         function getDrinkDesc($conn, $ntrID) {

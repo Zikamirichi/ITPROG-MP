@@ -90,7 +90,7 @@
                         <img src="../../images/white-drink-button.png" alt="Drinks">
                     </div>
                 </a></li>
-                <li><a href="cart.php">
+                <li><a href="processOrders.php">
                     <div class="navbar-icon">
                         <img src="../../images/white-cart-button.png" alt="Cart">
                     </div>
