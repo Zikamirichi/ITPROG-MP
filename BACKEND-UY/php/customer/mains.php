@@ -166,17 +166,17 @@
     <script>
         // Function to show the hidden div based on the provided div ID
         function showHiddenDiv(divId) {
+        var divToShow = document.getElementById(divId);
+        if (divToShow.style.display === "none" || divToShow.style.display === "") {
             
-            var divToShow = document.getElementById(divId);
-            if (divToShow.style.display === "none") {
-               
-                divToShow.style.display = "block";
-            } 
+            divToShow.style.display = "block";
+        } 
+        
+        else {
             
-            else {
-                divToShow.style.display = "none";
-            }
+            divToShow.style.display = "none";
         }
+    }
     </script>
 
     <?php

@@ -166,12 +166,13 @@
         // Function to show the hidden div based on the provided div ID
         function showHiddenDiv(divId) {
             var divToShow = document.getElementById(divId);
-            if (divToShow.style.display === "none") {
+            if (divToShow.style.display === "none" || divToShow.style.display === "") {
                 
                 divToShow.style.display = "block";
             } 
             
             else {
+                
                 divToShow.style.display = "none";
             }
         }
