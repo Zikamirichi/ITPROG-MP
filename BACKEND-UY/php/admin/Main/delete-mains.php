@@ -62,18 +62,22 @@
                 <th>Stocks</th>
             </tr>
 
-      <?php
-        $conn = mysqli_connect("localhost", "root", "") or die ("Unable to connect!". mysqli_error($conn) );
+      <?php 
+        $conn = mysqli_connect("localhost", "root", "", "mydb") or die ("Unable to connect!". mysqli_error($conn) );
         mysqli_select_db($conn, "mydb");
 
-        $factsQuery = mysqli_query($conn, "SELECT * FROM mains ORDER BY mains_id");
+        $factsQuery = mysqli_query($conn, "
+        SELECT m.*, s.quantity 
+        FROM mains m JOIN stocks s
+                     ON   m.stocks_id = s.stocks_id
+         ORDER BY mains_id;");
         while ($factsResult = mysqli_fetch_assoc($factsQuery)) {
             echo "<tr>";
             echo "<td>", $factsResult ["mains_id"], "</td>";
             echo "<td>", $factsResult ["name"], "</td>";
             echo "<td>", $factsResult ["price"], "</td>";
             echo "<td>", $factsResult ["nutr_facts_id"], "</td>";
-            echo "<td>", $factsResult ["stocks_id"], "</td>";
+            echo "<td>", $factsResult ["quantity"], "</td>";
             echo "</tr>";
         }
       ?>

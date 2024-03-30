@@ -120,7 +120,7 @@
     <table>
         <!-- Dishes Sold -->
         <tr>
-            <th>Dishes Sold</th>
+            <th>Total Dishes Sold</th>
         </tr>
         <tr>
         <?php
@@ -175,7 +175,7 @@
 
             // Compare actual and expected total dishes sold
             if ($actual_total_dishes_sold == $expected_total_dishes_sold) {
-            echo "<tr><td>Verified: Total dishes sold is <b>$expected_total_dishes_sold </b></td></tr>";
+            echo "<tr><td>Verified: <b>$expected_total_dishes_sold </b> dishes</td></tr>";
             } else {
             echo "<tr><td>Mismatch: Total dishes sold Expected: <b>$expected_total_dishes_sold</b>, Actual: <b> $actual_total_dishes_sold </b></td></tr>";
             }
@@ -188,7 +188,7 @@
 
         <table>
             <!-- Earnings -->
-            <tr><th>Earnings</th></tr>
+            <tr><th>Total Earnings</th></tr>
         <tr>
             <?php 
                     // Fetch the selected date from the form
@@ -277,7 +277,7 @@
 
                         // Compare actual and expected total earnings for the selected date
                         if ($actual_total_earnings == $expected_total_earnings) {
-                            echo "<td>Verified: Total earnings is <b>₱$expected_total_earnings</b></td>";
+                            echo "<td>Verified: <b>₱$expected_total_earnings</b></td>";
                         } else {
                             echo "<td>Mismatch: Total earnings Expected: <b>₱$expected_total_earnings</b>, Actual: <b>₱$actual_total_earnings</b></td>";
                         }
@@ -292,7 +292,7 @@
 
                 <!-- Discounts Given -->
                 <tr>
-                    <th>Discounts Given</th>
+                    <th>Total Discounts Given</th>
                 </tr>
                 <tr>
                     <?php
@@ -331,7 +331,7 @@
 
                                 // Compare actual and expected total discounts for the selected date
                                 if ($actual_total_discounts == $expected_total_discounts) {
-                                    echo "<td>Verified: Total discounts given is <b>$expected_total_discounts</b></td>";
+                                    echo "<td>Verified: <b>$expected_total_discounts</b></td>";
                                 } else {
                                     echo "<td>Mismatch: Total discounts given Expected: <b>$expected_total_discounts</b>, Actual: <b>$actual_total_discounts</b></td>";
                                 }
@@ -440,7 +440,7 @@ ksort($dates);
 
 // Display data in a tabular format
 echo "<div class='date-submit'>";
-echo "VERIFICATION RESULTS (ALL)</div>";
+echo "RESULTS (ALL)</div>";
 echo "<div class=verification-table><table>
         <tr>
             <th>Date</th>
