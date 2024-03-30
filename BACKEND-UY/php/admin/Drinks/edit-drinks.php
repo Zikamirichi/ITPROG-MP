@@ -2,7 +2,7 @@
 <head>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/ITPROG-MP/BACKEND-UY/css/admin.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/admin.css" />
     <title>Drinks</title>
     <style>
         table {
@@ -40,7 +40,7 @@
 <body>
         <div class="main-container">
         <div class="header">
-            <img src="/ITPROG-MP/BACKEND-UY/images/logo-only.png" alt="Logo">
+            <img src="../../../images/logo-only.png" alt="Logo">
             EDIT DRINKS
         </div>
         <div class="content-box">
@@ -96,12 +96,12 @@
             // Nutrition facts
             echo "<h3>Nutrition facts</h3>";
             //echo "<input type='hidden' name='newID' value='".$getFacts["nutr_facts_id"]."'>".$getFacts["nutr_facts_id"]."<br />";
-            echo "Description: <input type='text' name='newDesc' value='".$getFacts["desc"]."' size='150'> <br />";
-            echo "Ingredients: <input type='text' name='newIngredients' value='".$getFacts["Ingredients"]."' size='100'> <br />";
-            echo "Fat: <input type='text' name='newFat' value='".$getFacts["Fat"]."'><br />";
-            echo "Calories: <input type='text' name='newCalories' value='".$getFacts["Calories"]."'><br />";
-            echo "Carbs: <input type='text' name='newCarbs' value='".$getFacts["Carbs"]."'><br />";
-            echo "Protein: <input type='text' name='newProtein' value='".$getFacts["Protein"]."'><br />";
+            echo "Description: <input type='text' name='newDesc' value='".$getFacts["desc"]."' size='10' placeholder='Maximum of 44 characters' maxlength='44'> <br />";
+            echo "Ingredients: <input type='text' name='newIngredients' value='".$getFacts["Ingredients"]."' size='10' placeholder='Maximum of 500 characters' maxlength='500'> <br />";
+            echo "Fat (g) : <input type='number' name='newFat' value='".$getFacts["Fat"]."' min='0' step='0.1'><br />";
+            echo "Calories (g) : <input type='number' name='newCalories' value='".$getFacts["Calories"]."' min='0' step='0.1'><br />";
+            echo "Carbs (g) : <input type='number' name='newCarbs' value='".$getFacts["Carbs"]."' min='0' step='0.1'><br />";
+            echo "Protein (g) : <input type='number' name='newProtein' value='".$getFacts["Protein"]."' min='0' step='0.1'><br />";
 
             // quantity info
             echo "<h3>Stocks info</h3>";
