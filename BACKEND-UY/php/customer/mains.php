@@ -18,29 +18,6 @@
             display: flex;
         }
 
-        /* Timmy's implementation. If may better kayong UI please change hehe */
-
-        .item .facts { /* Nutrition facts about specific item */
-            visibility: hidden; /* Hidden before hovering */
-            width: 300px;
-            background-color: lightgrey;
-            color: black;
-            text-align: left;
-            border-radius: 6px;
-            padding: 5px 0;
-
-            position: absolute;
-            z-index: 1; /* Display above other images */
-            top: 50%;
-            left: 110%;
-            transform: translateY(-50%); 
-            box-shadow: 0 0 5px;
-        }
-
-        .item:hover .facts { /* Upon hover of item, make nutrition facts visible */
-            visibility: visible;
-        }
-
         .hidden-div {
             display: none;
             position: absolute;

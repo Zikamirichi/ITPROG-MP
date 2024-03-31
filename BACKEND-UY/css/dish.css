@@ -72,3 +72,34 @@
     text-align: right;
     font-size: larger;
   }
+
+
+  /* ------- HOVER NUTRIFACTS MESSAGE --------- */
+
+  .dish-item .facts { 
+    visibility: hidden; 
+    width: 50%;
+    max-width: 200px;
+    background-color: white;
+    color: #311712;
+    text-align: left;
+    border-radius: 6px;
+    padding: 5%;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 110%;
+    transform: translateY(-50%); 
+    box-shadow: 0 0 5px;
+    transition: visibility 0.3s ease;
+}
+
+.dish-item:hover .facts { 
+    visibility: visible;
+    display: block;
+}
+
+.dish-item:nth-child(3) .facts {
+    left: -10%; 
+    transform: translateY(-50%) translateX(-100%);
+}
