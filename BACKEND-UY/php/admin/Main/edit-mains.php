@@ -2,6 +2,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../../../css/admin.css" />
     <title>Main Dish</title>
     <style>
@@ -91,7 +97,7 @@ if(isset($_POST["enter"])){
     $factsQuery = mysqli_query($conn, "SELECT * FROM nutr_facts WHERE nutr_facts_id='$id'");
     $getFacts = mysqli_fetch_array($factsQuery);
     
-    echo "<form method='post' action='".$_SERVER['PHP_SELF']."' enctype='multipart/form-data'>";
+    echo "<form id='saveForm' method='post' action='".$_SERVER['PHP_SELF']."' enctype='multipart/form-data'>";
     // mains info
     echo "<h3>Mains info</h3>";
     echo "<input type='hidden' name='newMainID' value=$mainID>";
@@ -120,11 +126,11 @@ if(isset($_POST["enter"])){
     echo "<br><br>";
     echo '<input type="file" name="newImage">';
 
-    echo "<div class=save-box>";
-    echo "<input type='submit' name='save' value='Save'<br />";
+    echo "<div class='save-box'>";
+    echo "<button type='button' id='saveButton' class='submit-bttn'>Save</button><br />";
     echo "</div>";
     echo "</form>";
-}
+    }
 
 if(isset($_POST["save"])){
 
@@ -147,25 +153,24 @@ if(isset($_POST["save"])){
     $newName = $_POST["newName"];
     $newPrice = $_POST["newPrice"];
 
-    // Update the nutrtion facts and stocks tables
-    mysqli_query($conn, "UPDATE nutr_facts set `desc`='$newDesc', Ingredients='$newIngredients', Fat='$newFat', Calories='$newCalories', Carbs='$newCarbs', Protein='$newProtein'
-                        WHERE nutr_facts_id='$id'");
-                        
-    mysqli_query($conn, "UPDATE stocks set `quantity`='$newQuantity'
-                        WHERE stocks_id='$stocksID'");
-
-
     // Handle image upload
     if ($_FILES['newImage']['name']) {
         $target_dir = __DIR__ . "/../../../images/";
         $image = $_FILES['newImage']['name'];
-        $imageExt = pathinfo($image, PATHINFO_EXTENSION); // Extract Image extension
+        $imageExt = pathinfo($image, PATHINFO_EXTENSION);
 
         // Allow only .jpg files
         if ($imageExt == "jpg") {
             
             $target_file = $target_dir . basename($image);
-            move_uploaded_file($_FILES["newImage"]["tmp_name"], $target_file); // Moves uploaded file to the images folder
+            move_uploaded_file($_FILES["newImage"]["tmp_name"], $target_file);
+
+            // UPDATE STATEMENTS AFTER SUCCESSFUL IMAGE UPLOAD
+            mysqli_query($conn, "UPDATE nutr_facts set `desc`='$newDesc', Ingredients='$newIngredients', Fat='$newFat', Calories='$newCalories', Carbs='$newCarbs', Protein='$newProtein'
+                        WHERE nutr_facts_id='$id'");
+                        
+            mysqli_query($conn, "UPDATE stocks set `quantity`='$newQuantity'
+                        WHERE stocks_id='$stocksID'");
             
             // Update database with new image name
             mysqli_query($conn, "UPDATE mains set `name`='$newName', `price`='$newPrice', `image_name`='$image'
@@ -174,15 +179,16 @@ if(isset($_POST["save"])){
         
         else {
             
-            echo "Only .jpg files allowed, please upload another image.";
+            echo "Only .jpg files allowed, please try again.";
         }
     } 
     
-    else { // If no image was uploaded, don't update file_name (to revert to previous version)
+    else {
         
-        mysqli_query($conn, "UPDATE mains set `name`='$newName', `price`='$newPrice'
-                                WHERE mains_id='$mainID'");
+        echo "Error uploading image";
     }
+
+    echo "Record has been updated!";
 }
 ?>
 
@@ -206,6 +212,68 @@ if(isset($_POST["save"])){
     <a class="back-button" href="mains-table.php">Back</a>
     <input type="submit" name="enter" value="Enter" /><br /><br />
     </form>
-    
+    </div>
+        <!-- Modal -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmationModalLabel">Confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to save the changes?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                <button type="button" id="confirmSaveButton" class="submit-bttn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- New Modal for Success Alert -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Success</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Save successful!
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="successModalButton" class="submit-bttn" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Updated Script -->
+<script>
+    $(document).ready(function() {
+        // Show confirmation modal when the Save button is clicked
+        $("#saveButton").click(function() {
+            // Show the modal
+            $('#confirmationModal').modal('show');
+        });
+
+        // Handle Save button click inside the modal
+        $("#confirmSaveButton").click(function() {
+            // Show success modal after form submission
+            $('#confirmationModal').modal('hide');
+            $('#successModal').modal('show');
+        });
+
+        $("#successModalButton").click(function() {
+            // Submit the form with the name "save"
+            $("#saveForm").append("<input type='hidden' name='save' value='save'>").submit();
+        });
+    });
+</script>
 </body>
 </html>
