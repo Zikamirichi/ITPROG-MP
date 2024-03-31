@@ -187,8 +187,6 @@
                 
                 echo "Error uploading image";
             }
-
-            echo "Record has been updated!";
         }
     ?>
 

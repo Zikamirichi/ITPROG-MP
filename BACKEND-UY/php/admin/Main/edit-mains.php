@@ -181,8 +181,6 @@ if(isset($_POST["save"])){
         
         echo "Error uploading image";
     }
-
-    echo "Record has been updated!";
 }
 ?>
 

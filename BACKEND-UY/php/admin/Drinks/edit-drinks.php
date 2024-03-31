@@ -162,7 +162,6 @@
                             // Update database with new image name
                             mysqli_query($conn, "UPDATE drinks SET `names`='$newName', `price`='$newPrice', `image_name`='$image'
                                                 WHERE drinks_id='$newMainID'");
-                            echo "Record has been updated!";
                         } else {
                             echo "Only .jpg files allowed, please try again.";
                         }
