@@ -15,8 +15,8 @@
     <link rel="stylesheet" type="text/css" href="../../css/cart.css" />
 
     <?php
-        header("refresh: 5; URL=processOrders.php"); //Refresh page every 5 seconds to reflect combo changes
-    ?>
+        //header("refresh: 5; URL=processOrders.php"); //Refresh page every 5 seconds to reflect combo changes
+    ?> 
     
   </head>
     <title>Cart</title>
@@ -39,6 +39,16 @@
 <body>
     <?php
         session_start();
+
+        
+        if(!$_SESSION['cart_refreshed']) {
+
+            // Meta refresh code
+            header("refresh:5;url=processOrders.php");
+            
+            $_SESSION['cart_refreshed'] = true; 
+        }
+
         require_once("order.php"); //Adding the order class for OOP purposes
 
         //CHANGE $CONN VARIABLES DEPENDING ON PERSONAL DEVICE SETTINGS
@@ -103,105 +113,56 @@
                     if ($mainName != NULL) { // If the order is a main
 
                         $totalMainPrice = $mainPrice * $quantity; // Calculate total price for main
-                        echo "<div class='cart-item-box'> Main: $mainName - Php $mainPrice * $quantity = Php $totalMainPrice<br> </div>";
+                        echo "<div class='cart-item-box'>";
+                            echo "<div class='ala-carte-item'>";
+                                echo "<table>";
+                                    echo "<tr>";
+                                        echo "<td>$mainName</td>";
+                                        echo "<td>$quantity</td>";
+                                        echo "<td>Php $totalMainPrice</td>";
+                                    echo "</tr>";
+                                echo "</table>";
+                            echo "</div>";
+                        echo "</div>";
                     }
 
                     if ($sideName != NULL) { // If the order is a side   
 
                         $totalSidePrice = $sidePrice * $quantity; // Calculate total price for side
-                        echo "<div class='cart-item-box'> Sides: $sideName - Php $sidePrice * $quantity = Php $totalSidePrice<br> </div>";
+                        echo "<div class='cart-item-box'>";
+                            echo "<div class='ala-carte-item'>";
+                                echo "<table>";
+                                    echo "<tr>";
+                                        echo "<td>$sideName</td>";
+                                        echo "<td>$quantity</td>";
+                                        echo "<td>Php $totalSidePrice</td>";
+                                    echo "</tr>";
+                                echo "</table>";
+                            echo "</div>";
+                        echo "</div>";
                     }
 
                     if ($drinkName != NULL) { // If the order is a drink
                     
                         $totalDrinkPrice = $drinkPrice * $quantity; // Calculate total price for drink
-                        echo "<div class='cart-item-box'> Drinks: $drinkName - Php $drinkPrice * $quantity = Php $totalDrinkPrice<br> </div>";
+                        echo "<div class='cart-item-box'>";
+                            echo "<div class='ala-carte-item'>";
+                                echo "<table>";
+                                    echo "<tr>";
+                                        echo "<td>$drinkName</td>";
+                                        echo "<td>$quantity</td>";
+                                        echo "<td>Php $totalDrinkPrice</td>";
+                                    echo "</tr>";
+                                echo "</table>";
+                            echo "</div>";
+                        echo "</div>";
                     }
                 }
+
+                $totalForAlacarte = displayTotalAlacarte($conn, $cartID);
+                $totalBill += $totalForAlacarte;
             ?>
             
-            <div class="cart-item-box"> <!-- Display Total For AlaCarte -->
-                <?php 
-                    $totalForAlacarte = displayTotalAlacarte($conn, $cartID); 
-                    echo "Subtotal for Ala Carte: Php $totalForAlacarte <br><br>"; // Subtotal after all ala carte entries
-                ?> 
-            </div>
-
-            <div class="cart-item-box"> <!-- Display Total For Whole Order -->
-                <?php 
-                    $totalBill += $totalForAlacarte;
-                    echo "Total for Whole Transaction: Php $totalBill"; // Total bill from combos + ala_carte saved in session
-
-                    $_SESSION['totalBill'] = $totalBill;
-                ?> 
-            </div>
-
-            <!-- ------------- COMBO MEALS UI ----------- -->
-
-            <div class="cart-item-box">
-                <div class="combo-meal-box">COMBO MEAL
-                    <div class="order-item">
-                        <table>
-                            <tr>
-                                <td>Item Name 1</td>
-                                <td>x2</td>
-                                <td>PHP 10.99</td>
-                            </tr>
-                            <tr>
-                                <td>Item Name 2</td>
-                                <td>x1</td>
-                                <td>PHP 5.49</td>
-                            </tr>
-                        </table>
-                        <hr>
-                        <div class="orig-price">
-                            <table>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td>PHP 16.00</td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="price">
-                            <table>
-                                <tr>
-                                    <td></td>
-                                    <td>-15%</td>
-                                    <td>PHP 15.00</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- -------- Ala Carte Items UI -------- -->
-            <!-- use this template for every ala carte item that was ordered -->
-            <div class="cart-item-box"> 
-                <div class="ala-carte-item">
-                    <table>
-                        <tr>
-                            <td>Rice</td>
-                            <td>x2</td>
-                            <td>PHP 10.99</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <!-- up to this (ala carte item)-->
-            <div class="cart-item-box">
-                <div class="ala-carte-item">
-                    <table>
-                        <tr>
-                            <td>Iced Tea</td>
-                            <td>x2</td>
-                            <td>PHP 50.75</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
             <hr>
             <div class="cart-item-box"> 
                 <div class="price-total">
@@ -209,7 +170,7 @@
                         <tr>
                             <td></td>
                             <td>TOTAL</td>
-                            <td>PHP 200.00</td>
+                            <td>PHP <?php echo "$totalBill"; $_SESSION['totalBill'] = $totalBill;?></td>
                         </tr>
                     </table>
                 </div>

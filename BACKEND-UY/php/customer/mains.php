@@ -68,6 +68,8 @@
         session_start(); // Start session to store mains objects
         require_once("order.php"); //Adding the order class for OOP purposes
 
+        $_SESSION['cart_refreshed'] = false; // For cart purposes
+
     ?>
     <div class="navigation-bar">
         <ul>
