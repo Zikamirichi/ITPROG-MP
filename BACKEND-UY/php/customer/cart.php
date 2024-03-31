@@ -92,95 +92,97 @@
 
     <div class="right-container">
         <div class="select-text">CART</div>
+            <div class="cart-main-box">
             
-            <?php displayCombo($conn, $cartID); ?> 
-            
-            <?php
-                // Places Individual Ala Carte Items in Separate cart-item-boxes
-                $displayAlacarteResult = displayAlacarte($conn, $cartID); // Get Ala Carte Items from DB
-                while ($alaCarteRow = mysqli_fetch_assoc($displayAlacarteResult)) { // Loop through all resulting rows in ala_carte query
+                <?php displayCombo($conn, $cartID); ?> 
+                
+                <?php
+                    // Places Individual Ala Carte Items in Separate cart-item-boxes
+                    $displayAlacarteResult = displayAlacarte($conn, $cartID); // Get Ala Carte Items from DB
+                    while ($alaCarteRow = mysqli_fetch_assoc($displayAlacarteResult)) { // Loop through all resulting rows in ala_carte query
 
-                    $mainName = $alaCarteRow['mainName'];       // Get Item Info from Queries
-                    $mainPrice = $alaCarteRow['mainPrice'];     // Name and Price of Ala Carte Items
-                    $sideName = $alaCarteRow['sideName'];
-                    $sidePrice = $alaCarteRow['sidePrice'];
-                    $drinkName = $alaCarteRow['drinkName'];
-                    $drinkPrice = $alaCarteRow['drinkPrice'];
-                    $quantity = $alaCarteRow['quantity'];
+                        $mainName = $alaCarteRow['mainName'];       // Get Item Info from Queries
+                        $mainPrice = $alaCarteRow['mainPrice'];     // Name and Price of Ala Carte Items
+                        $sideName = $alaCarteRow['sideName'];
+                        $sidePrice = $alaCarteRow['sidePrice'];
+                        $drinkName = $alaCarteRow['drinkName'];
+                        $drinkPrice = $alaCarteRow['drinkPrice'];
+                        $quantity = $alaCarteRow['quantity'];
 
-                    if ($mainName != NULL) { // If the order is a main
+                        if ($mainName != NULL) { // If the order is a main
 
-                        $totalMainPrice = $mainPrice * $quantity; // Calculate total price for main
-                        echo "<div class='cart-item-box'>";
-                            echo "<div class='ala-carte-item'>";
-                                echo "<table>";
-                                    echo "<tr>";
-                                        echo "<td>$mainName</td>";
-                                        echo "<td>$quantity</td>";
-                                        echo "<td>Php $totalMainPrice</td>";
-                                    echo "</tr>";
-                                echo "</table>";
+                            $totalMainPrice = $mainPrice * $quantity; // Calculate total price for main
+                            echo "<div class='cart-item-box'>";
+                                echo "<div class='ala-carte-item'>";
+                                    echo "<table>";
+                                        echo "<tr>";
+                                            echo "<td>$mainName</td>";
+                                            echo "<td>$quantity</td>";
+                                            echo "<td>Php $totalMainPrice</td>";
+                                        echo "</tr>";
+                                    echo "</table>";
+                                echo "</div>";
                             echo "</div>";
-                        echo "</div>";
+                        }
+
+                        if ($sideName != NULL) { // If the order is a side   
+
+                            $totalSidePrice = $sidePrice * $quantity; // Calculate total price for side
+                            echo "<div class='cart-item-box'>";
+                                echo "<div class='ala-carte-item'>";
+                                    echo "<table>";
+                                        echo "<tr>";
+                                            echo "<td>$sideName</td>";
+                                            echo "<td>$quantity</td>";
+                                            echo "<td>Php $totalSidePrice</td>";
+                                        echo "</tr>";
+                                    echo "</table>";
+                                echo "</div>";
+                            echo "</div>";
+                        }
+
+                        if ($drinkName != NULL) { // If the order is a drink
+                        
+                            $totalDrinkPrice = $drinkPrice * $quantity; // Calculate total price for drink
+                            echo "<div class='cart-item-box'>";
+                                echo "<div class='ala-carte-item'>";
+                                    echo "<table>";
+                                        echo "<tr>";
+                                            echo "<td>$drinkName</td>";
+                                            echo "<td>$quantity</td>";
+                                            echo "<td>Php $totalDrinkPrice</td>";
+                                        echo "</tr>";
+                                    echo "</table>";
+                                echo "</div>";
+                            echo "</div>";
+                        }
                     }
 
-                    if ($sideName != NULL) { // If the order is a side   
-
-                        $totalSidePrice = $sidePrice * $quantity; // Calculate total price for side
-                        echo "<div class='cart-item-box'>";
-                            echo "<div class='ala-carte-item'>";
-                                echo "<table>";
-                                    echo "<tr>";
-                                        echo "<td>$sideName</td>";
-                                        echo "<td>$quantity</td>";
-                                        echo "<td>Php $totalSidePrice</td>";
-                                    echo "</tr>";
-                                echo "</table>";
-                            echo "</div>";
-                        echo "</div>";
-                    }
-
-                    if ($drinkName != NULL) { // If the order is a drink
-                    
-                        $totalDrinkPrice = $drinkPrice * $quantity; // Calculate total price for drink
-                        echo "<div class='cart-item-box'>";
-                            echo "<div class='ala-carte-item'>";
-                                echo "<table>";
-                                    echo "<tr>";
-                                        echo "<td>$drinkName</td>";
-                                        echo "<td>$quantity</td>";
-                                        echo "<td>Php $totalDrinkPrice</td>";
-                                    echo "</tr>";
-                                echo "</table>";
-                            echo "</div>";
-                        echo "</div>";
-                    }
-                }
-
-                $totalForAlacarte = displayTotalAlacarte($conn, $cartID);
-                $totalBill += $totalForAlacarte;
-            ?>
-            
-            <hr>
-            <div class="cart-item-box"> 
-                <div class="price-total">
-                    <table>
-                        <tr>
-                            <td></td>
-                            <td>TOTAL</td>
-                            <td>PHP <?php echo "$totalBill"; $_SESSION['totalBill'] = $totalBill;?></td>
-                        </tr>
-                    </table>
+                    $totalForAlacarte = displayTotalAlacarte($conn, $cartID);
+                    $totalBill += $totalForAlacarte;
+                ?>
+                
+                <hr>
+                <div class="cart-item-box"> 
+                    <div class="price-total">
+                        <table>
+                            <tr>
+                                <td></td>
+                                <td>TOTAL</td>
+                                <td>PHP <?php echo "$totalBill"; $_SESSION['totalBill'] = $totalBill;?></td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
-            </div>
 
-            <!-- ---------------- TO EDIT -------------------->
+                <!-- ---------------- TO EDIT -------------------->
 
-            <!-- <br><a href="editOrder.php">Edit Order</a>
-            <br><a href="payOptions.php">Proceed to Payment</a> -->
-            <div class="buttons-box">
-                <a class="edit-cart" href="editOrder.php">Edit Order</a>
-                <a class="proceed" href="payOptions.php">Proceed to Payment</a>
+                <!-- <br><a href="editOrder.php">Edit Order</a>
+                <br><a href="payOptions.php">Proceed to Payment</a> -->
+                <div class="buttons-box">
+                    <a class="edit-cart" href="editOrder.php">Edit Order</a>
+                    <a class="proceed" href="payOptions.php">Proceed to Payment</a>
+                </div>
             </div>
         </div>
     </div>
