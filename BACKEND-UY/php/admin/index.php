@@ -76,64 +76,75 @@ if(isset($_GET["success"])) {
     }
 }
 ?>
-
 <!-- Bootstrap modal for displaying error -->
 <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
+            <!-- Modal Header -->
             <div class="modal-header">
-                <h5 class="modal-title" id="errorModalLabel">Ivalid Input</h5>
+                <h5 class="modal-title" id="errorModalLabel">Invalid Input</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <!-- Modal Body -->
             <div class="modal-body">
                 Username and/or password is invalid!
             </div>
+            <!-- Modal Footer -->
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
- <!-- Bootstrap modal for displaying unauthorized user error -->
- <div class="modal fade" id="unauthorizedUserModal" tabindex="-1" role="dialog" aria-labelledby="unauthorizedUserModalLabel" aria-hidden="true">
-       <div class="modal-dialog" role="document">
-           <div class="modal-content">
-               <div class="modal-header">
-                   <h5 class="modal-title" id="unauthorizedUserModalLabel">Unauthorized User</h5>
-                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                       <span aria-hidden="true">&times;</span>
-                   </button>
-               </div>
-               <div class="modal-body">
-                   You are not authorized to access this page!
-               </div>
-               <div class="modal-footer">
-                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-               </div>
-           </div>
-       </div>
-   </div>
-<!-- Include modal HTML -->
-<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+
+<!-- Bootstrap modal for displaying unauthorized user error -->
+<div class="modal fade" id="unauthorizedUserModal" tabindex="-1" role="dialog" aria-labelledby="unauthorizedUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="unauthorizedUserModalLabel">Unauthorized User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">
+                You are not authorized to access this page!
+            </div>
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap modal for displaying success message -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <!-- Modal Header -->
             <div class="modal-header">
                 <h5 class="modal-title" id="successModalLabel">Login Successful</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <!-- Modal Body -->
             <div class="modal-body">
                 You have successfully logged in!
             </div>
+            <!-- Modal Footer -->
             <div class="modal-footer">
                 <button id="closeAndRedirect" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
+
    <script>
         $(document).ready(function(){
         if (typeof showErrorModal !== 'undefined' && showErrorModal) {
