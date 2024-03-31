@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../../css/navbar.css" />
     <link rel="stylesheet" type="text/css" href="../../css/dish.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/cart.css" />
 
     <?php
         header("refresh: 5; URL=processOrders.php"); //Refresh page every 5 seconds to reflect combo changes
@@ -28,36 +29,11 @@
             display: flex;
         }
 
-        .cart-main-box {
-            background-color: #CED3D7;
-            margin-left: 5%;
-            margin-right: 5%;
-            border-radius: 15px;
-            padding-top: 10px;
-            padding-bottom: 10px;
+        hr {
+            border-color: black;
+            width: 95%;
+            margin-left: 0;
         }
-
-        .cart-item-box {
-            margin: 2%;
-            border-radius: 15px;
-            background-color: white;
-            font-family: "Luckiest Guy", cursive;
-            font-weight: 400;
-            font-style: normal;
-            font-size: 23px;
-            padding: 10px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            position: relative;
-        }
-
-        /* TO DO:
-        - Divide cart-item-box into 3 parts (dish title, quantity, price)
-        - design for combo meal title
-        - create for total
-        - create - and + for quantity
-        - create confirm and cancel buttons
-        - integrate with prompt messages */
     </style>
 </head>
 <body>
@@ -159,6 +135,52 @@
                     $_SESSION['totalBill'] = $totalBill;
                 ?> 
             </div>
+
+            <!-- ------------- COMBO MEALS UI ----------- -->
+
+            <div class="cart-item-box">
+                <div class="combo-meal-box">COMBO MEAL
+                    <div class="order-item">
+                        <table>
+                            <tr>
+                                <td>Item Name 1</td>
+                                <td>x2</td>
+                                <td>PHP 10.99</td>
+                            </tr>
+                            <tr>
+                                <td>Item Name 2</td>
+                                <td>x1</td>
+                                <td>PHP 5.49</td>
+                            </tr>
+                        </table>
+                        <hr>
+                        <div class="orig-price">
+                            <table>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td>PHP 16.00</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="price">
+                            <table>
+                                <tr>
+                                    <td></td>
+                                    <td>-15%</td>
+                                    <td>PHP 15.00</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- -------- Ala Carte Items UI -------- -->
+
+
+            <!-- ---------------- TO EDIT -------------------->
 
             <br><a href="editOrder.php">Edit Order</a>
             <br><a href="payOptions.php">Proceed to Payment</a>
@@ -293,5 +315,6 @@
             return $totalForAlacarte = $alaCarteTotalRow['total_earned_from_alacarte'];
         }
     ?>
+
 </body>
 </html>
