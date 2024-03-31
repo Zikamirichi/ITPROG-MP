@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/cart.css" />
 
     <?php
-        header("refresh: 5; URL=processOrders.php"); //Refresh page every 5 seconds to reflect combo changes
+        //header("refresh: 5; URL=processOrders.php"); //Refresh page every 5 seconds to reflect combo changes
     ?> 
     
   </head>
@@ -39,6 +39,16 @@
 <body>
     <?php
         session_start();
+
+        
+        if(!$_SESSION['cart_refreshed']) {
+
+            // Meta refresh code
+            header("refresh:5;url=processOrders.php");
+            
+            $_SESSION['cart_refreshed'] = true; 
+        }
+
         require_once("order.php"); //Adding the order class for OOP purposes
 
         //CHANGE $CONN VARIABLES DEPENDING ON PERSONAL DEVICE SETTINGS
