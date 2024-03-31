@@ -79,7 +79,7 @@
 <body>
     <div id="gcash-prompt" class="gcash-prompt">
         <link rel="stylesheet" href="../../images/Healthy_Food_QR.jpg">
-        <span class="close">&times;</span>
+        <a href="cart.php" class="close">&times;</a>
         <h2>GCASH</h2>
         <div class="qr-code">
             <img src="../../images/Healthy_Food_QR.jpg" alt="QR Code">
