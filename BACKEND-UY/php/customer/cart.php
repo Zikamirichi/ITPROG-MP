@@ -82,10 +82,8 @@
 
     <div class="right-container">
         <div class="select-text">CART</div>
-        <div class="cart-main-box">
-            <div class="cart-item-box"> <!-- Display Combo Items in one box -->
-                <?php displayCombo($conn, $cartID); ?> 
-            </div>
+            
+            <?php displayCombo($conn, $cartID); ?> 
             
             <?php
                 // Places Individual Ala Carte Items in Separate cart-item-boxes
@@ -135,47 +133,6 @@
                     $_SESSION['totalBill'] = $totalBill;
                 ?> 
             </div>
-
-            <!-- ------------- COMBO MEALS UI ----------- -->
-
-            <div class="cart-item-box">
-                <div class="combo-meal-box">COMBO MEAL
-                    <div class="order-item">
-                        <table>
-                            <tr>
-                                <td>Item Name 1</td>
-                                <td>x2</td>
-                                <td>PHP 10.99</td>
-                            </tr>
-                            <tr>
-                                <td>Item Name 2</td>
-                                <td>x1</td>
-                                <td>PHP 5.49</td>
-                            </tr>
-                        </table>
-                        <hr>
-                        <div class="orig-price">
-                            <table>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td>PHP 16.00</td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="price">
-                            <table>
-                                <tr>
-                                    <td></td>
-                                    <td>-15%</td>
-                                    <td>PHP 15.00</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
 
             <!-- -------- Ala Carte Items UI -------- -->
 
@@ -238,13 +195,8 @@
 
             $displayComboResult = mysqli_query($conn, $displayComboQuery);
 
-            echo "<p>Combo Items</p>";
-            $comboNum = 1; // Initialize combo number as 1
-
             while ($comboRow = mysqli_fetch_assoc($displayComboResult)) { // Loop through each row in combo table created
 
-                echo "<br>Combo #" . $comboNum . "<br><br>"; // Show which combo is displayed
-                
                 $mainName = $comboRow['mainName'];      // Get the item data from the query
                 $mainPrice = $comboRow['mainPrice'];    // Name and price of items in combos
                 $sideName = $comboRow['sideName'];
@@ -256,16 +208,56 @@
                 $discountForCombo = $totalForCombo * 0.15;
                 $totalAfterDiscount = $totalForCombo - $discountForCombo;
 
-                echo "<li>Mains: $mainName - $mainPrice </li>"; // Display the mains, sides, drinks ordered in the combo with their prices
-                echo "<li>Sides: $sideName - $sidePrice </li>";
-                echo "<li>Drinks: $drinkName - $drinkPrice </li><br>";
-                echo "Subtotal: Php $totalForCombo <br>";
-                echo "Discount: Php $discountForCombo <br>";
-                echo "Subtotal After Discount: Php $totalAfterDiscount <br>";
+                // ------------------ COMBO MEALS UI ------------------ 
+                
+                echo "<div class='cart-item-box'>";
+                    echo "<div class='combo-meal-box'>COMBO MEAL";
+                        echo "<div class='order-item'>";
+                            echo "<table>";
+                                echo "<tr>";
+                                    echo "<td>$mainName</td>";
+                                    echo "<td>x1</td>";
+                                    echo "<td>PHP $mainPrice</td>";
+                                echo "</tr>";
+
+                                echo "<tr>";
+                                    echo "<td>$sideName</td>";
+                                    echo "<td>x1</td>";
+                                    echo "<td>PHP $sidePrice</td>";
+                                echo "</tr>";
+
+                                echo "<tr>";
+                                    echo "<td>$drinkName</td>";
+                                    echo "<td>x1</td>";
+                                    echo "<td>PHP $drinkPrice</td>";
+                                echo "</tr>";
+                            echo "</table>";
+                            echo "<hr>";
+                            echo "<div class='orig-price'>";
+                                echo "<table>";
+                                    echo "<tr>";
+                                        echo "<td></td>";
+                                        echo "<td></td>";
+                                        echo "<td>PHP $totalForCombo</td>";
+                                    echo "</tr>";
+                                echo "</table>";
+                            echo "</div>";
+
+                            echo "<div class='price'>";
+                                echo "<table>";
+                                    echo "<tr>";
+                                        echo "<td></td>";
+                                        echo "<td>-15%</td>";
+                                        echo "<td>PHP $totalAfterDiscount</td>";
+                                    echo "</tr>";
+                                echo "</table>";
+                            echo "</div>";
+                        echo "</div>";
+                    echo "</div>";
+                echo "</div>";
                 
                 global $totalBill;
                 $totalBill += $totalAfterDiscount; // Store subtotal in session variable. Gets added to after each loop iteration if more than 1 combo exists.
-                $comboNum++; // Increment the shown comboNum
             }
 
             return $comboRow = mysqli_fetch_assoc($displayComboResult);
