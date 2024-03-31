@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="../../css/cart.css" />
 
     <?php
-        // header("refresh: 5; URL=processOrders.php"); //Refresh page every 5 seconds to reflect combo changes
+        header("refresh: 5; URL=processOrders.php"); //Refresh page every 5 seconds to reflect combo changes
     ?>
     
   </head>
