@@ -162,11 +162,18 @@
                             // Update database with new image name
                             mysqli_query($conn, "UPDATE drinks SET `names`='$newName', `price`='$newPrice', `image_name`='$image'
                                                 WHERE drinks_id='$newMainID'");
-                        } else {
+                        } 
+                        
+                        else {
+                            
                             echo "Only .jpg files allowed, please try again.";
                         }
-                    } else {
-                        echo "Error uploading image";
+                    } 
+                    
+                    else { // If no image was uploaded, don't update file_name (to revert to previous version)
+                        
+                        mysqli_query($conn, "UPDATE drinks SET `names`='$newName', `price`='$newPrice'
+                                                WHERE drinks_id='$newMainID'");
                     }
                 }
                 ?>
