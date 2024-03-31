@@ -35,6 +35,57 @@
             color: white;
         }
 
+        .prompt-card {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 300px;
+        padding: 20px;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        z-index: 9999;
+        display: none;
+    }
+
+    .prompt-card p {
+        margin-bottom: 20px;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .exit-button, .cancel-button {
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .exit-button {
+        background-color: #D4471F;
+        color: white;
+        border: none;
+    }
+
+    .exit-button:hover {
+        background-color: #B3370A;
+    }
+
+    .cancel-button {
+        background-color: #CED3D7;
+        color: #333;
+        border: none;
+    }
+
+    .cancel-button:hover {
+        background-color: #B8BFC4;
+    }
+
     </style>
 </head>
 
@@ -210,6 +261,60 @@
     <a class="back-button" href="sides-table.php">Back</a>
     <input type="submit" name="enter" value="Enter" /><br /><br />
     </form>
+
+
+    <div class="prompt-card" id="unsaved-prompt">
+    <p>Any unsaved changes will be lost.</p>
+    <div class="button-container">
+        <button class="exit-button" id="exit-btn">Exit</button>
+        <button class="cancel-button" id="cancel-btn">Cancel</button>
+    </div>
+    </div>
+
+    <script>
+        var formEdited = false;
+
+        function markAsEdited() {
+            formEdited = true;
+        }
+  
+        window.onbeforeunload = function() {
+            if (formEdited) {
+                return "You have unsaved changes. Are you sure you want to leave this page?";
+            }
+        };
+
+        function resetFormEdited() {
+            formEdited = false;
+        }
+
+        var formInputs = document.querySelectorAll('input, select, textarea');
+        formInputs.forEach(function(input) {
+            input.addEventListener('input', markAsEdited);
+        });
+
+        document.querySelector('form').addEventListener('submit', resetFormEdited);
+
+        window.addEventListener('beforeunload', function(event) {
+            if (formEdited) {
+                document.getElementById('unsaved-prompt').style.display = 'block';
+                event.preventDefault();
+            }
+        });
+
+        document.getElementById('exit-btn').addEventListener('click', function() {
+            window.location.href = 'drinks-table.php';
+        });
+
+        function cancel() {
+            document.getElementById('unsaved-prompt').style.display = 'none'; 
+         }
+
+      document.getElementById('cancel-btn').addEventListener('click', cancel);
+                              
+
+        
+    </script>
 
 </body>
 </html>
