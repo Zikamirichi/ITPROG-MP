@@ -99,7 +99,7 @@
     display: block;
 }
 
-.dish-item:nth-child(3) .facts {
+.dish-item:nth-child(3n) .facts {
     left: -10%; 
     transform: translateY(-50%) translateX(-100%);
 }
