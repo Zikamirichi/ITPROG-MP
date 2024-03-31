@@ -69,7 +69,7 @@
 
     <div class="navigation-bar">
         <ul>
-            <li><a href="homepage.php">
+            <li><a href="cancelOrder.php">
                     <div class="navbar-icon">
                         <img src="../../images/white-home-button.png" alt="Homepage">
                     </div>
