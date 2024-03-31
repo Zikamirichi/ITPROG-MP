@@ -17,6 +17,7 @@
     <?php
         header("refresh: 5; URL=processOrders.php"); //Refresh page every 5 seconds to reflect combo changes
     ?>
+    
   </head>
     <title>Cart</title>
     <style>
@@ -32,7 +33,6 @@
         hr {
             border-color: black;
             width: 95%;
-            margin-left: 0;
         }
     </style>
 </head>
@@ -178,12 +178,51 @@
 
 
             <!-- -------- Ala Carte Items UI -------- -->
-
+            <!-- use this template for every ala carte item that was ordered -->
+            <div class="cart-item-box"> 
+                <div class="ala-carte-item">
+                    <table>
+                        <tr>
+                            <td>Rice</td>
+                            <td>x2</td>
+                            <td>PHP 10.99</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- up to this (ala carte item)-->
+            <div class="cart-item-box">
+                <div class="ala-carte-item">
+                    <table>
+                        <tr>
+                            <td>Iced Tea</td>
+                            <td>x2</td>
+                            <td>PHP 50.75</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <hr>
+            <div class="cart-item-box"> 
+                <div class="price-total">
+                    <table>
+                        <tr>
+                            <td></td>
+                            <td>TOTAL</td>
+                            <td>PHP 200.00</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
 
             <!-- ---------------- TO EDIT -------------------->
 
-            <br><a href="editOrder.php">Edit Order</a>
-            <br><a href="payOptions.php">Proceed to Payment</a>
+            <!-- <br><a href="editOrder.php">Edit Order</a>
+            <br><a href="payOptions.php">Proceed to Payment</a> -->
+            <div class="buttons-box">
+                <a class="edit-cart" href="editOrder.php">Edit Order</a>
+                <a class="proceed" href="payOptions.php">Proceed to Payment</a>
+            </div>
         </div>
     </div>
         <script> // Reference: https://stackoverflow.com/questions/17642872/refresh-page-and-keep-scroll-position

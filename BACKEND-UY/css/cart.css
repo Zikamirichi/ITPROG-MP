@@ -37,6 +37,12 @@
     padding-left: 5%;
 }
 
+.order-item hr {
+    border-color: black;
+    width: 95%;
+    margin-left: 0;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -69,3 +75,79 @@ td:nth-child(3) {
 .price td:nth-child(2) {
     color:#D4471F;
 }
+
+.ala-carte-item {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+    font-size: large;
+    color: #311712;
+}
+
+.ala-carte-item td:nth-child(1) {
+    width: 71.5%; 
+}
+
+.ala-carte-item td:nth-child(2) {
+    width: 9.6%; 
+}
+
+.buttons-box {
+    text-align: right;
+    padding: 2%;
+}
+
+.proceed {
+   text-decoration: none;
+   text-align: right;
+   background-color: #311712; 
+   color: white;
+   padding: 10px 15px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   font-size: 23px;
+   font-family: "Luckiest Guy", cursive;
+   font-weight: 400;
+   font-style: normal;
+   box-shadow: 0 7px #999;
+}
+
+.proceed:hover {
+   background-color: #45a049;
+   text-decoration: none;
+}
+
+.proceed:active{
+   background-color: #45a049;
+   box-shadow: 0 5px #666;
+   transform: translateY(4px);
+}
+
+.edit-cart {
+    text-decoration: none;
+    text-align: right;
+    background-color: white; 
+    color: #311712;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 23px;
+    font-family: "Luckiest Guy", cursive;
+    font-weight: 400;
+    font-style: normal;
+    box-shadow: 0 7px #999;
+ }
+ 
+ .edit-cart:hover {
+    background-color: #45a049;
+    text-decoration: none;
+ }
+ 
+ .edit-cart:active{
+    background-color: #45a049;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+ }
