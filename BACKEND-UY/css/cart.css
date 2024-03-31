@@ -1,0 +1,71 @@
+/* -----------------ALL CART UI ----------------- */
+
+.cart-main-box {
+    background-color: #CED3D7;
+    margin-left: 5%;
+    margin-right: 5%;
+    border-radius: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+  
+.cart-item-box {
+    margin: 2%;
+    border-radius: 15px;
+    background-color: white;
+    font-family: "Luckiest Guy", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 23px;
+    padding: 2%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.combo-meal-box {
+    color: #D4471F;
+}
+
+.order-item {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+    font-size: large;
+    color: #311712;
+    padding-left: 5%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+}
+
+td:nth-child(1) {
+    width: 70%; 
+}
+
+td:nth-child(2) {
+    width: 10%; 
+}
+
+td:nth-child(2),
+td:nth-child(3) {
+    text-align: center;
+}
+
+.orig-price {
+    color: gray;
+    text-decoration: line-through;
+}
+
+.price td:nth-child(2) {
+    color:#D4471F;
+}
