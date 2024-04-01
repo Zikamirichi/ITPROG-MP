@@ -174,7 +174,7 @@
             echo "Only .jpg files allowed, please try again.";
         }
     } else {
-        echo "No image uploaded.";
+        echo "";
     }
 }
                 ?>
