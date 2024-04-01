@@ -155,7 +155,7 @@
                                     echo "<table>";
                                         echo "<tr>";
                                             echo "<td>$mainName</td>";
-                                            echo "<td>$quantity</td>";
+                                            echo "<td>x $quantity</td>";
                                             echo "<td>Php $totalMainPrice</td>";
                                         echo "</tr>";
                                     echo "</table>";
@@ -171,7 +171,7 @@
                                     echo "<table>";
                                         echo "<tr>";
                                             echo "<td>$sideName</td>";
-                                            echo "<td>$quantity</td>";
+                                            echo "<td>x $quantity</td>";
                                             echo "<td>Php $totalSidePrice</td>";
                                         echo "</tr>";
                                     echo "</table>";
@@ -187,7 +187,7 @@
                                     echo "<table>";
                                         echo "<tr>";
                                             echo "<td>$drinkName</td>";
-                                            echo "<td>$quantity</td>";
+                                            echo "<td>x $quantity</td>";
                                             echo "<td>Php $totalDrinkPrice</td>";
                                         echo "</tr>";
                                     echo "</table>";
@@ -240,9 +240,6 @@
                 sessionStorage.setItem('scrollPos', window.scrollY);
             };
         };
-
-        
-
     </script>
 
     <?php

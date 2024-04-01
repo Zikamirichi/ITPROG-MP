@@ -194,11 +194,6 @@
             
                 $order = new Order($orderID); 
                 $order->setOrder($count, $mainID); // Set new order
-            
-                // Output for testing REMOVE LATER
-                echo "Order ID: " . $order->getOrderID() . "<br>";
-                echo "Quantity: " . $order->getQuantity() . "<br>";
-                echo "Item ID: " . $mainID . "<br>";
               }
             
             

@@ -193,11 +193,6 @@
             
                 $order = new Order($orderID); 
                 $order->setOrder($count, $drinkID); // Set new order
-            
-                // Output for testing REMOVE LATER
-                echo "Order ID: " . $order->getOrderID() . "<br>";
-                echo "Quantity: " . $order->getQuantity() . "<br>";
-                echo "Item ID: " . $drinkID . "<br>";
               }
             
             
