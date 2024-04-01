@@ -215,16 +215,17 @@
 
                 <!-- ---------------- TO EDIT -------------------->
 
-                <!-- <br><a href="editOrder.php">Edit Order</a>
-                <br><a href="payOptions.php">Proceed to Payment</a> -->
-                <div class="buttons-box">
-                    <a class="edit-cart" href="editOrder.php">Edit Order</a>
-                    <a class="proceed" href="payOptions.php">Proceed to Payment</a>
-                </div>
+            <!-- <br><a href="editOrder.php">Edit Order</a>
+            <br><a href="payOptions.php">Proceed to Payment</a> -->
+            <div class="buttons-box">
+                <a class="edit-cart" href="editOrder.php">Edit Order</a>
+                <a class="proceed" href="payOptions.php" >Proceed to Payment</a>
             </div>
+
+        
+            
         </div>
     </div>
-
     <script> // Reference: https://stackoverflow.com/questions/17642872/refresh-page-and-keep-scroll-position
         window.onload = function() {
             // Save scroll position
@@ -239,6 +240,9 @@
                 sessionStorage.setItem('scrollPos', window.scrollY);
             };
         };
+
+        
+
     </script>
 
     <?php

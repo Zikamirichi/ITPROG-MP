@@ -20,7 +20,7 @@
             display: none;
             position: absolute;
             length: 50%;
-            width: 50%;
+            width: 30%; /* updated width */
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -29,6 +29,18 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
+        }
+
+        h2 {
+            padding: 25px;
+            margin: 0;
+            margin-bottom: 30px;
+            background-color: #D4471F;
+            font-family: "Luckiest Guy", cursive;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 50px;
+            color: white;
         }
     </style>
 </head>
@@ -127,7 +139,7 @@
                 echo "<h2>$name</h2>";
 
                 // Limit style to 10%, may edit later
-                echo "<img src='../../images/$imageName' alt='" . $name . "' style='width: 10%; height: 10%;'>";
+                echo "<img src='../../images/$imageName' alt='" . $name . "' style='width: 300px; height: 250px; object-fit: cover;'>";
             
                 echo "<div class='counter'>";
                     echo "<form method='post'>";
