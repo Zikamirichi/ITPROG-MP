@@ -161,8 +161,41 @@
                 </div>
                 <!-- ---------- ALA CARTE EDIT UI END------------- -->
 
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        // This code won't run until the DOM is fully loaded
+                        var confirmCancelBtn = document.getElementById('confirmCancel');
+                        if (confirmCancelBtn) {
+                            confirmCancelBtn.addEventListener('click', function() {
+                                window.location.href = 'cart.php';
+                            });
+                        }
+                    });
+                </script>
+
+                <!-- Cancel Order Confirmation Prompt -->
+                <div class="modal fade" id="cancelConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalLongTitle">Cancel Order</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to cancel your order and go back? All unsaved changes will be lost.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="home-keep" data-dismiss="modal">No</button>
+                            <button type="button" class="home-delete" id="confirmCancel">Yes, Discard all changes</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="buttons-box">
-                    <a href="cart.php" onclick="return confirm('Are you sure you want to discard changes?')">
+                    <a href="#" data-toggle="modal" data-target="#cancelConfirmationModal">
                     <button class="edit-cart" type="button">Back</button></a> <!-- Back button with confirmation -->
                     <button class="proceed" type="submit" name="save_changes">Save</button> <!-- Save button -->                
                 </div>
