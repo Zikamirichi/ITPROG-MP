@@ -1,0 +1,65 @@
+h2 {
+    padding: 25px;
+    margin: 0;
+    margin-bottom: 30px;
+    background-color: #D4471F;
+    font-family: "Luckiest Guy", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 30px;
+    color: white;
+}
+
+/* Styling the input field */
+.input-field {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+/* Styling the submit button */
+.submit-button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    background-color: #D4471F;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #B53515;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.close-icon {
+    color: #555;
+    font-size: 20px;
+}
+
+.close-button:hover .close-icon {
+    color: #555;
+}
+
+.close-button:hover {
+    background-color: #eee;
+}
+

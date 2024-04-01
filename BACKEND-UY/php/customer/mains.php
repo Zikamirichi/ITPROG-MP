@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../../css/navbar.css" />
     <link rel="stylesheet" type="text/css" href="../../css/dish.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/prompts.css" />
     <title>Main Dishes</title>
     <style>
         body {
@@ -49,7 +50,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: lightgrey;
+            background-color: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -64,9 +65,64 @@
             font-family: "Luckiest Guy", cursive;
             font-weight: 400;
             font-style: normal;
-            font-size: 50px;
+            font-size: 30px;
             color: white;
         }
+
+        /* Styling the input field */
+        .input-field {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        /* Styling the submit button */
+        .submit-button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            background-color: #D4471F;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            outline: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #B53515;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #fff;
+            border: none;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .close-icon {
+            color: #555;
+            font-size: 20px;
+        }
+
+        .close-button:hover .close-icon {
+            color: #555;
+        }
+
+        .close-button:hover {
+            background-color: #eee;
+        }
+
+
     </style>
 </head>
 <body>
@@ -159,6 +215,7 @@
         
             // Hidden div
             echo "<div id='$mainID' class='hidden-div'>";
+                echo "<button class='close-button' onclick='closeModal(\"$mainID\")'><span class='close-icon'>&times;</span></button>"; // Close button
                 echo "<h2>$name</h2>";
                 
                 // Limit style to 10%, may edit later
@@ -166,9 +223,9 @@
             
                 echo "<div class='counter'>";
                     echo "<form method='post'>";
-                        echo "<input type='hidden' name='item' value='$mainID'>";
-                        echo "<input type='number' name='count' value='1' min='1' max='$maxStock'>";
-                        echo "<input type='submit' name='submit'>";
+                        echo "<input type='hidden' name='item' value='$mainID'><br>";
+                        echo "<input type='number' name='count' value='1' min='1' max='$maxStock' class='input-field'>";
+                        echo "<input type='submit' class='submit-button' name='submit'>";
                     echo "</form>";
                 echo "</div>";
             echo "</div>";
@@ -188,7 +245,12 @@
             
             divToShow.style.display = "none";
         }
-    }
+        }
+
+        function closeModal(modalID) {
+            var modal = document.getElementById(modalID);
+            modal.style.display = "none";
+        }
     </script>
 
     <?php
