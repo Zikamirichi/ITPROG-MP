@@ -14,6 +14,11 @@
     <link rel="stylesheet" type="text/css" href="../../css/dish.css" />
     <link rel="stylesheet" type="text/css" href="../../css/cart.css" />
 
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <?php
         //header("refresh: 5; URL=processOrders.php"); //Refresh page every 5 seconds to reflect combo changes
     ?> 
@@ -59,9 +64,42 @@
         $totalBill = 0; // Initialize total bill as zero
     ?>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // This code won't run until the DOM is fully loaded
+            var confirmCancelBtn = document.getElementById('confirmCancel');
+            if (confirmCancelBtn) {
+                confirmCancelBtn.addEventListener('click', function() {
+                    window.location.href = 'cancelOrder.php';
+                });
+            }
+        });
+    </script>
+
+    <!-- Cancel Order Confirmation Prompt -->
+    <div class="modal fade" id="cancelConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLongTitle">Cancel Order</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to cancel your order and go back? All unsaved changes will be lost.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No, Keep My Order</button>
+                <button type="button" class="btn btn-primary" id="confirmCancel">Yes, Cancel Order</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
     <div class="navigation-bar">
         <ul>
-            <li><a href="cancelOrder.php">
+            <li><li><a href="#" data-toggle="modal" data-target="#cancelConfirmationModal">
                     <div class="navbar-icon">
                         <img src="../../images/white-home-button.png" alt="Homepage">
                     </div>
@@ -186,7 +224,8 @@
             </div>
         </div>
     </div>
-        <script> // Reference: https://stackoverflow.com/questions/17642872/refresh-page-and-keep-scroll-position
+
+    <script> // Reference: https://stackoverflow.com/questions/17642872/refresh-page-and-keep-scroll-position
         window.onload = function() {
             // Save scroll position
             var scrollPos = sessionStorage.getItem('scrollPos');
