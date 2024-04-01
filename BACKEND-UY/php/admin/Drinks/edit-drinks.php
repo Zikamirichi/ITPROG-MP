@@ -257,47 +257,50 @@
     </div>
 
     <script>
-        var formEdited = false;
+    var formEdited = false;
+    var originalFormValues = {};
 
-        function markAsEdited() {
-            formEdited = true;
-        }
+    function markAsEdited() {
+        formEdited = true;
+    }
 
-        window.onbeforeunload = function() {
-            if (formEdited) {
-                return "You have unsaved changes. Are you sure you want to leave this page?";
-            }
-        };
+    function resetFormEdited() {
+        formEdited = false;
+    }
 
-        function resetFormEdited() {
-            formEdited = false;
-        }
-
-        var formInputs = document.querySelectorAll('input, select, textarea');
-        formInputs.forEach(function(input) {
-            input.addEventListener('input', markAsEdited);
-        });
-
-        document.querySelector('form').addEventListener('submit', resetFormEdited);
-
-        window.addEventListener('beforeunload', function(event) {
-            if (formEdited) {
-                document.getElementById('unsaved-prompt').style.display = 'block';
-                event.preventDefault();
-            }
-        });
-
-        document.getElementById('exit-btn').addEventListener('click', function() {
-            window.location.href = 'drinks-table.php';
-        });
-
-        function cancel() {
-            document.getElementById('unsaved-prompt').style.display = 'none';
-         }
-      document.getElementById('cancel-btn').addEventListener('click', cancel);
-                              
-
+    function cancel() {
+        document.getElementById('unsaved-prompt').style.display = 'none'; 
+        formEdited = false; 
         
+        
+        for (var key in originalFormValues) {
+            if (originalFormValues.hasOwnProperty(key)) {
+                document.getElementById(key).value = originalFormValues[key];
+            }
+        }
+    }
+
+    var formInputs = document.querySelectorAll('input[type="text"], input[type="number"]');
+    formInputs.forEach(function(input) {
+
+        originalFormValues[input.id] = input.value;
+        input.addEventListener('input', markAsEdited);
+    });
+
+    document.getElementById('cancel-btn').addEventListener('click', cancel);
+
+    document.getElementById('exit-btn').addEventListener('click', function() {
+        window.location.href = 'drinks-table.php';
+    });
+
+    document.querySelector('.back-button').addEventListener('click', function(event) {
+        if (formEdited) {
+            document.getElementById('unsaved-prompt').style.display = 'block'; 
+            event.preventDefault(); 
+        }
+    });
+
+    document.getElementById('edit-drinks-form').addEventListener('submit', resetFormEdited);
     </script>
 
 </body>
