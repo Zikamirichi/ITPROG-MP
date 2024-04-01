@@ -232,7 +232,7 @@
                 Are you sure you want to save the changes?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back</button>
+                <button type="button" class="back-button" data-dismiss="modal">Back</button>
                 <button type="button" id="confirmSaveButton" class="submit-bttn">Save Changes</button>
             </div>
         </div>
