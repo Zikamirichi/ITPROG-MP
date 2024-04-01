@@ -191,10 +191,9 @@
             
             else {
                 
-                echo "Error uploading image";
+                echo "";
             }
 
-            echo "Record has been updated!";
         }
     ?>
 
