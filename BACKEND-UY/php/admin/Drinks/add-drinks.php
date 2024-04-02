@@ -136,77 +136,47 @@
     </div>
 
     <script>
-    var formEdited = false;
-
-    
-    function markAsEdited() {
-        formEdited = true;
-    }
+    var originalFormValues = {};
 
     function resetFormEdited() {
-        formEdited = false;
+        for (var key in originalFormValues) {
+            if (originalFormValues.hasOwnProperty(key)) {
+                document.getElementById(key).value = originalFormValues[key];
+            }
+        }
     }
 
-    function cancel() {
-        document.getElementById('unsaved-prompt').style.display = 'none'; 
-        formEdited = false; 
-       
+    function hasNonEmptyInputs() {
         var formInputs = document.querySelectorAll('input[type="text"], input[type="number"]');
-        formInputs.forEach(function(input) {
-            input.value = '';
-        });
+        for (var i = 0; i < formInputs.length; i++) {
+            if (formInputs[i].value.trim() !== '') {
+                return true;
+            }
+        }
+        return false;
     }
 
-    var formInputs = document.querySelectorAll('input[type="text"], input[type="number"]');
-    formInputs.forEach(function(input) {
-        input.addEventListener('input', markAsEdited);
+    document.getElementById('cancel-btn').addEventListener('click', function() {
+        document.getElementById('unsaved-prompt').style.display = 'none';
+        resetFormEdited();
     });
 
-    document.getElementById('cancel-btn').addEventListener('click', cancel);
-
     document.getElementById('exit-btn').addEventListener('click', function() {
-        window.location.href = 'drinks-table.php'; 
+            window.location.href = 'drinks-table.php';
     });
 
     document.querySelector('.back-button').addEventListener('click', function(event) {
-        if (formEdited) {
-            document.getElementById('unsaved-prompt').style.display = 'block'; 
-            event.preventDefault(); 
+        if (hasNonEmptyInputs()) {
+            document.getElementById('unsaved-prompt').style.display = 'block';
+            event.preventDefault();
         }
     });
 
-    document.getElementById('add-drinks-form').addEventListener('submit', resetFormEdited);
+    document.getElementById('add-drinks-form').addEventListener('submit', function() {
+        resetFormEdited();
+    });
     </script>
 
-    <!-- Modal for Add Data Success -->
-    <div class="modal fade <?php if(isset($_POST['save'])) {echo 'show d-block';} ?>" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="background: rgba(0, 0, 0, 0.5);">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Success!</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            Record has been successfully inserted!
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <script>
-        // Script to manually close the modal
-        $(document).ready(function() {
-            $(".close, .btn-secondary").click(function() {
-                $("#exampleModalCenter").removeClass("show d-block").hide();
-            });
-            
-        });
-    </script>
 
     <?php
         error_reporting(E_ERROR | E_PARSE);
