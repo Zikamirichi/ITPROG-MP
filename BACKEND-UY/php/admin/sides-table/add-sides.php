@@ -127,8 +127,8 @@
     <div class="prompt-card" id="unsaved-prompt">
         <p>Any unsaved changes will be lost.</p>
         <div class="button-container">
-            <button class="exit-button" id="exit-btn">Exit</button>
-            <button class="cancel-button" id="cancel-btn">Cancel</button>
+            <button class="back-button" id="cancel-btn">Cancel</button>
+            <button class="btn btn-danger" id="exit-btn">Exit</button>
         </div>
     </div>
 
