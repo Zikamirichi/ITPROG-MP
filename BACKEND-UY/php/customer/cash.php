@@ -22,7 +22,7 @@
         margin: 0;
         color: #ffffff;
         background-color: #D4471F;
-        padding: 50px 0; /* Padding applied only to the header */
+        padding: 50px 0; 
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
         font-size: 36px;

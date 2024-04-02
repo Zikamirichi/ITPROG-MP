@@ -57,7 +57,7 @@
       background-color: #CED3D7;
       color: #000000;
       border: none;
-      padding: 15px 45px; /* 30% longer padding */
+      padding: 15px 45px; 
       border-radius: 50px;
       font-family: 'Luckiest Guy', cursive;
       font-size: 30px;

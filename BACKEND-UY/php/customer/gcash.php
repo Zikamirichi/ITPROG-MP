@@ -8,8 +8,8 @@
             border-radius: 5px;
             text-align: center;
             margin: 20px auto;
-            width: 600px; /* Increased width of the card container */
-            height: 650px; /* Increased height of the card container */
+            width: 600px; 
+            height: 650px; 
             font-family: 'Luckiest Guy', cursive;
             position: relative;
             aspect-ratio: 1/1;
@@ -36,11 +36,11 @@
             background-color: #D4471F;
             color: #ffffff;
             border: none;
-            padding: 10px 20px; /* Increased padding for the close button */
+            padding: 10px 20px; 
             font-family: 'Luckiest Guy', cursive;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 30px; /* Larger font size for the close button */
+            font-size: 30px; 
         }
 
         .gcash-prompt .close:hover {
@@ -48,24 +48,24 @@
         }
 
         .gcash-prompt .total-bill {
-            font-size: 24px; /* Font size for total bill text */
-            margin-bottom: 20px; /* Add margin below total bill text */
-            font-family: 'Luckiest Guy', cursive; /* Match the font family */
-            color: #333; /* Match the font color */
-            font-weight: bold; /* Make the font bold */
+            font-size: 24px; /
+            margin-bottom: 20px; 
+            font-family: 'Luckiest Guy', cursive; 
+            color: #333; 
+            font-weight: bold;
         }
 
         .gcash-prompt .qr-code {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 63%; /* Adjust height to accommodate the total bill text */
-            margin-top: 100px; /* Adjust margin to leave space for the header */
-            margin-bottom: 20px; /* Add margin below the QR code */
+            height: 63%; 
+            margin-top: 100px;
+            margin-bottom: 20px;
         }
 
         .gcash-prompt .qr-code img {
-            max-width: 100%; /* Adjust the size of the QR code image */
+            max-width: 100%; 
             max-height: 100%;
         }
 
@@ -73,15 +73,15 @@
             background-color: #CED3D7;
             color: #000000;
             border: none;
-            padding: 15px 45px; /* 30% longer padding */
+            padding: 15px 45px; 
             border-radius: 50px;
             font-family: 'Luckiest Guy', cursive;
             font-size: 30px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            width: 200px; /* Make the button wider */
+            width: 200px;
             text-transform: uppercase;
-            font-weight: bold; /* Make the font bold */
+            font-weight: bold;
         }
 
         .gcash-prompt button:hover {
@@ -110,7 +110,7 @@
             window.location.href = 'paid.php';
         });
 
-        // Add an event listener to the close button
+        
         document.querySelector('.gcash-prompt .close').addEventListener('click', () => {
             location.href = 'payOptions.php';
         });
