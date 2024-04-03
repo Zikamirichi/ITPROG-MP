@@ -1,5 +1,53 @@
 /* -----------------ALL CART UI ----------------- */
 
+/*pay prompt css */
+    .options a{
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 15px 0;
+    border-radius: 10px; 
+    background-color: #CED3D7; 
+    color: #000;
+    font-family: 'Luckiest Guy', cursive; 
+    font-size: 18px; 
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 7px #999;
+    }
+    
+
+   .options a:hover {
+    background-color: #311712;
+    color: #ffffff;
+    }
+    
+    .cash-image {
+    max-width: 50%;
+    max-height: 50%;
+    }
+
+    .done-button {
+    text-decoration: none;
+    text-align: right;
+    background-color: #311712; 
+    color: white;
+    margin-top: 20px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 23px;
+    font-family: "Luckiest Guy", cursive;
+    font-weight: 400;
+    font-style: normal;
+    box-shadow: 0 7px #999;
+    }
+
+    .done-button:hover {
+    background-color: #45a049;
+    }
+
+
 .cart-main-box {
     background-color: #CED3D7;
     margin-left: 5%;

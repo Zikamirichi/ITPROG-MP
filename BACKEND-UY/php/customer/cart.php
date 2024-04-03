@@ -249,10 +249,182 @@
 
                     // Redirect to payOptions.php on "YES" click
                     $("#confirmButton").click(function() {
-                        window.location.href = "payOptions.php";
+                        $("#confirmOrder").modal('hide');
+                        $("#paymentOptionsModal").modal('show'); 
                     });
                 });
             </script>
+
+            <!-- Modal for payment options --> 
+            <div class="modal fade" id="paymentOptionsModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true"> 
+                <div class="modal-dialog modal-dialog-centered" role="document"> 
+                    <div class="modal-content"> 
+                        <div class="modal-header"> <h5 class="modal-title" id="exampleModalLongTitle">PAYMENT OPTIONS</h5> 
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"> 
+                            <span aria-hidden="true">&times;</span> 
+                        </button> 
+                    </div> 
+                    <div class="modal-body"> 
+                        <div class="options"> 
+                            <a href="#" onclick="openGcashModal()" >GCash</a><br>
+                            <a href="#" onclick="openCreditCardModal()">Credit Card</a><br>
+                            <a href="#" onclick="openCashModal()">Cash</a><br>
+                        </div> 
+                    </div> 
+                </div> 
+            </div> 
+        </div>
+
+              <!-- GCash Payment Modal --> 
+              <div class="modal fade" id="gcashModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true"> 
+                <div class="modal-dialog modal-dialog-centered" role="document"> 
+                    <div class="modal-content"> 
+                        <div class="modal-header"> 
+                            <h2 class="modal-title">GCASH PAYMENT</h2> 
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> 
+                                <span aria-hidden="true">&times;</span> 
+                            </button> 
+                        </div> 
+                        <div class="modal-body"> 
+                            <div class="qr-code">  
+                                <img src="GCASH_QR.jpg" alt="GCash QR Code" class="cash-image"> 
+                            </div> 
+                            <?php 
+                            $totalBill = $_SESSION['totalBill']; 
+                            echo "<h3 class='total-bill' style='font-family: \"Luckiest Guy\", cursive;'>Total Bill: Php $totalBill</h3>";
+                            ?> 
+                            <button id="submit-gcash" class="done-button">DONE</button> 
+                        </div> 
+                    </div> 
+                </div>
+            </div>
+
+            <!-- Credit Card Payment Modal --> 
+            <div class="modal fade" id="creditCardModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true"> 
+                <div class="modal-dialog modal-dialog-centered" role="document"> 
+                    <div class="modal-content"> 
+                        <div class="modal-header"> 
+                            <h2 class="modal-title">Credit Card</h2> 
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> 
+                                <span aria-hidden="true">&times;</span> 
+                            </button> 
+                        </div> 
+                        <div class="modal-body"> 
+                            <div class="card-details"> 
+                                <h3 style="font-family: 'Luckiest Guy', cursive;">Tap Your Credit Card Here to Pay</h3> 
+                                <img src="../../images/tap_icon.png" alt="Tap Icon" class="cash-image"> 
+                            </div> 
+                            <?php  
+                            $totalBill = $_SESSION['totalBill']; 
+                            echo "<h3 style='font-family: \"Luckiest Guy\", cursive;'>Total Bill: Php $totalBill</h3>";  
+                            ?> 
+                            <button id="submit-credit-card" class="done-button">DONE</button> 
+                        </div> 
+                    </div>  
+                </div> 
+            </div>
+
+            <!-- Cash Payment Modal --> 
+            <div class="modal fade" id="cashModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true"> 
+                <div class="modal-dialog modal-dialog-centered" role="document"> 
+                    <div class="modal-content"> 
+                        <div class="modal-header"> 
+                            <h2 class="modal-title">CASH PAYMENT</h2> 
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> 
+                                <span aria-hidden="true">&times;</span> 
+                            </button> 
+                        </div> 
+                        <div class="modal-body"> 
+                            <div class="cash-details" style="font-size: 17px; font-family: 'Luckiest Guy', cursive;"> 
+                                <p>TOTAL BILL: Php <?php echo $totalBill; ?></p> 
+                            </div>
+                            <?php 
+                            $totalBill = $_SESSION['totalBill']; 
+                            $currentAmount = isset($_SESSION['currentAmount']) ? $_SESSION['currentAmount'] : 0; 
+                            // Current amount received 
+                            $change = isset($_SESSION['change']) ? $_SESSION['change'] : 0; 
+                            // Change to be dispensed echo 
+                            "<h1>Total Bill: Php $totalBill</h1>"; 
+                            // Check if form is submitted 
+                            if ($_SERVER["REQUEST_METHOD"] == "POST") { 
+                                // Get the input value 
+                                $inputAmount = isset($_POST['amount']) ? $_POST['amount'] : 0; 
+                                $inputAmount = floatval($inputAmount); 
+                                // Update the current amount received 
+                                $currentAmount += $inputAmount; $_SESSION['currentAmount'] = $currentAmount; 
+                                // Check if payment is successful 
+                                if ($currentAmount == $totalBill) { 
+                                    echo "<h3 style='font-family: \"Luckiest Guy\", cursive;'>Payment was successful!</h3>"; 
+                                    // Reset current amount 
+                                    } 
+                                elseif ($currentAmount < $totalBill) { 
+                                    $amountNeeded = $totalBill - $currentAmount; 
+                                    echo "<h3 style='font-family: \"Luckiest Guy\", cursive;'>You have paid $currentAmount. You need to pay " . $amountNeeded . " more.</h3>"; 
+                                    } 
+                                else { 
+                                    // Calculate change 
+                                    $change = $currentAmount - $totalBill; 
+                                    echo "<h3 style='font-family: \"Luckiest Guy\", cursive;'>Payment successful. Change dispensed: $change</h3>"; 
+                                    // Reset current amount 
+                                }                                                                                //if these logics are for the pay successful modal pa ayos nalang
+                            } 
+                                ?> 
+                            <form method="post" action="<?= $_SERVER['PHP_SELF'] ?>"> 
+                                <label for="amount" style="font-size: 17px; font-family: 'Luckiest Guy', cursive;">AMOUNT WE RECEIVED :</label> 
+                                <input type="number" style="font-family: 'Luckiest Guy', cursive;" id="amount" name="amount"> 
+                                <input type="submit" id="submit-cash" value="Done" class="done-button"> 
+                            </form> 
+                        </div> 
+                    </div> 
+                </div> 
+            </div>
+              
+              <script> 
+              function openGcashModal() { 
+                $('#gcashModal').modal('show'); 
+                $('#paymentOptionsModal').modal('hide'); 
+            } document.addEventListener('DOMContentLoaded', function() { 
+                document.getElementById('submit-gcash').addEventListener('click', function() { 
+                    window.location.href = 'paid.php'; }); //Change this nalang for the payment successful modal
+                    $('#gcashModal').on('hidden.bs.modal', function (e) { 
+                        $("#gcashModal").modal('hide');
+                        $("#paymentOptionsModal").modal('show'); 
+                        }); 
+                    }); 
+                </script>
+
+                <script>
+                function openCreditCardModal() { 
+                    $('#creditCardModal').modal('show'); 
+                    $('#paymentOptionsModal').modal('hide'); 
+                }
+                 document.addEventListener('DOMContentLoaded', function() { 
+                    document.getElementById('submit-credit-card').addEventListener('click', function() { 
+                        window.location.href = 'paid.php'; //Change this nalang for the payment successful modal
+                    }); 
+                    $('#creditCardModal').on('hidden.bs.modal', function(e) { 
+                        $("#creditCardModal").modal('hide'); 
+                        $("#paymentOptionsModal").modal('show'); 
+                    }); 
+                }); 
+                </script>
+
+                <script>
+                 function openCashModal() { 
+                    $('#cashModal').modal('show'); 
+                    $('#paymentOptionsModal').modal('hide'); 
+                } 
+                document.addEventListener('DOMContentLoaded', function() { 
+                    document.getElementById('submit-cash').addEventListener('click', function() { 
+                        window.location.href = 'paid.php'; //Change this nalang for the payment successful modal
+                    }); 
+                    $('#cashModal').on('hidden.bs.modal', function(e) { 
+                        $("#cashModal").modal('hide'); 
+                        $("#paymentOptionsModal").modal('show'); 
+                    }); 
+                });
+                </script>
+
 
             <div class="buttons-box">
                 <a class="edit-cart" href="editOrder.php">Edit Order</a>
