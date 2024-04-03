@@ -19,13 +19,18 @@
 		  aspect-ratio: 1/1;
 		}
 
-		.cash-prompt h2 {
-		  margin-top: 0;
-		  color: #ffffff;
-		  background-color: #D4471F;
-		  padding: 10px;
-		  border-radius: 5px;
-		}
+    .cash-prompt h2 {
+        margin: 0;
+        color: #ffffff;
+        background-color: #D4471F;
+        padding: 50px 0; /* Padding applied only to the header */
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        font-size: 36px;
+        font-weight: bold; 
+        width: 100%;
+        box-sizing: border-box;
+    }
 
 		.cash-prompt .close {
 		  position: absolute;
