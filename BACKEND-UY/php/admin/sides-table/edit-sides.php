@@ -158,15 +158,15 @@
             echo "<form id='saveForm' method='post' action='".$_SERVER['PHP_SELF']."' enctype='multipart/form-data'>";
             // sides info
             echo "<h3>Sides info</h3>";
-            echo "<input type='hidden' name='newMainID' value='".$getSidesInfo["sides_id"]."'>".$getSidesInfo["sides_id"]."<br />";
+            echo "<input type='hidden' name='newMainID' value='".$getSidesInfo["sides_id"]."'>";
             echo "Name: <input type='text' name='newName' value='".$getSidesInfo["name"]."' size='150'> <br />";
             echo "Price: <input type='number' name='newPrice' value='".$getSidesInfo["price"]."' size='150' step=0.01> <br />";
 
             // Nutrition facts
             echo "<h3>Nutrition facts</h3>";
-            echo "<input type='hidden' name='newID' value='".$getFacts["nutr_facts_id"]."'>".$getFacts["nutr_facts_id"]."<br />";
+            echo "<input type='hidden' name='newID' value='".$getFacts["nutr_facts_id"]."'>";
             echo "Description: <input type='text' name='newDesc' value='".$getFacts["desc"]."' size='10' placeholder='Maximum of 44 characters' maxlength='44'> <br />";
-            echo "Ingredients: <input type='text' name='newIngredients' value='".$getFacts["Ingredients"]."' size='10' placeholder='Maximum of 500 characters' maxlength='500'> <br />";
+            echo "Ingredients: <input type='text' name='newIngredients' value='".$getFacts["Ingredients"]."' size='10' placeholder='Maximum of 44 characters' maxlength='44'> <br />";
             echo "Fat (g) : <input type='number' name='newFat' value='".$getFacts["Fat"]."' min='0' step='0.1'><br />";
             echo "Calories (g) : <input type='number' name='newCalories' value='".$getFacts["Calories"]."' min='0' step='0.1'><br />";
             echo "Carbs (g) : <input type='number' name='newCarbs' value='".$getFacts["Carbs"]."' min='0' step='0.1'><br />";
@@ -174,7 +174,7 @@
 
             // quantity info
             echo "<h3>Stocks info</h3>";
-            echo "<input type='hidden' name='stocksID' value='".$getStocks["stocks_id"]."'>".$getStocks["stocks_id"]."<br />";
+            echo "<input type='hidden' name='stocksID' value='".$getStocks["stocks_id"]."'>";
             echo "Quantity: <input type='number' name='newQuantity' value='".$getStocks["quantity"]."' size='150'> <br />";
 
             // Image
@@ -370,8 +370,8 @@
     $(document).ready(function() {
         // Show confirmation modal when the Save button is clicked
         $("#saveButton").click(function() {
-            // Show the modal
-            $('#confirmationModal').modal('show');
+            // Check for negative values before showing the confirmation modal
+            checkForNegativeValues();
         });
 
         // Handle Save button click inside the modal
@@ -386,6 +386,69 @@
             $("#saveForm").append("<input type='hidden' name='save' value='save'>").submit();
         });
     });
+
+    function checkForNegativeValues() {
+        // Get all input fields
+        var inputs = document.querySelectorAll('input[type="number"]');
+        var negativeValueFound = false;
+
+        // Loop through each input field
+        inputs.forEach(function(input) {
+            // Check if value is negative
+            if (parseFloat(input.value) < 0) {
+                negativeValueFound = true;
+            }
+        });
+
+        // If negative value found, alert the user
+        if (negativeValueFound) {
+            alert("Negative value found. Please correct it.");
+        } else {
+            // If all values are valid, show confirmation modal
+            $('#confirmationModal').modal('show');
+        }
+    }
 </script>
+
+<script>
+    var formEdited = false;
+
+    function markAsEdited() {
+        formEdited = true;
+    }
+
+    function resetFormEdited() {
+        formEdited = false;
+    }
+
+    function cancel() {
+    // Hide the unsaved changes prompt
+    document.getElementById('unsaved-prompt').style.display = 'none'; 
+    // Reset the formEdited flag
+    formEdited = false; 
+
+}
+
+    var formInputs = document.querySelectorAll('input[type="text"], input[type="number"]');
+    formInputs.forEach(function(input) {
+        input.addEventListener('input', markAsEdited);
+    });
+
+    document.getElementById('cancel-btn').addEventListener('click', cancel);
+
+    document.getElementById('exit-btn').addEventListener('click', function() {
+        window.location.href = 'sides-table.php';
+    });
+
+    document.querySelector('.back-button').addEventListener('click', function(event) {
+        if (formEdited) {
+            document.getElementById('unsaved-prompt').style.display = 'block'; 
+            event.preventDefault(); 
+        }
+    });
+
+    document.getElementById('add-sides-form').addEventListener('submit', resetFormEdited);
+</script>
+
 </body>
 </html>
