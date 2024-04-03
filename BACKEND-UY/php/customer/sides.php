@@ -42,103 +42,6 @@
             font-size: 50px;
             color: white;
         }
-
-        /*CSS for prompts */
-        .card-container { 
-            width: 634.7px; 
-            height: 453.2px; 
-            border-radius: 10px; 
-            overflow: hidden; 
-            font-family: 'Luckiest Guy', cursive; 
-            text-transform: uppercase; 
-            background-color: white; 
-        } 
-
-        .header { 
-            height: 72.4px; 
-            background-color: #FF5733; 
-            color: white; 
-            font-size: 24.4px; 
-            text-align: center; 
-            line-height: 72.4px; 
-        } 
-
-        .close-button { 
-            position: absolute; 
-            top: 50%; 
-            right: 20px; 
-            transform: translateY(-50%); 
-            cursor: pointer; 
-        } 
-
-        .close-icon { 
-            width: 44px; 
-            height: 43.9px; 
-            border-radius: 50%; 
-            border: 2px solid white; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            font-size: 24px; 
-            background: transparent; 
-        } 
-
-        .body { 
-            padding: 20px; 
-        } 
-
-        .image { 
-            width: 287.3px;
-             height: 191.4px; 
-             display: block; 
-             margin: 0 auto; 
-            } 
-        .quantity-container { 
-            width: 165.2px; 
-            height: 51.8px; 
-            margin: 20px auto; 
-            text-align: center; 
-        } 
-
-        .quantity-text { 
-            font-size: 23px; 
-        } 
-
-        .quantity-input { 
-            font-size: 23px; 
-            width: 100px; 
-        } 
-        .buttons-container { 
-            display: flex; 
-            justify-content: center; 
-            margin-top: 20px; 
-        } 
-        button { 
-            width: 269.8px; 
-            height: 61.1px; 
-            font-size: 24.4px; 
-            cursor: pointer; 
-            border: none; 
-            border-radius: 30px; 
-            text-transform: uppercase; 
-            font-family: 'Luckiest Guy', cursive; 
-            margin: 0 10px; 
-        } 
-        .cancel-button { 
-            background-color: black; 
-            color: white; 
-        } 
-
-        .confirm-button { 
-            background-color: #FF5733; 
-            color: white; 
-        } 
-
-        .hidden-div {
-            background-color: transparent;  
-            padding: 0; margin: 0; 
-            border: none; 
-        }
     </style>
 </head>
 <body>
@@ -231,42 +134,23 @@
             $maxStock = $stockRow['quantity'];
         
             // Hidden div
-            echo "<form method='post'>";
-            echo "<div id='$sideID' class='hidden-div'>"; 
-            echo "<div class='card-container'>"; 
-            echo "<div class='header'>"; 
-            echo "<div class='header-text'>$name</div>"; 
-            echo "<div class='close-button'>"; 
-            echo "<div class='circle'></div>"; 
-            echo "<div class='circle'></div>"; 
-            echo "<div class='close-icon'>X</div>"; 
-            echo "</div>"; 
-            echo "</div>"; 
-            echo "<div class='body'>"; 
-            echo "<img src='../../images/$imageName' alt='$name' class='image'>"; 
-            echo "<div class='quantity-container'>"; 
-            echo "<div class='quantity-text'>Quantity:</div>"; 
-            echo "<input type='number' name='count' value='1' min='1' max='$maxStock' class='quantity-input'>"; 
-            echo "</div>"; 
-            echo "<div class='buttons-container'>"; 
-            echo "<button type='button' class='cancel-button' onclick='cancelPrompt(\"$sideID\")'>CANCEL</button>";
-            echo "<input type='hidden' name='item' value='$sideID'>"; 
-            echo "<button type='submit' name='submit' class='confirm-button'>CONFIRM</button>"; 
-            echo "</div>"; 
-            echo "</div>"; 
-            echo "</div>"; 
+            echo "<div id='$sideID' class='hidden-div'>";
+                echo "<h2>$name</h2>";
+                
+                // Limit style to 10%, may edit later
+                // style='width: 300px; height: 250px; object-fit: cover;'
+                echo "<img src='../../images/$imageName' alt='" . $name . "' style='width: 300px; height: 250px; object-fit: cover;'>";
+            
+                echo "<div class='counter'>";
+                    echo "<form method='post'>";
+                        echo "<input type='hidden' name='item' value='$sideID'>";
+                        echo "<input type='number' name='count' value='1' min='1' max='$maxStock'>";
+                        echo "<input type='submit' name='submit'>";
+                    echo "</form>";
+                echo "</div>";
             echo "</div>";
-            echo "</form>"; 
         }
   ?>
-
-   <script>
-    function cancelPrompt(drinkID) {
-        var hiddenDiv = document.getElementById(drinkID);
-        hiddenDiv.style.display = 'none'; 
-        document.getElementById('form-' + drinkID).reset(); 
-    }
-   </script>
 
     <script>
         // Function to show the hidden div based on the provided div ID
