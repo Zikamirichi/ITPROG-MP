@@ -103,3 +103,70 @@
     left: -10%; 
     transform: translateY(-50%) translateX(-100%);
 }
+
+
+/* ------- SUBMIT BUTTON AND CANCEL button --------- */
+.submit-button {
+  text-decoration: none;
+  text-align: center;
+  background-color: #311712;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 23px; 
+  font-family: "Luckiest Guy", cursive;
+  font-weight: 400;
+  font-style: normal;
+  box-shadow: 0 7px #999;
+}
+
+.submit-button:hover {
+  background-color: #45a049;
+  color: white;
+  text-decoration: none;
+}
+
+.submit-button:active {
+  background-color: #45a049;
+  color: white;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.cancel-button {
+  text-decoration: none;
+  text-align: right;
+  background-color: 311712; 
+  color: #311712;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 23px;
+  font-family: "Luckiest Guy", cursive;
+  font-weight: 400;
+  font-style: normal;
+  box-shadow: 0 7px #999;
+}
+
+.cancel-button:hover {
+  background-color: #D4471F;
+  color: #311712;
+  text-decoration: none;
+}
+
+.cancel-button:active {
+  background-color: #D4471F;
+  color: #311712;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.cancel-button,
+.submit-button {
+    margin-top: 10px; 
+    margin-right: 10px; 
+}
+
