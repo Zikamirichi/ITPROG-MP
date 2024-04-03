@@ -39,7 +39,7 @@
             padding: 25px;
             margin: 0;
             margin-bottom: 20px;
-            width: 525px;
+            max-width: 525px;
             background-color: #D4471F;
             font-family: "Luckiest Guy", cursive;
             font-weight: 400;
