@@ -226,7 +226,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                    PLEASE SELECT 'YES' TO CONFIRM YOUR ORDER AND PROCEED TO PAYMENT
+                    Please select "YES" to confirm your order and proceed to payment
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="home-keep" data-dismiss="modal">No</button>
