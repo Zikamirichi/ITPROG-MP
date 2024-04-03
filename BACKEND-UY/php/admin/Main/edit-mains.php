@@ -184,61 +184,63 @@ if(isset($_POST["enter"])){
     echo "</form>";
     }
 
-if(isset($_POST["save"])){
+    if(isset($_POST["save"])){
 
-    $mainID = $_POST['newMainID']; 
-    $stocksID = $_POST['stocksID'];
-    $id = $_POST['newID'];
-
-    // nutr update
-    $newDesc = $_POST["newDesc"];
-    $newIngredients = $_POST["newIngredients"];
-    $newFat = $_POST["newFat"];
-    $newCalories = $_POST["newCalories"];
-    $newCarbs = $_POST["newCarbs"];
-    $newProtein = $_POST["newProtein"];
-
-    // stocks update
-    $newQuantity = $_POST["newQuantity"];
-
-    // mains update
-    $newName = $_POST["newName"];
-    $newPrice = $_POST["newPrice"];
-
-    // Handle image upload
-    if ($_FILES['newImage']['name']) {
-        $target_dir = __DIR__ . "/../../../images/";
-        $image = $_FILES['newImage']['name'];
-        $imageExt = pathinfo($image, PATHINFO_EXTENSION);
-
-        // Allow only .jpg files
-        if ($imageExt == "jpg") {
+        $mainID = $_POST['newMainID']; 
+        $stocksID = $_POST['stocksID'];
+        $id = $_POST['newID'];
+    
+        // nutr update
+        $newDesc = $_POST["newDesc"];
+        $newIngredients = $_POST["newIngredients"];
+        $newFat = $_POST["newFat"];
+        $newCalories = $_POST["newCalories"];
+        $newCarbs = $_POST["newCarbs"];
+        $newProtein = $_POST["newProtein"];
+    
+        // stocks update
+        $newQuantity = $_POST["newQuantity"];
+    
+        // mains update
+        $newName = $_POST["newName"];
+        $newPrice = $_POST["newPrice"];
+    
+        // Update the nutrtion facts and stocks tables
+        mysqli_query($conn, "UPDATE nutr_facts set `desc`='$newDesc', Ingredients='$newIngredients', Fat='$newFat', Calories='$newCalories', Carbs='$newCarbs', Protein='$newProtein'
+                            WHERE nutr_facts_id='$id'");
+                            
+        mysqli_query($conn, "UPDATE stocks set `quantity`='$newQuantity'
+                            WHERE stocks_id='$stocksID'");
+    
+    
+        // Handle image upload
+        if ($_FILES['newImage']['name']) {
+            $target_dir = __DIR__ . "/../../../images/";
+            $image = $_FILES['newImage']['name'];
+            $imageExt = pathinfo($image, PATHINFO_EXTENSION); // Extract Image extension
+    
+            // Allow only .jpg files
+            if ($imageExt == "jpg") {
+                
+                $target_file = $target_dir . basename($image);
+                move_uploaded_file($_FILES["newImage"]["tmp_name"], $target_file); // Moves uploaded file to the images folder
+                
+                // Update database with new image name
+                mysqli_query($conn, "UPDATE mains set `name`='$newName', `price`='$newPrice', `image_name`='$image'
+                                    WHERE mains_id='$mainID'");
+            } 
             
-            $target_file = $target_dir . basename($image);
-            move_uploaded_file($_FILES["newImage"]["tmp_name"], $target_file);
-
-            // UPDATE STATEMENTS AFTER SUCCESSFUL IMAGE UPLOAD
-            mysqli_query($conn, "UPDATE nutr_facts set `desc`='$newDesc', Ingredients='$newIngredients', Fat='$newFat', Calories='$newCalories', Carbs='$newCarbs', Protein='$newProtein'
-                        WHERE nutr_facts_id='$id'");
-                        
-            mysqli_query($conn, "UPDATE stocks set `quantity`='$newQuantity'
-                        WHERE stocks_id='$stocksID'");
-            
-            // Update database with new image name
-            mysqli_query($conn, "UPDATE mains set `name`='$newName', `price`='$newPrice', `image_name`='$image'
-                                WHERE mains_id='$mainID'");
+            else {
+                
+                echo "Only .jpg files allowed, please upload another image.";
+            }
         } 
         
-        else {
+        else { // If no image was uploaded, don't update file_name (to revert to previous version)
             
-            echo "Only .jpg files allowed, please try again.";
+            mysqli_query($conn, "UPDATE mains set `name`='$newName', `price`='$newPrice'
+                                    WHERE mains_id='$mainID'");
         }
-    } 
-    
-    else {
-        
-        echo "";
-    }
 }
 ?>
 

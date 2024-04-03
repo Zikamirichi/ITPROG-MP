@@ -180,53 +180,57 @@
         echo "</div>";
         echo "</form>";
     }
-                if(isset($_POST["save"])){
-                    // nutr update
-                    $newID = $_POST["newID"];
-                    $newDesc = $_POST["newDesc"];
-                    $newIngredients = $_POST["newIngredients"];
-                    $newFat = $_POST["newFat"];
-                    $newCalories = $_POST["newCalories"];
-                    $newCarbs = $_POST["newCarbs"];
-                    $newProtein = $_POST["newProtein"];
-                    mysqli_query($conn, "UPDATE nutr_facts SET `desc`='$newDesc', Ingredients='$newIngredients', Fat='$newFat', Calories='$newCalories', Carbs='$newCarbs', Protein='$newProtein'
-                                        WHERE nutr_facts_id='$newID'");
-            
-                    // stocks update
-                    $stocksID = $_POST["stocksID"];
-                    $newQuantity = $_POST["newQuantity"];
-                    mysqli_query($conn, "UPDATE stocks SET `quantity`='$newQuantity'
-                                        WHERE stocks_id='$stocksID'");
-                
-                    // drinks update
-                    $newMainID = $_POST["newMainID"];
-                    $newName = $_POST["newName"];
-                    $newPrice = $_POST["newPrice"];
-                
-                    // Handle image upload
-    if ($_FILES['newImage']['name']) {
-        $target_dir = __DIR__ . "/../../../images/";
-        $image = $_FILES['newImage']['name'];
-        $imageExt = pathinfo($image, PATHINFO_EXTENSION);
-
-        // Allow only .jpg files
-        if ($imageExt == "jpg") {
-            $target_file = $target_dir . basename($image);
-            if (move_uploaded_file($_FILES["newImage"]["tmp_name"], $target_file)) {
+    if(isset($_POST["save"])){
+        // nutr update
+        $newID = $_POST["newID"];
+        $newDesc = $_POST["newDesc"];
+        $newIngredients = $_POST["newIngredients"];
+        $newFat = $_POST["newFat"];
+        $newCalories = $_POST["newCalories"];
+        $newCarbs = $_POST["newCarbs"];
+        $newProtein = $_POST["newProtein"];
+        mysqli_query($conn, "UPDATE nutr_facts SET `desc`='$newDesc', Ingredients='$newIngredients', Fat='$newFat', Calories='$newCalories', Carbs='$newCarbs', Protein='$newProtein'
+                            WHERE nutr_facts_id='$newID'");
+    
+        // stocks update
+        $stocksID = $_POST["stocksID"];
+        $newQuantity = $_POST["newQuantity"];
+        mysqli_query($conn, "UPDATE stocks SET `quantity`='$newQuantity'
+                            WHERE stocks_id='$stocksID'");
+    
+        // drinks update
+        $newMainID = $_POST["newMainID"];
+        $newName = $_POST["newName"];
+        $newPrice = $_POST["newPrice"];
+    
+        // Handle image upload
+        if ($_FILES['newImage']['name']) {
+            $target_dir = __DIR__ . "/../../../images/";
+            $image = $_FILES['newImage']['name'];
+            $imageExt = pathinfo($image, PATHINFO_EXTENSION);
+    
+            // Allow only .jpg files
+            if ($imageExt == "jpg") {
+                $target_file = $target_dir . basename($image);
+                move_uploaded_file($_FILES["newImage"]["tmp_name"], $target_file);
+    
                 // Update database with new image name
                 mysqli_query($conn, "UPDATE drinks SET `names`='$newName', `price`='$newPrice', `image_name`='$image'
                                     WHERE drinks_id='$newMainID'");
-                echo "Record has been updated!";
-            } else {
-                echo "Error uploading image.";
+            } 
+            
+            else {
+                
+                echo "Only .jpg files allowed, please try again.";
             }
-        } else {
-            echo "Only .jpg files allowed, please try again.";
+        } 
+        
+        else { // If no image was uploaded, don't update file_name (to revert to previous version)
+            
+            mysqli_query($conn, "UPDATE drinks SET `names`='$newName', `price`='$newPrice'
+                                    WHERE drinks_id='$newMainID'");
         }
-    } else {
-        echo "";
     }
-}
                 ?>
 
     <hr>

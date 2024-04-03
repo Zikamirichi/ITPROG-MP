@@ -209,25 +209,25 @@
             // sides update
             $newName = $_POST["newName"];
             $newPrice = $_POST["newPrice"];
+
+            // Update the nutrtion facts and stocks tables
+            mysqli_query($conn, "UPDATE nutr_facts set `desc`='$newDesc', Ingredients='$newIngredients', Fat='$newFat', Calories='$newCalories', Carbs='$newCarbs', Protein='$newProtein'
+                    WHERE nutr_facts_id='$id'");
+                                
+            mysqli_query($conn, "UPDATE stocks set `quantity`='$newQuantity'
+                    WHERE stocks_id='$stocksID'");
             
             // Handle image upload
             if ($_FILES['newImage']['name']) {
                 $target_dir = __DIR__ . "/../../../images/";
                 $image = $_FILES['newImage']['name'];
-                $imageExt = pathinfo($image, PATHINFO_EXTENSION);
+                $imageExt = pathinfo($image, PATHINFO_EXTENSION); // Extract Image extension
 
                 // Allow only .jpg files
                 if ($imageExt == "jpg") {
                     
                     $target_file = $target_dir . basename($image);
-                    move_uploaded_file($_FILES["newImage"]["tmp_name"], $target_file);
-
-                    // UPDATE STATEMENTS AFTER SUCCESSFUL IMAGE UPLOAD
-                    mysqli_query($conn, "UPDATE nutr_facts set `desc`='$newDesc', Ingredients='$newIngredients', Fat='$newFat', Calories='$newCalories', Carbs='$newCarbs', Protein='$newProtein'
-                    WHERE nutr_facts_id='$id'");
-                                
-                    mysqli_query($conn, "UPDATE stocks set `quantity`='$newQuantity'
-                    WHERE stocks_id='$stocksID'");
+                    move_uploaded_file($_FILES["newImage"]["tmp_name"], $target_file); // Moves uploaded file to the images folder
                     
                     // Update database with new image name
                     mysqli_query($conn, "UPDATE sides set `name`='$newName', `price`='$newPrice', `image_name`='$image'
@@ -236,15 +236,15 @@
                 
                 else {
                     
-                    echo "Only .jpg files allowed, please try again.";
+                    echo "Only .jpg files allowed, please upload another image.";
                 }
             } 
             
-            else {
+            else { // If no image was uploaded, don't update file_name (to revert to previous version)
                 
-                echo "";
+                mysqli_query($conn, "UPDATE sides set `name`='$newName', `price`='$newPrice'
+                                        WHERE sides_id='$mainID'");
             }
-
         }
     ?>
 
