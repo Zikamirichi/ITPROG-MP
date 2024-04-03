@@ -39,6 +39,18 @@
             border-color: black;
             width: 95%;
         }
+
+        .empty-cart-message{
+  color: #311712;
+  font-family: "Luckiest Guy", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 40px;
+  text-align: center;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  
+}
     </style>
 </head>
 <body>
@@ -131,11 +143,43 @@
     <div class="right-container">
         <div class="select-text">CART</div>
             <div class="cart-main-box">
-            
-                <?php displayCombo($conn, $cartID); ?> 
-                
+
                 <?php
-                    // Places Individual Ala Carte Items in Separate cart-item-boxes
+
+                        // Check if the cart is empty
+                            $cartIsEmpty = true;
+
+                            // Initialize $conn and $cartID if they are not defined
+                            if (!isset($conn)) {
+                                $conn = mysqli_connect("localhost", "root", "") or die ("Unable to connect!". mysqli_error($conn) );
+                                mysqli_select_db($conn, "mydb");
+                            }
+
+                            if (!isset($cartID)) {
+                                $cartID = $_SESSION['cartID'];
+                            }
+
+                            // Loop through each ala carte item and combo item to check if cart is empty
+                            $displayAlacarteResult = displayAlacarte($conn, $cartID);
+                            if (mysqli_num_rows($displayAlacarteResult) > 0) {
+                                $cartIsEmpty = false;
+                            } else {
+                                $displayComboQuery = "SELECT * FROM combo WHERE cart_id = '$cartID'";
+                                $displayComboResult = mysqli_query($conn, $displayComboQuery);
+                                if (mysqli_num_rows($displayComboResult) > 0) {
+                                    $cartIsEmpty = false;
+                                }
+                            }
+
+                            // If the cart is empty, display the message
+                            if ($cartIsEmpty) {
+                                echo "<div class='empty-cart-message'>";
+                                echo "<img src='../../images/sadcart.png' alt='Sad Cart' style='display: block; margin: 0 auto; height: auto;'>";
+                                echo "<div class='empty-cart-message'>Your cart is empty. Order now!</div>";
+                                echo "</div>";
+                                exit; // Stop further execution
+                            }
+                                            // Places Individual Ala Carte Items in Separate cart-item-boxes
                     $displayAlacarteResult = displayAlacarte($conn, $cartID); // Get Ala Carte Items from DB
                     while ($alaCarteRow = mysqli_fetch_assoc($displayAlacarteResult)) { // Loop through all resulting rows in ala_carte query
 
