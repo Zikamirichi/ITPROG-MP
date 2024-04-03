@@ -215,14 +215,50 @@
 
                 <!-- ---------------- TO EDIT -------------------->
 
-            <!-- <br><a href="editOrder.php">Edit Order</a>
-            <br><a href="payOptions.php">Proceed to Payment</a> -->
-            <div class="buttons-box">
-                <a class="edit-cart" href="editOrder.php">Edit Order</a>
-                <a class="proceed" href="payOptions.php" >Proceed to Payment</a>
+                <!-- Modal for confirmation prompt-->
+                <div class="modal fade" id="confirmOrder" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">CONFIRM ORDER</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                    PLEASE SELECT 'YES' TO CONFIRM YOUR ORDER AND PROCEED TO PAYMENT
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="home-keep" data-dismiss="modal">No</button>
+                        <button type="button" class="home-delete" id="confirmButton">Yes</button>
+                    </div>
+                    </div>
+                </div>
             </div>
 
-        
+            <script>
+                $(document).ready(function() {
+                    // When "Proceed to Payment" is clicked, show the modal
+                    $("#proceedToPayment").click(function(e) {
+                        e.preventDefault(); // Prevent default link behavior
+                        $("#confirmOrder").modal('show'); // Correctly use Bootstrap method to show the modal
+                    });
+
+                    // Close the modal on "NO" click or modal close button
+                    // Bootstrap's data-dismiss="modal" automatically handles closing, so you might not need this unless you're doing additional actions
+
+                    // Redirect to payOptions.php on "YES" click
+                    $("#confirmButton").click(function() {
+                        window.location.href = "payOptions.php";
+                    });
+                });
+            </script>
+
+            <div class="buttons-box">
+                <a class="edit-cart" href="editOrder.php">Edit Order</a>
+                <!-- Correctly identified "Proceed to Payment" link for script to target -->
+                <a class="proceed" href="#" id="proceedToPayment">Proceed to Payment</a>
+            </div>
             
         </div>
     </div>
