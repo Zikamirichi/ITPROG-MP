@@ -18,6 +18,16 @@
         .white-text {
             color: white;
         }
+
+        .back-button {
+            background-color: white;
+            color: #311712;
+            border: 1px solid #CED3D7;
+        }
+
+        .back-button:hover {
+            color: #311712;
+        }
     </style>
 </head>
 <body>
@@ -37,7 +47,7 @@
                 <br>
                 <a href="Results/results.php" class="button-table">Results</a>
                 <br> 
-                <a class="back-button" id="logoutBtn" style="color: white" >Logout</a>
+                <a class="btn btn-secondary" id="logoutBtn">Logout</a>
             </div>
         </div>
     </div>
@@ -60,8 +70,8 @@
                 </div>
                 <!-- Modal Footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    <a href="logout.php" class="back-button"  style="color: white">Yes</a>
+                    <button type="button" class="back-button" data-dismiss="modal">No</button>
+                    <a href="logout.php" class="btn btn-secondary">Yes</a>
                 </div>
             </div>
         </div>
