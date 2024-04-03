@@ -15,7 +15,7 @@
             text-align: center;
             margin: 20px auto;
             width: 300px;
-            height: 300px;
+            height: 500px;
             font-family: 'Luckiest Guy', cursive;
             position: relative;
             }
@@ -126,9 +126,21 @@
                 session_start();
                 $cartID = $_SESSION['cartID'];
 
+                // session stuff
+                $totalBill = $_SESSION['totalBill'];
+
+                $currentAmount = isset($_SESSION['currentAmount']) ? $_SESSION['currentAmount'] : $totalBill; // Current amount received
+                $change = isset($_SESSION['change']) ? $_SESSION['change'] : 0; // Change to be dispensed
+
                 //CHANGE $CONN VARIABLES DEPENDING ON PERSONAL DEVICE SETTINGS
                 $conn = mysqli_connect("localhost", "root", "") or die ("Unable to connect!". mysqli_error($conn) );
                 mysqli_select_db($conn, "mydb");
+
+                echo "We recieved a total payment of";
+                echo "<h1>PHP " . $currentAmount . "</h1>";
+
+                echo "Please get your change of";
+                echo "<h1>PHP " . $change . "</h1>";
 
                 // Generate OR NUM
                 $maxORQuery = mysqli_query($conn, "SELECT MAX(CAST(SUBSTRING(OR_num, 3) AS UNSIGNED)) AS maxOR_ FROM or_");

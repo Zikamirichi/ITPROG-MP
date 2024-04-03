@@ -118,8 +118,6 @@
                 
                 echo "Payment was successful!";
                 // Reset current amount
-                unset($_SESSION['currentAmount']);
-                unset($_SESSION['change']);
 
             }
              elseif ($currentAmount < $totalBill) {
@@ -134,8 +132,6 @@
                 $change = $currentAmount - $totalBill;
                 echo "Payment successful. Change dispensed: $change";
                 // Reset current amount
-                unset($_SESSION['currentAmount']);
-                unset($_SESSION['change']);
             }
         }
         ?>
