@@ -12,10 +12,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../../css/navbar.css" />
     <link rel="stylesheet" type="text/css" href="../../css/dish.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/cart.css" />
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <?php
-        header("refresh: 5; URL=processOrders.php"); //Refresh page every 5 seconds to reflect combo changes
-    ?>
+        //header("refresh: 5; URL=processOrders.php"); //Refresh page every 5 seconds to reflect combo changes
+    ?> 
+    
   </head>
     <title>Cart</title>
     <style>
@@ -28,41 +35,25 @@
             display: flex;
         }
 
-        .cart-main-box {
-            background-color: #CED3D7;
-            margin-left: 5%;
-            margin-right: 5%;
-            border-radius: 15px;
-            padding-top: 10px;
-            padding-bottom: 10px;
+        hr {
+            border-color: black;
+            width: 95%;
         }
-
-        .cart-item-box {
-            margin: 2%;
-            border-radius: 15px;
-            background-color: white;
-            font-family: "Luckiest Guy", cursive;
-            font-weight: 400;
-            font-style: normal;
-            font-size: 23px;
-            padding: 10px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            position: relative;
-        }
-
-        /* TO DO:
-        - Divide cart-item-box into 3 parts (dish title, quantity, price)
-        - design for combo meal title
-        - create for total
-        - create - and + for quantity
-        - create confirm and cancel buttons
-        - integrate with prompt messages */
     </style>
 </head>
 <body>
     <?php
         session_start();
+
+        
+        if(!$_SESSION['cart_refreshed']) {
+
+            // Meta refresh code
+            header("refresh:5;url=processOrders.php");
+            
+            $_SESSION['cart_refreshed'] = true; 
+        }
+
         require_once("order.php"); //Adding the order class for OOP purposes
 
         //CHANGE $CONN VARIABLES DEPENDING ON PERSONAL DEVICE SETTINGS
@@ -73,9 +64,42 @@
         $totalBill = 0; // Initialize total bill as zero
     ?>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // This code won't run until the DOM is fully loaded
+            var confirmCancelBtn = document.getElementById('confirmCancel');
+            if (confirmCancelBtn) {
+                confirmCancelBtn.addEventListener('click', function() {
+                    window.location.href = 'cancelOrder.php';
+                });
+            }
+        });
+    </script>
+
+    <!-- Cancel Order Confirmation Prompt -->
+    <div class="modal fade" id="cancelConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLongTitle">Cancel Order</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to cancel your order and go back? All unsaved changes will be lost.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="home-keep" data-dismiss="modal">No, Keep My Order</button>
+                <button type="button" class="home-delete" id="confirmCancel">Yes, Cancel Order</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
     <div class="navigation-bar">
         <ul>
-            <li><a href="homepage.php">
+            <li><li><a href="#" data-toggle="modal" data-target="#cancelConfirmationModal">
                     <div class="navbar-icon">
                         <img src="../../images/white-home-button.png" alt="Homepage">
                     </div>
@@ -106,65 +130,103 @@
 
     <div class="right-container">
         <div class="select-text">CART</div>
-        <div class="cart-main-box">
-            <div class="cart-item-box"> <!-- Display Combo Items in one box -->
+            <div class="cart-main-box">
+            
                 <?php displayCombo($conn, $cartID); ?> 
-            </div>
-            
-            <?php
-                // Places Individual Ala Carte Items in Separate cart-item-boxes
-                $displayAlacarteResult = displayAlacarte($conn, $cartID); // Get Ala Carte Items from DB
-                while ($alaCarteRow = mysqli_fetch_assoc($displayAlacarteResult)) { // Loop through all resulting rows in ala_carte query
+                
+                <?php
+                    // Places Individual Ala Carte Items in Separate cart-item-boxes
+                    $displayAlacarteResult = displayAlacarte($conn, $cartID); // Get Ala Carte Items from DB
+                    while ($alaCarteRow = mysqli_fetch_assoc($displayAlacarteResult)) { // Loop through all resulting rows in ala_carte query
 
-                    $mainName = $alaCarteRow['mainName'];       // Get Item Info from Queries
-                    $mainPrice = $alaCarteRow['mainPrice'];     // Name and Price of Ala Carte Items
-                    $sideName = $alaCarteRow['sideName'];
-                    $sidePrice = $alaCarteRow['sidePrice'];
-                    $drinkName = $alaCarteRow['drinkName'];
-                    $drinkPrice = $alaCarteRow['drinkPrice'];
-                    $quantity = $alaCarteRow['quantity'];
+                        $mainName = $alaCarteRow['mainName'];       // Get Item Info from Queries
+                        $mainPrice = $alaCarteRow['mainPrice'];     // Name and Price of Ala Carte Items
+                        $sideName = $alaCarteRow['sideName'];
+                        $sidePrice = $alaCarteRow['sidePrice'];
+                        $drinkName = $alaCarteRow['drinkName'];
+                        $drinkPrice = $alaCarteRow['drinkPrice'];
+                        $quantity = $alaCarteRow['quantity'];
 
-                    if ($mainName != NULL) { // If the order is a main
+                        if ($mainName != NULL) { // If the order is a main
 
-                        $totalMainPrice = $mainPrice * $quantity; // Calculate total price for main
-                        echo "<div class='cart-item-box'> Main: $mainName - Php $mainPrice * $quantity = Php $totalMainPrice<br> </div>";
+                            $totalMainPrice = $mainPrice * $quantity; // Calculate total price for main
+                            echo "<div class='cart-item-box'>";
+                                echo "<div class='ala-carte-item'>";
+                                    echo "<table>";
+                                        echo "<tr>";
+                                            echo "<td>$mainName</td>";
+                                            echo "<td>x $quantity</td>";
+                                            echo "<td>Php $totalMainPrice</td>";
+                                        echo "</tr>";
+                                    echo "</table>";
+                                echo "</div>";
+                            echo "</div>";
+                        }
+
+                        if ($sideName != NULL) { // If the order is a side   
+
+                            $totalSidePrice = $sidePrice * $quantity; // Calculate total price for side
+                            echo "<div class='cart-item-box'>";
+                                echo "<div class='ala-carte-item'>";
+                                    echo "<table>";
+                                        echo "<tr>";
+                                            echo "<td>$sideName</td>";
+                                            echo "<td>x $quantity</td>";
+                                            echo "<td>Php $totalSidePrice</td>";
+                                        echo "</tr>";
+                                    echo "</table>";
+                                echo "</div>";
+                            echo "</div>";
+                        }
+
+                        if ($drinkName != NULL) { // If the order is a drink
+                        
+                            $totalDrinkPrice = $drinkPrice * $quantity; // Calculate total price for drink
+                            echo "<div class='cart-item-box'>";
+                                echo "<div class='ala-carte-item'>";
+                                    echo "<table>";
+                                        echo "<tr>";
+                                            echo "<td>$drinkName</td>";
+                                            echo "<td>x $quantity</td>";
+                                            echo "<td>Php $totalDrinkPrice</td>";
+                                        echo "</tr>";
+                                    echo "</table>";
+                                echo "</div>";
+                            echo "</div>";
+                        }
                     }
 
-                    if ($sideName != NULL) { // If the order is a side   
-
-                        $totalSidePrice = $sidePrice * $quantity; // Calculate total price for side
-                        echo "<div class='cart-item-box'> Sides: $sideName - Php $sidePrice * $quantity = Php $totalSidePrice<br> </div>";
-                    }
-
-                    if ($drinkName != NULL) { // If the order is a drink
-                    
-                        $totalDrinkPrice = $drinkPrice * $quantity; // Calculate total price for drink
-                        echo "<div class='cart-item-box'> Drinks: $drinkName - Php $drinkPrice * $quantity = Php $totalDrinkPrice<br> </div>";
-                    }
-                }
-            ?>
-            
-            <div class="cart-item-box"> <!-- Display Total For AlaCarte -->
-                <?php 
-                    $totalForAlacarte = displayTotalAlacarte($conn, $cartID); 
-                    echo "Subtotal for Ala Carte: Php $totalForAlacarte <br><br>"; // Subtotal after all ala carte entries
-                ?> 
-            </div>
-
-            <div class="cart-item-box"> <!-- Display Total For Whole Order -->
-                <?php 
+                    $totalForAlacarte = displayTotalAlacarte($conn, $cartID);
                     $totalBill += $totalForAlacarte;
-                    echo "Total for Whole Transaction: Php $totalBill"; // Total bill from combos + ala_carte saved in session
+                ?>
+                
+                <hr>
+                <div class="cart-item-box"> 
+                    <div class="price-total">
+                        <table>
+                            <tr>
+                                <td></td>
+                                <td>TOTAL</td>
+                                <td>PHP <?php echo "$totalBill"; $_SESSION['totalBill'] = $totalBill;?></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
 
-                    $_SESSION['totalBill'] = $totalBill;
-                ?> 
+                <!-- ---------------- TO EDIT -------------------->
+
+            <!-- <br><a href="editOrder.php">Edit Order</a>
+            <br><a href="payOptions.php">Proceed to Payment</a> -->
+            <div class="buttons-box">
+                <a class="edit-cart" href="editOrder.php">Edit Order</a>
+                <a class="proceed" href="payOptions.php" >Proceed to Payment</a>
             </div>
 
-            <br><a href="editOrder.php">Edit Order</a>
-            <br><a href="payOptions.php">Proceed to Payment</a>
+        
+            
         </div>
     </div>
-        <script> // Reference: https://stackoverflow.com/questions/17642872/refresh-page-and-keep-scroll-position
+    <script> // Reference: https://stackoverflow.com/questions/17642872/refresh-page-and-keep-scroll-position
         window.onload = function() {
             // Save scroll position
             var scrollPos = sessionStorage.getItem('scrollPos');
@@ -216,13 +278,8 @@
 
             $displayComboResult = mysqli_query($conn, $displayComboQuery);
 
-            echo "<p>Combo Items</p>";
-            $comboNum = 1; // Initialize combo number as 1
-
             while ($comboRow = mysqli_fetch_assoc($displayComboResult)) { // Loop through each row in combo table created
 
-                echo "<br>Combo #" . $comboNum . "<br><br>"; // Show which combo is displayed
-                
                 $mainName = $comboRow['mainName'];      // Get the item data from the query
                 $mainPrice = $comboRow['mainPrice'];    // Name and price of items in combos
                 $sideName = $comboRow['sideName'];
@@ -234,16 +291,56 @@
                 $discountForCombo = $totalForCombo * 0.15;
                 $totalAfterDiscount = $totalForCombo - $discountForCombo;
 
-                echo "<li>Mains: $mainName - $mainPrice </li>"; // Display the mains, sides, drinks ordered in the combo with their prices
-                echo "<li>Sides: $sideName - $sidePrice </li>";
-                echo "<li>Drinks: $drinkName - $drinkPrice </li><br>";
-                echo "Subtotal: Php $totalForCombo <br>";
-                echo "Discount: Php $discountForCombo <br>";
-                echo "Subtotal After Discount: Php $totalAfterDiscount <br>";
+                // ------------------ COMBO MEALS UI ------------------ 
+                
+                echo "<div class='cart-item-box'>";
+                    echo "<div class='combo-meal-box'>COMBO MEAL";
+                        echo "<div class='order-item'>";
+                            echo "<table>";
+                                echo "<tr>";
+                                    echo "<td>$mainName</td>";
+                                    echo "<td>x1</td>";
+                                    echo "<td>PHP $mainPrice</td>";
+                                echo "</tr>";
+
+                                echo "<tr>";
+                                    echo "<td>$sideName</td>";
+                                    echo "<td>x1</td>";
+                                    echo "<td>PHP $sidePrice</td>";
+                                echo "</tr>";
+
+                                echo "<tr>";
+                                    echo "<td>$drinkName</td>";
+                                    echo "<td>x1</td>";
+                                    echo "<td>PHP $drinkPrice</td>";
+                                echo "</tr>";
+                            echo "</table>";
+                            echo "<hr>";
+                            echo "<div class='orig-price'>";
+                                echo "<table>";
+                                    echo "<tr>";
+                                        echo "<td></td>";
+                                        echo "<td></td>";
+                                        echo "<td>PHP $totalForCombo</td>";
+                                    echo "</tr>";
+                                echo "</table>";
+                            echo "</div>";
+
+                            echo "<div class='price'>";
+                                echo "<table>";
+                                    echo "<tr>";
+                                        echo "<td></td>";
+                                        echo "<td>-15%</td>";
+                                        echo "<td>PHP $totalAfterDiscount</td>";
+                                    echo "</tr>";
+                                echo "</table>";
+                            echo "</div>";
+                        echo "</div>";
+                    echo "</div>";
+                echo "</div>";
                 
                 global $totalBill;
                 $totalBill += $totalAfterDiscount; // Store subtotal in session variable. Gets added to after each loop iteration if more than 1 combo exists.
-                $comboNum++; // Increment the shown comboNum
             }
 
             return $comboRow = mysqli_fetch_assoc($displayComboResult);
@@ -293,5 +390,6 @@
             return $totalForAlacarte = $alaCarteTotalRow['total_earned_from_alacarte'];
         }
     ?>
+
 </body>
 </html>

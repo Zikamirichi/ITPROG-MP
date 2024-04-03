@@ -16,34 +16,11 @@
             display: flex;
         }
 
-        /* Timmy's implementation. If may better kayong UI please change hehe */
-
-        .item .facts { /* Nutrition facts about specific item */
-            visibility: hidden; /* Hidden before hovering */
-            width: 300px;
-            background-color: lightgrey;
-            color: black;
-            text-align: left;
-            border-radius: 6px;
-            padding: 5px 0;
-
-            position: absolute;
-            z-index: 1; /* Display above other images */
-            top: 50%;
-            left: 110%;
-            transform: translateY(-50%); 
-            box-shadow: 0 0 5px;
-        }
-
-        .item:hover .facts { /* Upon hover of item, make nutrition facts visible */
-            visibility: visible;
-        }
-
         .hidden-div {
             display: none;
             position: absolute;
             length: 50%;
-            width: 50%;
+            width: 30%; /* updated width */
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -52,6 +29,18 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
+        }
+
+        h2 {
+            padding: 25px;
+            margin: 0;
+            margin-bottom: 30px;
+            background-color: #D4471F;
+            font-family: "Luckiest Guy", cursive;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 50px;
+            color: white;
         }
     </style>
 </head>
@@ -65,11 +54,13 @@
 
         session_start(); // Start session to store mains objects
         require_once("order.php"); //Adding the order class for OOP purposes
+
+        $_SESSION['cart_refreshed'] = false; // For cart purposes
     ?>
 
     <div class="navigation-bar">
         <ul>
-            <li><a href="homepage.php">
+            <li><a href="cancelOrder.php">
                     <div class="navbar-icon">
                         <img src="../../images/white-home-button.png" alt="Homepage">
                     </div>
@@ -148,7 +139,7 @@
                 echo "<h2>$name</h2>";
 
                 // Limit style to 10%, may edit later
-                echo "<img src='../../images/$imageName' alt='" . $name . "' style='width: 10%; height: 10%;'>";
+                echo "<img src='../../images/$imageName' alt='" . $name . "' style='width: 300px; height: 250px; object-fit: cover;'>";
             
                 echo "<div class='counter'>";
                     echo "<form method='post'>";
@@ -202,11 +193,6 @@
             
                 $order = new Order($orderID); 
                 $order->setOrder($count, $drinkID); // Set new order
-            
-                // Output for testing REMOVE LATER
-                echo "Order ID: " . $order->getOrderID() . "<br>";
-                echo "Quantity: " . $order->getQuantity() . "<br>";
-                echo "Item ID: " . $drinkID . "<br>";
               }
             
             
