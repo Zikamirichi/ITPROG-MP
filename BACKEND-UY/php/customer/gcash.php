@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
@@ -19,6 +20,21 @@
 		  position: relative;
 		  aspect-ratio: 1/1;
 		}
+=======
+    <style>
+        .gcash-prompt {
+            background-color: #f1f1f1;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            margin: 20px auto;
+            width: 600px; /* Increased width of the card container */
+            height: 650px; /* Increased height of the card container */
+            font-family: 'Luckiest Guy', cursive;
+            position: relative;
+            aspect-ratio: 1/1;
+        }
+>>>>>>> parent of d96e2e4 (Updated)
 
 		.gcash-prompt h2 {
 		  margin-top: 0;
