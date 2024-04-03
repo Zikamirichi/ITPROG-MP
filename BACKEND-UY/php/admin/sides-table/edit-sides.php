@@ -41,6 +41,57 @@
             color: white;
         }
 
+        .prompt-card {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 300px;
+        padding: 20px;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        z-index: 9999;
+        display: none;
+    }
+
+    .prompt-card p {
+        margin-bottom: 20px;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .exit-button, .cancel-button {
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .exit-button {
+        background-color: #D4471F;
+        color: white;
+        border: none;
+    }
+
+    .exit-button:hover {
+        background-color: #B3370A;
+    }
+
+    .cancel-button {
+        background-color: #CED3D7;
+        color: #333;
+        border: none;
+    }
+
+    .cancel-button:hover {
+        background-color: #B8BFC4;
+    }
+
     </style>
 </head>
 
@@ -280,5 +331,61 @@
         });
     });
 </script>
+
+    <div class="prompt-card" id="unsaved-prompt">
+    <p>Any unsaved changes will be lost.</p>
+    <div class="button-container">
+        <button class="back-button" id="cancel-btn">Cancel</button>
+        <button class="btn btn-danger" id="exit-btn">Exit</button>
+    </div>
+    </div>
+
+    <script>
+    var formEdited = false;
+    var originalFormValues = {};
+
+    function markAsEdited() {
+        formEdited = true;
+    }
+
+    function resetFormEdited() {
+        formEdited = false;
+    }
+
+    function cancel() {
+        document.getElementById('unsaved-prompt').style.display = 'none'; 
+        formEdited = false; 
+        
+        
+        for (var key in originalFormValues) {
+            if (originalFormValues.hasOwnProperty(key)) {
+                document.getElementById(key).value = originalFormValues[key];
+            }
+        }
+    }
+
+    var formInputs = document.querySelectorAll('input[type="text"], input[type="number"]');
+    formInputs.forEach(function(input) {
+        
+        originalFormValues[input.id] = input.value;
+        input.addEventListener('input', markAsEdited);
+    });
+
+    document.getElementById('cancel-btn').addEventListener('click', cancel);
+
+    document.getElementById('exit-btn').addEventListener('click', function() {
+        window.location.href = 'sides-table.php';
+    });
+
+    document.querySelector('.back-button').addEventListener('click', function(event) {
+        if (formEdited) {
+            document.getElementById('unsaved-prompt').style.display = 'block'; 
+            event.preventDefault(); 
+        }
+    });
+
+    document.getElementById('edit-sides-form').addEventListener('submit', resetFormEdited);
+    </script>
+
 </body>
 </html>

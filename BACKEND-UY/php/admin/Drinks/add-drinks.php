@@ -30,6 +30,58 @@
         .button-table:active {
             background-color: #D4471F;
         }
+
+
+        .prompt-card {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            z-index: 9999;
+            display: none;
+        }
+
+        .prompt-card p {
+            margin-bottom: 20px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .exit-button, .cancel-button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .exit-button {
+            background-color: #D4471F;
+            color: white;
+            border: none;
+        }
+
+        .exit-button:hover {
+            background-color: #B3370A;
+        }
+
+        .cancel-button {
+            background-color: #CED3D7;
+            color: #333;
+            border: none;
+        }
+
+        .cancel-button:hover {
+            background-color: #B8BFC4;
+        }
     </style>
 </head>
 <body>
@@ -73,35 +125,58 @@
         ob_start(); // Start buffering output
     ?>
 
-    <!-- Modal for Add Data Success -->
-    <div class="modal fade <?php if(isset($_POST['save'])) {echo 'show d-block';} ?>" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="background: rgba(0, 0, 0, 0.5);">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Success!</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            Record has been successfully inserted!
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
+
+    <!-- Unsaved changes prompt card -->
+    <div class="prompt-card" id="unsaved-prompt">
+        <p>Any unsaved changes will be lost.</p>
+        <div class="button-container">
+            <button class="back-button" id="cancel-btn">Cancel</button>
+            <button class="btn btn-danger" id="exit-btn">Exit</button>
         </div>
-      </div>
     </div>
-    
+
     <script>
-        // Script to manually close the modal
-        $(document).ready(function() {
-            $(".close, .btn-secondary").click(function() {
-                $("#exampleModalCenter").removeClass("show d-block").hide();
-            });
-            
-        });
+    var originalFormValues = {};
+
+    function resetFormEdited() {
+        for (var key in originalFormValues) {
+            if (originalFormValues.hasOwnProperty(key)) {
+                document.getElementById(key).value = originalFormValues[key];
+            }
+        }
+    }
+
+    function hasNonEmptyInputs() {
+        var formInputs = document.querySelectorAll('input[type="text"], input[type="number"]');
+        for (var i = 0; i < formInputs.length; i++) {
+            if (formInputs[i].value.trim() !== '') {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    document.getElementById('cancel-btn').addEventListener('click', function() {
+        document.getElementById('unsaved-prompt').style.display = 'none';
+        resetFormEdited();
+    });
+
+    document.getElementById('exit-btn').addEventListener('click', function() {
+            window.location.href = 'drinks-table.php';
+    });
+
+    document.querySelector('.back-button').addEventListener('click', function(event) {
+        if (hasNonEmptyInputs()) {
+            document.getElementById('unsaved-prompt').style.display = 'block';
+            event.preventDefault();
+        }
+    });
+
+    document.getElementById('add-drinks-form').addEventListener('submit', function() {
+        resetFormEdited();
+    });
     </script>
+
 
     <?php
         error_reporting(E_ERROR | E_PARSE);
