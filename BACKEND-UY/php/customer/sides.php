@@ -16,31 +16,53 @@
             display: flex;
         }
 
+
         .hidden-div {
             display: none;
             position: absolute;
             length: 50%;
-            width: 30%;
+            width: 30%; /* updated width */
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: lightgrey;
+            background-color: white;
             padding: 20px;
+            padding-bottom: 30px;
+            border: 1px solid black;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
+        
 
         h2 {
             padding: 25px;
             margin: 0;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+            width: 525px;
             background-color: #D4471F;
             font-family: "Luckiest Guy", cursive;
             font-weight: 400;
             font-style: normal;
-            font-size: 50px;
+            font-size: 40px;
             color: white;
+        }
+
+        /* CSS styles for the quantity modifier box */
+        .counter {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%; 
+        }
+
+        .counter input[type="number"] {
+            width: 90px; 
+            height:30px;
+            font-size: 25px;
+            text-align: center;
+            margin-bottom: 10px; 
         }
     </style>
 </head>
@@ -139,32 +161,37 @@
                 
                 // Limit style to 10%, may edit later
                 // style='width: 300px; height: 250px; object-fit: cover;'
-                echo "<img src='../../images/$imageName' alt='" . $name . "' style='width: 300px; height: 250px; object-fit: cover;'>";
+                echo "<img src='../../images/$imageName' alt='" . $name . "' style='width: 300px; height: 200px; object-fit: cover;'>";
             
                 echo "<div class='counter'>";
                     echo "<form method='post'>";
                         echo "<input type='hidden' name='item' value='$sideID'>";
                         echo "<input type='number' name='count' value='1' min='1' max='$maxStock'>";
-                        echo "<input type='submit' name='submit'>";
+                        echo "<div>"; // Start a div to contain both buttons
+                        echo "<button type='button' class='cancel-button' onclick=\"hideHiddenDiv('$sideID')\">Cancel</button>"; // Cancel button
+                        echo "<button type='submit' class='submit-button' name='submit'>Submit</button>"; // Submit button
+                    echo "</div>"; // End of button div
                     echo "</form>";
                 echo "</div>";
             echo "</div>";
         }
-  ?>
+    ?>
 
     <script>
         // Function to show the hidden div based on the provided div ID
         function showHiddenDiv(divId) {
             var divToShow = document.getElementById(divId);
             if (divToShow.style.display === "none" || divToShow.style.display === "") {
-                
                 divToShow.style.display = "block";
-            } 
-            
-            else {
-                
+            } else {
                 divToShow.style.display = "none";
             }
+        }
+
+        // Function to hide the hidden div based on the provided div ID
+        function hideHiddenDiv(divId) {
+            var divToHide = document.getElementById(divId);
+            divToHide.style.display = "none";
         }
     </script>
 
@@ -192,7 +219,7 @@
             
                 $order = new Order($orderID); 
                 $order->setOrder($count, $sideID); // Set new order
-              }
+            }
             
             
             if(isset($_POST["submit"])) { // Execute upon submit button click
@@ -262,8 +289,6 @@
                 echo "Protein: ". $factsResult ["Protein"], "g<br>";
             }
         }
-
-        
     ?>
 </body>
 </html>
