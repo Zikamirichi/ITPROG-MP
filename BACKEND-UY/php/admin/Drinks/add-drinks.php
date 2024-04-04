@@ -136,46 +136,45 @@
     </div>
 
     <script>
-    var formEdited = false;
-
-    
-    function markAsEdited() {
-        formEdited = true;
-    }
+    var originalFormValues = {};
 
     function resetFormEdited() {
-        formEdited = false;
+        for (var key in originalFormValues) {
+            if (originalFormValues.hasOwnProperty(key)) {
+                document.getElementById(key).value = originalFormValues[key];
+            }
+        }
     }
 
-    function cancel() {
-        document.getElementById('unsaved-prompt').style.display = 'none'; 
-        formEdited = false; 
-       
+    function hasNonEmptyInputs() {
         var formInputs = document.querySelectorAll('input[type="text"], input[type="number"]');
-        formInputs.forEach(function(input) {
-            input.value = '';
-        });
+        for (var i = 0; i < formInputs.length; i++) {
+            if (formInputs[i].value.trim() !== '') {
+                return true;
+            }
+        }
+        return false;
     }
 
-    var formInputs = document.querySelectorAll('input[type="text"], input[type="number"]');
-    formInputs.forEach(function(input) {
-        input.addEventListener('input', markAsEdited);
+    document.getElementById('cancel-btn').addEventListener('click', function() {
+        document.getElementById('unsaved-prompt').style.display = 'none';
+        resetFormEdited();
     });
 
-    document.getElementById('cancel-btn').addEventListener('click', cancel);
-
     document.getElementById('exit-btn').addEventListener('click', function() {
-        window.location.href = 'drinks-table.php'; 
+            window.location.href = 'drinks-table.php';
     });
 
     document.querySelector('.back-button').addEventListener('click', function(event) {
-        if (formEdited) {
-            document.getElementById('unsaved-prompt').style.display = 'block'; 
-            event.preventDefault(); 
+        if (hasNonEmptyInputs()) {
+            document.getElementById('unsaved-prompt').style.display = 'block';
+            event.preventDefault();
         }
     });
 
-    document.getElementById('add-drinks-form').addEventListener('submit', resetFormEdited);
+    document.getElementById('add-drinks-form').addEventListener('submit', function() {
+        resetFormEdited();
+    });
     </script>
 
     <!-- Modal for Add Data Success -->
