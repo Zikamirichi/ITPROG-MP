@@ -169,6 +169,9 @@
         mysqli_query($conn, $deleteOrder);
     }
 
+    $delteOR = "DELETE FROM OR_ WHERE cart_id = '$cartID'";
+    mysqli_query($conn, $delteOR);
+
     // Delete Cart ID
     $deleteCart = "DELETE FROM cart WHERE cart_id = '$cartID'";
     mysqli_query($conn, $deleteCart);

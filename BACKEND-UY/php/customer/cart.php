@@ -60,7 +60,7 @@
         if(!$_SESSION['cart_refreshed']) {
 
             // Meta refresh code
-            header("refresh:5;url=processOrders.php");
+            header("refresh:2;url=processOrders.php");
             
             $_SESSION['cart_refreshed'] = true; 
         }
