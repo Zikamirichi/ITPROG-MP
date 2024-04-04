@@ -178,6 +178,8 @@
                                 echo "</div>";
                                 exit; // Stop further execution
                             }
+
+                            displayCombo($conn, $cartID);
                                             // Places Individual Ala Carte Items in Separate cart-item-boxes
                     $displayAlacarteResult = displayAlacarte($conn, $cartID); // Get Ala Carte Items from DB
                     while ($alaCarteRow = mysqli_fetch_assoc($displayAlacarteResult)) { // Loop through all resulting rows in ala_carte query
