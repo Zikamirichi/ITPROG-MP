@@ -27,6 +27,7 @@
 
         .back-button:hover {
             color: #311712;
+            text-decoration: none;
         }
     </style>
 </head>

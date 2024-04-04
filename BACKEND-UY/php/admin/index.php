@@ -82,14 +82,14 @@ if(isset($_GET["success"])) {
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <h5 class="modal-title" id="errorModalLabel">Invalid Input</h5>
+                <h5 class="modal-title" id="errorModalLabel"> Please try again</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <!-- Modal Body -->
             <div class="modal-body">
-                Username and/or password is invalid!
+                Username and/or password is incorrect!
             </div>
             <!-- Modal Footer -->
             <div class="modal-footer">

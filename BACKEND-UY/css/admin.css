@@ -79,6 +79,7 @@ body {
 .button-table:hover {
     background-color: #311712;;
     color: white;
+    text-decoration: none;
 }
 
 .instructions {
