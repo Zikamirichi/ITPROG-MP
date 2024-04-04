@@ -20,7 +20,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <?php
-        //header("refresh: 5; URL=processOrders.php"); //Refresh page every 5 seconds to reflect combo changes
+        // header("refresh: 5; URL=processOrders.php"); //Refresh page every 5 seconds to reflect combo changes
     ?> 
     
   </head>
@@ -41,23 +41,22 @@
         }
 
         .empty-cart-message{
-  color: #311712;
-  font-family: "Luckiest Guy", cursive;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 40px;
-  text-align: center;
-  margin-top: 2%;
-  margin-bottom: 2%;
-  
-}
+            color: #311712;
+            font-family: "Luckiest Guy", cursive;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 40px;
+            text-align: center;
+            margin-top: 2%;
+            margin-bottom: 2%;
+            
+        }
     </style>
 </head>
 <body>
     <?php
-        session_start();
+        session_start();        
 
-        
         if(!$_SESSION['cart_refreshed']) {
 
             // Meta refresh code
@@ -410,6 +409,7 @@
                                     $change = $currentAmount - $totalBill; 
                                     echo "<h3 style='font-family: \"Luckiest Guy\", cursive;'>Payment successful. Change dispensed: $change</h3>"; 
                                     // Reset current amount 
+                                    $_SESSION['change'] = $change;
                                 }                                                                                //if these logics are for the pay successful modal pa ayos nalang
                             } 
                                 ?> 
@@ -422,17 +422,82 @@
                     </div> 
                 </div> 
             </div>
-              
+
+            <!-- Successful payment -->
+            <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true"> 
+                <div class="modal-dialog modal-dialog-centered" role="document"> 
+                    <div class="modal-content"> 
+                        <div class="modal-header"> 
+                            <h2 class="modal-title">Payment Successful!</h2> 
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> 
+                            </button> 
+                        </div> 
+                        <div class="modal-body"> 
+                            <div class="card-details"> 
+                                <h3 style="font-family: 'Luckiest Guy', cursive;"></h3>  
+                            </div> 
+                            <?php
+                                // $cartID = $_SESSION['cartID'];
+
+                                // // session stuff
+                                $totalBill = $_SESSION['totalBill'];
+
+                                $currentAmount = isset($_SESSION['currentAmount']) ? $_SESSION['currentAmount'] : $totalBill; // Current amount received
+                                $change = isset($_SESSION['change']) ? $_SESSION['change'] : 0; // Change to be dispensed
+
+                                //CHANGE $CONN VARIABLES DEPENDING ON PERSONAL DEVICE SETTINGS
+                                $conn = mysqli_connect("localhost", "root", "") or die ("Unable to connect!". mysqli_error($conn) );
+                                mysqli_select_db($conn, "mydb");
+
+                                echo "We recieved a total payment of";
+                                echo "<h1 style=\"font-family: 'Luckiest Guy', cursive;\">PHP " . $currentAmount . "</h1>";
+
+                                echo "Please get your change of";
+                                echo "<h1 style=\"font-family: 'Luckiest Guy', cursive;\">PHP " . $change . "</h1>";
+
+                                // Generate OR NUM
+                                $maxORQuery = mysqli_query($conn, "SELECT MAX(CAST(SUBSTRING(OR_num, 3) AS UNSIGNED)) AS maxOR_ FROM or_");
+                                $row = mysqli_fetch_array($maxORQuery);
+                                $maxOR = $row['maxOR_'];
+
+                                $newOR = 'or' . ($maxOR + 1); // New OR Number
+                                $newDate = date("Y-m-d");
+
+                                // Insert to DB
+                                $insertORQuery = "INSERT INTO or_ (OR_num, cart_id, date) VALUES ('$newOR', '$cartID', '$newDate')";
+                                mysqli_query($conn, $insertORQuery);
+
+                                echo "OR Number: ". $newOR. "<br>";
+                                echo "Date: ". $newDate;
+
+                                unset($_SESSION['currentAmount']);
+                                unset($_SESSION['change']);
+                            ?>
+                            <br>
+                            <br>
+                            <a class="done-button" id="end" href="index.php">Done</a> 
+                        </div> 
+                    </div>  
+                </div> 
+            </div>
+
               <script> 
+              
               function openGcashModal() { 
                 $('#gcashModal').modal('show'); 
                 $('#paymentOptionsModal').modal('hide'); 
-            } document.addEventListener('DOMContentLoaded', function() { 
+            } 
+            
+            document.addEventListener('DOMContentLoaded', function() { 
                 document.getElementById('submit-gcash').addEventListener('click', function() { 
-                    window.location.href = 'paid.php'; }); //Change this nalang for the payment successful modal
+                    $('#successModal').modal('show'); 
+                    $("#gcashModal").modal('hide');
+                    
+                }); //Change this nalang for the payment successful modal
                     $('#gcashModal').on('hidden.bs.modal', function (e) { 
                         $("#gcashModal").modal('hide');
                         $("#paymentOptionsModal").modal('show'); 
+                        
                         }); 
                     }); 
                 </script>
@@ -444,7 +509,8 @@
                 }
                  document.addEventListener('DOMContentLoaded', function() { 
                     document.getElementById('submit-credit-card').addEventListener('click', function() { 
-                        window.location.href = 'paid.php'; //Change this nalang for the payment successful modal
+                        $("#creditCardModal").modal('hide'); 
+                        $('#successModal').modal('show');  //Change this nalang for the payment successful modal
                     }); 
                     $('#creditCardModal').on('hidden.bs.modal', function(e) { 
                         $("#creditCardModal").modal('hide'); 
@@ -460,7 +526,8 @@
                 } 
                 document.addEventListener('DOMContentLoaded', function() { 
                     document.getElementById('submit-cash').addEventListener('click', function() { 
-                        window.location.href = 'paid.php'; //Change this nalang for the payment successful modal
+                        $("#cashModal").modal('hide'); 
+                        $('#successModal').modal('show');  //Change this nalang for the payment successful modal
                     }); 
                     $('#cashModal').on('hidden.bs.modal', function(e) { 
                         $("#cashModal").modal('hide'); 
