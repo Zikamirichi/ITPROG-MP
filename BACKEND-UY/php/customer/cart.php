@@ -45,12 +45,19 @@
             font-family: "Luckiest Guy", cursive;
             font-weight: 400;
             font-style: normal;
-            font-size: 40px;
+            font-size: 25px;
             text-align: center;
             margin-top: 2%;
             margin-bottom: 2%;
             
         }
+
+        .empty-cart-message img {
+            margin: 0 auto; 
+            max-height: 200px;'
+        }
+
+        
     </style>
 </head>
 <body>
@@ -173,7 +180,7 @@
                             // If the cart is empty, display the message
                             if ($cartIsEmpty) {
                                 echo "<div class='empty-cart-message'>";
-                                echo "<img src='../../images/sadcart.png' alt='Sad Cart' style='display: block; margin: 0 auto; height: auto;'>";
+                                echo "<img src='../../images/sadcart.png' alt='Sad Cart'>";
                                 echo "<div class='empty-cart-message'>Your cart is empty. Order now!</div>";
                                 echo "</div>";
                                 exit; // Stop further execution
