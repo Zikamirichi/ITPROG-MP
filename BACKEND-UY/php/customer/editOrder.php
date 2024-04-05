@@ -598,7 +598,7 @@
                         echo '<input type="hidden" name="main_id" value="'.$mainID.'">'; 
                         echo '<input type="hidden" name="side_id" value="'.$sideID.'">';
                         echo '<input type="hidden" name="drink_id" value="'.$drinkID.'">';
-                        echo "<button type='submit' class='x-button' name='delete_combo'>X</button>";
+                        echo "<button type='submit' class='x-button' name='delete_combo' style='float: right; '>X</button>";
                         echo '</form>';
                     echo "<div class='order-item'>";
                         echo "<table>";
