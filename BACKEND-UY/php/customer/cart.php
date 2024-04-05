@@ -319,7 +319,7 @@
                         <div class="options"> 
                             <a href="#" onclick="openGcashModal()" >GCash</a><br>
                             <a href="#" onclick="openCreditCardModal()">Credit Card</a><br>
-                            <a href="#" onclick="openCashModal()">Cash</a><br>
+                            <a href="cash.php">Cash</a><br>
                         </div> 
                     </div> 
                 </div> 

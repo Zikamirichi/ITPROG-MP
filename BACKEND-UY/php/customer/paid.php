@@ -6,6 +6,12 @@
     <style>
             body {
                 font-family: 'Luckiest Guy', cursive;
+                margin: 0;
+                padding: 0;
+                background-image: url('../../images/menubg.png'); 
+                background-size: cover;
+                background-repeat: no-repeat;
+                display: flex;
             }
 
             .payment-successful-prompt {
