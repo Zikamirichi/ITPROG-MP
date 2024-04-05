@@ -133,10 +133,10 @@
                             echo "<td style='width: 63%'>$mainName</td>";
                             echo '<form method="post">'; // Form to change quantity of main
                                 echo '<td style="width: 9%"><button type="submit" name="confirmMain">Confirm</button></td>';
-                                echo "<td style='width: 13.5%'>x <input type='number' class='input-quantity' name='mainQuan' value='$mainQuantity' min='1'></td>"; 
+                                echo "<td style='width: 13%'>x <input type='number' class='input-quantity' name='mainQuan' value='$mainQuantity' min='1'></td>"; 
                                 echo '<input type="hidden" name="order_id" value="'.$orderID.'">';
                             echo '</form>';
-                            echo "<td>PHP $totalMainPrice</td>";
+                            echo "<td>PHP " . number_format($totalMainPrice, 2) ."</td>";
                             echo '<form method="post">';
                                 echo "<td><button type='submit' class='x-button' name='deleteAlaMain'>X</button></td>";
                                 echo '<input type="hidden" name="order_id" value="'.$orderID.'">';
@@ -159,10 +159,10 @@
                             echo "<td style='width: 63%'>$sideName</td>";
                             echo '<form method="post">'; // Form to change quantity of side
                                 echo '<td style="width: 9%"><button type="submit" name="confirmSide">Confirm</button></td>';
-                                echo "<td style='width: 13.5%'>x <input type='number' class='input-quantity' name='sideQuan' value='$sideQuantity' min='1'></td>"; 
+                                echo "<td style='width: 13%'>x <input type='number' class='input-quantity' name='sideQuan' value='$sideQuantity' min='1'></td>"; 
                                 echo '<input type="hidden" name="order_id" value="'.$orderID.'">';
                             echo '</form>';
-                            echo "<td >Php $totalSidePrice</td>";
+                            echo "<td >PHP " . number_format($totalSidePrice,2) ."/td>";
                             echo '<form method="post">';
                                 echo "<td><button type='submit' class='x-button' name='deleteAlaSide'>X</button></td>";
                                 echo '<input type="hidden" name="order_id" value="'.$orderID.'">';
@@ -185,10 +185,10 @@
                             echo "<td style='width: 63%'>$drinkName</td>";
                             echo '<form method="post">'; // Form to change quantity of drink
                                 echo '<td style="width: 9%"><button type="submit" name="confirmDrink">Confirm</button></td>';
-                                echo "<td style='width: 13.5%'>x <input type='number' class='input-quantity' name='drinkQuan' value='$drinkQuantity' min='1'></td>"; 
+                                echo "<td style='width: 13%'>x <input type='number' class='input-quantity' name='drinkQuan' value='$drinkQuantity' min='1'></td>"; 
                                 echo '<input type="hidden" name="order_id" value="'.$orderID.'">';
                             echo '</form>';
-                            echo "<td>Php $totalDrinkPrice</td>";
+                            echo "<td>PHP " . number_format($totalDrinkPrice,2) ."</td>";
                             echo '<form method="post">';
                                 echo "<td><button type='submit' class='x-button' name='deleteAlaDrink'>X</button></td>";
                                 echo '<input type="hidden" name="order_id" value="'.$orderID.'">';
@@ -605,19 +605,19 @@
                             echo "<tr>";
                                 echo "<td>$mainName</td>";
                                 echo "<td>x1</td>";
-                                echo "<td>PHP $mainPrice</td>";
+                                echo "<td>PHP " . number_format($mainPrice, 2) ."</td>";
                             echo "</tr>";
 
                             echo "<tr>";
                                 echo "<td>$sideName</td>";
                                 echo "<td>x1</td>";
-                                echo "<td>PHP $sidePrice</td>";
+                                echo "<td>PHP " . number_format($sidePrice, 2) ."</td>";
                             echo "</tr>";
 
                             echo "<tr>";
                                 echo "<td>$drinkName</td>";
                                 echo "<td>x1</td>";
-                                echo "<td>PHP $drinkPrice</td>";
+                                echo "<td>PHP " . number_format($drinkPrice, 2) ."</td>";
                             echo "</tr>";
                         echo "</table>";
                         echo "<hr>";

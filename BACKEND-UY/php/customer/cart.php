@@ -208,7 +208,7 @@
                                         echo "<tr>";
                                             echo "<td>$mainName</td>";
                                             echo "<td>x $quantity</td>";
-                                            echo "<td>Php $totalMainPrice</td>";
+                                            echo "<td>PHP " . number_format($totalMainPrice,2) . " </td>";
                                         echo "</tr>";
                                     echo "</table>";
                                 echo "</div>";
@@ -224,7 +224,7 @@
                                         echo "<tr>";
                                             echo "<td>$sideName</td>";
                                             echo "<td>x $quantity</td>";
-                                            echo "<td>Php $totalSidePrice</td>";
+                                            echo "<td>PHP " . number_format($totalSidePrice,2) . "</td>";
                                         echo "</tr>";
                                     echo "</table>";
                                 echo "</div>";
@@ -240,7 +240,7 @@
                                         echo "<tr>";
                                             echo "<td>$drinkName</td>";
                                             echo "<td>x $quantity</td>";
-                                            echo "<td>Php $totalDrinkPrice</td>";
+                                            echo "<td>PHP " . number_format($totalDrinkPrice,2) . "</td>";
                                         echo "</tr>";
                                     echo "</table>";
                                 echo "</div>";
@@ -628,19 +628,19 @@
                                 echo "<tr>";
                                     echo "<td>$mainName</td>";
                                     echo "<td>x1</td>";
-                                    echo "<td>PHP $mainPrice</td>";
+                                    echo "<td>PHP " . number_format($mainPrice, 2) ."</td>";
                                 echo "</tr>";
 
                                 echo "<tr>";
                                     echo "<td>$sideName</td>";
                                     echo "<td>x1</td>";
-                                    echo "<td>PHP $sidePrice</td>";
+                                    echo "<td>PHP " . number_format($sidePrice, 2) ."</td>";
                                 echo "</tr>";
 
                                 echo "<tr>";
                                     echo "<td>$drinkName</td>";
                                     echo "<td>x1</td>";
-                                    echo "<td>PHP $drinkPrice</td>";
+                                    echo "<td>PHP " . number_format($drinkPrice, 2) ."</td>";
                                 echo "</tr>";
                             echo "</table>";
                             echo "<hr>";
@@ -649,7 +649,7 @@
                                     echo "<tr>";
                                         echo "<td></td>";
                                         echo "<td></td>";
-                                        echo "<td>PHP $totalForCombo</td>";
+                                        echo "<td>PHP $totalForCombo </td>";
                                     echo "</tr>";
                                 echo "</table>";
                             echo "</div>";
@@ -659,7 +659,7 @@
                                     echo "<tr>";
                                         echo "<td></td>";
                                         echo "<td>-15%</td>";
-                                        echo "<td>PHP $totalAfterDiscount</td>";
+                                        echo "<td>PHP $totalAfterDiscount </td>";
                                     echo "</tr>";
                                 echo "</table>";
                             echo "</div>";
