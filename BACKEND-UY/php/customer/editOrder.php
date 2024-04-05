@@ -162,7 +162,7 @@
                                 echo "<td style='width: 13%'>x <input type='number' class='input-quantity' name='sideQuan' value='$sideQuantity' min='1'></td>"; 
                                 echo '<input type="hidden" name="order_id" value="'.$orderID.'">';
                             echo '</form>';
-                            echo "<td >PHP " . number_format($totalSidePrice,2) ."/td>";
+                            echo "<td >PHP " . number_format($totalSidePrice,2) ."</td>";
                             echo '<form method="post">';
                                 echo "<td><button type='submit' class='x-button' name='deleteAlaSide'>X</button></td>";
                                 echo '<input type="hidden" name="order_id" value="'.$orderID.'">';
