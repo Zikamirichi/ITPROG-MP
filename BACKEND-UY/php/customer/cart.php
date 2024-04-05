@@ -458,10 +458,10 @@
                                 mysqli_select_db($conn, "mydb");
 
                                 echo "We recieved a total payment of";
-                                echo "<h1 style=\"font-family: 'Luckiest Guy', cursive;\">PHP " . $currentAmount . "</h1>";
+                                echo "<h1 style=\"font-family: 'Luckiest Guy', cursive;\">PHP " . number_format($currentAmount,2) . "</h1>";
 
                                 echo "Please get your change of";
-                                echo "<h1 style=\"font-family: 'Luckiest Guy', cursive;\">PHP " . $change . "</h1>";
+                                echo "<h1 style=\"font-family: 'Luckiest Guy', cursive;\">PHP " . number_format($change,2) . "</h1>";
 
                                 // Generate OR NUM
                                 $maxORQuery = mysqli_query($conn, "SELECT MAX(CAST(SUBSTRING(OR_num, 3) AS UNSIGNED)) AS maxOR_ FROM or_");
