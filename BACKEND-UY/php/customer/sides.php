@@ -242,11 +242,6 @@
 
                 array_push($_SESSION['sides'],$ordr_id); // Add order IDs to sides array in session
 
-                echo "Record has been successfully inserted!";
-                
-                } else {
-                    echo "Failed to insert record!!!";
-                }
         }
 
         function getSideDesc($conn, $ntrID) {

@@ -242,11 +242,6 @@
 
                 array_push($_SESSION['mains'],$ordr_id); // Add order IDs to mains array in session
 
-                echo "Record has been successfully inserted!"; // TESTING ALSO, CAN REMOVE along with else statement
-                
-                } else {
-                    echo "Failed to insert record!!!";
-                }
         }
 
         function getMainDesc($conn, $ntrID) {

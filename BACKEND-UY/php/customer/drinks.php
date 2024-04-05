@@ -245,12 +245,6 @@
             mysqli_query($conn, $updateDrinkStock); 
 
             array_push($_SESSION['drinks'],$ordr_id); // Add order IDs to drinks array in session
-
-            echo "Record has been successfully inserted!";
-            
-            } else {
-                echo "Failed to insert record!!!";
-            }
     }
 
     function getDrinkDesc($conn, $ntrID) {
