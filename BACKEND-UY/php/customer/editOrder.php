@@ -626,7 +626,7 @@
                                 echo "<tr>";
                                     echo "<td></td>";
                                     echo "<td></td>";
-                                    echo "<td>PHP $totalForCombo</td>";
+                                    echo "<td>PHP " . number_format($totalForCombo,2) ."</td>";
                                 echo "</tr>";
                             echo "</table>";
                         echo "</div>";
@@ -636,7 +636,7 @@
                                 echo "<tr>";
                                     echo "<td></td>";
                                     echo "<td>-15%</td>";
-                                    echo "<td>PHP $totalAfterDiscount</td>";
+                                    echo "<td>PHP " . number_format($totalAfterDiscount,2) ."</td>";
                                 echo "</tr>";
                             echo "</table>";
                         echo "</div>";

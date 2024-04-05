@@ -259,7 +259,7 @@
                             <tr>
                                 <td></td>
                                 <td>TOTAL</td>
-                                <td>PHP <?php echo "$totalBill"; $_SESSION['totalBill'] = $totalBill;?></td>
+                                <td>PHP <?php echo number_format($totalBill,2); $_SESSION['totalBill'] = $totalBill;?></td>
                             </tr>
                         </table>
                     </div>
@@ -649,7 +649,7 @@
                                     echo "<tr>";
                                         echo "<td></td>";
                                         echo "<td></td>";
-                                        echo "<td>PHP $totalForCombo </td>";
+                                        echo "<td>PHP " . number_format($totalForCombo,2) ." </td>";
                                     echo "</tr>";
                                 echo "</table>";
                             echo "</div>";
@@ -659,7 +659,7 @@
                                     echo "<tr>";
                                         echo "<td></td>";
                                         echo "<td>-15%</td>";
-                                        echo "<td>PHP $totalAfterDiscount </td>";
+                                        echo "<td>PHP " . number_format($totalAfterDiscount,2) ." </td>";
                                     echo "</tr>";
                                 echo "</table>";
                             echo "</div>";
