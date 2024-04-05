@@ -130,13 +130,13 @@
                 echo "<div class='ala-carte-item'>";
                     echo "<table>";
                         echo "<tr>";
-                            echo "<td>$mainName</td>";
+                            echo "<td style='width: 63%'>$mainName</td>";
                             echo '<form method="post">'; // Form to change quantity of main
-                                echo "<td>x <input type='number' class='input-quantity' name='mainQuan' value='$mainQuantity' min='1'></td>"; 
+                                echo '<td style="width: 9%"><button type="submit" name="confirmMain">Confirm</button></td>';
+                                echo "<td style='width: 13.5%'>x <input type='number' class='input-quantity' name='mainQuan' value='$mainQuantity' min='1'></td>"; 
                                 echo '<input type="hidden" name="order_id" value="'.$orderID.'">';
-                                echo '<td><button type="submit" name="confirmMain">Confirm</button></td>';
                             echo '</form>';
-                            echo "<td>Php $totalMainPrice</td>";
+                            echo "<td>PHP $totalMainPrice</td>";
                             echo '<form method="post">';
                                 echo "<td><button type='submit' class='x-button' name='deleteAlaMain'>X</button></td>";
                                 echo '<input type="hidden" name="order_id" value="'.$orderID.'">';
@@ -156,13 +156,13 @@
                 echo "<div class='ala-carte-item'>";
                     echo "<table>";
                         echo "<tr>";
-                            echo "<td>$sideName</td>";
+                            echo "<td style='width: 63%'>$sideName</td>";
                             echo '<form method="post">'; // Form to change quantity of side
-                                echo "<td>x <input type='number' class='input-quantity' name='sideQuan' value='$sideQuantity' min='1'></td>"; 
+                                echo '<td style="width: 9%"><button type="submit" name="confirmSide">Confirm</button></td>';
+                                echo "<td style='width: 13.5%'>x <input type='number' class='input-quantity' name='sideQuan' value='$sideQuantity' min='1'></td>"; 
                                 echo '<input type="hidden" name="order_id" value="'.$orderID.'">';
-                                echo '<td><button type="submit" name="confirmSide">Confirm</button></td>';
                             echo '</form>';
-                            echo "<td>Php $totalSidePrice</td>";
+                            echo "<td >Php $totalSidePrice</td>";
                             echo '<form method="post">';
                                 echo "<td><button type='submit' class='x-button' name='deleteAlaSide'>X</button></td>";
                                 echo '<input type="hidden" name="order_id" value="'.$orderID.'">';
@@ -182,11 +182,11 @@
                 echo "<div class='ala-carte-item'>";
                     echo "<table>";
                         echo "<tr>";
-                            echo "<td>$drinkName</td>";
+                            echo "<td style='width: 63%'>$drinkName</td>";
                             echo '<form method="post">'; // Form to change quantity of drink
-                                echo "<td>x <input type='number' class='input-quantity' name='drinkQuan' value='$drinkQuantity' min='1'></td>"; 
+                                echo '<td style="width: 9%"><button type="submit" name="confirmDrink">Confirm</button></td>';
+                                echo "<td style='width: 13.5%'>x <input type='number' class='input-quantity' name='drinkQuan' value='$drinkQuantity' min='1'></td>"; 
                                 echo '<input type="hidden" name="order_id" value="'.$orderID.'">';
-                                echo '<td><button type="submit" name="confirmDrink">Confirm</button></td>';
                             echo '</form>';
                             echo "<td>Php $totalDrinkPrice</td>";
                             echo '<form method="post">';
