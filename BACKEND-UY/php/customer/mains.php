@@ -241,7 +241,7 @@
                 mysqli_query($conn, $updateMainsStock); 
 
                 array_push($_SESSION['mains'],$ordr_id); // Add order IDs to mains array in session
-
+            }
         }
 
         function getMainDesc($conn, $ntrID) {
