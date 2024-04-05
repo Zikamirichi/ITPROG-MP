@@ -56,7 +56,6 @@
             margin: 0 auto; 
             max-height: 200px;'
         }
-
         
     </style>
 </head>

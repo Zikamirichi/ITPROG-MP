@@ -19,6 +19,11 @@
    .options a:hover {
     background-color: #311712;
     color: #ffffff;
+    text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: none;
     }
     
     .cash-image {
